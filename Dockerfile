@@ -25,9 +25,17 @@ RUN apk update && apk add --no-cache \
    diffutils \
    findutils \
    file \
+   bash \
+   kmod \
+   iproute2 \
    perl
 
+RUN mkdir -p /nipa-data/json && \
+    mkdir -p /nipa-data/outputs && \
+    mkdir -p /tmp/kernel-patches
+
 COPY tdc.config /tmp
+COPY kernel-patches /tmp/kernel-patches/
 
 RUN mkdir -p /nipa-data/json && \
     mkdir -p /nipa-data/outputs
@@ -36,7 +44,12 @@ RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/k
     cd /nipa-data/kernel && \
     git remote set-branches origin '*' && \
     git fetch -v --depth=1 && \
-    make defconfig
+    git apply /tmp/kernel-patches/*
 
 # Clone nipa
 RUN git clone --depth=1 -b dev https://github.com/tammela/nipa.git
+
+# Make nipa run in one shot mode
+ENV NIPA_FETCHER_COUNT=3
+
+ENTRYPOINT ["/usr/bin/python3", "/nipa/contest/remote/vmksft.py", "/tmp/tdc.config"]
