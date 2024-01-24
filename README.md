@@ -23,6 +23,7 @@ The timer will trigger the executor every 3 hours following NIPA's patch publish
 	docker
 	git
 	systemd
+	moreutils (sponge)
 ```
 
 ## Testing upstream changes locally
