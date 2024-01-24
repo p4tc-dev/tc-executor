@@ -12,7 +12,7 @@ local:
 	bash ${CURDIR}/run-executor.sh -l
 
 remote: 
-	bash ${CURDIR}/run-executor.sh -l
+	bash ${CURDIR}/run-executor.sh
 
 clean:
 	docker image rmi -f nipa-executor
