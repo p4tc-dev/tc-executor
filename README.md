@@ -21,6 +21,7 @@ The timer will trigger the executor every 3 hours following NIPA's patch publish
 ```
 	bash
 	docker
+	git
 	systemd
 ```
 
