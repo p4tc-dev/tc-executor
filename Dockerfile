@@ -59,9 +59,9 @@ RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/k
 # iproute2
 RUN git clone --depth=1 https://github.com/iproute2/iproute2.git /nipa-data/iproute2
 
-RUN if [ "$(ls -A /tmp/iproute2-patches)" ]; then  \
+RUN if [ "$(find /tmp/iproute2-patches/ -name *.patch)" ]; then  \
 	cd /nipa-data/iproute2; \
-	git apply /tmp/iproute2-patches/*; \
+	git apply /tmp/iproute2-patches/*.patch; \
     fi
 
 RUN cd /nipa-data/iproute2/ && \
