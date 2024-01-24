@@ -11,7 +11,8 @@ TC Executor:
         local - Run a test and save the artifacts locally
         remote - Run a test and push the artifacts to remote storage
         clean - Remove image and docker cache
-        install - Install and start the tc-executor service/timer
+        install - Install and start the tc-executor systemd service/timer
+        uninstall - Remove systemd files
 ```
 
 The timer will trigger the executor every 3 hours following NIPA's patch publishing schedule.

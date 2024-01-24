@@ -27,6 +27,11 @@ install:
 	sudo systemctl enable tc-executor.timer
 	sudo systemctl start tc-executor.timer
 
+uninstall:
+	sudo systemctl disable tc-executor.service
+	sudo systemctl disable tc-executor.timer
+	sudo rm -v /etc/systemd/system/tc-executor.*
+
 help:
 	@echo "TC Executor:"
 	@echo  "\tall - Build the image and drop into a shell"
@@ -35,3 +40,4 @@ help:
 	@echo  "\tremote - Run a test and push the artifacts to remote storage"
 	@echo  "\tclean - Remove image and docker cache"
 	@echo  "\tinstall - Install and start the tc-executor systemd service/timer"
+	@echo  "\tuninstall - Remove systemd files"
