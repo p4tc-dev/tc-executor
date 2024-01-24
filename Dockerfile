@@ -54,7 +54,7 @@ RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/k
     cd /nipa-data/kernel && \
     git remote set-branches origin '*' && \
     git fetch -v --depth=1 && \
-    git apply /tmp/kernel-patches/*
+    git apply /tmp/kernel-patches/*.patch
 
 # iproute2
 RUN git clone --depth=1 https://github.com/iproute2/iproute2.git /nipa-data/iproute2

@@ -46,7 +46,10 @@ fi
 
 pushd "$CUR"
 	docker image rmi nipa-executor || true
-	docker build --no-cache -t nipa-executor .
+	docker build --no-cache \
+		--build-arg UID=$(id -u) \
+		--build-arg GID=$(id -g) \
+		-t nipa-executor .
 	docker run --device=/dev/kvm \
 		--rm \
 		-v $(realpath .)/$STORAGE:/storage \
