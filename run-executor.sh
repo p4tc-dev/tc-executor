@@ -27,9 +27,14 @@ if [ $REMOTE = true ]; then
 			-b storage \
 			https://github.com/tammela/tc-executor.git \
 			"$STORAGE"
+	else
+		if ! [ -d "$CUR/$STORAGE/.git" ]; then
+			echo "Please remove $CUR/$STORAGE"
+			exit 1
+		fi
 	fi
 
-	pushd "$CUR/tc-executor-storage"
+	pushd "$CUR/$STORAGE"
 		git checkout storage
 		date -u > checkpoint
 		mkdir -p artifacts
