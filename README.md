@@ -16,6 +16,14 @@ TC Executor:
 
 The timer will trigger the executor every 3 hours following NIPA's patch publishing schedule.
 
+## Requirements for running host
+
+```
+	bash
+	docker
+	systemd
+```
+
 ## Testing upstream changes locally
 
 Changes to either Linux or iproute2 can be tested locally by copying patches to `kernel-patches` or `iproute2-patches`.
