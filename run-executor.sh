@@ -71,6 +71,6 @@ if [ $REMOTE = true ]; then
 		# Push changes
 		git add .
 		git commit -m "$(date)"
-		#git push https://$(cat $CUR/token | tr -d'\n')@github.com/p4tc-dev/tc-executor.git
+		git push https://$(cat $CUR/token)@github.com/p4tc-dev/tc-executor.git
 	popd
 fi
