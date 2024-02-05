@@ -25,6 +25,7 @@ The timer will trigger the executor every 3 hours following NIPA's patch publish
 	git
 	systemd
 	moreutils (sponge)
+	kvm
 ```
 
 ## Testing upstream changes locally
