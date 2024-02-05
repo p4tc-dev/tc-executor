@@ -49,15 +49,15 @@ COPY tdc.config /tmp
 COPY kernel-patches /tmp/kernel-patches/
 COPY iproute2-patches /tmp/iproute2-patches/
 
-# Kernel
-RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel && \
-    cd /nipa-data/kernel && \
-    git remote set-branches origin '*' && \
-    git fetch -v --depth=1 && \
-    git apply /tmp/kernel-patches/*.patch
+RUN git config --global user.email foo@bar.com
+RUN git config --global user.name foo@bar.com
 
 # iproute2
-RUN git clone --depth=1 https://github.com/iproute2/iproute2.git /nipa-data/iproute2
+RUN git clone https://git.kernel.org/pub/scm/network/iproute2/iproute2-next.git /nipa-data/iproute2
+RUN cd /nipa-data/iproute2 && \
+	git remote add stable https://git.kernel.org/pub/scm/network/iproute2/iproute2.git && \
+	git fetch --all && \
+	git merge stable/main
 
 RUN if [ "$(find /tmp/iproute2-patches/ -name *.patch)" ]; then  \
 	cd /nipa-data/iproute2; \
@@ -67,6 +67,13 @@ RUN if [ "$(find /tmp/iproute2-patches/ -name *.patch)" ]; then  \
 RUN cd /nipa-data/iproute2/ && \
     ./configure && \
     make
+
+# Kernel
+RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel && \
+    cd /nipa-data/kernel && \
+    git remote set-branches origin '*' && \
+    git fetch -v --depth=1 && \
+    git apply /tmp/kernel-patches/*.patch
 
 # Clone nipa
 RUN git clone --depth=1 -b dev https://github.com/p4tc-dev/nipa.git
