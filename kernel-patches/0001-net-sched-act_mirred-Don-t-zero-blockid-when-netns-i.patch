@@ -1,0 +1,34 @@
+From fc41ab3f408599bc6e9bb3daac85ad5c9a9b861a Mon Sep 17 00:00:00 2001
+From: Victor Nogueira <victor@mojatatu.com>
+Date: Sat, 3 Feb 2024 22:40:57 +0000
+Subject: [PATCH net] net/sched: act_mirred: Don't zero blockid when netns is
+ going down
+
+While testing tdc with parallel tests for mirred to block we caught an
+intermittent bug. The blockid was being zeroed out when a parallel net
+namespace was going down and, thus, giving us an incorrect blockid value
+whenever we tried to dump the mirred action. Since we don't increment the
+block refcount in the control path (and only use the ID), we don't need to
+zero the blockid field whenever the net namespace is going down.
+
+Signed-off-by: Victor Nogueira <victor@mojatatu.com>
+---
+ net/sched/act_mirred.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/net/sched/act_mirred.c b/net/sched/act_mirred.c
+index 93a96e9d8d90..6f4bb1c8ce7b 100644
+--- a/net/sched/act_mirred.c
++++ b/net/sched/act_mirred.c
+@@ -533,8 +533,6 @@ static int mirred_device_event(struct notifier_block *unused,
+ 				 * net_device are already rcu protected.
+ 				 */
+ 				RCU_INIT_POINTER(m->tcfm_dev, NULL);
+-			} else if (m->tcfm_blockid) {
+-				m->tcfm_blockid = 0;
+ 			}
+ 			spin_unlock_bh(&m->tcf_lock);
+ 		}
+-- 
+2.34.1
+
