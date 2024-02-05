@@ -9,10 +9,10 @@ shell: image
 	docker run --device=/dev/kvm:/dev/kvm --rm -v $(realpath .)/tc-executor-storage:/storage --entrypoint ash -it nipa-executor
 
 local: 
-	bash ${CURDIR}/run-executor.sh -l
+	bash -x ${CURDIR}/run-executor.sh -l
 
 remote: 
-	bash ${CURDIR}/run-executor.sh
+	bash -x ${CURDIR}/run-executor.sh
 
 clean:
 	docker image rmi -f nipa-executor

@@ -72,14 +72,10 @@ RUN cd /nipa-data/iproute2/ && \
 RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel && \
     cd /nipa-data/kernel && \
     git remote set-branches origin '*' && \
-    git fetch -v --depth=1 && \
-    git apply /tmp/kernel-patches/*.patch
+    git fetch -v --depth=1
 
 # Clone nipa
-RUN git clone --depth=1 -b dev https://github.com/p4tc-dev/nipa.git
-
-# Make nipa run in one shot mode
-ENV NIPA_FETCHER_COUNT=2
+RUN git clone --depth=1 -b dev https://github.com/p4tc-dev/new-nipa.git nipa
 
 COPY entrypoint.sh /entrypoint.sh
 
