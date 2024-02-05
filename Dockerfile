@@ -22,7 +22,7 @@ RUN apk update && apk add --no-cache \
    scapy@community \
    make \
    gcc \
-   libc-dev \
+   musl-dev \
    flex \
    bison \
    linux-headers \
