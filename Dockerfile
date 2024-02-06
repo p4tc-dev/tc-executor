@@ -69,12 +69,9 @@ RUN cd /nipa-data/iproute2/ && \
     make
 
 # Kernel
-RUN git clone --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel && \
-    cd /nipa-data/kernel && \
-    git remote set-branches origin '*' && \
-    git fetch -v --depth=1
+RUN git clone --no-single-branch --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel
 
-# Clone nipa
+# nipa
 RUN git clone --depth=1 -b dev https://github.com/p4tc-dev/new-nipa.git nipa
 
 COPY entrypoint.sh /entrypoint.sh
