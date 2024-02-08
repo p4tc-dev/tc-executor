@@ -65,12 +65,12 @@ if [ $REMOTE = true ]; then
 	pushd "$CUR/tc-executor-storage"
 		# Adjust artifacts browsing on dashboard
 		RESULT="$(find results -name '*-*' -type f | sort -n -r | head -1)"
-		ARTIFACTS="$(cat $RESULT | jq .link | sed 's/raw\.githubusercontent/github/g' -)"
-		jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
 
-
-		ARTIFACTS="$(cat $RESULT | jq .link | sed 's/storage/tree\/storage/g' -)"
-		jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
+		DLINK="$(cat $RESULT | jq .link)"
+		if [[ "$DLINK" =~ raw\.githubusercontent ]]; then
+			ARTIFACTS="$(echo $DLINK | sed 's/raw\.githubusercontent/github/g' | sed 's/storage/tree\/storage/g')"
+			jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
+		fi
 
 		# Push changes
 		git add .
