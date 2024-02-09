@@ -63,7 +63,7 @@ pushd "$CUR"
 popd
 
 if [ $REMOTE = true ]; then
-	pushd "$CUR/tc-executor-storage"
+	pushd "$CUR/$STORAGE"
 		# Adjust artifacts browsing on dashboard
 		RESULT="$(find results -name '*-*' -type f | sort -n -r | head -1)"
 
@@ -72,6 +72,10 @@ if [ $REMOTE = true ]; then
 			ARTIFACTS="$(echo $DLINK | sed 's/raw\.githubusercontent/github/g' | sed 's/storage/tree\/storage/g')"
 			jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
 		fi
+
+		# Copy container logs to storage
+		ARTPATH = "$CUR/$STORAGE/$(jq .link "$RESULT" | grep -o -P 'artifacts\/[0-9]+')"
+		cp /tmp/tc-executor-output "$ARTPATH/executor.log"
 
 		# Push changes
 		git add .
