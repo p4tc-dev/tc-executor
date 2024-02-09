@@ -71,11 +71,11 @@ if [ $REMOTE = true ]; then
 		if [[ "$DLINK" =~ raw\.githubusercontent ]]; then
 			ARTIFACTS="$(echo $DLINK | sed 's/raw\.githubusercontent/github/g' | sed 's/storage/tree\/storage/g')"
 			jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
-		fi
 
-		# Copy container logs to storage
-		ARTPATH = "$CUR/$STORAGE/$(jq .link "$RESULT" | grep -o -P 'artifacts\/[0-9]+')"
-		cp /tmp/tc-executor-output "$ARTPATH/executor.log"
+			# Copy container logs to storage
+			ARTPATH="$CUR/$STORAGE/$(jq .link "$RESULT" | grep -o -P 'artifacts\/[0-9]+')"
+			cp /tmp/tc-executor-output "$ARTPATH/executor.log"
+		fi
 
 		# Push changes
 		git add .
