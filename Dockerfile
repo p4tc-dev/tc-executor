@@ -40,7 +40,8 @@ RUN apk update && apk add --no-cache \
    libmnl-dev \
    iproute2  \
    jq \
-   libbpf-dev
+   libbpf-dev \
+   rsync
 
 RUN mkdir -p /tmp/kernel-patches && \
     mkdir -p /tmp/iproute2-patches

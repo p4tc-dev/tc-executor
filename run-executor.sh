@@ -58,6 +58,7 @@ pushd "$CUR"
 	docker run --device=/dev/kvm \
 		--rm \
 		-v $(realpath .)/$STORAGE:/storage \
+		-it \
 		nipa-executor
 popd
 
