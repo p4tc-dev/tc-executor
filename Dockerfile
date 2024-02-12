@@ -1,9 +1,11 @@
 FROM alpine:edge
 
+ARG DEBUG=false
 ARG UNAME=hostuser
 ARG UID=1000
 ARG GID=1000
 
+RUN echo $DEBUG > debug-mode
 RUN addgroup -g $GID $UNAME
 RUN adduser -u $UID -G $UNAME -H -D -s /bin/ash $UNAME
 
@@ -47,8 +49,10 @@ RUN mkdir -p /tmp/kernel-patches && \
     mkdir -p /tmp/iproute2-patches
 
 COPY tdc.config /tmp
+COPY tdc-debug.config /tmp
 COPY kernel-patches /tmp/kernel-patches/
 COPY iproute2-patches /tmp/iproute2-patches/
+COPY configs /tmp/configs/
 
 RUN git config --global user.email foo@bar.com
 RUN git config --global user.name foo@bar.com

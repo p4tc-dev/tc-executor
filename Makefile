@@ -1,31 +1,40 @@
 CURDIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+SYSTEMD := ${CURDIR}/systemd/
+DEBUG ?= false
+
+ifeq ($(DEBUG), true)
+	FLAGS := -d
+endif
 
 all: shell
 
 image:
-	docker build --no-cache --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) -t nipa-executor .
+	docker build --no-cache --build-arg DEBUG=${DEBUG} --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) -t nipa-executor .
 
 shell: image
 	docker run --device=/dev/kvm:/dev/kvm --rm -v $(realpath .)/tc-executor-storage:/storage --entrypoint ash -it nipa-executor
 
 local: 
-	bash -x ${CURDIR}/run-executor.sh -l
+	bash -x ${CURDIR}/run-executor.sh -l ${FLAGS}
 
 remote: 
-	bash -x ${CURDIR}/run-executor.sh
+	bash -x ${CURDIR}/run-executor.sh ${FLAGS}
 
 clean:
 	docker image rmi -f nipa-executor
 	docker builder prune -f
 
 install:
-	cpp -E -DINSTALL=${CURDIR} -DUSER=$(shell id -un) tc-executor.service | sed -e 's/\/ //' -e 's/#.*//' > /tmp/tc-executor.service
+	cpp -E -DINSTALL=${CURDIR} -DUSER=$(shell id -un) ${SYSTEMD}/tc-executor.service | sed -e 's/\/ //' -e 's/#.*//' > /tmp/tc-executor.service
+	cpp -E -DINSTALL=${CURDIR} -DUSER=$(shell id -un) ${SYSTEMD}/tc-executor.service | sed -e 's/\/ //' -e 's/#.*//' > /tmp/tc-executor-debug.service
 	sudo cp /tmp/tc-executor.service /etc/systemd/system/
-	sudo cp ${CURDIR}/tc-executor.timer /etc/systemd/system/
+	sudo cp /tmp/tc-executor-debug.service /etc/systemd/system/
+	sudo cp ${SYSTEMD}/tc-executor.timer /etc/systemd/system/
+	sudo cp ${SYSTEMD}/tc-executor-debug.timer /etc/systemd/system/
 	sudo systemctl daemon-reload
-	sudo systemctl enable tc-executor.service
-	sudo systemctl enable tc-executor.timer
-	sudo systemctl start tc-executor.timer
+	sudo systemctl enable tc-executor.service tc-executor-debug.service
+	sudo systemctl enable tc-executor.timer tc-executor-debug.timer
+	sudo systemctl start tc-executor.timer tc-executor-debug.timer
 
 uninstall:
 	sudo systemctl disable tc-executor.service

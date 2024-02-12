@@ -1,0 +1,14 @@
+[Unit]
+Description=TC Debug Executor
+After=network.target
+
+[Service]
+User=USER
+Group=USER
+ExecStart=INSTALL/run-executor.sh -d
+StandardInput=tty-force
+StandardOutput=truncate:/tmp/tc-executor-output
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

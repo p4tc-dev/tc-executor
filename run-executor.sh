@@ -11,20 +11,29 @@ trap cleanup EXIT SIGINT SIGTERM
 
 CUR=$(dirname -- "$( readlink -f -- "$0"; )";)
 REMOTE=true
+DEBUG=false
 STORAGE="tc-executor-storage"
+STORAGE_BRANCH="storage"
 
-while getopts "l" opt; do
+while getopts "ld" opt; do
 	case "$opt" in
 		l) REMOTE=false
 			;;
+		d) DEBUG=true
+			;;
 	esac
 done
+
+if [ "$DEBUG" = "true" ]; then
+	STORAGE_BRANCH=storage-dbg
+fi
 
 if [ $REMOTE = true ]; then
 	if ! [ -d "$CUR/$STORAGE" ]; then
 		cd "$CUR" && \
 		git clone --depth=1 \
-			-b storage \
+			--no-single-branch \
+			-b "$STORAGE_BRANCH" \
 			https://github.com/tammela/tc-executor.git \
 			"$STORAGE"
 	else
@@ -35,7 +44,7 @@ if [ $REMOTE = true ]; then
 	fi
 
 	pushd "$CUR/$STORAGE"
-		git checkout storage
+		git checkout "$STORAGE_BRANCH"
 		date -u > checkpoint
 		mkdir -p artifacts
 		mkdir -p results
@@ -54,6 +63,7 @@ pushd "$CUR"
 	docker build --no-cache \
 		--build-arg UID=$(id -u) \
 		--build-arg GID=$(id -g) \
+		--build-arg DEBUG=$DEBUG \
 		-t nipa-executor .
 	docker run --device=/dev/kvm \
 		--rm \
@@ -69,7 +79,7 @@ if [ $REMOTE = true ]; then
 
 		DLINK="$(cat $RESULT | jq .link)"
 		if [[ "$DLINK" =~ raw\.githubusercontent ]]; then
-			ARTIFACTS="$(echo $DLINK | sed 's/raw\.githubusercontent/github/g' | sed 's/storage/tree\/storage/g')"
+			ARTIFACTS="$(echo $DLINK | sed 's/raw\.githubusercontent/github/g' | sed -e "s/$STORAGE_BRANCH/tree\/$STORAGE_BRANCH/g")"
 			jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
 
 			# Copy container logs to storage
