@@ -28,6 +28,17 @@ if [ "$DEBUG" = "true" ]; then
 	STORAGE_BRANCH=storage-dbg
 fi
 
+# About 5-6 minutes window
+for time in 30 60 120 240; do
+	if ping -q -c1 github.com -W 2 > /dev/null; then
+		INTERNET=y
+		break
+	else
+		INTERNET=n
+		sleep $time
+	fi
+done
+
 if [ $REMOTE = true ]; then
 	if ! [ -d "$CUR/$STORAGE" ]; then
 		cd "$CUR" && \
@@ -48,6 +59,10 @@ if [ $REMOTE = true ]; then
 		date -u > checkpoint
 		mkdir -p artifacts
 		mkdir -p results
+		if [ $INTERNET = "n" ]; then
+			echo "$(date -u): No connection to the internet" >> failure
+			exit 1
+		fi
 	popd
 else
 	STORAGE="$(date +%Y-%m-%d-%H%M%S)"
@@ -55,6 +70,10 @@ else
 	pushd "$CUR/$STORAGE"
 		mkdir -p artifacts
 		mkdir -p results
+		if [ $INTERNET = "n" ]; then
+			echo "$(date -u): No connection to the internet" >> failure
+			exit 1
+		fi
 	popd
 fi
 
