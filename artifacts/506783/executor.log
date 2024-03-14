@@ -1,0 +1,1089 @@
+~/nipa/tc-executor/tc-executor-storage /
+Switched to branch 'storage'
+Your branch is ahead of 'origin/storage' by 240 commits.
+  (use "git push" to publish your local commits)
+/
+~/nipa/tc-executor /
+Error response from daemon: No such image: nipa-executor:latest
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.03kB done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:edge
+#3 DONE 0.0s
+
+#4 [ 1/22] FROM docker.io/library/alpine:edge
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 3.02kB done
+#5 DONE 0.0s
+
+#6 [ 2/22] RUN echo false > debug-mode
+#6 DONE 0.5s
+
+#7 [ 3/22] RUN addgroup -g 1001 hostuser
+#7 DONE 0.3s
+
+#8 [ 4/22] RUN adduser -u 1001 -G hostuser -H -D -s /bin/ash hostuser
+#8 DONE 0.3s
+
+#9 [ 5/22] RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+#9 DONE 0.4s
+
+#10 [ 6/22] RUN echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+#10 DONE 0.4s
+
+#11 [ 7/22] RUN apk update && apk add --no-cache    virtme-ng@testing    git    py3-requests    py3-psutil    py3-setuptools    py3-pyroute2    py3-argcomplete    qemu-system-x86_64@community    scapy@community    make    gcc    musl-dev    flex    bison    linux-headers    elfutils-dev    util-linux    coreutils    diffutils    findutils    file    bash    kmod    perl    iptables-dev    libcap-dev    libmnl-dev    iproute2     jq    libbpf-dev    rsync
+#11 0.348 fetch https://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+#11 0.512 fetch https://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.179 fetch http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+#11 1.326 fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.500 v20231219-5528-ge090ff2f538 [https://dl-cdn.alpinelinux.org/alpine/edge/main]
+#11 1.500 v20231219-5533-gdb06f7b79d3 [https://dl-cdn.alpinelinux.org/alpine/edge/community]
+#11 1.500 v20231219-5278-ga41a09791b2 [http://dl-cdn.alpinelinux.org/alpine/edge/testing]
+#11 1.500 v20231219-5533-gdb06f7b79d3 [http://dl-cdn.alpinelinux.org/alpine/edge/community]
+#11 1.500 OK: 30693 distinct packages available
+#11 1.545 fetch https://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+#11 1.603 fetch https://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.674 fetch http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+#11 1.728 fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.882 (1/175) Upgrading musl (1.2.4_git20230717-r5 -> 1.2.5-r0)
+#11 1.897 (2/175) Upgrading zlib (1.3-r2 -> 1.3.1-r0)
+#11 1.904 (3/175) Installing ncurses-terminfo-base (6.4_p20231125-r0)
+#11 1.912 (4/175) Installing libncursesw (6.4_p20231125-r0)
+#11 1.921 (5/175) Installing readline (8.2.10-r0)
+#11 1.930 (6/175) Installing bash (5.2.26-r0)
+#11 1.945 Executing bash-5.2.26-r0.post-install
+#11 1.949 (7/175) Installing m4 (1.4.19-r3)
+#11 1.957 (8/175) Installing bison (3.8.2-r1)
+#11 1.971 (9/175) Installing coreutils-env (9.4-r2)
+#11 1.978 (10/175) Installing coreutils-fmt (9.4-r2)
+#11 1.983 (11/175) Installing coreutils-sha512sum (9.4-r2)
+#11 1.990 (12/175) Installing libacl (2.3.2-r0)
+#11 1.996 (13/175) Installing libattr (2.5.2-r0)
+#11 2.006 (14/175) Installing skalibs (2.14.1.1-r0)
+#11 2.019 (15/175) Installing utmps-libs (0.1.2.2-r0)
+#11 2.025 (16/175) Installing coreutils (9.4-r2)
+#11 2.041 (17/175) Installing diffutils (3.10-r0)
+#11 2.049 (18/175) Installing zstd-libs (1.5.5-r8)
+#11 2.060 (19/175) Installing libelf (0.191-r0)
+#11 2.067 (20/175) Installing libbz2 (1.0.8-r6)
+#11 2.082 (21/175) Installing musl-fts (1.2.7-r6)
+#11 2.088 (22/175) Installing xz-libs (5.6.1-r1)
+#11 2.097 (23/175) Installing libdw (0.191-r0)
+#11 2.107 (24/175) Installing libasm (0.191-r0)
+#11 2.120 (25/175) Installing xz (5.6.1-r1)
+#11 2.132 (26/175) Installing pkgconf (2.1.1-r0)
+#11 2.141 (27/175) Installing xz-dev (5.6.1-r1)
+#11 2.155 (28/175) Installing libgcc (13.2.1_git20240309-r0)
+#11 2.163 (29/175) Installing libstdc++ (13.2.1_git20240309-r0)
+#11 2.180 (30/175) Installing zstd (1.5.5-r8)
+#11 2.188 (31/175) Installing zstd-dev (1.5.5-r8)
+#11 2.203 (32/175) Installing zlib-dev (1.3.1-r0)
+#11 2.211 (33/175) Installing elfutils-dev (0.191-r0)
+#11 2.227 (34/175) Installing libmagic (5.45-r1)
+#11 2.251 (35/175) Installing file (5.45-r1)
+#11 2.260 (36/175) Installing findutils (4.9.0-r5)
+#11 2.269 (37/175) Installing flex (2.6.4-r6)
+#11 2.276 (38/175) Installing jansson (2.14-r4)
+#11 2.282 (39/175) Installing binutils (2.42-r0)
+#11 2.327 (40/175) Installing libgomp (13.2.1_git20240309-r0)
+#11 2.335 (41/175) Installing libatomic (13.2.1_git20240309-r0)
+#11 2.342 (42/175) Installing gmp (6.3.0-r0)
+#11 2.374 (43/175) Installing isl26 (0.26-r1)
+#11 2.397 (44/175) Installing mpfr4 (4.2.1-r0)
+#11 2.418 (45/175) Installing mpc1 (1.3.1-r1)
+#11 2.429 (46/175) Installing gcc (13.2.1_git20240309-r0)
+#11 2.862 (47/175) Installing ca-certificates (20240226-r0)
+#11 2.878 (48/175) Installing brotli-libs (1.1.0-r1)
+#11 2.892 (49/175) Installing c-ares (1.26.0-r0)
+#11 2.900 (50/175) Installing libunistring (1.2-r0)
+#11 2.917 (51/175) Installing libidn2 (2.3.7-r0)
+#11 2.926 (52/175) Installing nghttp2-libs (1.59.0-r0)
+#11 2.933 (53/175) Installing libpsl (0.21.5-r1)
+#11 2.940 (54/175) Installing libcurl (8.6.0-r0)
+#11 2.954 (55/175) Installing libexpat (2.6.1-r0)
+#11 2.964 (56/175) Installing pcre2 (10.43-r0)
+#11 2.975 (57/175) Installing git (2.44.0-r0)
+#11 3.017 (58/175) Installing git-init-template (2.44.0-r0)
+#11 3.034 (59/175) Installing libcap2 (2.69-r1)
+#11 3.047 (60/175) Installing libmnl (1.0.5-r2)
+#11 3.053 (61/175) Installing iproute2-minimal (6.8.0-r0)
+#11 3.063 (62/175) Installing libxtables (1.8.10-r3)
+#11 3.070 (63/175) Installing iproute2-tc (6.8.0-r0)
+#11 3.080 (64/175) Installing iproute2-ss (6.8.0-r0)
+#11 3.087 (65/175) Installing iproute2 (6.8.0-r0)
+#11 3.096 Executing iproute2-6.8.0-r0.post-install
+#11 3.099 (66/175) Installing linux-headers (6.6-r0)
+#11 3.172 (67/175) Installing libip4tc (1.8.10-r3)
+#11 3.180 (68/175) Installing libip6tc (1.8.10-r3)
+#11 3.186 (69/175) Installing libipq (1.8.10-r3)
+#11 3.192 (70/175) Installing iptables-dev (1.8.10-r3)
+#11 3.199 (71/175) Installing oniguruma (6.9.9-r0)
+#11 3.209 (72/175) Installing jq (1.7.1-r0)
+#11 3.219 (73/175) Installing kmod (31-r4)
+#11 3.231 (74/175) Installing libbpf (1.3.0-r0)
+#11 3.240 (75/175) Installing libbpf-dev (1.3.0-r0)
+#11 3.253 (76/175) Installing libcap-dev (2.69-r1)
+#11 3.261 (77/175) Installing libmnl-dev (1.0.5-r2)
+#11 3.267 (78/175) Installing make (4.4.1-r2)
+#11 3.275 (79/175) Installing musl-dev (1.2.5-r0)
+#11 3.319 (80/175) Installing perl (5.38.2-r0)
+#11 3.485 (81/175) Installing perl-error (0.17029-r2)
+#11 3.491 (82/175) Installing perl-git (2.44.0-r0)
+#11 3.501 (83/175) Installing git-perl (2.44.0-r0)
+#11 3.508 (84/175) Installing libffi (3.4.6-r0)
+#11 3.514 (85/175) Installing gdbm (1.23-r1)
+#11 3.520 (86/175) Installing mpdecimal (4.0.0-r0)
+#11 3.527 (87/175) Installing libpanelw (6.4_p20231125-r0)
+#11 3.533 (88/175) Installing sqlite-libs (3.45.1-r0)
+#11 3.552 (89/175) Installing python3 (3.11.8-r0)
+#11 3.668 (90/175) Installing python3-pycache-pyc0 (3.11.8-r0)
+#11 3.747 (91/175) Installing pyc (3.11.8-r0)
+#11 3.757 (92/175) Installing py3-argcomplete-pyc (3.2.3-r0)
+#11 3.765 (93/175) Installing python3-pyc (3.11.8-r0)
+#11 3.771 (94/175) Installing py3-argcomplete (3.2.3-r0)
+#11 3.779 (95/175) Installing py3-psutil (5.9.8-r0)
+#11 3.791 (96/175) Installing py3-psutil-pyc (5.9.8-r0)
+#11 3.804 (97/175) Installing py3-pyroute2 (0.7.12-r0)
+#11 3.832 (98/175) Installing py3-pyroute2-pyc (0.7.12-r0)
+#11 3.859 (99/175) Installing py3-certifi (2023.11.17-r0)
+#11 3.866 (100/175) Installing py3-certifi-pyc (2023.11.17-r0)
+#11 3.871 (101/175) Installing py3-charset-normalizer (3.3.2-r0)
+#11 3.879 (102/175) Installing py3-charset-normalizer-pyc (3.3.2-r0)
+#11 3.887 (103/175) Installing py3-idna (3.6-r0)
+#11 3.894 (104/175) Installing py3-idna-pyc (3.6-r0)
+#11 3.902 (105/175) Installing py3-urllib3 (1.26.18-r0)
+#11 3.912 (106/175) Installing py3-urllib3-pyc (1.26.18-r0)
+#11 3.931 (107/175) Installing py3-requests (2.31.0-r1)
+#11 3.940 (108/175) Installing py3-requests-pyc (2.31.0-r1)
+#11 3.952 (109/175) Installing py3-parsing (3.1.2-r0)
+#11 3.962 (110/175) Installing py3-parsing-pyc (3.1.2-r0)
+#11 3.980 (111/175) Installing py3-packaging (23.2-r0)
+#11 3.987 (112/175) Installing py3-packaging-pyc (23.2-r0)
+#11 3.996 (113/175) Installing py3-setuptools (69.1.1-r0)
+#11 4.191 (114/175) Installing py3-setuptools-pyc (69.1.1-r0)
+#11 4.226 (115/175) Installing libcap-ng (0.8.4-r0)
+#11 4.235 (116/175) Installing libintl (0.22.4-r0)
+#11 4.244 (117/175) Installing libblkid (2.39.3-r0)
+#11 4.257 (118/175) Installing libmount (2.39.3-r0)
+#11 4.265 (119/175) Installing glib (2.78.4-r0)
+#11 4.289 (120/175) Installing numactl (2.0.18-r0)
+#11 4.301 (121/175) Installing qemu (8.2.1-r0)
+#11 4.313 Executing qemu-8.2.1-r0.pre-install
+#11 4.383 Executing qemu-8.2.1-r0.post-install
+#11 4.387 *
+#11 4.387 * If you want to run VM as unprivileged user and let Qemu create tunX devices,
+#11 4.387 * then you must add that user to the group "qemu".
+#11 4.387 * If you use KVM for hardware-assisted virtualization, then you may also need
+#11 4.387 * to add that user to the group "kvm".
+#11 4.387 *
+#11 4.387 (122/175) Installing qemu-bridge-helper (8.2.1-r0)
+#11 4.397 (123/175) Installing libaio (0.3.113-r2)
+#11 4.404 (124/175) Installing capstone (5.0.1-r2)
+#11 4.427 (125/175) Installing py3-capstone (5.0.1-r2)
+#11 4.451 (126/175) Installing py3-capstone-pyc (5.0.1-r2)
+#11 4.457 (127/175) Installing nettle (3.9.1-r0)
+#11 4.469 (128/175) Installing libtasn1 (4.19.0-r2)
+#11 4.475 (129/175) Installing p11-kit (0.25.3-r0)
+#11 4.486 (130/175) Installing gnutls (3.8.3-r0)
+#11 4.506 (131/175) Installing libjpeg-turbo (3.0.2-r0)
+#11 4.516 (132/175) Installing lzo (2.10-r5)
+#11 4.523 (133/175) Installing pixman (0.43.2-r0)
+#11 4.533 (134/175) Installing libpng (1.6.43-r0)
+#11 4.541 (135/175) Installing libsasl (2.1.28-r6)
+#11 4.548 (136/175) Installing libseccomp (2.5.5-r0)
+#11 4.555 (137/175) Installing libslirp (4.7.0-r0)
+#11 4.562 (138/175) Installing snappy (1.1.10-r2)
+#11 4.568 (139/175) Installing liburing (2.5-r1)
+#11 4.576 (140/175) Installing vde2-libs (2.3.3-r1)
+#11 4.583 (141/175) Installing qemu-system-x86_64 (8.2.1-r0)
+#11 4.670 (142/175) Installing lz4-libs (1.9.4-r5)
+#11 4.681 (143/175) Installing popt (1.19-r3)
+#11 4.687 (144/175) Installing libxxhash (0.8.2-r2)
+#11 4.693 (145/175) Installing rsync (3.2.7-r4)
+#11 4.702 (146/175) Installing scapy (2.5.0-r1)
+#11 4.742 Executing scapy-2.5.0-r1.post-install
+#11 4.745 *
+#11 4.745 * Certain optional features of scapy also depend on the following packages:
+#11 4.745 *     py3-matplotlib graphviz imagemagick py3-cryptography sox
+#11 4.745 * And the following unpackaged dependencies:
+#11 4.745 *     pyxi vpython-jupyter nmap<v4.23
+#11 4.745 * More information can be found at https://scapy.readthedocs.io/en/latest/installation.html#optional-dependencies
+#11 4.745 *
+#11 4.745 (147/175) Installing scapy-pyc (2.5.0-r1)
+#11 4.800 (148/175) Installing util-linux (2.39.3-r0)
+#11 4.806 (149/175) Installing setarch (2.39.3-r0)
+#11 4.818 (150/175) Installing libuuid (2.39.3-r0)
+#11 4.824 (151/175) Installing libfdisk (2.39.3-r0)
+#11 4.832 (152/175) Installing libsmartcols (2.39.3-r0)
+#11 4.845 (153/175) Installing util-linux-misc (2.39.3-r0)
+#11 4.866 (154/175) Installing libeconf (0.6.2-r0)
+#11 4.876 (155/175) Installing linux-pam (1.5.3-r8)
+#11 4.892 (156/175) Installing runuser (2.39.3-r0)
+#11 4.903 (157/175) Installing mount (2.39.3-r0)
+#11 4.921 (158/175) Installing losetup (2.39.3-r0)
+#11 4.933 (159/175) Installing hexdump (2.39.3-r0)
+#11 4.944 (160/175) Installing uuidgen (2.39.3-r0)
+#11 4.950 (161/175) Installing blkid (2.39.3-r0)
+#11 4.956 (162/175) Installing sfdisk (2.39.3-r0)
+#11 4.962 (163/175) Installing mcookie (2.39.3-r0)
+#11 4.969 (164/175) Installing agetty (2.39.3-r0)
+#11 4.979 (165/175) Installing wipefs (2.39.3-r0)
+#11 4.986 (166/175) Installing cfdisk (2.39.3-r0)
+#11 4.993 (167/175) Installing umount (2.39.3-r0)
+#11 4.999 (168/175) Installing flock (2.39.3-r0)
+#11 5.005 (169/175) Installing lsblk (2.39.3-r0)
+#11 5.014 (170/175) Installing setpriv (2.39.3-r0)
+#11 5.020 (171/175) Installing logger (2.39.3-r0)
+#11 5.030 (172/175) Installing partx (2.39.3-r0)
+#11 5.037 (173/175) Installing fstrim (2.39.3-r0)
+#11 5.043 (174/175) Installing findmnt (2.39.3-r0)
+#11 5.049 (175/175) Installing virtme-ng@testing (1.22-r0)
+#11 5.079 Executing busybox-1.36.1-r17.trigger
+#11 5.084 Executing ca-certificates-20240226-r0.trigger
+#11 5.106 Executing glib-2.78.4-r0.trigger
+#11 5.112 OK: 385 MiB in 188 packages
+#11 DONE 5.6s
+
+#12 [ 8/22] RUN mkdir -p /tmp/kernel-patches &&     mkdir -p /tmp/iproute2-patches
+#12 DONE 0.3s
+
+#13 [ 9/22] COPY tdc.config /tmp
+#13 DONE 0.0s
+
+#14 [10/22] COPY tdc-debug.config /tmp
+#14 DONE 0.1s
+
+#15 [11/22] COPY kernel-patches /tmp/kernel-patches/
+#15 DONE 0.0s
+
+#16 [12/22] COPY iproute2-patches /tmp/iproute2-patches/
+#16 DONE 0.0s
+
+#17 [13/22] COPY configs /tmp/configs/
+#17 DONE 0.0s
+
+#18 [14/22] RUN git config --global user.email foo@bar.com
+#18 DONE 0.2s
+
+#19 [15/22] RUN git config --global user.name foo@bar.com
+#19 DONE 0.4s
+
+#20 [16/22] RUN git clone https://git.kernel.org/pub/scm/network/iproute2/iproute2-next.git /nipa-data/iproute2
+#20 0.366 Cloning into '/nipa-data/iproute2'...
+#20 DONE 2.2s
+
+#21 [17/22] RUN cd /nipa-data/iproute2 && 	git remote add stable https://git.kernel.org/pub/scm/network/iproute2/iproute2.git && 	git fetch --all && 	git merge stable/main
+#21 1.013 Fetching origin
+#21 1.414 Fetching stable
+#21 2.556 From https://git.kernel.org/pub/scm/network/iproute2/iproute2
+#21 2.556  * [new branch]        codeql         -> stable/codeql
+#21 2.556  * [new branch]        iproute2-4.1.x -> stable/iproute2-4.1.x
+#21 2.556  * [new branch]        main           -> stable/main
+#21 2.562  * [new tag]           v6.8.0         -> v6.8.0
+#21 2.567 Updating a9fce553..11740815
+#21 2.833 Fast-forward
+#21 2.848  README               | 13 ++++++++
+#21 2.848  include/version.h    |  2 +-
+#21 2.848  ip/iptuntap.c        |  5 ++-
+#21 2.848  lib/rt_names.c       | 43 +++++++++++++-------------
+#21 2.848  man/man8/ip.8        | 33 ++++++++++++++++++--
+#21 2.848  man/man8/tc-mirred.8 |  2 +-
+#21 2.848  man/man8/tc-simple.8 | 12 ++++----
+#21 2.848  misc/ifstat.c        |  6 ++--
+#21 2.848  misc/ss.c            | 17 ++++++++++-
+#21 2.848  tc/e_bpf.c           |  2 +-
+#21 2.848  tc/f_basic.c         |  4 +--
+#21 2.848  tc/f_bpf.c           |  4 +--
+#21 2.848  tc/f_cgroup.c        |  4 +--
+#21 2.848  tc/f_flow.c          |  4 +--
+#21 2.848  tc/f_flower.c        |  4 +--
+#21 2.848  tc/f_fw.c            |  4 +--
+#21 2.848  tc/f_matchall.c      |  4 +--
+#21 2.848  tc/f_route.c         |  4 +--
+#21 2.848  tc/f_u32.c           |  6 ++--
+#21 2.848  tc/m_action.c        |  6 ++--
+#21 2.848  tc/m_bpf.c           |  4 +--
+#21 2.848  tc/m_connmark.c      |  4 +--
+#21 2.848  tc/m_csum.c          |  4 +--
+#21 2.848  tc/m_ct.c            |  4 +--
+#21 2.848  tc/m_ctinfo.c        |  4 +--
+#21 2.848  tc/m_gact.c          |  4 +--
+#21 2.848  tc/m_gate.c          |  8 ++---
+#21 2.848  tc/m_ife.c           |  4 +--
+#21 2.848  tc/m_mirred.c        |  6 ++--
+#21 2.848  tc/m_mpls.c          |  4 +--
+#21 2.848  tc/m_nat.c           |  4 +--
+#21 2.848  tc/m_pedit.c         | 10 +++---
+#21 2.848  tc/m_police.c        |  8 ++---
+#21 2.848  tc/m_sample.c        |  4 +--
+#21 2.848  tc/m_simple.c        | 12 +++++---
+#21 2.848  tc/m_skbedit.c       |  4 +--
+#21 2.848  tc/m_skbmod.c        | 41 ++++++++++++++-----------
+#21 2.848  tc/m_tunnel_key.c    |  4 +--
+#21 2.848  tc/m_vlan.c          |  4 +--
+#21 2.848  tc/q_cake.c          |  6 ++--
+#21 2.848  tc/q_cbs.c           |  4 +--
+#21 2.848  tc/q_choke.c         |  6 ++--
+#21 2.848  tc/q_clsact.c        |  4 +--
+#21 2.848  tc/q_codel.c         |  6 ++--
+#21 2.848  tc/q_drr.c           |  8 ++---
+#21 2.848  tc/q_etf.c           |  4 +--
+#21 2.848  tc/q_ets.c           |  8 ++---
+#21 2.848  tc/q_fifo.c          |  4 +--
+#21 2.848  tc/q_fq.c            |  6 ++--
+#21 2.848  tc/q_fq_codel.c      |  6 ++--
+#21 2.848  tc/q_fq_pie.c        |  6 ++--
+#21 2.848  tc/q_gred.c          |  6 ++--
+#21 2.848  tc/q_hfsc.c          | 10 +++---
+#21 2.848  tc/q_hhf.c           |  6 ++--
+#21 2.848  tc/q_htb.c           |  8 ++---
+#21 2.848  tc/q_ingress.c       |  4 +--
+#21 2.848  tc/q_mqprio.c        |  4 +--
+#21 2.848  tc/q_multiq.c        |  4 +--
+#21 2.848  tc/q_netem.c         | 86 +++++++++++++++++++++++++++++-----------------------
+#21 2.848  tc/q_pie.c           |  6 ++--
+#21 2.848  tc/q_plug.c          |  4 +--
+#21 2.848  tc/q_prio.c          |  4 +--
+#21 2.848  tc/q_qfq.c           |  6 ++--
+#21 2.848  tc/q_red.c           |  8 ++---
+#21 2.848  tc/q_sfb.c           |  6 ++--
+#21 2.848  tc/q_sfq.c           |  6 ++--
+#21 2.848  tc/q_skbprio.c       |  4 +--
+#21 2.848  tc/q_taprio.c        |  6 ++--
+#21 2.848  tc/q_tbf.c           |  4 +--
+#21 2.848  tc/tc.c              | 12 ++++----
+#21 2.848  tc/tc_class.c        |  6 ++--
+#21 2.848  tc/tc_core.c         | 15 ++-------
+#21 2.848  tc/tc_core.h         |  2 --
+#21 2.848  tc/tc_exec.c         |  2 +-
+#21 2.848  tc/tc_filter.c       |  6 ++--
+#21 2.848  tc/tc_qdisc.c        |  6 ++--
+#21 2.848  tc/tc_util.c         | 33 +++++++++-----------
+#21 2.848  tc/tc_util.h         | 36 +++++++++++-----------
+#21 2.848  78 files changed, 373 insertions(+), 311 deletions(-)
+#21 DONE 3.4s
+
+#22 [18/22] RUN if [ "$(find /tmp/iproute2-patches/ -name *.patch)" ]; then  	cd /nipa-data/iproute2; 	git apply /tmp/iproute2-patches/*.patch;     fi
+#22 DONE 2.8s
+
+#23 [19/22] RUN cd /nipa-data/iproute2/ &&     ./configure &&     make
+#23 2.170 TC schedulers
+#23 2.170  IPT	using xtables
+#23 2.198  IPSET  yes
+#23 2.216 
+#23 2.217 lib directory: /usr/lib
+#23 2.217 libc has setns: yes
+#23 2.237 libc has name_to_handle_at: yes
+#23 2.257 SELinux support: no
+#23 2.258 libtirpc support: no
+#23 2.258 libbpf support: yes
+#23 2.321 	libbpf version 1.3.0
+#23 2.321 ELF support: yes
+#23 2.323 libmnl support: yes
+#23 2.325 Berkeley DB: no
+#23 2.335 need for strlcpy: no
+#23 2.354 libcap support: yes
+#23 2.356 color output: never
+#23 2.358 
+#23 2.358 lib
+#23 2.360     CC       libgenl.o
+#23 2.396     CC       libnetlink.o
+#23 2.669     CC       mnl_utils.o
+#23 2.738     AR       libnetlink.a
+#23 2.740     CC       utils.o
+#23 3.080     CC       utils_math.o
+#23 3.116     CC       rt_names.o
+#23 3.262     CC       ll_map.o
+#23 3.341     CC       ll_types.o
+#23 3.352 In file included from ll_types.c:20:
+#23 3.352 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 3.352    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 3.352       | 
+#23 3.352 In file included from /usr/include/sys/ioctl.h:10,
+#23 3.352                  from ll_types.c:12:
+#23 3.352 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 3.352   111 | #define SIOCGSTAMP      0x8906
+#23 3.352       | 
+#23 3.352 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 3.352    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 3.352       | 
+#23 3.352 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 3.352   112 | #define SIOCGSTAMPNS    0x8907
+#23 3.352       | 
+#23 3.365     CC       ll_proto.o
+#23 3.376 In file included from ll_proto.c:21:
+#23 3.376 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 3.376    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 3.376       | 
+#23 3.376 In file included from /usr/include/sys/ioctl.h:10,
+#23 3.376                  from ll_proto.c:13:
+#23 3.376 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 3.376   111 | #define SIOCGSTAMP      0x8906
+#23 3.376       | 
+#23 3.376 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 3.376    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 3.376       | 
+#23 3.376 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 3.376   112 | #define SIOCGSTAMPNS    0x8907
+#23 3.376       | 
+#23 3.388     CC       ll_addr.o
+#23 3.399 In file included from ll_addr.c:20:
+#23 3.399 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 3.399    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 3.399       | 
+#23 3.399 In file included from /usr/include/sys/ioctl.h:10,
+#23 3.399                  from ll_addr.c:12:
+#23 3.399 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 3.399   111 | #define SIOCGSTAMP      0x8906
+#23 3.399       | 
+#23 3.399 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 3.399    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 3.399       | 
+#23 3.399 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 3.399   112 | #define SIOCGSTAMPNS    0x8907
+#23 3.399       | 
+#23 3.423     CC       inet_proto.o
+#23 3.449     CC       namespace.o
+#23 3.498     CC       json_writer.o
+#23 3.568     CC       json_print.o
+#23 3.673     CC       json_print_math.o
+#23 3.700     CC       names.o
+#23 3.739     CC       color.o
+#23 3.774     CC       bpf_legacy.o
+#23 4.087     CC       bpf_glue.o
+#23 4.120     CC       exec.o
+#23 4.146     CC       fs.o
+#23 4.203     CC       cg_map.o
+#23 4.233     CC       ppp_proto.o
+#23 4.253     CC       bpf_libbpf.o
+#23 4.319     CC       selinux.o
+#23 4.335     CC       ax25_ntop.o
+#23 4.359     CC       rose_ntop.o
+#23 4.370 In file included from rose_ntop.c:16:
+#23 4.370 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 4.370    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 4.370       | 
+#23 4.370 In file included from /usr/include/sys/ioctl.h:10,
+#23 4.370                  from rose_ntop.c:7:
+#23 4.370 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 4.370   111 | #define SIOCGSTAMP      0x8906
+#23 4.370       | 
+#23 4.370 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 4.370    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 4.370       | 
+#23 4.370 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 4.370   112 | #define SIOCGSTAMPNS    0x8907
+#23 4.370       | 
+#23 4.383     CC       mpls_ntop.o
+#23 4.406     CC       mpls_pton.o
+#23 4.430     CC       netrom_ntop.o
+#23 4.450     AR       libutil.a
+#23 4.454 
+#23 4.454 ip
+#23 4.456     CC       ip.o
+#23 4.519     CC       ipaddress.o
+#23 4.532 In file included from ipaddress.c:26:
+#23 4.532 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 4.532    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 4.532       | 
+#23 4.532 In file included from /usr/include/sys/ioctl.h:10,
+#23 4.532                  from ipaddress.c:14:
+#23 4.532 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 4.532   111 | #define SIOCGSTAMP      0x8906
+#23 4.532       | 
+#23 4.532 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 4.532    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 4.532       | 
+#23 4.532 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 4.532   112 | #define SIOCGSTAMPNS    0x8907
+#23 4.532       | 
+#23 4.932     CC       ipaddrlabel.o
+#23 4.984     CC       iproute.o
+#23 5.436     CC       iprule.o
+#23 5.600     CC       ipnetns.o
+#23 5.771     CC       rtm_map.o
+#23 5.802     CC       iptunnel.o
+#23 5.814 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 5.814                  from iptunnel.c:19:
+#23 5.814 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 5.814   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 5.814       | 
+#23 5.814 In file included from iptunnel.c:16:
+#23 5.814 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 5.814    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 5.814       | 
+#23 5.931     CC       ip6tunnel.o
+#23 6.032     CC       tunnel.o
+#23 6.115     CC       ipneigh.o
+#23 6.248     CC       ipntable.o
+#23 6.341     CC       iplink.o
+#23 6.595     CC       ipmaddr.o
+#23 6.606 In file included from ipmaddr.c:21:
+#23 6.606 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 6.606    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 6.606       | 
+#23 6.606 In file included from /usr/include/sys/ioctl.h:10,
+#23 6.606                  from ipmaddr.c:12:
+#23 6.606 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 6.606   111 | #define SIOCGSTAMP      0x8906
+#23 6.606       | 
+#23 6.606 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 6.606    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 6.606       | 
+#23 6.606 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 6.606   112 | #define SIOCGSTAMPNS    0x8907
+#23 6.606       | 
+#23 6.674     CC       ipmonitor.o
+#23 6.738     CC       ipmroute.o
+#23 6.750 In file included from ipmroute.c:22:
+#23 6.750 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 6.750    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 6.750       | 
+#23 6.750 In file included from /usr/include/sys/ioctl.h:10,
+#23 6.750                  from ipmroute.c:13:
+#23 6.750 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 6.750   111 | #define SIOCGSTAMP      0x8906
+#23 6.750       | 
+#23 6.750 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 6.750    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 6.750       | 
+#23 6.750 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 6.750   112 | #define SIOCGSTAMPNS    0x8907
+#23 6.750       | 
+#23 6.804     CC       ipprefix.o
+#23 6.830     CC       iptuntap.o
+#23 6.926     CC       iptoken.o
+#23 6.973     CC       ipxfrm.o
+#23 7.237     CC       xfrm_state.o
+#23 7.474     CC       xfrm_policy.o
+#23 7.680     CC       xfrm_monitor.o
+#23 7.749     CC       iplink_dummy.o
+#23 7.771     CC       iplink_ifb.o
+#23 7.792     CC       iplink_nlmon.o
+#23 7.811     CC       iplink_team.o
+#23 7.831     CC       iplink_vcan.o
+#23 7.851     CC       iplink_vxcan.o
+#23 7.874     CC       iplink_vlan.o
+#23 7.937     CC       link_veth.o
+#23 7.961     CC       link_gre.o
+#23 7.970 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 7.970                  from link_gre.c:15:
+#23 7.970 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 7.970   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 7.970       | 
+#23 7.970 In file included from link_gre.c:9:
+#23 7.970 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 7.970    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 7.970       | 
+#23 8.066     CC       iplink_can.o
+#23 8.194     CC       iplink_xdp.o
+#23 8.250     CC       iplink_macvlan.o
+#23 8.313     CC       ipl2tp.o
+#23 8.455     CC       link_vti.o
+#23 8.465 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 8.465                  from link_vti.c:16:
+#23 8.465 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 8.465   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 8.465       | 
+#23 8.465 In file included from link_vti.c:10:
+#23 8.465 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 8.465    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 8.465       | 
+#23 8.507     CC       link_vti6.o
+#23 8.518 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 8.518                  from link_vti6.c:17:
+#23 8.518 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 8.518   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 8.518       | 
+#23 8.518 In file included from link_vti6.c:11:
+#23 8.518 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 8.518    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 8.518       | 
+#23 8.561     CC       link_xfrm.o
+#23 8.592     CC       iplink_vxlan.o
+#23 8.730     CC       tcp_metrics.o
+#23 8.823     CC       iplink_ipoib.o
+#23 8.863     CC       ipnetconf.o
+#23 8.911     CC       link_ip6tnl.o
+#23 8.921 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 8.921                  from link_ip6tnl.c:15:
+#23 8.921 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 8.921   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 8.921       | 
+#23 8.921 In file included from link_ip6tnl.c:9:
+#23 8.921 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 8.921    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 8.921       | 
+#23 8.999     CC       link_iptnl.o
+#23 9.009 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 9.009                  from link_iptnl.c:16:
+#23 9.009 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 9.009   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 9.009       | 
+#23 9.009 In file included from link_iptnl.c:9:
+#23 9.009 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 9.009    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 9.009       | 
+#23 9.088     CC       link_gre6.o
+#23 9.099 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 9.099                  from link_gre6.c:15:
+#23 9.099 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 9.099   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 9.099       | 
+#23 9.099 In file included from link_gre6.c:9:
+#23 9.099 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 9.099    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 9.099       | 
+#23 9.204     CC       iplink_bond.o
+#23 9.367     CC       iplink_bond_slave.o
+#23 9.414     CC       iplink_hsr.o
+#23 9.458     CC       iplink_bridge.o
+#23 9.592     CC       iplink_bridge_slave.o
+#23 9.680     CC       iplink_dsa.o
+#23 9.710     CC       ipfou.o
+#23 9.782     CC       iplink_ipvlan.o
+#23 9.820     CC       iplink_geneve.o
+#23 9.903     CC       iplink_vrf.o
+#23 9.946     CC       iproute_lwtunnel.o
+#23 10.30     CC       ipmacsec.o
+#23 10.52     CC       ipila.o
+#23 10.59     CC       ipvrf.o
+#23 10.69     CC       iplink_xstats.o
+#23 10.72     CC       ipseg6.o
+#23 10.76     CC       iplink_netdevsim.o
+#23 10.78     CC       iplink_rmnet.o
+#23 10.81     CC       ipnexthop.o
+#23 11.01     CC       ipmptcp.o
+#23 11.11     CC       iplink_bareudp.o
+#23 11.16     CC       iplink_wwan.o
+#23 11.19     CC       ipioam6.o
+#23 11.25     CC       iplink_amt.o
+#23 11.30     CC       iplink_batadv.o
+#23 11.33     CC       iplink_gtp.o
+#23 11.37     CC       iplink_virt_wifi.o
+#23 11.39     CC       iplink_netkit.o
+#23 11.43     CC       ipstats.o
+#23 11.62     LINK     ip
+#23 11.65     CC       rtmon.o
+#23 11.70     LINK     rtmon
+#23 11.71 
+#23 11.71 tc
+#23 11.71     CC       tc.o
+#23 11.79     CC       tc_qdisc.o
+#23 11.89     CC       tc_class.o
+#23 11.99     CC       tc_filter.o
+#23 12.14     CC       tc_util.o
+#23 12.31     CC       tc_monitor.o
+#23 12.34     CC       tc_exec.o
+#23 12.37     CC       m_police.o
+#23 12.45     CC       m_estimator.o
+#23 12.47     CC       m_action.o
+#23 12.61     CC       m_ematch.o
+#23 12.72     YACC     emp_ematch.tab.c
+#23 12.77     CC       emp_ematch.tab.o
+#23 12.87     LEX      emp_ematch.lex.c
+#23 12.87     CC       emp_ematch.lex.o
+#23 13.03     CC       q_fifo.o
+#23 13.06     CC       q_sfq.o
+#23 13.13     CC       q_red.o
+#23 13.19     CC       q_prio.o
+#23 13.23     CC       q_skbprio.o
+#23 13.26     CC       q_tbf.o
+#23 13.34     CC       q_multiq.o
+#23 13.37     CC       q_netem.o
+#23 13.56     CC       q_choke.o
+#23 13.62     CC       q_sfb.o
+#23 13.68     CC       f_u32.o
+#23 13.91     CC       f_route.o
+#23 13.96     CC       f_fw.o
+#23 14.01     CC       f_basic.o
+#23 14.05     CC       f_bpf.o
+#23 14.11     CC       f_flow.o
+#23 14.19     CC       f_cgroup.o
+#23 14.23     CC       f_flower.o
+#23 14.24 In file included from ../include/uapi/linux/netdevice.h:29,
+#23 14.24                  from ../include/uapi/linux/if_arp.h:27,
+#23 14.24                  from f_flower.c:14:
+#23 14.24 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 14.24   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 14.24       | 
+#23 14.24 In file included from f_flower.c:12:
+#23 14.24 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 14.24    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 14.24       | 
+#23 14.69     CC       q_gred.o
+#23 14.79     CC       q_ingress.o
+#23 14.81     CC       q_hfsc.o
+#23 14.90     CC       q_htb.o
+#23 14.98     CC       q_drr.o
+#23 15.02     CC       q_qfq.o
+#23 15.05     CC       m_gact.o
+#23 15.10     CC       m_mirred.o
+#23 15.16     CC       m_mpls.o
+#23 15.23     CC       m_nat.o
+#23 15.27     CC       m_pedit.o
+#23 15.39     CC       m_ife.o
+#23 15.46     CC       m_skbedit.o
+#23 15.52     CC       m_skbmod.o
+#23 15.58     CC       m_csum.o
+#23 15.63     CC       m_simple.o
+#23 15.67     CC       m_vlan.o
+#23 15.74     CC       m_connmark.o
+#23 15.77     CC       m_ctinfo.o
+#23 15.83     CC       m_bpf.o
+#23 15.87     CC       m_tunnel_key.o
+#23 15.98     CC       m_sample.o
+#23 16.03     CC       m_ct.o
+#23 16.12     CC       m_gate.o
+#23 16.20     CC       p_ip.o
+#23 16.24     CC       p_ip6.o
+#23 16.28     CC       p_icmp.o
+#23 16.30     CC       p_eth.o
+#23 16.33     CC       p_tcp.o
+#23 16.35     CC       p_udp.o
+#23 16.38     CC       em_nbyte.o
+#23 16.42     CC       em_cmp.o
+#23 16.47     CC       em_u32.o
+#23 16.52     CC       em_canid.o
+#23 16.56     CC       em_meta.o
+#23 16.66     CC       q_mqprio.o
+#23 16.76     CC       q_codel.o
+#23 16.81     CC       q_fq_codel.o
+#23 16.87     CC       q_fq.o
+#23 16.98     CC       q_pie.o
+#23 17.03     CC       q_fq_pie.o
+#23 17.10     CC       q_cake.o
+#23 17.26     CC       q_hhf.o
+#23 17.31     CC       q_clsact.o
+#23 17.33     CC       e_bpf.o
+#23 17.38     CC       f_matchall.o
+#23 17.42     CC       q_cbs.o
+#23 17.47     CC       q_etf.o
+#23 17.51     CC       q_taprio.o
+#23 17.62     CC       q_plug.o
+#23 17.65     CC       q_ets.o
+#23 17.72     CC       em_ipt.o
+#23 17.74 In file included from tc_util.h:7,
+#23 17.74                  from m_ematch.h:11,
+#23 17.74                  from em_ipt.c:13:
+#23 17.74 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 17.74   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 17.74       | 
+#23 17.74 In file included from ../include/xtables.h:17,
+#23 17.74                  from em_ipt.c:12:
+#23 17.74 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 17.74    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 17.74       | 
+#23 17.76     CC       em_ipset.o
+#23 17.78 In file included from tc_util.h:7,
+#23 17.78                  from m_ematch.h:11,
+#23 17.78                  from em_ipset.c:39:
+#23 17.78 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 17.78   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 17.78       | 
+#23 17.78 In file included from ../include/xtables.h:17,
+#23 17.78                  from em_ipset.c:23:
+#23 17.78 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 17.78    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 17.78       | 
+#23 17.81     CC       tc_core.o
+#23 17.87     CC       tc_red.o
+#23 17.91     CC       tc_estimator.o
+#23 17.94     CC       tc_stab.o
+#23 17.99     CC       tc_qevent.o
+#23 18.04     AR       libtc.a
+#23 18.04     LINK     tc
+#23 18.07 rm emp_ematch.lex.c
+#23 18.07 
+#23 18.07 bridge
+#23 18.08     CC       bridge.o
+#23 18.12     CC       fdb.o
+#23 18.29     CC       monitor.o
+#23 18.33     CC       link.o
+#23 18.47     CC       mdb.o
+#23 18.64     CC       vlan.o
+#23 18.65 In file included from vlan.c:14:
+#23 18.65 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.65    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.65       |                              ^~~~~~~
+#23 18.65 ../include/json_print.h:50:37: note: in definition of macro '_PRINT_FUNC'
+#23 18.65    50 |                                     type value);                        \
+#23 18.65       |                                     ^~~~
+#23 18.65 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.65    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.65       |                              ^~~~~~~
+#23 18.65 ../include/json_print.h:55:45: note: in definition of macro '_PRINT_FUNC'
+#23 18.65    55 |                                             type value)                 \
+#23 18.65       |                                             ^~~~
+#23 18.65 ../include/json_print.h: In function 'print_tv':
+#23 18.65 ../include/json_print.h:58:48: warning: passing argument 5 of 'print_color_tv' from incompatible pointer type [-Wincompatible-pointer-types]
+#23 18.65    58 |                                                value);                  \
+#23 18.65       |                                                ^~~~~
+#23 18.65       |                                                |
+#23 18.65       |                                                const struct timeval *
+#23 18.65 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.65    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.65       | ^~~~~~~~~~~
+#23 18.65 ../include/json_print.h:50:42: note: expected 'const struct timeval *' but argument is of type 'const struct timeval *'
+#23 18.65    50 |                                     type value);                        \
+#23 18.65       |                                          ^
+#23 18.65 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.65    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.65       | ^~~~~~~~~~~
+#23 18.85     CC       vni.o
+#23 18.86 In file included from vni.c:19:
+#23 18.86 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.86    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.86       |                              ^~~~~~~
+#23 18.86 ../include/json_print.h:50:37: note: in definition of macro '_PRINT_FUNC'
+#23 18.86    50 |                                     type value);                        \
+#23 18.86       |                                     ^~~~
+#23 18.86 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.86    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.86       |                              ^~~~~~~
+#23 18.86 ../include/json_print.h:55:45: note: in definition of macro '_PRINT_FUNC'
+#23 18.86    55 |                                             type value)                 \
+#23 18.86       |                                             ^~~~
+#23 18.86 ../include/json_print.h: In function 'print_tv':
+#23 18.86 ../include/json_print.h:58:48: warning: passing argument 5 of 'print_color_tv' from incompatible pointer type [-Wincompatible-pointer-types]
+#23 18.86    58 |                                                value);                  \
+#23 18.86       |                                                ^~~~~
+#23 18.86       |                                                |
+#23 18.86       |                                                const struct timeval *
+#23 18.86 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.86    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.86       | ^~~~~~~~~~~
+#23 18.86 ../include/json_print.h:50:42: note: expected 'const struct timeval *' but argument is of type 'const struct timeval *'
+#23 18.86    50 |                                     type value);                        \
+#23 18.86       |                                          ^
+#23 18.86 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.86    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.86       | ^~~~~~~~~~~
+#23 18.93     LINK     bridge
+#23 18.94 
+#23 18.94 misc
+#23 18.94     CC       ss.o
+#23 18.96 In file included from ../include/uapi/linux/tipc.h:42,
+#23 18.96                  from ss.c:49:
+#23 18.96 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 18.96    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 18.96       | 
+#23 18.96 In file included from /usr/include/sys/ioctl.h:10,
+#23 18.96                  from ss.c:12:
+#23 18.96 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 18.96   111 | #define SIOCGSTAMP      0x8906
+#23 18.96       | 
+#23 18.96 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 18.96    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 18.96       | 
+#23 18.96 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 18.96   112 | #define SIOCGSTAMPNS    0x8907
+#23 18.96       | 
+#23 19.73     CC       ssfilter_check.o
+#23 19.76     YACC     ssfilter.tab.c
+#23 19.81     CC       ssfilter.tab.o
+#23 19.91     LINK     ss
+#23 19.92     CC       nstat
+#23 19.93 In file included from nstat.c:20:
+#23 19.93 /usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+#23 19.93     1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+#23 19.93       |  ^~~~~~~
+#23 20.05     CC       ifstat
+#23 20.06 In file included from ifstat.c:20:
+#23 20.06 /usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+#23 20.06     1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+#23 20.06       |  ^~~~~~~
+#23 20.22     CC       rtacct
+#23 20.23 In file included from rtacct.c:19:
+#23 20.23 /usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+#23 20.23     1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+#23 20.23       |  ^~~~~~~
+#23 20.34     CC       lnstat.o
+#23 20.40     CC       lnstat_util.o
+#23 20.46     LINK     lnstat
+#23 20.47 
+#23 20.47 netem
+#23 20.47 gcc  -I../include -o maketable maketable.c -lm
+#23 20.50 gcc  -I../include -o normal normal.c -lm
+#23 20.52 gcc  -I../include -o pareto pareto.c -lm
+#23 20.54 gcc  -I../include -o paretonormal paretonormal.c -lm
+#23 20.57 ./normal > normal.dist
+#23 20.58 ./pareto > pareto.dist
+#23 20.58 ./paretonormal > paretonormal.dist
+#23 20.59 ./maketable experimental.dat > experimental.dist
+#23 20.59 
+#23 20.59 genl
+#23 20.60     CC       genl.o
+#23 20.63     CC       ctrl.o
+#23 20.69     LINK     genl
+#23 20.70 
+#23 20.70 man
+#23 20.71 make[2]: Nothing to be done for 'all'.
+#23 20.71 make[2]: Nothing to be done for 'all'.
+#23 20.71 sed \
+#23 20.71 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.71 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.71 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.71 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.71 	ip-address.8.in > ip-address.8
+#23 20.71 sed \
+#23 20.71 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.71 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.71 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.71 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.71 	ip-link.8.in > ip-link.8
+#23 20.72 sed \
+#23 20.72 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.72 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.72 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.72 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.72 	ip-netns.8.in > ip-netns.8
+#23 20.72 sed \
+#23 20.72 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.72 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.72 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.72 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.72 	ip-route.8.in > ip-route.8
+#23 20.72 
+#23 20.72 tipc
+#23 20.73     CC       bearer.o
+#23 20.88     CC       cmdl.o
+#23 20.92     CC       link.o
+#23 21.10     CC       media.o
+#23 21.15     CC       misc.o
+#23 21.20     CC       msg.o
+#23 21.22     CC       nametable.o
+#23 21.25     CC       node.o
+#23 21.33     CC       socket.o
+#23 21.36     CC       peer.o
+#23 21.39     CC       tipc.o
+#23 21.42     LINK     tipc
+#23 21.43 
+#23 21.43 devlink
+#23 21.44     CC       devlink.o
+#23 22.92     CC       mnlg.o
+#23 22.96     LINK     devlink
+#23 22.97 
+#23 22.97 rdma
+#23 22.97     CC       rdma.o
+#23 22.99 rdma.c: In function 'main':
+#23 22.99 rdma.c:110:20: warning: implicit declaration of function 'basename'; did you mean 'rename'? [-Wimplicit-function-declaration]
+#23 22.99   110 |         filename = basename(argv[0]);
+#23 22.99       |                    ^~~~~~~~
+#23 22.99       |                    rename
+#23 22.99 rdma.c:110:18: warning: assignment to 'char *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+#23 22.99   110 |         filename = basename(argv[0]);
+#23 22.99       |                  ^
+#23 23.01     CC       utils.o
+#23 23.18     CC       dev.o
+#23 23.24     CC       link.o
+#23 23.31     CC       res.o
+#23 23.41     CC       res-pd.o
+#23 23.45     CC       res-mr.o
+#23 23.49     CC       res-cq.o
+#23 23.53     CC       res-cmid.o
+#23 23.59     CC       res-qp.o
+#23 23.64     CC       sys.o
+#23 23.68     CC       stat.o
+#23 23.88     CC       stat-mr.o
+#23 23.91     CC       res-ctx.o
+#23 23.94     CC       res-srq.o
+#23 24.01     LINK     rdma
+#23 24.02 
+#23 24.02 dcb
+#23 24.02     CC       dcb.o
+#23 24.13     CC       dcb_app.o
+#23 24.30     CC       dcb_buffer.o
+#23 24.36     CC       dcb_dcbx.o
+#23 24.40     CC       dcb_ets.o
+#23 24.47     CC       dcb_maxrate.o
+#23 24.52     CC       dcb_pfc.o
+#23 24.57     CC       dcb_apptrust.o
+#23 24.63     CC       dcb_rewr.o
+#23 24.70     LINK     dcb
+#23 24.71 
+#23 24.71 vdpa
+#23 24.71     CC       vdpa.o
+#23 24.72 In file included from vdpa.c:19:
+#23 24.72 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 24.72    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 24.72       |                              ^~~~~~~
+#23 24.72 ../include/json_print.h:50:37: note: in definition of macro '_PRINT_FUNC'
+#23 24.72    50 |                                     type value);                        \
+#23 24.72       |                                     ^~~~
+#23 24.72 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 24.72    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 24.72       |                              ^~~~~~~
+#23 24.72 ../include/json_print.h:55:45: note: in definition of macro '_PRINT_FUNC'
+#23 24.72    55 |                                             type value)                 \
+#23 24.72       |                                             ^~~~
+#23 24.72 ../include/json_print.h: In function 'print_tv':
+#23 24.72 ../include/json_print.h:58:48: warning: passing argument 5 of 'print_color_tv' from incompatible pointer type [-Wincompatible-pointer-types]
+#23 24.72    58 |                                                value);                  \
+#23 24.72       |                                                ^~~~~
+#23 24.72       |                                                |
+#23 24.72       |                                                const struct timeval *
+#23 24.72 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 24.72    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 24.72       | ^~~~~~~~~~~
+#23 24.72 ../include/json_print.h:50:42: note: expected 'const struct timeval *' but argument is of type 'const struct timeval *'
+#23 24.72    50 |                                     type value);                        \
+#23 24.72       |                                          ^
+#23 24.72 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 24.72    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 24.72       | ^~~~~~~~~~~
+#23 24.86     LINK     vdpa
+#23 DONE 24.9s
+
+#24 [20/22] RUN git clone --no-single-branch --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel
+#24 0.352 Cloning into '/nipa-data/kernel'...
+#24 33.14 Updating files:  19% (16089/83283)Updating files:  20% (16657/83283)Updating files:  21% (17490/83283)Updating files:  22% (18323/83283)Updating files:  23% (19156/83283)Updating files:  24% (19988/83283)Updating files:  25% (20821/83283)Updating files:  26% (21654/83283)Updating files:  27% (22487/83283)Updating files:  28% (23320/83283)Updating files:  29% (24153/83283)Updating files:  30% (24985/83283)Updating files:  31% (25818/83283)Updating files:  32% (26651/83283)Updating files:  33% (27484/83283)Updating files:  34% (28317/83283)Updating files:  35% (29150/83283)Updating files:  36% (29982/83283)Updating files:  37% (30815/83283)Updating files:  38% (31648/83283)Updating files:  38% (32097/83283)Updating files:  39% (32481/83283)Updating files:  40% (33314/83283)Updating files:  41% (34147/83283)Updating files:  42% (34979/83283)Updating files:  42% (35217/83283)Updating files:  43% (35812/83283)Updating files:  44% (36645/83283)Updating files:  45% (37478/83283)Updating files:  46% (38311/83283)Updating files:  47% (39144/83283)Updating files:  48% (39976/83283)Updating files:  49% (40809/83283)Updating files:  50% (41642/83283)Updating files:  51% (42475/83283)Updating files:  52% (43308/83283)Updating files:  53% (44140/83283)Updating files:  54% (44973/83283)Updating files:  55% (45806/83283)Updating files:  56% (46639/83283)Updating files:  57% (47472/83283)Updating files:  57% (47747/83283)Updating files:  58% (48305/83283)Updating files:  59% (49137/83283)Updating files:  60% (49970/83283)Updating files:  61% (50803/83283)Updating files:  62% (51636/83283)Updating files:  63% (52469/83283)Updating files:  64% (53302/83283)Updating files:  65% (54134/83283)Updating files:  66% (54967/83283)Updating files:  67% (55800/83283)Updating files:  68% (56633/83283)Updating files:  69% (57466/83283)Updating files:  70% (58299/83283)Updating files:  71% (59131/83283)Updating files:  72% (59964/83283)Updating files:  72% (60697/83283)Updating files:  73% (60797/83283)Updating files:  74% (61630/83283)Updating files:  75% (62463/83283)Updating files:  76% (63296/83283)Updating files:  77% (64128/83283)Updating files:  78% (64961/83283)Updating files:  79% (65794/83283)Updating files:  80% (66627/83283)Updating files:  81% (67460/83283)Updating files:  82% (68293/83283)Updating files:  83% (69125/83283)Updating files:  84% (69958/83283)Updating files:  85% (70791/83283)Updating files:  86% (71624/83283)Updating files:  87% (72457/83283)Updating files:  88% (73290/83283)Updating files:  89% (74122/83283)Updating files:  90% (74955/83283)Updating files:  91% (75788/83283)Updating files:  92% (76621/83283)Updating files:  93% (77454/83283)Updating files:  93% (77732/83283)Updating files:  94% (78287/83283)Updating files:  95% (79119/83283)Updating files:  96% (79952/83283)Updating files:  97% (80785/83283)Updating files:  98% (81618/83283)Updating files:  99% (82451/83283)Updating files: 100% (83283/83283)Updating files: 100% (83283/83283), done.
+#24 DONE 40.1s
+
+#25 [21/22] RUN git clone --depth=1 -b dev https://github.com/p4tc-dev/new-nipa.git nipa
+#25 0.283 Cloning into 'nipa'...
+#25 DONE 1.0s
+
+#26 [22/22] COPY entrypoint.sh /entrypoint.sh
+#26 DONE 0.0s
+
+#27 exporting to image
+#27 exporting layers
+#27 exporting layers 5.7s done
+#27 writing image sha256:7e3680c1da52e5367f5384b7c09baf0ba5ff286d1be71585aa462eb94a0a7b30 done
+#27 naming to docker.io/library/nipa-executor done
+#27 DONE 5.7s
+NIPA version: 9d4ceb4 (fetcher: support local kernel patches, 2024-02-05)
+INFO: Last run date: 2024-03-14 06:00:20.508565+00:00
+Testing  {'branch': 'net-next-2024-03-14--09-00', 'date': '2024-03-14T09:00:13.586350+00:00', 'base': 'd7d75124965aee23e5e4421d78376545cf070b0a', 'url': 'https://github.com/linux-netdev/testing.git net-next-2024-03-14--09-00'}
+Updating files:  87% (7276/8359)Updating files:  88% (7356/8359)Updating files:  89% (7440/8359)Updating files:  90% (7524/8359)Updating files:  91% (7607/8359)Updating files:  92% (7691/8359)Updating files:  93% (7774/8359)Updating files:  94% (7858/8359)Updating files:  95% (7942/8359)Updating files:  96% (8025/8359)Updating files:  97% (8109/8359)Updating files:  98% (8192/8359)Updating files:  99% (8276/8359)Updating files: 100% (8359/8359)Updating files: 100% (8359/8359), done.
+branch 'net-next-2024-03-14--09-00' set up to track 'origin/net-next-2024-03-14--09-00'.
+Switched to a new branch 'net-next-2024-03-14--09-00'
+error: No valid patches in input (allow with "--allow-empty")
+Checking patch tools/testing/selftests/tc-testing/tdc_config.py...
+Applied patch tools/testing/selftests/tc-testing/tdc_config.py cleanly.
+Run at 2024-03-14 09:03:56.528416
+INFO: building kernel
+INFO: starting VM 0
+INFO: thr0-1 VM starting: vng -v -r arch/x86/boot/bzImage --user root --rwdir=/nipa-data/kernel/
+INFO: thr0-1 expecting prompt: '/nipa-data/kernel# '
+INFO: thr0-1 reached initial prompt
+INFO: thr-0 testing == tdc.sh
+INFO: thr-0 tdc.sh >> retcode: 0 result: pass found {'fail': False, 'skip': False, 'pass': True}
+INFO: thr-0 has no more work, exiting
+INFO: thr0-1 VM stopped
+Done at 2024-03-14 09:06:36.680394
+NIPA quitting!
+/
+~/nipa/tc-executor/tc-executor-storage /
+sort: write failed: 'standard output': Broken pipe
+sort: write error
