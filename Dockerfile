@@ -43,7 +43,8 @@ RUN apk update && apk add --no-cache \
    iproute2  \
    jq \
    libbpf-dev \
-   rsync
+   rsync \
+   openssl-dev
 
 RUN mkdir -p /tmp/kernel-patches && \
     mkdir -p /tmp/iproute2-patches
