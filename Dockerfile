@@ -78,7 +78,7 @@ RUN cd /nipa-data/iproute2/ && \
 RUN git clone --no-single-branch --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel
 
 # nipa
-RUN git clone --depth=1 -b dev https://github.com/p4tc-dev/new-nipa.git nipa
+RUN git clone --depth=1 -b main https://github.com/p4tc-dev/new-nipa.git nipa
 
 COPY entrypoint.sh /entrypoint.sh
 
