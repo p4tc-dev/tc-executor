@@ -40,7 +40,7 @@ RUN apk update && apk add --no-cache \
    iptables-dev \
    libcap-dev \
    libmnl-dev \
-   iproute2 \
+   iproute2  \
    jq \
    libbpf-dev \
    rsync \
@@ -81,9 +81,5 @@ RUN git clone --no-single-branch --depth=1 https://github.com/linux-netdev/testi
 RUN git clone --depth=1 -b main https://github.com/p4tc-dev/new-nipa.git nipa
 
 COPY entrypoint.sh /entrypoint.sh
-
-# Hotfix for qemu-8.2.2:
-# https://github.com/arighi/virtme-ng/issues/97
-RUN sed -i '/\["-serial", "none"\]/d' /usr/lib/python3.11/site-packages/virtme/commands/run.py
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
