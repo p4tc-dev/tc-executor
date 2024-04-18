@@ -26,7 +26,7 @@ clean:
 
 install:
 	cpp -E -DINSTALL=${CURDIR} -DUSER=$(shell id -un) ${SYSTEMD}/tc-executor.service | sed -e 's/\/ //' -e 's/#.*//' > /tmp/tc-executor.service
-	cpp -E -DINSTALL=${CURDIR} -DUSER=$(shell id -un) ${SYSTEMD}/tc-executor.service | sed -e 's/\/ //' -e 's/#.*//' > /tmp/tc-executor-debug.service
+	cpp -E -DINSTALL=${CURDIR} -DUSER=$(shell id -un) ${SYSTEMD}/tc-executor-debug.service | sed -e 's/\/ //' -e 's/#.*//' > /tmp/tc-executor-debug.service
 	sudo cp /tmp/tc-executor.service /etc/systemd/system/
 	sudo cp /tmp/tc-executor-debug.service /etc/systemd/system/
 	sudo cp ${SYSTEMD}/tc-executor.timer /etc/systemd/system/
