@@ -1,0 +1,1118 @@
+~/nipa/tc-executor/tc-executor-storage /
+Switched to branch 'storage'
+Your branch is ahead of 'origin/storage' by 579 commits.
+  (use "git push" to publish your local commits)
+/
+~/nipa/tc-executor /
+Error response from daemon: No such image: nipa-executor:latest
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.05kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:edge
+#3 DONE 0.0s
+
+#4 [ 1/22] FROM docker.io/library/alpine:edge
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 3.02kB done
+#5 DONE 0.0s
+
+#6 [ 2/22] RUN echo false > debug-mode
+#6 DONE 0.7s
+
+#7 [ 3/22] RUN addgroup -g 1001 hostuser
+#7 DONE 0.4s
+
+#8 [ 4/22] RUN adduser -u 1001 -G hostuser -H -D -s /bin/ash hostuser
+#8 DONE 0.4s
+
+#9 [ 5/22] RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+#9 DONE 0.4s
+
+#10 [ 6/22] RUN echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+#10 DONE 0.4s
+
+#11 [ 7/22] RUN apk update && apk add --no-cache    virtme-ng@testing    git    py3-requests    py3-psutil    py3-setuptools    py3-pyroute2    py3-argcomplete    qemu-system-x86_64@community    scapy@community    make    gcc    musl-dev    flex    bison    linux-headers    elfutils-dev    util-linux    coreutils    diffutils    findutils    file    bash    kmod    perl    iptables-dev    libcap-dev    libmnl-dev    iproute2     jq    libbpf-dev    rsync    openssl-dev
+#11 0.414 fetch https://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+#11 0.624 fetch https://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 0.821 fetch http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+#11 1.023 fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.274 v20240329-2859-gfee7a754416 [https://dl-cdn.alpinelinux.org/alpine/edge/main]
+#11 1.274 v20240329-2902-g9d516fb7276 [https://dl-cdn.alpinelinux.org/alpine/edge/community]
+#11 1.274 v20240329-2901-gb470cf07801 [http://dl-cdn.alpinelinux.org/alpine/edge/testing]
+#11 1.274 v20240329-2902-g9d516fb7276 [http://dl-cdn.alpinelinux.org/alpine/edge/community]
+#11 1.274 OK: 31282 distinct packages available
+#11 1.333 fetch https://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+#11 1.436 fetch https://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.529 fetch http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+#11 1.618 fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+#11 1.839 (1/176) Upgrading musl (1.2.4_git20230717-r5 -> 1.2.5-r0)
+#11 1.856 (2/176) Upgrading libcrypto3 (3.1.4-r2 -> 3.3.0-r1)
+#11 1.890 (3/176) Upgrading libssl3 (3.1.4-r2 -> 3.3.0-r1)
+#11 1.907 (4/176) Upgrading zlib (1.3-r2 -> 1.3.1-r1)
+#11 1.920 (5/176) Installing ncurses-terminfo-base (6.4_p20240330-r0)
+#11 1.933 (6/176) Installing libncursesw (6.4_p20240330-r0)
+#11 1.949 (7/176) Installing readline (8.2.10-r0)
+#11 1.963 (8/176) Installing bash (5.2.26-r0)
+#11 1.984 Executing bash-5.2.26-r0.post-install
+#11 1.987 (9/176) Installing m4 (1.4.19-r3)
+#11 2.001 (10/176) Installing bison (3.8.2-r1)
+#11 2.022 (11/176) Installing coreutils-env (9.5-r1)
+#11 2.034 (12/176) Installing coreutils-fmt (9.5-r1)
+#11 2.046 (13/176) Installing coreutils-sha512sum (9.5-r1)
+#11 2.061 (14/176) Installing libacl (2.3.2-r0)
+#11 2.073 (15/176) Installing libattr (2.5.2-r0)
+#11 2.089 (16/176) Installing skalibs (2.14.1.1-r0)
+#11 2.103 (17/176) Installing utmps-libs (0.1.2.2-r1)
+#11 2.148 (18/176) Installing coreutils (9.5-r1)
+#11 2.185 (19/176) Installing diffutils (3.10-r0)
+#11 2.199 (20/176) Installing zstd-libs (1.5.6-r0)
+#11 2.215 (21/176) Installing libelf (0.191-r0)
+#11 2.237 (22/176) Installing libbz2 (1.0.8-r6)
+#11 2.250 (23/176) Installing musl-fts (1.2.7-r6)
+#11 2.262 (24/176) Installing xz-libs (5.6.1-r3)
+#11 2.276 (25/176) Installing libdw (0.191-r0)
+#11 2.292 (26/176) Installing libasm (0.191-r0)
+#11 2.304 (27/176) Installing xz (5.6.1-r3)
+#11 2.319 (28/176) Installing pkgconf (2.2.0-r0)
+#11 2.331 (29/176) Installing xz-dev (5.6.1-r3)
+#11 2.345 (30/176) Installing libgcc (13.2.1_git20240309-r0)
+#11 2.358 (31/176) Installing libstdc++ (13.2.1_git20240309-r0)
+#11 2.383 (32/176) Installing zstd (1.5.6-r0)
+#11 2.397 (33/176) Installing zstd-dev (1.5.6-r0)
+#11 2.410 (34/176) Installing zlib-dev (1.3.1-r1)
+#11 2.422 (35/176) Installing elfutils-dev (0.191-r0)
+#11 2.442 (36/176) Installing libmagic (5.45-r1)
+#11 2.469 (37/176) Installing file (5.45-r1)
+#11 2.482 (38/176) Installing findutils (4.9.0-r5)
+#11 2.496 (39/176) Installing flex (2.6.4-r6)
+#11 2.510 (40/176) Installing jansson (2.14-r4)
+#11 2.523 (41/176) Installing binutils (2.42-r0)
+#11 2.575 (42/176) Installing libgomp (13.2.1_git20240309-r0)
+#11 2.589 (43/176) Installing libatomic (13.2.1_git20240309-r0)
+#11 2.601 (44/176) Installing gmp (6.3.0-r0)
+#11 2.618 (45/176) Installing isl26 (0.26-r1)
+#11 2.642 (46/176) Installing mpfr4 (4.2.1-r0)
+#11 2.659 (47/176) Installing mpc1 (1.3.1-r1)
+#11 2.674 (48/176) Installing gcc (13.2.1_git20240309-r0)
+#11 3.146 (49/176) Installing ca-certificates (20240226-r0)
+#11 3.168 (50/176) Installing brotli-libs (1.1.0-r2)
+#11 3.186 (51/176) Installing c-ares (1.28.1-r0)
+#11 3.200 (52/176) Installing libunistring (1.2-r0)
+#11 3.221 (53/176) Installing libidn2 (2.3.7-r0)
+#11 3.236 (54/176) Installing nghttp2-libs (1.61.0-r0)
+#11 3.249 (55/176) Installing libpsl (0.21.5-r1)
+#11 3.262 (56/176) Installing libcurl (8.7.1-r0)
+#11 3.278 (57/176) Installing libexpat (2.6.2-r0)
+#11 3.290 (58/176) Installing pcre2 (10.43-r0)
+#11 3.306 (59/176) Installing git (2.45.0-r0)
+#11 3.355 (60/176) Installing git-init-template (2.45.0-r0)
+#11 3.368 (61/176) Installing libcap2 (2.69-r1)
+#11 3.381 (62/176) Installing libmnl (1.0.5-r2)
+#11 3.393 (63/176) Installing iproute2-minimal (6.8.0-r0)
+#11 3.409 (64/176) Installing libxtables (1.8.10-r3)
+#11 3.421 (65/176) Installing iproute2-tc (6.8.0-r0)
+#11 3.438 (66/176) Installing iproute2-ss (6.8.0-r0)
+#11 3.450 (67/176) Installing iproute2 (6.8.0-r0)
+#11 3.466 Executing iproute2-6.8.0-r0.post-install
+#11 3.468 (68/176) Installing linux-headers (6.6-r0)
+#11 3.550 (69/176) Installing libip4tc (1.8.10-r3)
+#11 3.563 (70/176) Installing libip6tc (1.8.10-r3)
+#11 3.606 (71/176) Installing libipq (1.8.10-r3)
+#11 3.619 (72/176) Installing iptables-dev (1.8.10-r3)
+#11 3.631 (73/176) Installing oniguruma (6.9.9-r0)
+#11 3.653 (74/176) Installing jq (1.7.1-r0)
+#11 3.670 (75/176) Installing kmod (32-r0)
+#11 3.684 (76/176) Installing libbpf (1.4.0-r0)
+#11 3.699 (77/176) Installing libbpf-dev (1.4.0-r0)
+#11 3.718 (78/176) Installing libcap-dev (2.69-r1)
+#11 3.732 (79/176) Installing libmnl-dev (1.0.5-r2)
+#11 3.744 (80/176) Installing make (4.4.1-r2)
+#11 3.763 (81/176) Installing musl-dev (1.2.5-r0)
+#11 3.829 (82/176) Installing openssl-dev (3.3.0-r1)
+#11 3.856 (83/176) Installing perl (5.38.2-r0)
+#11 4.052 (84/176) Installing perl-error (0.17029-r2)
+#11 4.064 (85/176) Installing perl-git (2.45.0-r0)
+#11 4.077 (86/176) Installing git-perl (2.45.0-r0)
+#11 4.091 (87/176) Installing libffi (3.4.6-r0)
+#11 4.106 (88/176) Installing gdbm (1.23-r1)
+#11 4.119 (89/176) Installing mpdecimal (4.0.0-r0)
+#11 4.132 (90/176) Installing libpanelw (6.4_p20240330-r0)
+#11 4.143 (91/176) Installing sqlite-libs (3.45.3-r0)
+#11 4.165 (92/176) Installing python3 (3.12.3-r1)
+#11 4.288 (93/176) Installing python3-pycache-pyc0 (3.12.3-r1)
+#11 4.385 (94/176) Installing pyc (3.12.3-r1)
+#11 4.397 (95/176) Installing py3-argcomplete-pyc (3.3.0-r0)
+#11 4.410 (96/176) Installing python3-pyc (3.12.3-r1)
+#11 4.422 (97/176) Installing py3-argcomplete (3.3.0-r0)
+#11 4.436 (98/176) Installing py3-psutil (5.9.8-r1)
+#11 4.451 (99/176) Installing py3-psutil-pyc (5.9.8-r1)
+#11 4.467 (100/176) Installing py3-pyroute2 (0.7.12-r1)
+#11 4.499 (101/176) Installing py3-pyroute2-pyc (0.7.12-r1)
+#11 4.535 (102/176) Installing py3-certifi (2024.2.2-r1)
+#11 4.547 (103/176) Installing py3-certifi-pyc (2024.2.2-r1)
+#11 4.559 (104/176) Installing py3-charset-normalizer (3.3.2-r1)
+#11 4.573 (105/176) Installing py3-charset-normalizer-pyc (3.3.2-r1)
+#11 4.586 (106/176) Installing py3-idna (3.7-r0)
+#11 4.602 (107/176) Installing py3-idna-pyc (3.7-r0)
+#11 4.618 (108/176) Installing py3-urllib3 (1.26.18-r1)
+#11 4.635 (109/176) Installing py3-urllib3-pyc (1.26.18-r1)
+#11 4.652 (110/176) Installing py3-requests (2.31.0-r2)
+#11 4.666 (111/176) Installing py3-requests-pyc (2.31.0-r2)
+#11 4.680 (112/176) Installing py3-parsing (3.1.2-r1)
+#11 4.698 (113/176) Installing py3-parsing-pyc (3.1.2-r1)
+#11 4.715 (114/176) Installing py3-packaging (24.0-r1)
+#11 4.730 (115/176) Installing py3-packaging-pyc (24.0-r1)
+#11 4.743 (116/176) Installing py3-setuptools (69.5.1-r0)
+#11 4.780 (117/176) Installing py3-setuptools-pyc (69.5.1-r0)
+#11 4.822 (118/176) Installing libcap-ng (0.8.4-r0)
+#11 4.835 (119/176) Installing libintl (0.22.5-r0)
+#11 4.847 (120/176) Installing libeconf (0.6.2-r0)
+#11 4.860 (121/176) Installing libblkid (2.40-r2)
+#11 4.873 (122/176) Installing libmount (2.40-r2)
+#11 4.887 (123/176) Installing glib (2.80.0-r3)
+#11 4.921 (124/176) Installing numactl (2.0.18-r0)
+#11 4.936 (125/176) Installing qemu (9.0.0-r0)
+#11 4.956 Executing qemu-9.0.0-r0.pre-install
+#11 5.029 Executing qemu-9.0.0-r0.post-install
+#11 5.031 *
+#11 5.031 * If you want to run VM as unprivileged user and let Qemu create tunX devices,
+#11 5.031 * then you must add that user to the group "qemu".
+#11 5.031 * If you use KVM for hardware-assisted virtualization, then you may also need
+#11 5.031 * to add that user to the group "kvm".
+#11 5.031 *
+#11 5.031 (126/176) Installing qemu-bridge-helper (9.0.0-r0)
+#11 5.047 (127/176) Installing libaio (0.3.113-r2)
+#11 5.059 (128/176) Installing capstone (5.0.1-r4)
+#11 5.089 (129/176) Installing nettle (3.9.1-r0)
+#11 5.106 (130/176) Installing libtasn1 (4.19.0-r2)
+#11 5.119 (131/176) Installing p11-kit (0.25.3-r0)
+#11 5.137 (132/176) Installing gnutls (3.8.3-r0)
+#11 5.160 (133/176) Installing libjpeg-turbo (3.0.2-r0)
+#11 5.176 (134/176) Installing lzo (2.10-r5)
+#11 5.191 (135/176) Installing pixman (0.43.2-r0)
+#11 5.206 (136/176) Installing libpng (1.6.43-r0)
+#11 5.220 (137/176) Installing libsasl (2.1.28-r6)
+#11 5.239 (138/176) Installing libseccomp (2.5.5-r1)
+#11 5.253 (139/176) Installing libslirp (4.7.0-r0)
+#11 5.285 (140/176) Installing snappy (1.1.10-r2)
+#11 5.297 (141/176) Installing liburing (2.5-r1)
+#11 5.309 (142/176) Installing vde2-libs (2.3.3-r3)
+#11 5.323 (143/176) Installing qemu-system-x86_64 (9.0.0-r0)
+#11 5.430 (144/176) Installing lz4-libs (1.9.4-r5)
+#11 5.445 (145/176) Installing popt (1.19-r3)
+#11 5.457 (146/176) Installing libxxhash (0.8.2-r2)
+#11 5.469 (147/176) Installing rsync (3.3.0-r0)
+#11 5.484 (148/176) Installing scapy (2.5.0-r3)
+#11 5.541 Executing scapy-2.5.0-r3.post-install
+#11 5.543 *
+#11 5.543 * Certain optional features of scapy also depend on the following packages:
+#11 5.543 *     py3-matplotlib graphviz imagemagick py3-cryptography sox
+#11 5.543 * And the following unpackaged dependencies:
+#11 5.543 *     pyxi vpython-jupyter nmap<v4.23
+#11 5.543 * More information can be found at https://scapy.readthedocs.io/en/latest/installation.html#optional-dependencies
+#11 5.543 *
+#11 5.543 (149/176) Installing scapy-pyc (2.5.0-r3)
+#11 5.608 (150/176) Installing util-linux (2.40-r2)
+#11 5.624 (151/176) Installing setarch (2.40-r2)
+#11 5.636 (152/176) Installing libuuid (2.40-r2)
+#11 5.649 (153/176) Installing libfdisk (2.40-r2)
+#11 5.664 (154/176) Installing libsmartcols (2.40-r2)
+#11 5.677 (155/176) Installing util-linux-misc (2.40-r2)
+#11 5.706 (156/176) Installing linux-pam (1.6.0-r0)
+#11 5.727 (157/176) Installing runuser (2.40-r2)
+#11 5.739 (158/176) Installing mount (2.40-r2)
+#11 5.752 (159/176) Installing losetup (2.40-r2)
+#11 5.765 (160/176) Installing hexdump (2.40-r2)
+#11 5.778 (161/176) Installing uuidgen (2.40-r2)
+#11 5.789 (162/176) Installing blkid (2.40-r2)
+#11 5.801 (163/176) Installing sfdisk (2.40-r2)
+#11 5.814 (164/176) Installing mcookie (2.40-r2)
+#11 5.825 (165/176) Installing agetty (2.40-r2)
+#11 5.837 (166/176) Installing wipefs (2.40-r2)
+#11 5.849 (167/176) Installing cfdisk (2.40-r2)
+#11 5.862 (168/176) Installing umount (2.40-r2)
+#11 5.874 (169/176) Installing flock (2.40-r2)
+#11 5.886 (170/176) Installing lsblk (2.40-r2)
+#11 5.899 (171/176) Installing setpriv (2.40-r2)
+#11 5.911 (172/176) Installing logger (2.40-r2)
+#11 5.923 (173/176) Installing partx (2.40-r2)
+#11 5.935 (174/176) Installing fstrim (2.40-r2)
+#11 5.947 (175/176) Installing findmnt (2.40-r2)
+#11 5.959 (176/176) Installing virtme-ng@testing (1.23-r1)
+#11 6.013 Executing busybox-1.36.1-r17.trigger
+#11 6.016 Executing ca-certificates-20240226-r0.trigger
+#11 6.037 Executing glib-2.80.0-r3.trigger
+#11 6.043 OK: 384 MiB in 187 packages
+#11 DONE 6.4s
+
+#12 [ 8/22] RUN mkdir -p /tmp/kernel-patches &&     mkdir -p /tmp/iproute2-patches
+#12 DONE 0.4s
+
+#13 [ 9/22] COPY tdc.config /tmp
+#13 DONE 0.0s
+
+#14 [10/22] COPY tdc-debug.config /tmp
+#14 DONE 0.0s
+
+#15 [11/22] COPY kernel-patches /tmp/kernel-patches/
+#15 DONE 0.1s
+
+#16 [12/22] COPY iproute2-patches /tmp/iproute2-patches/
+#16 DONE 0.0s
+
+#17 [13/22] COPY configs /tmp/configs/
+#17 DONE 0.0s
+
+#18 [14/22] RUN git config --global user.email foo@bar.com
+#18 DONE 0.4s
+
+#19 [15/22] RUN git config --global user.name foo@bar.com
+#19 DONE 0.4s
+
+#20 [16/22] RUN git clone https://git.kernel.org/pub/scm/network/iproute2/iproute2-next.git /nipa-data/iproute2
+#20 0.436 Cloning into '/nipa-data/iproute2'...
+#20 DONE 2.0s
+
+#21 [17/22] RUN cd /nipa-data/iproute2 && 	git remote add stable https://git.kernel.org/pub/scm/network/iproute2/iproute2.git && 	git fetch --all && 	git merge stable/main
+#21 0.384 Fetching origin
+#21 0.660 Fetching stable
+#21 1.126 From https://git.kernel.org/pub/scm/network/iproute2/iproute2
+#21 1.126  * [new branch]        codeql         -> stable/codeql
+#21 1.126  * [new branch]        iproute2-4.1.x -> stable/iproute2-4.1.x
+#21 1.126  * [new branch]        main           -> stable/main
+#21 1.155 Auto-merging ip/iplink.c
+#21 1.155 Auto-merging man/man8/ip-link.8.in
+#21 1.155 Auto-merging tc/f_u32.c
+#21 1.155 Auto-merging tc/m_sample.c
+#21 1.169 Merge made by the 'ort' strategy.
+#21 1.174  ip/ip.c                        | 10 +++++-----
+#21 1.174  ip/iplink.c                    |  2 +-
+#21 1.174  ip/iproute_lwtunnel.c          |  7 ++-----
+#21 1.174  ip/rtmon.c                     |  4 ++--
+#21 1.174  lib/exec.c                     |  7 ++++++-
+#21 1.174  man/man8/ip-link.8.in          |  2 +-
+#21 1.174  tc/f_u32.c                     |  2 +-
+#21 1.174  tc/m_sample.c                  |  7 ++-----
+#21 1.174  tc/tc.c                        |  2 +-
+#21 1.174  vdpa/include/uapi/linux/vdpa.h |  6 +++---
+#21 1.174  10 files changed, 24 insertions(+), 25 deletions(-)
+#21 DONE 1.2s
+
+#22 [18/22] RUN if [ "$(find /tmp/iproute2-patches/ -name *.patch)" ]; then  	cd /nipa-data/iproute2; 	git apply /tmp/iproute2-patches/*.patch;     fi
+#22 DONE 0.4s
+
+#23 [19/22] RUN cd /nipa-data/iproute2/ &&     ./configure &&     make
+#23 0.391 TC schedulers
+#23 0.392  IPT	using xtables
+#23 0.419  IPSET  yes
+#23 0.439 
+#23 0.440 lib directory: /usr/lib
+#23 0.440 libc has setns: yes
+#23 0.459 libc has name_to_handle_at: yes
+#23 0.480 SELinux support: no
+#23 0.481 libtirpc support: no
+#23 0.482 libbpf support: yes
+#23 0.547 	libbpf version 1.4.0
+#23 0.547 ELF support: yes
+#23 0.549 libmnl support: yes
+#23 0.550 Berkeley DB: no
+#23 0.560 need for strlcpy: no
+#23 0.580 libcap support: yes
+#23 0.582 color output: never
+#23 0.584 
+#23 0.584 lib
+#23 0.586     CC       libgenl.o
+#23 0.598 In file included from ../include/libgenl.h:5,
+#23 0.598                  from libgenl.c:12:
+#23 0.598 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 0.598 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 0.598   280 |         return htobe64(rta_getattr_u64(rta));
+#23 0.598       |                ^~~~~~~
+#23 0.626     CC       libnetlink.o
+#23 0.929     CC       mnl_utils.o
+#23 0.942 In file included from mnl_utils.c:12:
+#23 0.942 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 0.942 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 0.942   280 |         return htobe64(rta_getattr_u64(rta));
+#23 0.942       |                ^~~~~~~
+#23 1.005     AR       libnetlink.a
+#23 1.008     CC       utils.o
+#23 1.404     CC       utils_math.o
+#23 1.443     CC       rt_names.o
+#23 1.607     CC       ll_map.o
+#23 1.620 In file included from ll_map.c:17:
+#23 1.620 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 1.620 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 1.620   280 |         return htobe64(rta_getattr_u64(rta));
+#23 1.620       |                ^~~~~~~
+#23 1.697     CC       ll_types.o
+#23 1.709 In file included from ll_types.c:20:
+#23 1.709 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 1.709    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 1.709       | 
+#23 1.709 In file included from /usr/include/sys/ioctl.h:10,
+#23 1.709                  from ll_types.c:12:
+#23 1.709 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 1.709   111 | #define SIOCGSTAMP      0x8906
+#23 1.709       | 
+#23 1.709 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 1.709    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 1.709       | 
+#23 1.709 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 1.709   112 | #define SIOCGSTAMPNS    0x8907
+#23 1.709       | 
+#23 1.724     CC       ll_proto.o
+#23 1.737 In file included from ll_proto.c:21:
+#23 1.737 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 1.737    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 1.737       | 
+#23 1.737 In file included from /usr/include/sys/ioctl.h:10,
+#23 1.737                  from ll_proto.c:13:
+#23 1.737 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 1.737   111 | #define SIOCGSTAMP      0x8906
+#23 1.737       | 
+#23 1.737 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 1.737    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 1.737       | 
+#23 1.737 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 1.737   112 | #define SIOCGSTAMPNS    0x8907
+#23 1.737       | 
+#23 1.750     CC       ll_addr.o
+#23 1.762 In file included from ll_addr.c:20:
+#23 1.762 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 1.762    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 1.762       | 
+#23 1.762 In file included from /usr/include/sys/ioctl.h:10,
+#23 1.762                  from ll_addr.c:12:
+#23 1.762 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 1.762   111 | #define SIOCGSTAMP      0x8906
+#23 1.762       | 
+#23 1.762 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 1.762    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 1.762       | 
+#23 1.762 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 1.762   112 | #define SIOCGSTAMPNS    0x8907
+#23 1.762       | 
+#23 1.789     CC       inet_proto.o
+#23 1.817     CC       namespace.o
+#23 1.881     CC       json_writer.o
+#23 1.958     CC       json_print.o
+#23 2.077     CC       json_print_math.o
+#23 2.107     CC       names.o
+#23 2.152     CC       color.o
+#23 2.191     CC       bpf_legacy.o
+#23 2.547     CC       bpf_glue.o
+#23 2.581     CC       exec.o
+#23 2.610     CC       fs.o
+#23 2.687     CC       cg_map.o
+#23 2.719     CC       ppp_proto.o
+#23 2.744     CC       bpf_libbpf.o
+#23 2.830     CC       selinux.o
+#23 2.849     CC       ax25_ntop.o
+#23 2.877     CC       rose_ntop.o
+#23 2.890 In file included from rose_ntop.c:16:
+#23 2.890 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 2.890    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 2.890       | 
+#23 2.890 In file included from /usr/include/sys/ioctl.h:10,
+#23 2.890                  from rose_ntop.c:7:
+#23 2.890 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 2.890   111 | #define SIOCGSTAMP      0x8906
+#23 2.890       | 
+#23 2.890 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 2.890    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 2.890       | 
+#23 2.890 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 2.890   112 | #define SIOCGSTAMPNS    0x8907
+#23 2.890       | 
+#23 2.906     CC       mpls_ntop.o
+#23 2.935     CC       mpls_pton.o
+#23 2.963     CC       netrom_ntop.o
+#23 2.985     AR       libutil.a
+#23 2.989 
+#23 2.989 ip
+#23 2.991     CC       ip.o
+#23 3.061     CC       ipaddress.o
+#23 3.074 In file included from ipaddress.c:26:
+#23 3.074 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 3.074    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 3.074       | 
+#23 3.074 In file included from /usr/include/sys/ioctl.h:10,
+#23 3.074                  from ipaddress.c:14:
+#23 3.074 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 3.074   111 | #define SIOCGSTAMP      0x8906
+#23 3.074       | 
+#23 3.074 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 3.074    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 3.074       | 
+#23 3.074 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 3.074   112 | #define SIOCGSTAMPNS    0x8907
+#23 3.074       | 
+#23 3.504     CC       ipaddrlabel.o
+#23 3.562     CC       iproute.o
+#23 4.050     CC       iprule.o
+#23 4.241     CC       ipnetns.o
+#23 4.453     CC       rtm_map.o
+#23 4.487     CC       iptunnel.o
+#23 4.499 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 4.499                  from iptunnel.c:19:
+#23 4.499 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 4.499   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 4.499       | 
+#23 4.499 In file included from iptunnel.c:16:
+#23 4.499 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 4.499    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 4.499       | 
+#23 4.630     CC       ip6tunnel.o
+#23 4.732     CC       tunnel.o
+#23 4.819     CC       ipneigh.o
+#23 4.962     CC       ipntable.o
+#23 5.060     CC       iplink.o
+#23 5.323     CC       ipmaddr.o
+#23 5.335 In file included from ipmaddr.c:21:
+#23 5.335 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 5.335    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 5.335       | 
+#23 5.335 In file included from /usr/include/sys/ioctl.h:10,
+#23 5.335                  from ipmaddr.c:12:
+#23 5.335 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 5.335   111 | #define SIOCGSTAMP      0x8906
+#23 5.335       | 
+#23 5.335 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 5.335    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 5.335       | 
+#23 5.335 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 5.335   112 | #define SIOCGSTAMPNS    0x8907
+#23 5.335       | 
+#23 5.407     CC       ipmonitor.o
+#23 5.481     CC       ipmroute.o
+#23 5.494 In file included from ipmroute.c:22:
+#23 5.494 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 5.494    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 5.494       | 
+#23 5.494 In file included from /usr/include/sys/ioctl.h:10,
+#23 5.494                  from ipmroute.c:13:
+#23 5.494 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 5.494   111 | #define SIOCGSTAMP      0x8906
+#23 5.494       | 
+#23 5.494 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 5.494    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 5.494       | 
+#23 5.494 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 5.494   112 | #define SIOCGSTAMPNS    0x8907
+#23 5.494       | 
+#23 5.552     CC       ipprefix.o
+#23 5.588     CC       iptuntap.o
+#23 5.692     CC       iptoken.o
+#23 5.755     CC       ipxfrm.o
+#23 6.051     CC       xfrm_state.o
+#23 6.313     CC       xfrm_policy.o
+#23 6.530     CC       xfrm_monitor.o
+#23 6.602     CC       iplink_dummy.o
+#23 6.623     CC       iplink_ifb.o
+#23 6.644     CC       iplink_nlmon.o
+#23 6.666     CC       iplink_team.o
+#23 6.689     CC       iplink_vcan.o
+#23 6.710     CC       iplink_vxcan.o
+#23 6.742     CC       iplink_vlan.o
+#23 6.809     CC       link_veth.o
+#23 6.839     CC       link_gre.o
+#23 6.852 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 6.852                  from link_gre.c:15:
+#23 6.852 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 6.852   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 6.852       | 
+#23 6.852 In file included from link_gre.c:9:
+#23 6.852 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 6.852    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 6.852       | 
+#23 6.962     CC       iplink_can.o
+#23 7.097     CC       iplink_xdp.o
+#23 7.154     CC       iplink_macvlan.o
+#23 7.219     CC       ipl2tp.o
+#23 7.374     CC       link_vti.o
+#23 7.384 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 7.384                  from link_vti.c:16:
+#23 7.384 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 7.384   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 7.384       | 
+#23 7.384 In file included from link_vti.c:10:
+#23 7.384 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 7.384    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 7.384       | 
+#23 7.427     CC       link_vti6.o
+#23 7.438 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 7.438                  from link_vti6.c:17:
+#23 7.438 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 7.438   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 7.438       | 
+#23 7.438 In file included from link_vti6.c:11:
+#23 7.438 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 7.438    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 7.438       | 
+#23 7.491     CC       link_xfrm.o
+#23 7.525     CC       iplink_vxlan.o
+#23 7.667     CC       tcp_metrics.o
+#23 7.779     CC       iplink_ipoib.o
+#23 7.818     CC       ipnetconf.o
+#23 7.869     CC       link_ip6tnl.o
+#23 7.879 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 7.879                  from link_ip6tnl.c:15:
+#23 7.879 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 7.879   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 7.879       | 
+#23 7.879 In file included from link_ip6tnl.c:9:
+#23 7.879 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 7.879    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 7.879       | 
+#23 7.962     CC       link_iptnl.o
+#23 7.973 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 7.973                  from link_iptnl.c:16:
+#23 7.973 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 7.973   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 7.973       | 
+#23 7.973 In file included from link_iptnl.c:9:
+#23 7.973 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 7.973    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 7.973       | 
+#23 8.061     CC       link_gre6.o
+#23 8.073 In file included from ../include/uapi/linux/if_tunnel.h:6,
+#23 8.073                  from link_gre6.c:15:
+#23 8.073 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 8.073   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 8.073       | 
+#23 8.073 In file included from link_gre6.c:9:
+#23 8.073 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 8.073    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 8.073       | 
+#23 8.187     CC       iplink_bond.o
+#23 8.353     CC       iplink_bond_slave.o
+#23 8.405     CC       iplink_hsr.o
+#23 8.449     CC       iplink_bridge.o
+#23 8.590     CC       iplink_bridge_slave.o
+#23 8.682     CC       iplink_dsa.o
+#23 8.712     CC       ipfou.o
+#23 8.725 In file included from ../include/libgenl.h:5,
+#23 8.725                  from ipfou.c:18:
+#23 8.725 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 8.725 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 8.725   280 |         return htobe64(rta_getattr_u64(rta));
+#23 8.725       |                ^~~~~~~
+#23 8.789     CC       iplink_ipvlan.o
+#23 8.827     CC       iplink_geneve.o
+#23 8.912     CC       iplink_vrf.o
+#23 8.957     CC       iproute_lwtunnel.o
+#23 9.336     CC       ipmacsec.o
+#23 9.572     CC       ipila.o
+#23 9.585 In file included from ../include/libgenl.h:5,
+#23 9.585                  from ipila.c:18:
+#23 9.585 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 9.585 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 9.585   280 |         return htobe64(rta_getattr_u64(rta));
+#23 9.585       |                ^~~~~~~
+#23 9.647     CC       ipvrf.o
+#23 9.756     CC       iplink_xstats.o
+#23 9.784     CC       ipseg6.o
+#23 9.836     CC       iplink_netdevsim.o
+#23 9.860     CC       iplink_rmnet.o
+#23 9.893     CC       ipnexthop.o
+#23 10.15     CC       ipmptcp.o
+#23 10.28     CC       iplink_bareudp.o
+#23 10.29 In file included from iplink_bareudp.c:9:
+#23 10.29 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 10.29 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 10.29   280 |         return htobe64(rta_getattr_u64(rta));
+#23 10.29       |                ^~~~~~~
+#23 10.33     CC       iplink_wwan.o
+#23 10.36     CC       ipioam6.o
+#23 10.45     CC       iplink_amt.o
+#23 10.50     CC       iplink_batadv.o
+#23 10.53     CC       iplink_gtp.o
+#23 10.57     CC       iplink_virt_wifi.o
+#23 10.59     CC       iplink_netkit.o
+#23 10.63     CC       ipstats.o
+#23 10.84     LINK     ip
+#23 10.87     CC       rtmon.o
+#23 10.92     LINK     rtmon
+#23 10.93 
+#23 10.93 tc
+#23 10.94     CC       tc.o
+#23 11.02     CC       tc_qdisc.o
+#23 11.14     CC       tc_class.o
+#23 11.24     CC       tc_filter.o
+#23 11.41     CC       tc_util.o
+#23 11.59     CC       tc_monitor.o
+#23 11.62     CC       tc_exec.o
+#23 11.65     CC       m_police.o
+#23 11.74     CC       m_estimator.o
+#23 11.77     CC       m_action.o
+#23 11.91     CC       m_ematch.o
+#23 12.02     YACC     emp_ematch.tab.c
+#23 12.08     CC       emp_ematch.tab.o
+#23 12.18     LEX      emp_ematch.lex.c
+#23 12.19     CC       emp_ematch.lex.o
+#23 12.35     CC       q_fifo.o
+#23 12.38     CC       q_sfq.o
+#23 12.45     CC       q_red.o
+#23 12.52     CC       q_prio.o
+#23 12.56     CC       q_skbprio.o
+#23 12.60     CC       q_tbf.o
+#23 12.69     CC       q_multiq.o
+#23 12.72     CC       q_netem.o
+#23 12.92     CC       q_choke.o
+#23 12.98     CC       q_sfb.o
+#23 13.04     CC       f_u32.o
+#23 13.29     CC       f_route.o
+#23 13.34     CC       f_fw.o
+#23 13.39     CC       f_basic.o
+#23 13.43     CC       f_bpf.o
+#23 13.50     CC       f_flow.o
+#23 13.58     CC       f_cgroup.o
+#23 13.62     CC       f_flower.o
+#23 13.62 In file included from ../include/uapi/linux/netdevice.h:29,
+#23 13.62                  from ../include/uapi/linux/if_arp.h:27,
+#23 13.62                  from f_flower.c:14:
+#23 13.62 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 13.62   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 13.62       | 
+#23 13.62 In file included from f_flower.c:12:
+#23 13.62 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 13.62    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 13.62       | 
+#23 14.14     CC       q_gred.o
+#23 14.24     CC       q_ingress.o
+#23 14.27     CC       q_hfsc.o
+#23 14.36     CC       q_htb.o
+#23 14.46     CC       q_drr.o
+#23 14.51     CC       q_qfq.o
+#23 14.56     CC       m_gact.o
+#23 14.61     CC       m_mirred.o
+#23 14.68     CC       m_mpls.o
+#23 14.75     CC       m_nat.o
+#23 14.80     CC       m_pedit.o
+#23 14.93     CC       m_ife.o
+#23 15.01     CC       m_skbedit.o
+#23 15.08     CC       m_skbmod.o
+#23 15.16     CC       m_csum.o
+#23 15.21     CC       m_simple.o
+#23 15.27     CC       m_vlan.o
+#23 15.35     CC       m_connmark.o
+#23 15.38     CC       m_ctinfo.o
+#23 15.44     CC       m_bpf.o
+#23 15.50     CC       m_tunnel_key.o
+#23 15.62     CC       m_sample.o
+#23 15.67     CC       m_ct.o
+#23 15.76     CC       m_gate.o
+#23 15.85     CC       p_ip.o
+#23 15.89     CC       p_ip6.o
+#23 15.94     CC       p_icmp.o
+#23 15.96     CC       p_eth.o
+#23 15.99     CC       p_tcp.o
+#23 16.02     CC       p_udp.o
+#23 16.04     CC       em_nbyte.o
+#23 16.09     CC       em_cmp.o
+#23 16.14     CC       em_u32.o
+#23 16.18     CC       em_canid.o
+#23 16.23     CC       em_meta.o
+#23 16.33     CC       q_mqprio.o
+#23 16.44     CC       q_codel.o
+#23 16.49     CC       q_fq_codel.o
+#23 16.56     CC       q_fq.o
+#23 16.67     CC       q_pie.o
+#23 16.75     CC       q_fq_pie.o
+#23 16.81     CC       q_cake.o
+#23 17.01     CC       q_hhf.o
+#23 17.06     CC       q_clsact.o
+#23 17.09     CC       e_bpf.o
+#23 17.14     CC       f_matchall.o
+#23 17.20     CC       q_cbs.o
+#23 17.24     CC       q_etf.o
+#23 17.28     CC       q_taprio.o
+#23 17.40     CC       q_plug.o
+#23 17.43     CC       q_ets.o
+#23 17.50     CC       em_ipt.o
+#23 17.52 In file included from tc_util.h:7,
+#23 17.52                  from m_ematch.h:11,
+#23 17.52                  from em_ipt.c:13:
+#23 17.52 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 17.52   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 17.52       | 
+#23 17.52 In file included from ../include/xtables.h:17,
+#23 17.52                  from em_ipt.c:12:
+#23 17.52 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 17.52    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 17.52       | 
+#23 17.55     CC       em_ipset.o
+#23 17.56 In file included from tc_util.h:7,
+#23 17.56                  from m_ematch.h:11,
+#23 17.56                  from em_ipset.c:39:
+#23 17.56 ../include/uapi/linux/if.h:134: warning: "IFF_VOLATILE" redefined
+#23 17.56   134 | #define IFF_VOLATILE    (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST|IFF_ECHO|\
+#23 17.56       | 
+#23 17.56 In file included from ../include/xtables.h:17,
+#23 17.56                  from em_ipset.c:23:
+#23 17.56 /usr/include/net/if.h:48: note: this is the location of the previous definition
+#23 17.56    48 | #define IFF_VOLATILE (IFF_LOOPBACK|IFF_POINTOPOINT|IFF_BROADCAST| \
+#23 17.56       | 
+#23 17.60     CC       tc_core.o
+#23 17.67     CC       tc_red.o
+#23 17.71     CC       tc_estimator.o
+#23 17.74     CC       tc_stab.o
+#23 17.79     CC       tc_qevent.o
+#23 17.80 In file included from tc_qevent.h:7,
+#23 17.80                  from tc_qevent.c:10:
+#23 17.80 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 17.80 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 17.80   280 |         return htobe64(rta_getattr_u64(rta));
+#23 17.80       |                ^~~~~~~
+#23 17.84     AR       libtc.a
+#23 17.84     LINK     tc
+#23 17.88 rm emp_ematch.lex.c
+#23 17.88 
+#23 17.88 bridge
+#23 17.88     CC       bridge.o
+#23 17.92     CC       fdb.o
+#23 17.94 In file included from fdb.c:28:
+#23 17.94 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 17.94 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 17.94   280 |         return htobe64(rta_getattr_u64(rta));
+#23 17.94       |                ^~~~~~~
+#23 18.10     CC       monitor.o
+#23 18.14     CC       link.o
+#23 18.15 In file included from link.c:16:
+#23 18.15 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 18.15 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 18.15   280 |         return htobe64(rta_getattr_u64(rta));
+#23 18.15       |                ^~~~~~~
+#23 18.29     CC       mdb.o
+#23 18.30 In file included from mdb.c:20:
+#23 18.30 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 18.30 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 18.30   280 |         return htobe64(rta_getattr_u64(rta));
+#23 18.30       |                ^~~~~~~
+#23 18.47     CC       vlan.o
+#23 18.48 In file included from vlan.c:14:
+#23 18.48 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.48    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.48       |                              ^~~~~~~
+#23 18.48 ../include/json_print.h:50:37: note: in definition of macro '_PRINT_FUNC'
+#23 18.48    50 |                                     type value);                        \
+#23 18.48       |                                     ^~~~
+#23 18.48 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.48    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.48       |                              ^~~~~~~
+#23 18.48 ../include/json_print.h:55:45: note: in definition of macro '_PRINT_FUNC'
+#23 18.48    55 |                                             type value)                 \
+#23 18.48       |                                             ^~~~
+#23 18.49 ../include/json_print.h: In function 'print_tv':
+#23 18.49 ../include/json_print.h:58:48: warning: passing argument 5 of 'print_color_tv' from incompatible pointer type [-Wincompatible-pointer-types]
+#23 18.49    58 |                                                value);                  \
+#23 18.49       |                                                ^~~~~
+#23 18.49       |                                                |
+#23 18.49       |                                                const struct timeval *
+#23 18.49 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.49    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.49       | ^~~~~~~~~~~
+#23 18.49 ../include/json_print.h:50:42: note: expected 'const struct timeval *' but argument is of type 'const struct timeval *'
+#23 18.49    50 |                                     type value);                        \
+#23 18.49       |                                          ^
+#23 18.49 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.49    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.49       | ^~~~~~~~~~~
+#23 18.49 In file included from vlan.c:15:
+#23 18.49 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 18.49 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 18.49   280 |         return htobe64(rta_getattr_u64(rta));
+#23 18.49       |                ^~~~~~~
+#23 18.70     CC       vni.o
+#23 18.71 In file included from vni.c:19:
+#23 18.71 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.71    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.71       |                              ^~~~~~~
+#23 18.71 ../include/json_print.h:50:37: note: in definition of macro '_PRINT_FUNC'
+#23 18.71    50 |                                     type value);                        \
+#23 18.71       |                                     ^~~~
+#23 18.71 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 18.71    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.71       |                              ^~~~~~~
+#23 18.71 ../include/json_print.h:55:45: note: in definition of macro '_PRINT_FUNC'
+#23 18.71    55 |                                             type value)                 \
+#23 18.71       |                                             ^~~~
+#23 18.71 ../include/json_print.h: In function 'print_tv':
+#23 18.71 ../include/json_print.h:58:48: warning: passing argument 5 of 'print_color_tv' from incompatible pointer type [-Wincompatible-pointer-types]
+#23 18.71    58 |                                                value);                  \
+#23 18.71       |                                                ^~~~~
+#23 18.71       |                                                |
+#23 18.71       |                                                const struct timeval *
+#23 18.71 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.71    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.71       | ^~~~~~~~~~~
+#23 18.71 ../include/json_print.h:50:42: note: expected 'const struct timeval *' but argument is of type 'const struct timeval *'
+#23 18.71    50 |                                     type value);                        \
+#23 18.71       |                                          ^
+#23 18.71 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 18.71    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 18.71       | ^~~~~~~~~~~
+#23 18.72 In file included from vni.c:20:
+#23 18.72 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 18.72 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 18.72   280 |         return htobe64(rta_getattr_u64(rta));
+#23 18.72       |                ^~~~~~~
+#23 18.80     LINK     bridge
+#23 18.81 
+#23 18.81 misc
+#23 18.81     CC       ss.o
+#23 18.83 In file included from ../include/uapi/linux/tipc.h:42,
+#23 18.83                  from ss.c:49:
+#23 18.83 ../include/uapi/linux/sockios.h:42: warning: "SIOCGSTAMP" redefined
+#23 18.83    42 | #define SIOCGSTAMP      SIOCGSTAMP_OLD
+#23 18.83       | 
+#23 18.83 In file included from /usr/include/sys/ioctl.h:10,
+#23 18.83                  from ss.c:12:
+#23 18.83 /usr/include/bits/ioctl.h:111: note: this is the location of the previous definition
+#23 18.83   111 | #define SIOCGSTAMP      0x8906
+#23 18.83       | 
+#23 18.83 ../include/uapi/linux/sockios.h:43: warning: "SIOCGSTAMPNS" redefined
+#23 18.83    43 | #define SIOCGSTAMPNS    SIOCGSTAMPNS_OLD
+#23 18.83       | 
+#23 18.83 /usr/include/bits/ioctl.h:112: note: this is the location of the previous definition
+#23 18.83   112 | #define SIOCGSTAMPNS    0x8907
+#23 18.83       | 
+#23 19.67     CC       ssfilter_check.o
+#23 19.68 In file included from ssfilter_check.c:6:
+#23 19.68 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 19.68 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 19.68   280 |         return htobe64(rta_getattr_u64(rta));
+#23 19.68       |                ^~~~~~~
+#23 19.70     YACC     ssfilter.tab.c
+#23 19.77     CC       ssfilter.tab.o
+#23 19.87     LINK     ss
+#23 19.89     CC       nstat
+#23 19.90 In file included from nstat.c:20:
+#23 19.90 /usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+#23 19.90     1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+#23 19.90       |  ^~~~~~~
+#23 20.03     CC       ifstat
+#23 20.04 In file included from ifstat.c:20:
+#23 20.04 /usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+#23 20.04     1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+#23 20.04       |  ^~~~~~~
+#23 20.04 In file included from ifstat.c:30:
+#23 20.04 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 20.04 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 20.04   280 |         return htobe64(rta_getattr_u64(rta));
+#23 20.04       |                ^~~~~~~
+#23 20.25     CC       rtacct
+#23 20.26 In file included from rtacct.c:19:
+#23 20.26 /usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+#23 20.26     1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+#23 20.26       |  ^~~~~~~
+#23 20.37     CC       lnstat.o
+#23 20.45     CC       lnstat_util.o
+#23 20.51     LINK     lnstat
+#23 20.52 
+#23 20.52 netem
+#23 20.52 gcc  -I../include -o maketable maketable.c -lm
+#23 20.55 gcc  -I../include -o normal normal.c -lm
+#23 20.58 gcc  -I../include -o pareto pareto.c -lm
+#23 20.60 gcc  -I../include -o paretonormal paretonormal.c -lm
+#23 20.63 ./normal > normal.dist
+#23 20.63 ./pareto > pareto.dist
+#23 20.63 ./paretonormal > paretonormal.dist
+#23 20.64 ./maketable experimental.dat > experimental.dist
+#23 20.65 
+#23 20.65 genl
+#23 20.65     CC       genl.o
+#23 20.69     CC       ctrl.o
+#23 20.77     LINK     genl
+#23 20.78 
+#23 20.78 man
+#23 20.79 make[2]: Nothing to be done for 'all'.
+#23 20.79 make[2]: Nothing to be done for 'all'.
+#23 20.79 sed \
+#23 20.79 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.79 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.79 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.79 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.79 	ip-address.8.in > ip-address.8
+#23 20.79 sed \
+#23 20.79 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.79 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.79 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.79 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.79 	ip-link.8.in > ip-link.8
+#23 20.80 sed \
+#23 20.80 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.80 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.80 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.80 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.80 	ip-netns.8.in > ip-netns.8
+#23 20.80 sed \
+#23 20.80 	-e "s|@NETNS_ETC_DIR@|/etc/netns|g" \
+#23 20.80 	-e "s|@NETNS_RUN_DIR@|/var/run/netns|g" \
+#23 20.80 	-e "s|@SYSCONF_ETC_DIR@|/etc/iproute2|g" \
+#23 20.80 	-e "s|@SYSCONF_USR_DIR@|/usr/share/iproute2|g" \
+#23 20.80 	ip-route.8.in > ip-route.8
+#23 20.80 
+#23 20.80 tipc
+#23 20.80     CC       bearer.o
+#23 20.99     CC       cmdl.o
+#23 21.03     CC       link.o
+#23 21.23     CC       media.o
+#23 21.28     CC       misc.o
+#23 21.33     CC       msg.o
+#23 21.36     CC       nametable.o
+#23 21.39     CC       node.o
+#23 21.48     CC       socket.o
+#23 21.51     CC       peer.o
+#23 21.54     CC       tipc.o
+#23 21.58     LINK     tipc
+#23 21.59 
+#23 21.59 devlink
+#23 21.59     CC       devlink.o
+#23 23.35     CC       mnlg.o
+#23 23.36 In file included from mnlg.c:16:
+#23 23.36 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 23.36 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 23.36   280 |         return htobe64(rta_getattr_u64(rta));
+#23 23.36       |                ^~~~~~~
+#23 23.40     LINK     devlink
+#23 23.41 
+#23 23.41 rdma
+#23 23.42     CC       rdma.o
+#23 23.44 rdma.c: In function 'main':
+#23 23.44 rdma.c:110:20: warning: implicit declaration of function 'basename'; did you mean 'rename'? [-Wimplicit-function-declaration]
+#23 23.44   110 |         filename = basename(argv[0]);
+#23 23.44       |                    ^~~~~~~~
+#23 23.44       |                    rename
+#23 23.44 rdma.c:110:18: warning: assignment to 'char *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+#23 23.44   110 |         filename = basename(argv[0]);
+#23 23.44       |                  ^
+#23 23.47     CC       utils.o
+#23 23.64     CC       dev.o
+#23 23.71     CC       link.o
+#23 23.78     CC       res.o
+#23 23.90     CC       res-pd.o
+#23 23.94     CC       res-mr.o
+#23 23.98     CC       res-cq.o
+#23 24.03     CC       res-cmid.o
+#23 24.09     CC       res-qp.o
+#23 24.14     CC       sys.o
+#23 24.19     CC       stat.o
+#23 24.41     CC       stat-mr.o
+#23 24.45     CC       res-ctx.o
+#23 24.49     CC       res-srq.o
+#23 24.55     LINK     rdma
+#23 24.57 
+#23 24.57 dcb
+#23 24.57     CC       dcb.o
+#23 24.58 In file included from ../include/namespace.h:10,
+#23 24.58                  from dcb.c:11:
+#23 24.58 ../include/libnetlink.h: In function 'rta_getattr_be64':
+#23 24.58 ../include/libnetlink.h:280:16: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
+#23 24.58   280 |         return htobe64(rta_getattr_u64(rta));
+#23 24.58       |                ^~~~~~~
+#23 24.68     CC       dcb_app.o
+#23 24.86     CC       dcb_buffer.o
+#23 24.93     CC       dcb_dcbx.o
+#23 24.98     CC       dcb_ets.o
+#23 25.06     CC       dcb_maxrate.o
+#23 25.11     CC       dcb_pfc.o
+#23 25.18     CC       dcb_apptrust.o
+#23 25.25     CC       dcb_rewr.o
+#23 25.33     LINK     dcb
+#23 25.34 
+#23 25.34 vdpa
+#23 25.34     CC       vdpa.o
+#23 25.35 In file included from vdpa.c:19:
+#23 25.35 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 25.35    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 25.35       |                              ^~~~~~~
+#23 25.35 ../include/json_print.h:50:37: note: in definition of macro '_PRINT_FUNC'
+#23 25.35    50 |                                     type value);                        \
+#23 25.35       |                                     ^~~~
+#23 25.35 ../include/json_print.h:80:30: warning: 'struct timeval' declared inside parameter list will not be visible outside of this definition or declaration
+#23 25.35    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 25.35       |                              ^~~~~~~
+#23 25.35 ../include/json_print.h:55:45: note: in definition of macro '_PRINT_FUNC'
+#23 25.35    55 |                                             type value)                 \
+#23 25.35       |                                             ^~~~
+#23 25.35 ../include/json_print.h: In function 'print_tv':
+#23 25.35 ../include/json_print.h:58:48: warning: passing argument 5 of 'print_color_tv' from incompatible pointer type [-Wincompatible-pointer-types]
+#23 25.35    58 |                                                value);                  \
+#23 25.35       |                                                ^~~~~
+#23 25.35       |                                                |
+#23 25.35       |                                                const struct timeval *
+#23 25.35 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 25.35    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 25.35       | ^~~~~~~~~~~
+#23 25.35 ../include/json_print.h:50:42: note: expected 'const struct timeval *' but argument is of type 'const struct timeval *'
+#23 25.35    50 |                                     type value);                        \
+#23 25.35       |                                          ^
+#23 25.35 ../include/json_print.h:80:1: note: in expansion of macro '_PRINT_FUNC'
+#23 25.35    80 | _PRINT_FUNC(tv, const struct timeval *)
+#23 25.35       | ^~~~~~~~~~~
+#23 25.50     LINK     vdpa
+#23 DONE 25.5s
+
+#24 [20/22] RUN git clone --no-single-branch --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel
+#24 0.351 Cloning into '/nipa-data/kernel'...
+#24 19.46 Updating files:  16% (13787/83283)Updating files:  17% (14159/83283)Updating files:  18% (14991/83283)Updating files:  19% (15824/83283)Updating files:  20% (16657/83283)Updating files:  21% (17490/83283)Updating files:  22% (18323/83283)Updating files:  23% (19156/83283)Updating files:  24% (19988/83283)Updating files:  25% (20821/83283)Updating files:  26% (21654/83283)Updating files:  27% (22487/83283)Updating files:  28% (23320/83283)Updating files:  29% (24153/83283)Updating files:  30% (24985/83283)Updating files:  31% (25818/83283)Updating files:  32% (26651/83283)Updating files:  33% (27484/83283)Updating files:  34% (28317/83283)Updating files:  35% (29150/83283)Updating files:  35% (29406/83283)Updating files:  36% (29982/83283)Updating files:  37% (30815/83283)Updating files:  38% (31648/83283)Updating files:  39% (32481/83283)Updating files:  40% (33314/83283)Updating files:  40% (33614/83283)Updating files:  41% (34147/83283)Updating files:  42% (34979/83283)Updating files:  43% (35812/83283)Updating files:  44% (36645/83283)Updating files:  45% (37478/83283)Updating files:  46% (38311/83283)Updating files:  47% (39144/83283)Updating files:  48% (39976/83283)Updating files:  49% (40809/83283)Updating files:  50% (41642/83283)Updating files:  51% (42475/83283)Updating files:  51% (42956/83283)Updating files:  52% (43308/83283)Updating files:  53% (44140/83283)Updating files:  54% (44973/83283)Updating files:  55% (45806/83283)Updating files:  56% (46639/83283)Updating files:  57% (47472/83283)Updating files:  58% (48305/83283)Updating files:  59% (49137/83283)Updating files:  60% (49970/83283)Updating files:  61% (50803/83283)Updating files:  62% (51636/83283)Updating files:  63% (52469/83283)Updating files:  64% (53302/83283)Updating files:  65% (54134/83283)Updating files:  65% (54816/83283)Updating files:  66% (54967/83283)Updating files:  67% (55800/83283)Updating files:  68% (56633/83283)Updating files:  69% (57466/83283)Updating files:  70% (58299/83283)Updating files:  71% (59131/83283)Updating files:  72% (59964/83283)Updating files:  73% (60797/83283)Updating files:  74% (61630/83283)Updating files:  75% (62463/83283)Updating files:  76% (63296/83283)Updating files:  77% (64128/83283)Updating files:  78% (64961/83283)Updating files:  79% (65794/83283)Updating files:  80% (66627/83283)Updating files:  81% (67460/83283)Updating files:  82% (68293/83283)Updating files:  83% (69125/83283)Updating files:  83% (69435/83283)Updating files:  84% (69958/83283)Updating files:  85% (70791/83283)Updating files:  86% (71624/83283)Updating files:  87% (72457/83283)Updating files:  88% (73290/83283)Updating files:  89% (74122/83283)Updating files:  90% (74955/83283)Updating files:  91% (75788/83283)Updating files:  92% (76621/83283)Updating files:  93% (77454/83283)Updating files:  94% (78287/83283)Updating files:  95% (79119/83283)Updating files:  96% (79952/83283)Updating files:  97% (80785/83283)Updating files:  98% (81618/83283)Updating files:  99% (82451/83283)Updating files: 100% (83283/83283)Updating files: 100% (83283/83283), done.
+#24 DONE 29.9s
+
+#25 [21/22] RUN git clone --depth=1 -b main https://github.com/p4tc-dev/new-nipa.git nipa
+#25 0.339 Cloning into 'nipa'...
+#25 DONE 0.7s
+
+#26 [22/22] COPY entrypoint.sh /entrypoint.sh
+#26 DONE 0.0s
+
+#27 exporting to image
+#27 exporting layers
+#27 exporting layers 8.8s done
+#27 writing image sha256:ca4f0a101541d580e53c1dbe79c33ae87cadd38bf3b6ac03fce8be75228b7896 0.1s done
+#27 naming to docker.io/library/nipa-executor
+#27 naming to docker.io/library/nipa-executor 0.2s done
+#27 DONE 9.1s
+NIPA version: 1b9c21a (ui: set canvas background color to stand out, 2024-03-28)
+INFO: Last run date: 2024-04-30 15:00:02.893525+00:00
+Testing  {'branch': 'net-next-2024-04-30--21-00', 'date': '2024-04-30T21:00:15.096823+00:00', 'base': '7668c627ffc499de1c69734fe8734a26cb8b0b4f', 'url': 'https://github.com/linux-netdev/testing.git net-next-2024-04-30--21-00'}
+remote: Enumerating objects: 1[Kremote: Enumerating objects: 162378[Kremote: Enumerating objects: 478152[Kremote: Enumerating objects: 785685[Kremote: Enumerating objects: 1099148[Kremote: Enumerating objects: 1327642[Kremote: Enumerating objects: 1487045[Kremote: Enumerating objects: 1624086[Kremote: Enumerating objects: 1707003[Kremote: Enumerating objects: 1792904[Kremote: Enumerating objects: 1908359[Kremote: Enumerating objects: 2008118[Kremote: Enumerating objects: 2095030[Kremote: Enumerating objects: 2160281[Kremote: Enumerating objects: 2213298[Kremote: Enumerating objects: 2264478[Kremote: Enumerating objects: 2313282[Kremote: Enumerating objects: 2378520[Kremote: Enumerating objects: 2454129[Kremote: Enumerating objects: 2570576[Kremote: Enumerating objects: 2663613[Kremote: Enumerating objects: 2746211[Kremote: Enumerating objects: 2821956[Kremote: Enumerating objects: 2906690[Kremote: Enumerating objects: 2981113[Kremote: Enumerating objects: 3057029[Kremote: Enumerating objects: 3137487[Kremote: Enumerating objects: 3212408[Kremote: Enumerating objects: 3320178[Kremote: Enumerating objects: 3398471[Kremote: Enumerating objects: 3474448[Kremote: Enumerating objects: 3554804[Kremote: Enumerating objects: 3625948[Kremote: Enumerating objects: 3709019[Kremote: Enumerating objects: 3797011[Kremote: Enumerating objects: 3877969[Kremote: Enumerating objects: 3952834[Kremote: Enumerating objects: 4036430[Kremote: Enumerating objects: 4117119[Kremote: Enumerating objects: 4202640[Kremote: Enumerating objects: 4282996[Kremote: Enumerating objects: 4368822[Kremote: Enumerating objects: 4450962[Kremote: Enumerating objects: 4568511[Kremote: Enumerating objects: 4657632[Kremote: Enumerating objects: 4740605[Kremote: Enumerating objects: 4835367[Kremote: Enumerating objects: 4914836[Kremote: Enumerating objects: 4998273[Kremote: Enumerating objects: 5089404[Kremote: Enumerating objects: 5169417[Kremote: Enumerating objects: 5248765[Kremote: Enumerating objects: 5328992[Kremote: Enumerating objects: 5409749[Kremote: Enumerating objects: 5493856[Kremote: Enumerating objects: 5564480[Kremote: Enumerating objects: 5649981[Kremote: Enumerating objects: 5730817[Kremote: Enumerating objects: 5820909[Kremote: Enumerating objects: 5908311[Kremote: Enumerating objects: 5995372[Kremote: Enumerating objects: 6081196[Kremote: Enumerating objects: 6172941[Kremote: Enumerating objects: 6253144[Kremote: Enumerating objects: 6333818[Kremote: Enumerating objects: 6416087[Kremote: Enumerating objects: 6497778[Kremote: Enumerating objects: 6576068[Kremote: Enumerating objects: 6664718[Kremote: Enumerating objects: 6746891[Kremote: Enumerating objects: 6831548[Kremote: Enumerating objects: 6916429[Kremote: Enumerating objects: 7010203[Kremote: Enumerating objects: 7097188[Kremote: Enumerating objects: 7189207[Kremote: Enumerating objects: 7282730[Kremote: Enumerating objects: 7373934[Kremote: Enumerating objects: 7467135[Kremote: Enumerating objects: 7558324[Kremote: Enumerating objects: 7640745[Kremote: Enumerating objects: 7726783[Kremote: Enumerating objects: 7815964[Kremote: Enumerating objects: 7911882[Kremote: Enumerating objects: 8009036[Kremote: Enumerating objects: 8099983[Kremote: Enumerating objects: 8195822[Kremote: Enumerating objects: 8283906[Kremote: Enumerating objects: 8376988[Kremote: Enumerating objects: 8471804[Kremote: Enumerating objects: 8558739[Kremote: Enumerating objects: 8646593[Kremote: Enumerating objects: 8737010[Kremote: Enumerating objects: 8828913[Kremote: Enumerating objects: 8927142[Kremote: Enumerating objects: 9019003[Kremote: Enumerating objects: 9115053[Kremote: Enumerating objects: 9211191[Kremote: Enumerating objects: 9308284[Kremote: Enumerating objects: 9404664[Kremote: Enumerating objects: 9503090[Kremote: Enumerating objects: 9604850[Kremote: Enumerating objects: 9702474[Kremote: Enumerating objects: 9802018[Kremote: Enumerating objects: 9901514[Kremote: Enumerating objects: 9999567[Kremote: Enumerating objects: 10102447[Kremote: Enumerating objects: 10212189[Kremote: Enumerating objects: 10318665[Kremote: Enumerating objects: 10429704[Kremote: Enumerating objects: 10537347[Kremote: Enumerating objects: 10647705[Kremote: Enumerating objects: 10677256, done.[K
+remote: Counting objects:   0% (1/10094623)[Kremote: Counting objects:   1% (100947/10094623)[Kremote: Counting objects:   2% (201893/10094623)[Kremote: Counting objects:   2% (220274/10094623)[Kremote: Counting objects:   3% (302839/10094623)[Kremote: Counting objects:   4% (403785/10094623)[Kremote: Counting objects:   5% (504732/10094623)[Kremote: Counting objects:   6% (605678/10094623)[Kremote: Counting objects:   7% (706624/10094623)[Kremote: Counting objects:   8% (807570/10094623)[Kremote: Counting objects:   9% (908517/10094623)[Kremote: Counting objects:  10% (1009463/10094623)[Kremote: Counting objects:  11% (1110409/10094623)[Kremote: Counting objects:  12% (1211355/10094623)[Kremote: Counting objects:  13% (1312301/10094623)[Kremote: Counting objects:  14% (1413248/10094623)[Kremote: Counting objects:  15% (1514194/10094623)[Kremote: Counting objects:  16% (1615140/10094623)[Kremote: Counting objects:  17% (1716086/10094623)[Kremote: Counting objects:  18% (1817033/10094623)[Kremote: Counting objects:  19% (1917979/10094623)[Kremote: Counting objects:  20% (2018925/10094623)[Kremote: Counting objects:  20% (2039631/10094623)[Kremote: Counting objects:  21% (2119871/10094623)[Kremote: Counting objects:  22% (2220818/10094623)[Kremote: Counting objects:  23% (2321764/10094623)[Kremote: Counting objects:  24% (2422710/10094623)[Kremote: Counting objects:  25% (2523656/10094623)[Kremote: Counting objects:  26% (2624602/10094623)[Kremote: Counting objects:  27% (2725549/10094623)[Kremote: Counting objects:  28% (2826495/10094623)[Kremote: Counting objects:  28% (2838579/10094623)[Kremote: Counting objects:  29% (2927441/10094623)[Kremote: Counting objects:  30% (3028387/10094623)[Kremote: Counting objects:  31% (3129334/10094623)[Kremote: Counting objects:  32% (3230280/10094623)[Kremote: Counting objects:  33% (3331226/10094623)[Kremote: Counting objects:  34% (3432172/10094623)[Kremote: Counting objects:  35% (3533119/10094623)[Kremote: Counting objects:  35% (3622410/10094623)[Kremote: Counting objects:  36% (3634065/10094623)[Kremote: Counting objects:  37% (3735011/10094623)[Kremote: Counting objects:  38% (3835957/10094623)[Kremote: Counting objects:  39% (3936903/10094623)[Kremote: Counting objects:  40% (4037850/10094623)[Kremote: Counting objects:  41% (4138796/10094623)[Kremote: Counting objects:  42% (4239742/10094623)[Kremote: Counting objects:  42% (4330148/10094623)[Kremote: Counting objects:  43% (4340688/10094623)[Kremote: Counting objects:  44% (4441635/10094623)[Kremote: Counting objects:  45% (4542581/10094623)[Kremote: Counting objects:  46% (4643527/10094623)[Kremote: Counting objects:  47% (4744473/10094623)[Kremote: Counting objects:  48% (4845420/10094623)[Kremote: Counting objects:  49% (4946366/10094623)[Kremote: Counting objects:  50% (5047312/10094623)[Kremote: Counting objects:  51% (5148258/10094623)[Kremote: Counting objects:  52% (5249204/10094623)[Kremote: Counting objects:  52% (5283748/10094623)[Kremote: Counting objects:  53% (5350151/10094623)[Kremote: Counting objects:  54% (5451097/10094623)[Kremote: Counting objects:  55% (5552043/10094623)[Kremote: Counting objects:  56% (5652989/10094623)[Kremote: Counting objects:  57% (5753936/10094623)[Kremote: Counting objects:  58% (5854882/10094623)[Kremote: Counting objects:  59% (5955828/10094623)[Kremote: Counting objects:  60% (6056774/10094623)[Kremote: Counting objects:  60% (6119028/10094623)[Kremote: Counting objects:  61% (6157721/10094623)[Kremote: Counting objects:  62% (6258667/10094623)[Kremote: Counting objects:  63% (6359613/10094623)[Kremote: Counting objects:  64% (6460559/10094623)[Kremote: Counting objects:  65% (6561505/10094623)[Kremote: Counting objects:  66% (6662452/10094623)[Kremote: Counting objects:  67% (6763398/10094623)[Kremote: Counting objects:  68% (6864344/10094623)[Kremote: Counting objects:  69% (6965290/10094623)[Kremote: Counting objects:  70% (7066237/10094623)[Kremote: Counting objects:  71% (7167183/10094623)[Kremote: Counting objects:  72% (7268129/10094623)[Kremote: Counting objects:  73% (7369075/10094623)[Kremote: Counting objects:  73% (7414174/10094623)[Kremote: Counting objects:  74% (7470022/10094623)[Kremote: Counting objects:  75% (7570968/10094623)[Kremote: Counting objects:  76% (7671914/10094623)[Kremote: Counting objects:  77% (7772860/10094623)[Kremote: Counting objects:  78% (7873806/10094623)[Kremote: Counting objects:  79% (7974753/10094623)[Kremote: Counting objects:  80% (8075699/10094623)[Kremote: Counting objects:  81% (8176645/10094623)[Kremote: Counting objects:  82% (8277591/10094623)[Kremote: Counting objects:  83% (8378538/10094623)[Kremote: Counting objects:  84% (8479484/10094623)[Kremote: Counting objects:  85% (8580430/10094623)[Kremote: Counting objects:  85% (8656187/10094623)[Kremote: Counting objects:  86% (8681376/10094623)[Kremote: Counting objects:  87% (8782323/10094623)[Kremote: Counting objects:  88% (8883269/10094623)[Kremote: Counting objects:  89% (8984215/10094623)[Kremote: Counting objects:  90% (9085161/10094623)[Kremote: Counting objects:  91% (9186107/10094623)[Kremote: Counting objects:  92% (9287054/10094623)[Kremote: Counting objects:  93% (9388000/10094623)[Kremote: Counting objects:  94% (9488946/10094623)[Kremote: Counting objects:  95% (9589892/10094623)[Kremote: Counting objects:  96% (9690839/10094623)[Kremote: Counting objects:  97% (9791785/10094623)[Kremote: Counting objects:  97% (9828106/10094623)[Kremote: Counting objects:  98% (9892731/10094623)[Kremote: Counting objects:  99% (9993677/10094623)[Kremote: Counting objects: 100% (10094623/10094623)[Kremote: Counting objects: 100% (10094623/10094623), done.[K
+remote: Compressing objects:   0% (1/1730292)[Kremote: Compressing objects:   0% (10005/1730292)[Kremote: Compressing objects:   1% (17303/1730292)[Kremote: Compressing objects:   1% (18858/1730292)[Kremote: Compressing objects:   1% (33030/1730292)[Kremote: Compressing objects:   2% (34606/1730292)[Kremote: Compressing objects:   2% (42406/1730292)[Kremote: Compressing objects:   3% (51909/1730292)[Kremote: Compressing objects:   3% (67158/1730292)[Kremote: Compressing objects:   4% (69212/1730292)[Kremote: Compressing objects:   4% (77018/1730292)[Kremote: Compressing objects:   4% (83990/1730292)[Kremote: Compressing objects:   5% (86515/1730292)[Kremote: Compressing objects:   5% (93552/1730292)[Kremote: Compressing objects:   6% (103818/1730292)[Kremote: Compressing objects:   6% (106393/1730292)[Kremote: Compressing objects:   6% (108827/1730292)[Kremote: Compressing objects:   6% (108855/1730292)[Kremote: Compressing objects:   6% (108866/1730292)[Kremote: Compressing objects:   6% (115312/1730292)[Kremote: Compressing objects:   7% (121121/1730292)[Kremote: Compressing objects:   7% (127553/1730292)[Kremote: Compressing objects:   7% (137200/1730292)[Kremote: Compressing objects:   8% (138424/1730292)[Kremote: Compressing objects:   8% (148934/1730292)[Kremote: Compressing objects:   8% (154483/1730292)[Kremote: Compressing objects:   9% (155727/1730292)[Kremote: Compressing objects:   9% (158581/1730292)[Kremote: Compressing objects:   9% (163135/1730292)[Kremote: Compressing objects:   9% (168087/1730292)[Kremote: Compressing objects:  10% (173030/1730292)[Kremote: Compressing objects:  10% (173361/1730292)[Kremote: Compressing objects:  10% (178317/1730292)[Kremote: Compressing objects:  10% (183009/1730292)[Kremote: Compressing objects:  10% (189558/1730292)[Kremote: Compressing objects:  11% (190333/1730292)[Kremote: Compressing objects:  11% (193779/1730292)[Kremote: Compressing objects:  11% (198688/1730292)[Kremote: Compressing objects:  11% (203237/1730292)[Kremote: Compressing objects:  11% (207061/1730292)[Kremote: Compressing objects:  12% (207636/1730292)[Kremote: Compressing objects:  12% (211597/1730292)[Kremote: Compressing objects:  12% (217127/1730292)[Kremote: Compressing objects:  12% (222309/1730292)[Kremote: Compressing objects:  13% (224938/1730292)[Kremote: Compressing objects:  13% (227788/1730292)[Kremote: Compressing objects:  13% (231826/1730292)[Kremote: Compressing objects:  13% (235177/1730292)[Kremote: Compressing objects:  13% (238174/1730292)[Kremote: Compressing objects:  14% (242241/1730292)[Kremote: Compressing objects:  14% (243020/1730292)[Kremote: Compressing objects:  14% (247696/1730292)[Kremote: Compressing objects:  14% (252283/1730292)[Kremote: Compressing objects:  14% (257275/1730292)[Kremote: Compressing objects:  15% (259544/1730292)[Kremote: Compressing objects:  15% (261830/1730292)[Kremote: Compressing objects:  15% (265492/1730292)[Kremote: Compressing objects:  15% (268441/1730292)[Kremote: Compressing objects:  15% (273940/1730292)[Kremote: Compressing objects:  16% (276847/1730292)[Kremote: Compressing objects:  16% (279277/1730292)[Kremote: Compressing objects:  16% (283264/1730292)[Kremote: Compressing objects:  16% (286794/1730292)[Kremote: Compressing objects:  16% (290443/1730292)[Kremote: Compressing objects:  17% (294150/1730292)[Kremote: Compressing objects:  17% (294884/1730292)[Kremote: Compressing objects:  17% (300182/1730292)[Kremote: Compressing objects:  17% (304755/1730292)[Kremote: Compressing objects:  17% (308850/1730292)[Kremote: Compressing objects:  18% (311453/1730292)[Kremote: Compressing objects:  18% (314609/1730292)[Kremote: Compressing objects:  18% (318664/1730292)[Kremote: Compressing objects:  18% (323993/1730292)[Kremote: Compressing objects:  19% (328756/1730292)[Kremote: Compressing objects:  19% (329228/1730292)[Kremote: Compressing objects:  19% (334065/1730292)[Kremote: Compressing objects:  19% (339400/1730292)[Kremote: Compressing objects:  20% (346059/1730292)[Kremote: Compressing objects:  21% (363362/1730292)[Kremote: Compressing objects:  22% (380665/1730292)[Kremote: Compressing objects:  23% (397968/1730292)[Kremote: Compressing objects:  24% (415271/1730292)[Kremote: Compressing objects:  25% (432573/1730292)[Kremote: Compressing objects:  25% (438576/1730292)[Kremote: Compressing objects:  26% (449876/1730292)[Kremote: Compressing objects:  27% (467179/1730292)[Kremote: Compressing objects:  28% (484482/1730292)[Kremote: Compressing objects:  29% (501785/1730292)[Kremote: Compressing objects:  30% (519088/1730292)[Kremote: Compressing objects:  31% (536391/1730292)[Kremote: Compressing objects:  32% (553694/1730292)[Kremote: Compressing objects:  33% (570997/1730292)[Kremote: Compressing objects:  34% (588300/1730292)[Kremote: Compressing objects:  35% (605603/1730292)[Kremote: Compressing objects:  36% (622906/1730292)[Kremote: Compressing objects:  37% (640209/1730292)[Kremote: Compressing objects:  38% (657511/1730292)[Kremote: Compressing objects:  39% (674814/1730292)[Kremote: Compressing objects:  40% (692117/1730292)[Kremote: Compressing objects:  41% (709420/1730292)[Kremote: Compressing objects:  42% (726723/1730292)[Kremote: Compressing objects:  43% (744026/1730292)[Kremote: Compressing objects:  44% (761329/1730292)[Kremote: Compressing objects:  45% (778632/1730292)[Kremote: Compressing objects:  46% (795935/1730292)[Kremote: Compressing objects:  47% (813238/1730292)[Kremote: Compressing objects:  48% (830541/1730292)[Kremote: Compressing objects:  48% (841101/1730292)[Kremote: Compressing objects:  49% (847844/1730292)[Kremote: Compressing objects:  50% (865146/1730292)[Kremote: Compressing objects:  51% (882449/1730292)[Kremote: Compressing objects:  52% (899752/1730292)[Kremote: Compressing objects:  53% (917055/1730292)[Kremote: Compressing objects:  54% (934358/1730292)[Kremote: Compressing objects:  55% (951661/1730292)[Kremote: Compressing objects:  56% (968964/1730292)[Kremote: Compressing objects:  57% (986267/1730292)[Kremote: Compressing objects:  58% (1003570/1730292)[Kremote: Compressing objects:  59% (1020873/1730292)[Kremote: Compressing objects:  60% (1038176/1730292)[Kremote: Compressing objects:  61% (1055479/1730292)[Kremote: Compressing objects:  62% (1072782/1730292)[Kremote: Compressing objects:  63% (1090084/1730292)[Kremote: Compressing objects:  64% (1107387/1730292)[Kremote: Compressing objects:  65% (1124690/1730292)[Kremote: Compressing objects:  66% (1141993/1730292)[Kremote: Compressing objects:  67% (1159296/1730292)[Kremote: Compressing objects:  68% (1176599/1730292)[Kremote: Compressing objects:  69% (1193902/1730292)[Kremote: Compressing objects:  70% (1211205/1730292)[Kremote: Compressing objects:  71% (1228508/1730292)[Kremote: Compressing objects:  72% (1245811/1730292)[Kremote: Compressing objects:  73% (1263114/1730292)[Kremote: Compressing objects:  74% (1280417/1730292)[Kremote: Compressing objects:  75% (1297719/1730292)[Kremote: Compressing objects:  76% (1315022/1730292)[Kremote: Compressing objects:  77% (1332325/1730292)[Kremote: Compressing objects:  78% (1349628/1730292)[Kremote: Compressing objects:  79% (1366931/1730292)[Kremote: Compressing objects:  80% (1384234/1730292)[Kremote: Compressing objects:  81% (1401537/1730292)[Kremote: Compressing objects:  82% (1418840/1730292)[Kremote: Compressing objects:  83% (1436143/1730292)[Kremote: Compressing objects:  84% (1453446/1730292)[Kremote: Compressing objects:  85% (1470749/1730292)[Kremote: Compressing objects:  86% (1488052/1730292)[Kremote: Compressing objects:  87% (1505355/1730292)[Kremote: Compressing objects:  88% (1522657/1730292)[Kremote: Compressing objects:  89% (1539960/1730292)[Kremote: Compressing objects:  90% (1557263/1730292)[Kremote: Compressing objects:  91% (1574566/1730292)[Kremote: Compressing objects:  92% (1591869/1730292)[Kremote: Compressing objects:  93% (1609172/1730292)[Kremote: Compressing objects:  94% (1626475/1730292)[Kremote: Compressing objects:  95% (1643778/1730292)[Kremote: Compressing objects:  96% (1661081/1730292)[Kremote: Compressing objects:  97% (1678384/1730292)[Kremote: Compressing objects:  98% (1695687/1730292)[Kremote: Compressing objects:  99% (1712990/1730292)[Kremote: Compressing objects: 100% (1730292/1730292)[Kremote: Compressing objects: 100% (1730292/1730292), done.[K
+Receiving objects:   0% (1/10013255)Receiving objects:   0% (82928/10013255), 17.61 MiB | 35.22 MiB/sReceiving objects:   1% (100133/10013255), 43.50 MiB | 43.50 MiB/sReceiving objects:   1% (186172/10013255), 69.86 MiB | 46.57 MiB/sReceiving objects:   2% (200266/10013255), 96.77 MiB | 48.38 MiB/sReceiving objects:   2% (296483/10013255), 124.80 MiB | 49.92 MiB/sReceiving objects:   3% (300398/10013255), 152.57 MiB | 50.87 MiB/sReceiving objects:   4% (400531/10013255), 180.03 MiB | 51.45 MiB/sReceiving objects:   4% (404552/10013255), 180.03 MiB | 51.45 MiB/sReceiving objects:   5% (500663/10013255), 232.98 MiB | 51.80 MiB/sReceiving objects:   5% (518431/10013255), 232.98 MiB | 51.80 MiB/sReceiving objects:   6% (600796/10013255), 287.60 MiB | 54.27 MiB/sReceiving objects:   6% (638859/10013255), 287.60 MiB | 54.27 MiB/sReceiving objects:   7% (700928/10013255), 341.29 MiB | 54.36 MiB/sReceiving objects:   7% (763119/10013255), 341.29 MiB | 54.36 MiB/sReceiving objects:   8% (801061/10013255), 367.75 MiB | 54.01 MiB/sReceiving objects:   8% (896467/10013255), 394.52 MiB | 53.78 MiB/sReceiving objects:   9% (901193/10013255), 421.06 MiB | 53.57 MiB/sReceiving objects:  10% (1001326/10013255), 465.82 MiB | 57.73 MiB/sReceiving objects:  10% (1051533/10013255), 465.82 MiB | 57.73 MiB/sReceiving objects:  11% (1101459/10013255), 514.72 MiB | 62.61 MiB/sReceiving objects:  12% (1201591/10013255), 565.77 MiB | 67.85 MiB/sReceiving objects:  12% (1216281/10013255), 565.77 MiB | 67.85 MiB/sReceiving objects:  12% (1288906/10013255), 651.90 MiB | 74.95 MiB/sReceiving objects:  13% (1301724/10013255), 664.34 MiB | 65.87 MiB/sReceiving objects:  13% (1311681/10013255), 664.34 MiB | 65.87 MiB/sReceiving objects:  13% (1331506/10013255), 680.73 MiB | 57.37 MiB/sReceiving objects:  13% (1394948/10013255), 695.36 MiB | 39.91 MiB/sReceiving objects:  14% (1401856/10013255), 711.68 MiB | 32.24 MiB/sReceiving objects:  15% (1501989/10013255), 737.29 MiB | 26.51 MiB/sReceiving objects:  15% (1554995/10013255), 737.29 MiB | 26.51 MiB/sReceiving objects:  15% (1587191/10013255), 768.66 MiB | 24.05 MiB/sReceiving objects:  15% (1592807/10013255), 778.00 MiB | 23.11 MiB/sReceiving objects:  16% (1602121/10013255), 782.65 MiB | 22.63 MiB/sReceiving objects:  16% (1612201/10013255), 790.73 MiB | 23.52 MiB/sReceiving objects:  16% (1622374/10013255), 800.18 MiB | 19.65 MiB/sReceiving objects:  17% (1702254/10013255), 821.60 MiB | 13.93 MiB/sReceiving objects:  17% (1708083/10013255), 821.60 MiB | 13.93 MiB/sReceiving objects:  17% (1772754/10013255), 850.73 MiB | 16.96 MiB/sReceiving objects:  18% (1802386/10013255), 863.43 MiB | 17.88 MiB/sReceiving objects:  18% (1854023/10013255), 863.43 MiB | 17.88 MiB/sReceiving objects:  19% (1902519/10013255), 890.34 MiB | 22.05 MiB/sReceiving objects:  19% (1970727/10013255), 910.26 MiB | 25.41 MiB/sReceiving objects:  20% (2002651/10013255), 930.32 MiB | 27.50 MiB/sReceiving objects:  20% (2016077/10013255), 930.32 MiB | 27.50 MiB/sReceiving objects:  20% (2028006/10013255), 953.53 MiB | 26.34 MiB/sReceiving objects:  21% (2102784/10013255), 979.18 MiB | 27.13 MiB/sReceiving objects:  21% (2104382/10013255), 979.18 MiB | 27.13 MiB/sReceiving objects:  21% (2112325/10013255), 992.62 MiB | 22.67 MiB/sReceiving objects:  21% (2121996/10013255), 1004.30 MiB | 17.50 MiB/sReceiving objects:  21% (2132708/10013255), 1017.04 MiB | 15.65 MiB/sReceiving objects:  21% (2191152/10013255), 1.01 GiB | 16.53 MiB/s   Receiving objects:  21% (2202261/10013255), 1.02 GiB | 13.72 MiB/sReceiving objects:  22% (2202917/10013255), 1.02 GiB | 13.72 MiB/sReceiving objects:  22% (2265871/10013255), 1.04 GiB | 16.11 MiB/sReceiving objects:  23% (2303049/10013255), 1.06 GiB | 17.87 MiB/sReceiving objects:  23% (2311300/10013255), 1.06 GiB | 17.87 MiB/sReceiving objects:  23% (2403113/10013255), 1.11 GiB | 26.58 MiB/sReceiving objects:  24% (2403182/10013255), 1.11 GiB | 26.58 MiB/sReceiving objects:  24% (2458484/10013255), 1.13 GiB | 26.16 MiB/sReceiving objects:  25% (2503314/10013255), 1.16 GiB | 32.07 MiB/sReceiving objects:  26% (2603447/10013255), 1.20 GiB | 39.84 MiB/sReceiving objects:  26% (2614002/10013255), 1.20 GiB | 39.84 MiB/sReceiving objects:  26% (2691333/10013255), 1.25 GiB | 45.60 MiB/sReceiving objects:  27% (2703579/10013255), 1.29 GiB | 52.35 MiB/sReceiving objects:  27% (2795865/10013255), 1.33 GiB | 57.57 MiB/sReceiving objects:  28% (2803712/10013255), 1.35 GiB | 55.39 MiB/sReceiving objects:  28% (2810980/10013255), 1.36 GiB | 55.71 MiB/sReceiving objects:  28% (2825435/10013255), 1.38 GiB | 50.13 MiB/sReceiving objects:  28% (2877756/10013255), 1.40 GiB | 39.02 MiB/sReceiving objects:  29% (2903844/10013255), 1.43 GiB | 41.07 MiB/sReceiving objects:  30% (3003977/10013255), 1.47 GiB | 40.39 MiB/sReceiving objects:  30% (3008491/10013255), 1.47 GiB | 40.39 MiB/sReceiving objects:  30% (3068134/10013255), 1.53 GiB | 40.98 MiB/sReceiving objects:  31% (3104110/10013255), 1.55 GiB | 41.91 MiB/sReceiving objects:  32% (3204242/10013255), 1.59 GiB | 48.69 MiB/sReceiving objects:  32% (3231944/10013255), 1.59 GiB | 48.69 MiB/sReceiving objects:  33% (3304375/10013255), 1.65 GiB | 57.94 MiB/sReceiving objects:  33% (3315746/10013255), 1.65 GiB | 57.94 MiB/sReceiving objects:  34% (3404507/10013255), 1.68 GiB | 63.70 MiB/sReceiving objects:  34% (3483045/10013255), 1.72 GiB | 65.71 MiB/sReceiving objects:  35% (3504640/10013255), 1.72 GiB | 65.71 MiB/sReceiving objects:  36% (3604772/10013255), 1.76 GiB | 66.72 MiB/sReceiving objects:  36% (3675301/10013255), 1.80 GiB | 67.39 MiB/sReceiving objects:  37% (3704905/10013255), 1.83 GiB | 67.70 MiB/sReceiving objects:  38% (3805037/10013255), 1.87 GiB | 72.86 MiB/sReceiving objects:  38% (3857921/10013255), 1.87 GiB | 72.86 MiB/sReceiving objects:  39% (3905170/10013255), 1.90 GiB | 72.08 MiB/sReceiving objects:  39% (3998149/10013255), 1.94 GiB | 72.55 MiB/sReceiving objects:  40% (4005302/10013255), 1.97 GiB | 73.07 MiB/sReceiving objects:  40% (4078674/10013255), 1.98 GiB | 68.49 MiB/sReceiving objects:  41% (4105435/10013255), 1.98 GiB | 68.49 MiB/sReceiving objects:  42% (4205568/10013255), 2.02 GiB | 67.19 MiB/sReceiving objects:  42% (4268558/10013255), 2.05 GiB | 66.60 MiB/sReceiving objects:  43% (4305700/10013255), 2.05 GiB | 66.60 MiB/sReceiving objects:  44% (4405833/10013255), 2.09 GiB | 66.04 MiB/sReceiving objects:  45% (4505965/10013255), 2.12 GiB | 66.25 MiB/sReceiving objects:  45% (4518619/10013255), 2.12 GiB | 66.25 MiB/sReceiving objects:  46% (4606098/10013255), 2.19 GiB | 65.11 MiB/sReceiving objects:  46% (4606690/10013255), 2.19 GiB | 65.11 MiB/sReceiving objects:  47% (4706230/10013255), 2.22 GiB | 62.73 MiB/sReceiving objects:  48% (4806363/10013255), 2.26 GiB | 65.65 MiB/sReceiving objects:  48% (4837020/10013255), 2.26 GiB | 65.65 MiB/sReceiving objects:  49% (4906495/10013255), 2.30 GiB | 71.63 MiB/sReceiving objects:  49% (4975327/10013255), 2.33 GiB | 71.79 MiB/sReceiving objects:  50% (5006628/10013255), 2.36 GiB | 70.31 MiB/sReceiving objects:  51% (5106761/10013255), 2.40 GiB | 70.67 MiB/sReceiving objects:  51% (5141457/10013255), 2.40 GiB | 70.67 MiB/sReceiving objects:  52% (5206893/10013255), 2.46 GiB | 67.80 MiB/sReceiving objects:  52% (5235933/10013255), 2.46 GiB | 67.80 MiB/sReceiving objects:  53% (5307026/10013255), 2.49 GiB | 68.66 MiB/sReceiving objects:  53% (5391896/10013255), 2.53 GiB | 70.46 MiB/sReceiving objects:  54% (5407158/10013255), 2.53 GiB | 70.46 MiB/sReceiving objects:  55% (5507291/10013255), 2.56 GiB | 69.86 MiB/sReceiving objects:  55% (5536947/10013255), 2.59 GiB | 67.31 MiB/sReceiving objects:  56% (5607423/10013255), 2.62 GiB | 65.23 MiB/sReceiving objects:  57% (5707556/10013255), 2.66 GiB | 66.53 MiB/sReceiving objects:  57% (5760767/10013255), 2.66 GiB | 66.53 MiB/sReceiving objects:  58% (5807688/10013255), 2.69 GiB | 66.82 MiB/sReceiving objects:  59% (5907821/10013255), 2.73 GiB | 67.79 MiB/sReceiving objects:  60% (6007953/10013255), 2.73 GiB | 67.79 MiB/sReceiving objects:  60% (6022362/10013255), 2.73 GiB | 67.79 MiB/sReceiving objects:  61% (6108086/10013255), 2.81 GiB | 72.09 MiB/sReceiving objects:  61% (6179578/10013255), 2.81 GiB | 72.09 MiB/sReceiving objects:  62% (6208219/10013255), 2.84 GiB | 71.18 MiB/sReceiving objects:  63% (6308351/10013255), 2.88 GiB | 71.25 MiB/sReceiving objects:  63% (6351567/10013255), 2.88 GiB | 71.25 MiB/sReceiving objects:  64% (6408484/10013255), 2.91 GiB | 72.45 MiB/sReceiving objects:  65% (6508616/10013255), 2.95 GiB | 74.30 MiB/sReceiving objects:  65% (6593683/10013255), 2.95 GiB | 74.30 MiB/sReceiving objects:  66% (6608749/10013255), 2.95 GiB | 74.30 MiB/sReceiving objects:  67% (6708881/10013255), 2.98 GiB | 74.17 MiB/sReceiving objects:  68% (6809014/10013255), 3.02 GiB | 73.72 MiB/sReceiving objects:  69% (6909146/10013255), 3.02 GiB | 73.72 MiB/sReceiving objects:  69% (6914635/10013255), 3.02 GiB | 73.72 MiB/sReceiving objects:  70% (7009279/10013255), 3.05 GiB | 73.04 MiB/sReceiving objects:  71% (7109412/10013255), 3.05 GiB | 73.04 MiB/sReceiving objects:  72% (7209544/10013255), 3.09 GiB | 72.35 MiB/sReceiving objects:  72% (7264629/10013255), 3.09 GiB | 72.35 MiB/sReceiving objects:  73% (7309677/10013255), 3.09 GiB | 72.35 MiB/sReceiving objects:  74% (7409809/10013255), 3.12 GiB | 71.78 MiB/sReceiving objects:  75% (7509942/10013255), 3.16 GiB | 72.40 MiB/sReceiving objects:  76% (7610074/10013255), 3.16 GiB | 72.40 MiB/sReceiving objects:  76% (7625319/10013255), 3.16 GiB | 72.40 MiB/sReceiving objects:  77% (7710207/10013255), 3.20 GiB | 72.67 MiB/sReceiving objects:  77% (7742051/10013255), 3.22 GiB | 71.10 MiB/sReceiving objects:  78% (7810339/10013255), 3.24 GiB | 67.55 MiB/sReceiving objects:  79% (7910472/10013255), 3.24 GiB | 67.55 MiB/sReceiving objects:  80% (8010604/10013255), 3.28 GiB | 67.61 MiB/sReceiving objects:  80% (8087086/10013255), 3.28 GiB | 67.61 MiB/sReceiving objects:  81% (8110737/10013255), 3.31 GiB | 67.75 MiB/sReceiving objects:  82% (8210870/10013255), 3.35 GiB | 66.80 MiB/sReceiving objects:  83% (8311002/10013255), 3.35 GiB | 66.80 MiB/sReceiving objects:  83% (8335350/10013255), 3.35 GiB | 66.80 MiB/sReceiving objects:  84% (8411135/10013255), 3.38 GiB | 66.95 MiB/sReceiving objects:  85% (8511267/10013255), 3.41 GiB | 65.79 MiB/sReceiving objects:  85% (8546139/10013255), 3.41 GiB | 65.79 MiB/sReceiving objects:  86% (8611400/10013255), 3.44 GiB | 64.31 MiB/sReceiving objects:  87% (8711532/10013255), 3.44 GiB | 64.31 MiB/sReceiving objects:  88% (8811665/10013255), 3.44 GiB | 64.31 MiB/sReceiving objects:  89% (8911797/10013255), 3.48 GiB | 63.98 MiB/sReceiving objects:  89% (8967526/10013255), 3.48 GiB | 63.98 MiB/sReceiving objects:  90% (9011930/10013255), 3.51 GiB | 65.20 MiB/sReceiving objects:  91% (9112063/10013255), 3.51 GiB | 65.20 MiB/sReceiving objects:  92% (9212195/10013255), 3.54 GiB | 68.55 MiB/sReceiving objects:  93% (9312328/10013255), 3.54 GiB | 68.55 MiB/sReceiving objects:  93% (9314043/10013255), 3.54 GiB | 68.55 MiB/sReceiving objects:  94% (9412460/10013255), 3.58 GiB | 68.12 MiB/sReceiving objects:  95% (9512593/10013255), 3.58 GiB | 68.12 MiB/sReceiving objects:  96% (9612725/10013255), 3.61 GiB | 67.14 MiB/sReceiving objects:  97% (9712858/10013255), 3.61 GiB | 67.14 MiB/sReceiving objects:  97% (9714579/10013255), 3.61 GiB | 67.14 MiB/sReceiving objects:  98% (9812990/10013255), 3.64 GiB | 67.49 MiB/sReceiving objects:  99% (9913123/10013255), 3.64 GiB | 67.49 MiB/sremote: Total 10013255 (delta 8456623), reused 9784213 (delta 8228255), pack-reused 0[K
+Receiving objects: 100% (10013255/10013255), 3.68 GiB | 66.66 MiB/sReceiving objects: 100% (10013255/10013255), 3.69 GiB | 50.57 MiB/s, done.
+Resolving deltas:   0% (0/8456623)Resolving deltas:   0% (39048/8456623)Resolving deltas:   0% (75906/8456623)Resolving deltas:   1% (84567/8456623)Resolving deltas:   1% (114684/8456623)Resolving deltas:   1% (154225/8456623)Resolving deltas:   2% (169134/8456623)Resolving deltas:   2% (220353/8456623)Resolving deltas:   3% (253699/8456623)Resolving deltas:   3% (288698/8456623)Resolving deltas:   4% (338265/8456623)Resolving deltas:   4% (371585/8456623)Resolving deltas:   4% (417491/8456623)Resolving deltas:   5% (422832/8456623)Resolving deltas:   5% (486633/8456623)Resolving deltas:   6% (507400/8456623)Resolving deltas:   6% (554152/8456623)Resolving deltas:   7% (591964/8456623)Resolving deltas:   7% (621809/8456623)Resolving deltas:   8% (676530/8456623)Resolving deltas:   8% (690005/8456623)Resolving deltas:   8% (758165/8456623)Resolving deltas:   9% (761103/8456623)Resolving deltas:   9% (808692/8456623)Resolving deltas:  10% (845664/8456623)Resolving deltas:  10% (874244/8456623)Resolving deltas:  11% (930229/8456623)Resolving deltas:  11% (983989/8456623)Resolving deltas:  12% (1014795/8456623)Resolving deltas:  12% (1084290/8456623)Resolving deltas:  13% (1099361/8456623)Resolving deltas:  14% (1183930/8456623)Resolving deltas:  14% (1200832/8456623)Resolving deltas:  15% (1268494/8456623)Resolving deltas:  15% (1313075/8456623)Resolving deltas:  16% (1353060/8456623)Resolving deltas:  16% (1370649/8456623)Resolving deltas:  16% (1413256/8456623)Resolving deltas:  17% (1437626/8456623)Resolving deltas:  17% (1457700/8456623)Resolving deltas:  18% (1522194/8456623)Resolving deltas:  18% (1522472/8456623)Resolving deltas:  19% (1606759/8456623)Resolving deltas:  19% (1649192/8456623)Resolving deltas:  20% (1691326/8456623)Resolving deltas:  20% (1758933/8456623)Resolving deltas:  21% (1775891/8456623)Resolving deltas:  21% (1858043/8456623)Resolving deltas:  22% (1860459/8456623)Resolving deltas:  23% (1945026/8456623)Resolving deltas:  23% (1948271/8456623)Resolving deltas:  24% (2029590/8456623)Resolving deltas:  24% (2056236/8456623)Resolving deltas:  25% (2114157/8456623)Resolving deltas:  25% (2160144/8456623)Resolving deltas:  26% (2198724/8456623)Resolving deltas:  26% (2248000/8456623)Resolving deltas:  27% (2283290/8456623)Resolving deltas:  27% (2336608/8456623)Resolving deltas:  28% (2367855/8456623)Resolving deltas:  28% (2411242/8456623)Resolving deltas:  29% (2452422/8456623)Resolving deltas:  29% (2508014/8456623)Resolving deltas:  30% (2536988/8456623)Resolving deltas:  30% (2579479/8456623)Resolving deltas:  31% (2621556/8456623)Resolving deltas:  31% (2676631/8456623)Resolving deltas:  32% (2706120/8456623)Resolving deltas:  32% (2749948/8456623)Resolving deltas:  33% (2790686/8456623)Resolving deltas:  33% (2842944/8456623)Resolving deltas:  34% (2875252/8456623)Resolving deltas:  35% (2959821/8456623)Resolving deltas:  35% (2960063/8456623)Resolving deltas:  36% (3044385/8456623)Resolving deltas:  36% (3068000/8456623)Resolving deltas:  37% (3128952/8456623)Resolving deltas:  37% (3166257/8456623)Resolving deltas:  38% (3213517/8456623)Resolving deltas:  38% (3254466/8456623)Resolving deltas:  39% (3298084/8456623)Resolving deltas:  39% (3357835/8456623)Resolving deltas:  40% (3382650/8456623)Resolving deltas:  40% (3435693/8456623)Resolving deltas:  41% (3467222/8456623)Resolving deltas:  41% (3535435/8456623)Resolving deltas:  42% (3551782/8456623)Resolving deltas:  42% (3630964/8456623)Resolving deltas:  43% (3636357/8456623)Resolving deltas:  44% (3720915/8456623)Resolving deltas:  44% (3737692/8456623)Resolving deltas:  45% (3805481/8456623)Resolving deltas:  45% (3860924/8456623)Resolving deltas:  46% (3890047/8456623)Resolving deltas:  46% (3947043/8456623)Resolving deltas:  47% (3974615/8456623)Resolving deltas:  47% (4016302/8456623)Resolving deltas:  48% (4059180/8456623)Resolving deltas:  48% (4078337/8456623)Resolving deltas:  48% (4127237/8456623)Resolving deltas:  49% (4143746/8456623)Resolving deltas:  50% (4228313/8456623)Resolving deltas:  50% (4237810/8456623)Resolving deltas:  51% (4312880/8456623)Resolving deltas:  51% (4362437/8456623)Resolving deltas:  52% (4397444/8456623)Resolving deltas:  52% (4481672/8456623)Resolving deltas:  53% (4482012/8456623)Resolving deltas:  54% (4566578/8456623)Resolving deltas:  54% (4598960/8456623)Resolving deltas:  55% (4651143/8456623)Resolving deltas:  56% (4735712/8456623)Resolving deltas:  56% (4744509/8456623)Resolving deltas:  57% (4820276/8456623)Resolving deltas:  57% (4835413/8456623)Resolving deltas:  58% (4904842/8456623)Resolving deltas:  58% (4957201/8456623)Resolving deltas:  59% (4989408/8456623)Resolving deltas:  59% (5063103/8456623)Resolving deltas:  60% (5073975/8456623)Resolving deltas:  61% (5158541/8456623)Resolving deltas:  61% (5175970/8456623)Resolving deltas:  62% (5243107/8456623)Resolving deltas:  62% (5252818/8456623)Resolving deltas:  62% (5297381/8456623)Resolving deltas:  63% (5327673/8456623)Resolving deltas:  63% (5387237/8456623)Resolving deltas:  64% (5412241/8456623)Resolving deltas:  65% (5496808/8456623)Resolving deltas:  65% (5502038/8456623)Resolving deltas:  65% (5573840/8456623)Resolving deltas:  66% (5581372/8456623)Resolving deltas:  67% (5665938/8456623)Resolving deltas:  67% (5680547/8456623)Resolving deltas:  68% (5750504/8456623)Resolving deltas:  68% (5774733/8456623)Resolving deltas:  69% (5835070/8456623)Resolving deltas:  69% (5863094/8456623)Resolving deltas:  70% (5919637/8456623)Resolving deltas:  70% (5956670/8456623)Resolving deltas:  71% (6004204/8456623)Resolving deltas:  72% (6088770/8456623)Resolving deltas:  72% (6098424/8456623)Resolving deltas:  73% (6173335/8456623)Resolving deltas:  73% (6208875/8456623)Resolving deltas:  74% (6257903/8456623)Resolving deltas:  74% (6310306/8456623)Resolving deltas:  75% (6342468/8456623)Resolving deltas:  75% (6424732/8456623)Resolving deltas:  76% (6427034/8456623)Resolving deltas:  77% (6511604/8456623)Resolving deltas:  77% (6528329/8456623)Resolving deltas:  78% (6596166/8456623)Resolving deltas:  78% (6647852/8456623)Resolving deltas:  79% (6680733/8456623)Resolving deltas:  80% (6765299/8456623)Resolving deltas:  80% (6772006/8456623)Resolving deltas:  80% (6832787/8456623)Resolving deltas:  80% (6846884/8456623)Resolving deltas:  81% (6849865/8456623)Resolving deltas:  81% (6850190/8456623)Resolving deltas:  81% (6857732/8456623)Resolving deltas:  81% (6863811/8456623)Resolving deltas:  81% (6869179/8456623)Resolving deltas:  81% (6876561/8456623)Resolving deltas:  81% (6881851/8456623)Resolving deltas:  81% (6893967/8456623)Resolving deltas:  81% (6899022/8456623)Resolving deltas:  81% (6905038/8456623)Resolving deltas:  81% (6913024/8456623)Resolving deltas:  81% (6920984/8456623)Resolving deltas:  81% (6924805/8456623)Resolving deltas:  81% (6928753/8456623)Resolving deltas:  82% (6934431/8456623)Resolving deltas:  82% (6935893/8456623)Resolving deltas:  82% (6938584/8456623)Resolving deltas:  82% (6943362/8456623)Resolving deltas:  82% (6949225/8456623)Resolving deltas:  82% (6953655/8456623)Resolving deltas:  82% (6963138/8456623)Resolving deltas:  82% (6965877/8456623)Resolving deltas:  82% (6968153/8456623)Resolving deltas:  82% (6973238/8456623)Resolving deltas:  82% (6975794/8456623)Resolving deltas:  82% (6976678/8456623)Resolving deltas:  82% (6977749/8456623)Resolving deltas:  82% (6978481/8456623)Resolving deltas:  82% (6979174/8456623)Resolving deltas:  82% (6979908/8456623)Resolving deltas:  82% (6980702/8456623)Resolving deltas:  82% (6981370/8456623)Resolving deltas:  82% (6982215/8456623)Resolving deltas:  82% (6982930/8456623)Resolving deltas:  82% (6983607/8456623)Resolving deltas:  82% (6984460/8456623)Resolving deltas:  82% (6985135/8456623)Resolving deltas:  82% (6985891/8456623)Resolving deltas:  82% (6987306/8456623)Resolving deltas:  82% (6988833/8456623)Resolving deltas:  82% (6990536/8456623)Resolving deltas:  82% (7009430/8456623)Resolving deltas:  83% (7018998/8456623)Resolving deltas:  83% (7025532/8456623)Resolving deltas:  83% (7033334/8456623)Resolving deltas:  83% (7041953/8456623)Resolving deltas:  83% (7047873/8456623)Resolving deltas:  83% (7057808/8456623)Resolving deltas:  83% (7073998/8456623)Resolving deltas:  83% (7080825/8456623)Resolving deltas:  83% (7084264/8456623)Resolving deltas:  83% (7091808/8456623)Resolving deltas:  83% (7099527/8456623)Resolving deltas:  84% (7103564/8456623)Resolving deltas:  84% (7106282/8456623)Resolving deltas:  84% (7113911/8456623)Resolving deltas:  84% (7122801/8456623)Resolving deltas:  84% (7129828/8456623)Resolving deltas:  84% (7133303/8456623)Resolving deltas:  84% (7140660/8456623)Resolving deltas:  84% (7150313/8456623)Resolving deltas:  84% (7160580/8456623)Resolving deltas:  84% (7165250/8456623)Resolving deltas:  84% (7171042/8456623)Resolving deltas:  84% (7180636/8456623)Resolving deltas:  84% (7183133/8456623)Resolving deltas:  85% (7188130/8456623)Resolving deltas:  85% (7190566/8456623)Resolving deltas:  85% (7203080/8456623)Resolving deltas:  85% (7211418/8456623)Resolving deltas:  85% (7218838/8456623)Resolving deltas:  85% (7227985/8456623)Resolving deltas:  85% (7233385/8456623)Resolving deltas:  85% (7238239/8456623)Resolving deltas:  85% (7240855/8456623)Resolving deltas:  85% (7248712/8456623)Resolving deltas:  85% (7257202/8456623)Resolving deltas:  86% (7272696/8456623)Resolving deltas:  86% (7277494/8456623)Resolving deltas:  86% (7294519/8456623)Resolving deltas:  86% (7301506/8456623)Resolving deltas:  86% (7313979/8456623)Resolving deltas:  86% (7321558/8456623)Resolving deltas:  86% (7335731/8456623)Resolving deltas:  86% (7347445/8456623)Resolving deltas:  87% (7357263/8456623)Resolving deltas:  87% (7361055/8456623)Resolving deltas:  87% (7370070/8456623)Resolving deltas:  87% (7377483/8456623)Resolving deltas:  87% (7384470/8456623)Resolving deltas:  87% (7392818/8456623)Resolving deltas:  87% (7400957/8456623)Resolving deltas:  87% (7407861/8456623)Resolving deltas:  87% (7411571/8456623)Resolving deltas:  87% (7424389/8456623)Resolving deltas:  87% (7437137/8456623)Resolving deltas:  88% (7441829/8456623)Resolving deltas:  88% (7450915/8456623)Resolving deltas:  88% (7465732/8456623)Resolving deltas:  88% (7474099/8456623)Resolving deltas:  88% (7487830/8456623)Resolving deltas:  88% (7500021/8456623)Resolving deltas:  88% (7511833/8456623)Resolving deltas:  88% (7519541/8456623)Resolving deltas:  89% (7526395/8456623)Resolving deltas:  89% (7532138/8456623)Resolving deltas:  89% (7545673/8456623)Resolving deltas:  89% (7568464/8456623)Resolving deltas:  89% (7592563/8456623)Resolving deltas:  89% (7603972/8456623)Resolving deltas:  90% (7610961/8456623)Resolving deltas:  90% (7621072/8456623)Resolving deltas:  90% (7630204/8456623)Resolving deltas:  90% (7646384/8456623)Resolving deltas:  90% (7659654/8456623)Resolving deltas:  90% (7670834/8456623)Resolving deltas:  90% (7683931/8456623)Resolving deltas:  91% (7695527/8456623)Resolving deltas:  91% (7698372/8456623)Resolving deltas:  91% (7707752/8456623)Resolving deltas:  91% (7718713/8456623)Resolving deltas:  91% (7733997/8456623)Resolving deltas:  91% (7746161/8456623)Resolving deltas:  91% (7751034/8456623)Resolving deltas:  91% (7755190/8456623)Resolving deltas:  91% (7763626/8456623)Resolving deltas:  91% (7776275/8456623)Resolving deltas:  92% (7780094/8456623)Resolving deltas:  92% (7791723/8456623)Resolving deltas:  92% (7808083/8456623)Resolving deltas:  92% (7830325/8456623)Resolving deltas:  92% (7846534/8456623)Resolving deltas:  92% (7860400/8456623)Resolving deltas:  93% (7864660/8456623)Resolving deltas:  93% (7881223/8456623)Resolving deltas:  93% (7892971/8456623)Resolving deltas:  93% (7905566/8456623)Resolving deltas:  93% (7920348/8456623)Resolving deltas:  93% (7923902/8456623)Resolving deltas:  93% (7940193/8456623)Resolving deltas:  94% (7949226/8456623)Resolving deltas:  94% (7954159/8456623)Resolving deltas:  94% (7957991/8456623)Resolving deltas:  94% (7973195/8456623)Resolving deltas:  94% (7981494/8456623)Resolving deltas:  94% (7991705/8456623)Resolving deltas:  94% (8010192/8456623)Resolving deltas:  94% (8032530/8456623)Resolving deltas:  95% (8033792/8456623)Resolving deltas:  95% (8046444/8456623)Resolving deltas:  95% (8055107/8456623)Resolving deltas:  95% (8070686/8456623)Resolving deltas:  95% (8080429/8456623)Resolving deltas:  95% (8094277/8456623)Resolving deltas:  95% (8112503/8456623)Resolving deltas:  96% (8118359/8456623)Resolving deltas:  96% (8132926/8456623)Resolving deltas:  96% (8150036/8456623)Resolving deltas:  96% (8167831/8456623)Resolving deltas:  96% (8184174/8456623)Resolving deltas:  96% (8198094/8456623)Resolving deltas:  97% (8202925/8456623)Resolving deltas:  97% (8226310/8456623)Resolving deltas:  97% (8244270/8456623)Resolving deltas:  97% (8255685/8456623)Resolving deltas:  97% (8269773/8456623)Resolving deltas:  98% (8287491/8456623)Resolving deltas:  98% (8293500/8456623)Resolving deltas:  98% (8313138/8456623)Resolving deltas:  98% (8329715/8456623)Resolving deltas:  98% (8344790/8456623)Resolving deltas:  98% (8360890/8456623)Resolving deltas:  99% (8372057/8456623)Resolving deltas:  99% (8379053/8456623)Resolving deltas:  99% (8393547/8456623)Resolving deltas:  99% (8415160/8456623)Resolving deltas:  99% (8435591/8456623)Resolving deltas:  99% (8453451/8456623)Resolving deltas: 100% (8456623/8456623)Resolving deltas: 100% (8456623/8456623), completed with 66629 local objects.
+From https://github.com/linux-netdev/testing
+ * [new branch]                net-next-2024-04-30--21-00 -> origin/net-next-2024-04-30--21-00
+Updating files:  41% (6241/15185)Updating files:  42% (6378/15185)Updating files:  43% (6530/15185)Updating files:  44% (6682/15185)Updating files:  45% (6834/15185)Updating files:  46% (6986/15185)Updating files:  47% (7137/15185)Updating files:  48% (7289/15185)Updating files:  49% (7441/15185)Updating files:  50% (7593/15185)Updating files:  51% (7745/15185)Updating files:  52% (7897/15185)Updating files:  53% (8049/15185)Updating files:  54% (8200/15185)Updating files:  55% (8352/15185)Updating files:  56% (8504/15185)Updating files:  57% (8656/15185)Updating files:  58% (8808/15185)Updating files:  59% (8960/15185)Updating files:  60% (9111/15185)Updating files:  61% (9263/15185)Updating files:  62% (9415/15185)Updating files:  63% (9567/15185)Updating files:  64% (9719/15185)Updating files:  65% (9871/15185)Updating files:  66% (10023/15185)Updating files:  67% (10174/15185)Updating files:  68% (10326/15185)Updating files:  69% (10478/15185)Updating files:  70% (10630/15185)Updating files:  71% (10782/15185)Updating files:  72% (10934/15185)Updating files:  73% (11086/15185)Updating files:  74% (11237/15185)Updating files:  75% (11389/15185)Updating files:  76% (11541/15185)Updating files:  77% (11693/15185)Updating files:  78% (11845/15185)Updating files:  79% (11997/15185)Updating files:  80% (12148/15185)Updating files:  80% (12209/15185)Updating files:  81% (12300/15185)Updating files:  82% (12452/15185)Updating files:  83% (12604/15185)Updating files:  84% (12756/15185)Updating files:  85% (12908/15185)Updating files:  86% (13060/15185)Updating files:  87% (13211/15185)Updating files:  88% (13363/15185)Updating files:  89% (13515/15185)Updating files:  90% (13667/15185)Updating files:  91% (13819/15185)Updating files:  92% (13971/15185)Updating files:  93% (14123/15185)Updating files:  94% (14274/15185)Updating files:  95% (14426/15185)Updating files:  96% (14578/15185)Updating files:  97% (14730/15185)Updating files:  98% (14882/15185)Updating files:  99% (15034/15185)Updating files: 100% (15185/15185)Updating files: 100% (15185/15185), done.
+branch 'net-next-2024-04-30--21-00' set up to track 'origin/net-next-2024-04-30--21-00'.
+Switched to a new branch 'net-next-2024-04-30--21-00'
+error: No valid patches in input (allow with "--allow-empty")
+Checking patch tools/testing/selftests/tc-testing/tdc_config.py...
+Applied patch tools/testing/selftests/tc-testing/tdc_config.py cleanly.
+Run at 2024-04-30 21:14:55.544070
+INFO: building kernel
+INFO: starting VM 0
+INFO: thr0-0 VM starting: vng -v -r arch/x86/boot/bzImage --user root --rwdir=/nipa-data/kernel/
+INFO: thr0-0 expecting prompt: '/nipa-data/kernel# '
+INFO: thr0-0 reached initial prompt
+INFO: thr-0 testing == tdc.sh
+INFO: thr-0 tdc.sh >> retcode: 0 result: pass found {'fail': False, 'skip': False, 'pass': True}
+INFO: thr-0 has no more work, exiting
+INFO: thr0-0 VM stopped
+Done at 2024-04-30 21:18:26.680352
+NIPA quitting!
+/
+~/nipa/tc-executor/tc-executor-storage /
+sort: write failed: 'standard output': Broken pipe
+sort: write error
