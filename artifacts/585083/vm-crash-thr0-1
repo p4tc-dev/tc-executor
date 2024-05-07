@@ -1,0 +1,122 @@
+======================================
+| [   18.835614] v0p0id3992: entered promiscuous mode
+| [   18.858723] v0p0id3992: left promiscuous mode
+| [   20.565226] unregister_netdevice: waiting for lo to become free. Usage count = 7
+| [   22.132460] python3 invoked oom-killer: gfp_mask=0xcc2(GFP_KERNEL|__GFP_HIGHMEM), order=0, oom_score_adj=0
+| [   22.132528] CPU: 11 PID: 6408 Comm: python3 Not tainted 6.9.0-rc6-virtme #1
+[   22.132569] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[   22.132640] Call Trace:
+[   22.132666]  <TASK>
+[   22.132690] dump_stack_lvl (lib/dump_stack.c:117) 
+[   22.132719] dump_header (mm/oom_kill.c:463 (discriminator 1)) 
+[   22.132738] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.132764] ? ___ratelimit (lib/ratelimit.c:72) 
+[   22.132797] oom_kill_process (mm/oom_kill.c:1037) 
+[   22.132822] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.132849] out_of_memory (mm/oom_kill.c:1176) 
+[   22.132876] __alloc_pages (mm/page_alloc.c:3489 mm/page_alloc.c:4251 mm/page_alloc.c:4588) 
+[   22.132903] pcpu_populate_chunk (mm/percpu-vm.c:95 (discriminator 2) mm/percpu-vm.c:285 (discriminator 2)) 
+[   22.132936] pcpu_alloc (mm/percpu.c:1855 (discriminator 1)) 
+[   22.132972] ipv4_mib_init_net (net/ipv4/af_inet.c:1783 (discriminator 1)) 
+[   22.132996] ops_init (net/core/net_namespace.c:139) 
+[   22.133022] setup_net (net/core/net_namespace.c:343) 
+[   22.133048] copy_net_ns (net/core/net_namespace.c:510) 
+[   22.133066] create_new_namespaces (kernel/nsproxy.c:110 (discriminator 1)) 
+[   22.133106] unshare_nsproxy_namespaces (kernel/nsproxy.c:228 (discriminator 2)) 
+[   22.133141] ksys_unshare (kernel/fork.c:3323) 
+[   22.133173] ? do_user_addr_fault (arch/x86/mm/fault.c:1366) 
+[   22.133222] __x64_sys_unshare (kernel/fork.c:3394 (discriminator 1) kernel/fork.c:3392 (discriminator 1) kernel/fork.c:3392 (discriminator 1)) 
+[   22.133246] do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1)) 
+[   22.133271] entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130) 
+[   22.133311] RIP: 0033:0x7ffa94403e2a
+[ 22.133339] Code: Unable to access opcode bytes at 0x7ffa94403e00.
+
+Code starting with the faulting instruction
+===========================================
+[   22.133371] RSP: 002b:00007ffe5ec26ed0 EFLAGS: 00000202 ORIG_RAX: 0000000000000110
+[   22.133422] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007ffa94403e2a
+[   22.133471] RDX: 00007ffe5ec26e58 RSI: 00007ffa93dccdb0 RDI: 0000000040000000
+[   22.133509] RBP: 00007ffe5ec26ee0 R08: 00007ffa92ee75c0 R09: 00007ffa93f769bc
+[   22.133545] R10: 0000000000000000 R11: 0000000000000202 R12: 00007ffe5ec26e20
+[   22.133581] R13: 00007ffe5ec270c0 R14: 0000000000000004 R15: 0000000000000001
+| [   22.138226] [   6408]     0  6408    17689    13840    13648      192         0   176128        0             0 python3
+| [   22.138275] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,task=python3,pid=6407,uid=0
+| [   22.138341] Out of memory: Killed process 6407 (python3) total-vm:70944kB, anon-rss:54816kB, file-rss:768kB, shmem-rss:0kB, UID:0 pgtables:172kB oom_score_adj:0
+| [   22.470968] sh invoked oom-killer: gfp_mask=0x440dc0(GFP_KERNEL_ACCOUNT|__GFP_COMP|__GFP_ZERO), order=0, oom_score_adj=0
+| [   22.471049] CPU: 6 PID: 6422 Comm: sh Not tainted 6.9.0-rc6-virtme #1
+[   22.471091] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[   22.471160] Call Trace:
+[   22.471186]  <TASK>
+[   22.471209] dump_stack_lvl (lib/dump_stack.c:117) 
+[   22.471241] dump_header (mm/oom_kill.c:463 (discriminator 1)) 
+[   22.471266] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.471294] ? __free_one_page (./include/linux/vmstat.h:493 mm/page_alloc.c:781) 
+[   22.471319] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.471354] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.471388] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.471422] ? ___ratelimit (lib/ratelimit.c:72) 
+[   22.471455] oom_kill_process (mm/oom_kill.c:1037) 
+[   22.471487] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.471522] out_of_memory (mm/oom_kill.c:1176) 
+[   22.471555] __alloc_pages (mm/page_alloc.c:3489 mm/page_alloc.c:4251 mm/page_alloc.c:4588) 
+[   22.471589] alloc_pages_mpol (mm/mempolicy.c:2266 (discriminator 1)) 
+[   22.471616] __pud_alloc (./include/asm-generic/pgalloc.h:170 ./include/asm-generic/pgalloc.h:189 mm/memory.c:5828) 
+[   22.471634] __handle_mm_fault (./include/linux/mm.h:2821 (discriminator 1) mm/memory.c:5372 (discriminator 1)) 
+[   22.471652] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.471697] handle_mm_fault (mm/memory.c:5466 mm/memory.c:5622) 
+[   22.471728] __get_user_pages (mm/gup.c:958 mm/gup.c:1257) 
+[   22.471761] get_user_pages_remote (mm/gup.c:1527 mm/gup.c:2361) 
+[   22.471793] ? __entry_text_end (??:?) 
+[   22.471821] get_arg_page (fs/exec.c:226) 
+[   22.471852] copy_string_kernel (fs/exec.c:644) 
+[   22.471884] do_execveat_common.isra.0 (fs/exec.c:1953) 
+[   22.471924] __x64_sys_execve (fs/exec.c:2124 (discriminator 1)) 
+[   22.471955] do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1)) 
+[   22.471987] entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130) 
+[   22.472020] RIP: 0033:0x7f6a76a1fc91
+[ 22.472045] Code: d6 49 c7 04 ca 00 00 00 00 e8 d9 01 00 00 c9 c3 48 8b 05 22 b3 05 00 48 8b 10 e9 00 00 00 00 48 83 ec 08 b8 3b 00 00 00 0f 05 <48> 89 c7 e8 ed b2 fd ff 48 83 c4 08 c3 55 48 89 e5 41 57 41 56 49
+All code
+========
+   0:	d6                   	(bad)
+   1:	49 c7 04 ca 00 00 00 	movq   $0x0,(%r10,%rcx,8)
+   8:	00 
+   9:	e8 d9 01 00 00       	call   0x1e7
+   e:	c9                   	leave
+   f:	c3                   	ret
+  10:	48 8b 05 22 b3 05 00 	mov    0x5b322(%rip),%rax        # 0x5b339
+  17:	48 8b 10             	mov    (%rax),%rdx
+  1a:	e9 00 00 00 00       	jmp    0x1f
+  1f:	48 83 ec 08          	sub    $0x8,%rsp
+  23:	b8 3b 00 00 00       	mov    $0x3b,%eax
+  28:	0f 05                	syscall
+  2a:*	48 89 c7             	mov    %rax,%rdi		<-- trapping instruction
+  2d:	e8 ed b2 fd ff       	call   0xfffffffffffdb31f
+  32:	48 83 c4 08          	add    $0x8,%rsp
+  36:	c3                   	ret
+  37:	55                   	push   %rbp
+  38:	48 89 e5             	mov    %rsp,%rbp
+  3b:	41 57                	push   %r15
+  3d:	41 56                	push   %r14
+  3f:	49                   	rex.WB
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 89 c7             	mov    %rax,%rdi
+   3:	e8 ed b2 fd ff       	call   0xfffffffffffdb2f5
+   8:	48 83 c4 08          	add    $0x8,%rsp
+   c:	c3                   	ret
+   d:	55                   	push   %rbp
+   e:	48 89 e5             	mov    %rsp,%rbp
+  11:	41 57                	push   %r15
+  13:	41 56                	push   %r14
+  15:	49                   	rex.WB
+[   22.472149] RSP: 002b:00007ffc91f48ad0 EFLAGS: 00000202 ORIG_RAX: 000000000000003b
+[   22.472200] RAX: ffffffffffffffda RBX: 00007f6a76a7e4d0 RCX: 00007f6a76a1fc91
+[   22.472244] RDX: 00007f6a76a7e520 RSI: 00007f6a76a7e4d0 RDI: 00007f6a76a7e3b8
+[   22.472292] RBP: 00007f6a76a7e3b8 R08: 2f2f2f2f2f2f2f2f R09: 8080808080808080
+[   22.472337] R10: 00007f6a769d27fc R11: 0000000000000202 R12: 00007f6a76a7e520
+
+
+Finger prints:
+dump_stack_lvl:dump_header:oom_kill_process:out_of_memory
+dump_stack_lvl:dump_header:oom_kill_process:out_of_memory

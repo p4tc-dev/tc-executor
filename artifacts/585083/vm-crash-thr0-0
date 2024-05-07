@@ -1,0 +1,121 @@
+======================================
+| [   18.564056] v0p0id3992: left promiscuous mode
+| [   18.583104] v0p0id3992: entered promiscuous mode
+| [   18.606002] v0p0id3992: left promiscuous mode
+| [   20.459692] modprobe: page allocation failure: order:6, mode:0x40dc0(GFP_KERNEL|__GFP_COMP|__GFP_ZERO), nodemask=(null),cpuset=/,mems_allowed=0
+| [   20.459797] CPU: 9 PID: 6216 Comm: modprobe Not tainted 6.9.0-rc6-virtme #1
+[   20.459846] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[   20.459921] Call Trace:
+[   20.459946]  <TASK>
+[   20.459972] dump_stack_lvl (lib/dump_stack.c:117) 
+[   20.460005] warn_alloc (mm/page_alloc.c:3396) 
+[   20.460040] ? __cond_resched (./arch/x86/include/asm/preempt.h:84 (discriminator 13) kernel/sched/core.c:6927 (discriminator 13) kernel/sched/core.c:8590 (discriminator 13)) 
+[   20.460070] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   20.460105] ? __alloc_pages_direct_compact (mm/page_alloc.c:3524) 
+[   20.460141] __alloc_pages (mm/page_alloc.c:4318 mm/page_alloc.c:4588) 
+[   20.460170] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   20.460206] ? v9fs_alloc_rdir_buf.isra.0 (fs/9p/vfs_dir.c:73 (discriminator 1)) 
+[   20.460240] __kmalloc_large_node (mm/slub.c:3912) 
+[   20.460275] __kmalloc (./arch/x86/include/asm/bitops.h:417 ./include/asm-generic/getorder.h:46 mm/slub.c:3956 mm/slub.c:3979) 
+[   20.460303] ? v9fs_alloc_rdir_buf.isra.0 (fs/9p/vfs_dir.c:73 (discriminator 1)) 
+[   20.460336] v9fs_alloc_rdir_buf.isra.0 (fs/9p/vfs_dir.c:73 (discriminator 1)) 
+[   20.460371] v9fs_dir_readdir_dotl (fs/9p/vfs_dir.c:161) 
+[   20.460409] iterate_dir (fs/readdir.c:110) 
+[   20.460438] ovl_iterate (fs/overlayfs/readdir.c:775) 
+[   20.460469] ? __pfx_ovl_iterate (fs/overlayfs/readdir.c:751) 
+[   20.460496] wrap_directory_iterator (fs/readdir.c:67) 
+[   20.460531] iterate_dir (fs/readdir.c:110) 
+[   20.460558] __x64_sys_getdents64 (fs/readdir.c:410 fs/readdir.c:394 fs/readdir.c:394) 
+[   20.460592] ? __pfx_filldir64 (fs/readdir.c:352) 
+[   20.460620] do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1)) 
+[   20.460648] entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130) 
+[   20.460682] RIP: 0033:0x7f987b9d015a
+[ 20.460709] Code: 48 01 f0 0f b7 48 10 01 ca 41 89 50 0c 48 8b 50 08 49 89 10 5b c3 48 63 7f 08 49 8d 70 18 b8 d9 00 00 00 ba 00 08 00 00 0f 05 <48> 89 c3 85 c0 7e 12 41 89 40 10 31 d2 31 c0 41 c7 40 0c 00 00 00
+All code
+========
+   0:	48 01 f0             	add    %rsi,%rax
+   3:	0f b7 48 10          	movzwl 0x10(%rax),%ecx
+   7:	01 ca                	add    %ecx,%edx
+   9:	41 89 50 0c          	mov    %edx,0xc(%r8)
+   d:	48 8b 50 08          	mov    0x8(%rax),%rdx
+  11:	49 89 10             	mov    %rdx,(%r8)
+  14:	5b                   	pop    %rbx
+  15:	c3                   	ret
+  16:	48 63 7f 08          	movslq 0x8(%rdi),%rdi
+  1a:	49 8d 70 18          	lea    0x18(%r8),%rsi
+  1e:	b8 d9 00 00 00       	mov    $0xd9,%eax
+  23:	ba 00 08 00 00       	mov    $0x800,%edx
+  28:	0f 05                	syscall
+  2a:*	48 89 c3             	mov    %rax,%rbx		<-- trapping instruction
+  2d:	85 c0                	test   %eax,%eax
+  2f:	7e 12                	jle    0x43
+  31:	41 89 40 10          	mov    %eax,0x10(%r8)
+  35:	31 d2                	xor    %edx,%edx
+  37:	31 c0                	xor    %eax,%eax
+  39:	41                   	rex.B
+  3a:	c7                   	.byte 0xc7
+  3b:	40 0c 00             	rex or $0x0,%al
+	...
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 89 c3             	mov    %rax,%rbx
+   3:	85 c0                	test   %eax,%eax
+   5:	7e 12                	jle    0x19
+   7:	41 89 40 10          	mov    %eax,0x10(%r8)
+   b:	31 d2                	xor    %edx,%edx
+   d:	31 c0                	xor    %eax,%eax
+   f:	41                   	rex.B
+  10:	c7                   	.byte 0xc7
+  11:	40 0c 00             	rex or $0x0,%al
+	...
+[   20.460810] RSP: 002b:00007fff5b2a3a60 EFLAGS: 00000246 ORIG_RAX: 00000000000000d9
+[   20.460858] RAX: ffffffffffffffda RBX: 0000558beaab435d RCX: 00007f987b9d015a
+[   20.460906] RDX: 0000000000000800 RSI: 00007f987b462038 RDI: 0000000000000000
+[   20.460953] RBP: 0000000000000000 R08: 00007f987b462020 R09: 0000000000000000
+[   20.461001] R10: 0000000000002000 R11: 0000000000000246 R12: 0000558beaab9ac0
+[   20.461052] R13: 00007f987b462020 R14: 0000000000000000 R15: 00007f987b8fc8e0
+| [   20.462423] 0 pages HighMem/MovableOnly
+| [   20.462463] 14512 pages reserved
+| [   20.729489] unregister_netdevice: waiting for lo to become free. Usage count = 5
+| [   21.483648] python3 invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   21.483789] CPU: 3 PID: 6350 Comm: python3 Not tainted 6.9.0-rc6-virtme #1
+[   21.483867] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[   21.483963] Call Trace:
+[   21.483996]  <TASK>
+[   21.484023] dump_stack_lvl (lib/dump_stack.c:117) 
+[   21.484070] dump_header (mm/oom_kill.c:463 (discriminator 1)) 
+[   21.484111] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   21.484175] ? __free_one_page (./include/linux/vmstat.h:493 mm/page_alloc.c:781) 
+[   21.484224] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   21.484286] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   21.484343] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   21.484401] ? ___ratelimit (lib/ratelimit.c:72) 
+[   21.484441] oom_kill_process (mm/oom_kill.c:1037) 
+[   21.484497] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   21.484556] out_of_memory (mm/oom_kill.c:1176) 
+[   21.484601] __alloc_pages (mm/page_alloc.c:3489 mm/page_alloc.c:4251 mm/page_alloc.c:4588) 
+[   21.484652] alloc_pages_mpol (mm/mempolicy.c:2266 (discriminator 1)) 
+[   21.484704] __filemap_get_folio (mm/filemap.c:1926) 
+[   21.484749] filemap_fault (mm/filemap.c:3299) 
+[   21.484798] __do_fault (mm/memory.c:4531) 
+[   21.484841] __handle_mm_fault (mm/memory.c:4894 mm/memory.c:5024 mm/memory.c:3880 mm/memory.c:5300 mm/memory.c:5441) 
+[   21.484892] handle_mm_fault (mm/memory.c:5466 mm/memory.c:5622) 
+[   21.484930] do_user_addr_fault (arch/x86/mm/fault.c:1363) 
+[   21.484972] exc_page_fault (./arch/x86/include/asm/irqflags.h:37 ./arch/x86/include/asm/irqflags.h:72 arch/x86/mm/fault.c:1513 arch/x86/mm/fault.c:1563) 
+[   21.485015] asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:623) 
+[   21.485056] RIP: 0033:0x7f2995ad41cd
+[ 21.485105] Code: Unable to access opcode bytes at 0x7f2995ad41a3.
+
+Code starting with the faulting instruction
+===========================================
+[   21.485176] RSP: 002b:00007fff386d64d0 EFLAGS: 00010206
+[   21.485213] RAX: 00007f2995f099c0 RBX: 00007f2991dd3140 RCX: 0000000000000000
+[   21.485291] RDX: 00007f2995f099c0 RSI: 00007f2995f099c0 RDI: 00007f2995f82688
+[   21.485360] RBP: 0000000000000000 R08: 0000000000000005 R09: a1b99b16a154ea83
+[   21.485445] R10: 00007f29958d27f2 R11: 0000000000000000 R12: 00007f299534f420
+
+
+Finger prints:
+dump_stack_lvl:warn_alloc:__alloc_pages:__kmalloc_large_node
+dump_stack_lvl:dump_header:oom_kill_process:out_of_memory
