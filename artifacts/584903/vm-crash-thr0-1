@@ -1,0 +1,44 @@
+======================================
+| [   18.762688] v0p0id3992: entered promiscuous mode
+| [   18.785958] v0p0id3992: left promiscuous mode
+| [   20.486333] unregister_netdevice: waiting for lo to become free. Usage count = 7
+| [   22.880642] python3 invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   22.880693] CPU: 2 PID: 6438 Comm: python3 Not tainted 6.9.0-rc6-virtme #1
+[   22.880723] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[   22.880778] Call Trace:
+[   22.880810]  <TASK>
+[   22.880831] dump_stack_lvl (lib/dump_stack.c:117) 
+[   22.880853] dump_header (mm/oom_kill.c:463 (discriminator 1)) 
+[   22.880875] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.880909] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.880940] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.880990] ? ___ratelimit (lib/ratelimit.c:72) 
+[   22.881011] oom_kill_process (mm/oom_kill.c:1037) 
+[   22.881042] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.881074] out_of_memory (mm/oom_kill.c:1176) 
+[   22.881095] __alloc_pages (mm/page_alloc.c:3489 mm/page_alloc.c:4251 mm/page_alloc.c:4588) 
+[   22.881127] alloc_pages_mpol (mm/mempolicy.c:2266 (discriminator 1)) 
+[   22.881148] __filemap_get_folio (mm/filemap.c:1926) 
+[   22.881168] filemap_fault (mm/filemap.c:3299) 
+[   22.881198] ? register_netdevice (net/core/dev.c:10451) 
+[   22.881235] __do_fault (mm/memory.c:4531) 
+[   22.881260] __handle_mm_fault (mm/memory.c:4894 mm/memory.c:5024 mm/memory.c:3880 mm/memory.c:5300 mm/memory.c:5441) 
+[   22.881286] ? setup_net (net/core/net_namespace.c:383) 
+[   22.881313] handle_mm_fault (mm/memory.c:5466 mm/memory.c:5622) 
+[   22.881337] do_user_addr_fault (arch/x86/mm/fault.c:1363) 
+[   22.881363] exc_page_fault (./arch/x86/include/asm/irqflags.h:37 ./arch/x86/include/asm/irqflags.h:72 arch/x86/mm/fault.c:1513 arch/x86/mm/fault.c:1563) 
+[   22.881389] asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:623) 
+[   22.881415] RIP: 0033:0x7f71a7038f86
+[ 22.881443] Code: Unable to access opcode bytes at 0x7f71a7038f5c.
+
+Code starting with the faulting instruction
+===========================================
+[   22.881479] RSP: 002b:00007ffea145e748 EFLAGS: 00010206
+[   22.881511] RAX: 0000000000000000 RBX: 0000000000000000 RCX: 00007f71a703ae2a
+[   22.881555] RDX: 00007ffea145e6d8 RSI: 00007f71a6a04d80 RDI: 0000000000000000
+[   22.881600] RBP: 00007ffea145e760 R08: 00007f71a5b1f5c0 R09: 00007f71a6bad9bc
+[   22.881645] R10: 0000000000000000 R11: 0000000000000206 R12: 00007ffea145e6a0
+
+
+Finger prints:
+dump_stack_lvl:dump_header:oom_kill_process:out_of_memory

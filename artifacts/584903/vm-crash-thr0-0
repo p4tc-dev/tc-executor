@@ -1,0 +1,63 @@
+======================================
+| [   19.345934] v0p0id3992: entered promiscuous mode
+| [   19.367680] v0p0id3992: left promiscuous mode
+| [   20.872556] unregister_netdevice: waiting for lo to become free. Usage count = 3
+| [   22.924825] ip invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   22.924916] CPU: 3 PID: 6382 Comm: ip Not tainted 6.9.0-rc6-virtme #1
+[   22.924967] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014
+[   22.925051] Call Trace:
+[   22.925078]  <TASK>
+[   22.925103] dump_stack_lvl (lib/dump_stack.c:117) 
+[   22.925141] dump_header (mm/oom_kill.c:463 (discriminator 1)) 
+[   22.925175] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.925217] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.925259] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.925301] ? ___ratelimit (lib/ratelimit.c:72) 
+[   22.925335] oom_kill_process (mm/oom_kill.c:1037) 
+[   22.925370] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182) 
+[   22.925412] out_of_memory (mm/oom_kill.c:1176) 
+[   22.925447] __alloc_pages (mm/page_alloc.c:3489 mm/page_alloc.c:4251 mm/page_alloc.c:4588) 
+[   22.925483] alloc_pages_mpol (mm/mempolicy.c:2266 (discriminator 1)) 
+[   22.925520] vma_alloc_folio (./include/linux/mempolicy.h:77 ./include/linux/mempolicy.h:82 mm/mempolicy.c:2305) 
+[   22.925553] __handle_mm_fault (mm/memory.c:1048 mm/memory.c:4918 mm/memory.c:5026 mm/memory.c:3880 mm/memory.c:5300 mm/memory.c:5441) 
+[   22.925589] handle_mm_fault (mm/memory.c:5466 mm/memory.c:5622) 
+[   22.925621] do_user_addr_fault (arch/x86/mm/fault.c:1413) 
+[   22.925654] exc_page_fault (./arch/x86/include/asm/irqflags.h:37 ./arch/x86/include/asm/irqflags.h:72 arch/x86/mm/fault.c:1513 arch/x86/mm/fault.c:1563) 
+[   22.925687] asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:623) 
+[   22.925721] RIP: 0033:0x7f7cf9c3493a
+[ 22.925754] Code: 15 bb ba 03 00 48 8b 3d 14 e6 03 00 be 01 00 00 00 e8 fa 9c fe ff 4c 01 ce 49 89 75 00 e9 c3 fd ff ff 48 8b 44 24 50 49 01 c1 <4d> 89 4d 00 e9 b2 fd ff ff 48 8b 51 10 4c 89 ef 44 89 54 24 28 4c
+All code
+========
+   0:	15 bb ba 03 00       	adc    $0x3babb,%eax
+   5:	48 8b 3d 14 e6 03 00 	mov    0x3e614(%rip),%rdi        # 0x3e620
+   c:	be 01 00 00 00       	mov    $0x1,%esi
+  11:	e8 fa 9c fe ff       	call   0xfffffffffffe9d10
+  16:	4c 01 ce             	add    %r9,%rsi
+  19:	49 89 75 00          	mov    %rsi,0x0(%r13)
+  1d:	e9 c3 fd ff ff       	jmp    0xfffffffffffffde5
+  22:	48 8b 44 24 50       	mov    0x50(%rsp),%rax
+  27:	49 01 c1             	add    %rax,%r9
+  2a:*	4d 89 4d 00          	mov    %r9,0x0(%r13)		<-- trapping instruction
+  2e:	e9 b2 fd ff ff       	jmp    0xfffffffffffffde5
+  33:	48 8b 51 10          	mov    0x10(%rcx),%rdx
+  37:	4c 89 ef             	mov    %r13,%rdi
+  3a:	44 89 54 24 28       	mov    %r10d,0x28(%rsp)
+  3f:	4c                   	rex.WR
+
+Code starting with the faulting instruction
+===========================================
+   0:	4d 89 4d 00          	mov    %r9,0x0(%r13)
+   4:	e9 b2 fd ff ff       	jmp    0xfffffffffffffdbb
+   9:	48 8b 51 10          	mov    0x10(%rcx),%rdx
+   d:	4c 89 ef             	mov    %r13,%rdi
+  10:	44 89 54 24 28       	mov    %r10d,0x28(%rsp)
+  15:	4c                   	rex.WR
+[   22.925879] RSP: 002b:00007fff7f28ef00 EFLAGS: 00010206
+[   22.925921] RAX: 0000565526e8e000 RBX: 0000565526e9b038 RCX: 0000000000000000
+[   22.925980] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 00007f7cf9c6dd88
+[   22.926039] RBP: 0000000000000300 R08: 0000565526e93b8c R09: 0000565526f0d63a
+[   22.926097] R10: 0000000000000000 R11: 00007f7cf9c72680 R12: 0000000000000008
+
+
+Finger prints:
+dump_stack_lvl:dump_header:oom_kill_process:out_of_memory
