@@ -96,10 +96,8 @@ if [ $REMOTE = true ]; then
 		# Adjust artifacts browsing on dashboard
 		RESULT="$(find results -name '*-*' -type f | sort -n -r | head -1)"
 
-		DLINK="$(cat $RESULT | jq .link)"
-		if [[ "$DLINK" =~ raw\.githubusercontent ]]; then
-			ARTIFACTS="$(echo $DLINK | sed 's/raw\.githubusercontent/github/g' | sed -e "s/$STORAGE_BRANCH/tree\/$STORAGE_BRANCH/g")"
-			jq ".link = $ARTIFACTS" "$RESULT" | sponge "$RESULT"
+		if grep -q 'raw\.githubusercontent' $RESULT; then
+			sed -i 's#raw\.githubusercontent\.com/p4tc-dev/tc-executor/#github.com/p4tc-dev/tc-executor/tree/#g' $RESULT
 
 			# Copy container logs to storage
 			ARTPATH="$CUR/$STORAGE/$(jq .link "$RESULT" | grep -o -P 'artifacts\/[0-9]+')"
