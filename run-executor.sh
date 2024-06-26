@@ -45,7 +45,7 @@ if [ $REMOTE = true ]; then
 		git clone --depth=1 \
 			--no-single-branch \
 			-b "$STORAGE_BRANCH" \
-			https://github.com/tammela/tc-executor.git \
+			https://github.com/p4tc-dev/tc-executor.git \
 			"$STORAGE"
 	else
 		if ! [ -d "$CUR/$STORAGE/.git" ]; then
