@@ -12,7 +12,7 @@ image:
 	docker build --no-cache --build-arg DEBUG=${DEBUG} --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) -t nipa-executor .
 
 shell: image
-	docker run --device=/dev/kvm:/dev/kvm --rm -v $(realpath .)/tc-executor-storage:/storage --entrypoint ash -it nipa-executor
+	docker run --device=/dev/kvm:/dev/kvm --rm -v $(realpath .)/tc-executor-storage:/storage --entrypoint sh -it nipa-executor
 
 local: 
 	bash -x ${CURDIR}/run-executor.sh -l ${FLAGS}
@@ -39,6 +39,8 @@ install:
 uninstall:
 	sudo systemctl disable tc-executor.service
 	sudo systemctl disable tc-executor.timer
+	sudo systemctl disable tc-executor-debug.service
+	sudo systemctl disable tc-executor-debug.timer
 	sudo rm -v /etc/systemd/system/tc-executor.*
 
 help:

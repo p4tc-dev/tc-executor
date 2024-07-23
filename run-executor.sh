@@ -40,6 +40,10 @@ for time in 30 60 120 240; do
 done
 
 if [ $REMOTE = true ]; then
+	if ! [ -f "$CUR/token" ]; then
+		echo "Missing GH token"
+		exit 1
+	fi
 	if ! [ -d "$CUR/$STORAGE" ]; then
 		cd "$CUR" && \
 		git clone --depth=1 \

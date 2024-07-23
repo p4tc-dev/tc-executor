@@ -1,32 +1,34 @@
-FROM ubuntu:latest
+FROM alpine:edge
 
 ARG DEBUG=false
 ARG UNAME=hostuser
 ARG UID=1000
 ARG GID=1000
 
-ENV A_UID=$UID
-ENV A_GID=$GID
+RUN echo $DEBUG > debug-mode
+RUN addgroup -g $GID $UNAME
+RUN adduser -u $UID -G $UNAME -H -D -s /bin/ash $UNAME
 
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt install -y \
-   adduser \
-   virtme-ng \
+RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+RUN echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
+
+RUN apk update && apk add --no-cache \
+   virtme-ng@testing \
    git \
-   python3-requests \
-   python3-psutil \
-   python3-setuptools \
-   python3-pyroute2 \
-   python3-argcomplete \
-   qemu-system-x86 \
-   scapy \
+   py3-requests \
+   py3-psutil \
+   py3-setuptools \
+   py3-pyroute2 \
+   py3-argcomplete \
+   qemu-system-x86_64@community \
+   scapy@community \
    make \
    gcc \
    musl-dev \
    flex \
    bison \
-   linux-headers-generic \
-   elfutils \
+   linux-headers \
+   elfutils-dev \
    util-linux \
    coreutils \
    diffutils \
@@ -35,21 +37,14 @@ RUN apt update && apt install -y \
    bash \
    kmod \
    perl \
+   iptables-dev \
    libcap-dev \
    libmnl-dev \
    iproute2  \
    jq \
    libbpf-dev \
    rsync \
-   libssl-dev \
-   bc \
-   kbd \
-   pkg-config
-
-RUN echo $DEBUG > debug-mode
-
-RUN addgroup --gid $A_GID $UNAME || true
-RUN adduser --uid $A_UID --ingroup $UNAME --no-create-home --shell /bin/sh $UNAME || true
+   openssl-dev
 
 RUN mkdir -p /tmp/kernel-patches && \
     mkdir -p /tmp/iproute2-patches
@@ -75,19 +70,15 @@ RUN if [ "$(find /tmp/iproute2-patches/ -name *.patch)" ]; then  \
 	git apply /tmp/iproute2-patches/*.patch; \
     fi
 
-RUN cd /nipa-data/iproute2/ && \
-    ./configure --libdir /usr/lib/x86_64-linux-gnu && \
-    make V=1
+#RUN cd /nipa-data/iproute2/ && \
+#    ./configure && \
+#    make V=1
 
 # Kernel
 RUN git clone --no-single-branch --depth=1 https://github.com/linux-netdev/testing.git /nipa-data/kernel
 
 # nipa
 RUN git clone --depth=1 -b main https://github.com/p4tc-dev/new-nipa.git nipa
-
-# Hotfix for qemu-8.2.2:
-# https://github.com/arighi/virtme-ng/issues/97
-RUN sed -i '/\["-serial", "none"\]/d' /usr/lib/python3/dist-packages/virtme/commands/run.py
 
 COPY entrypoint.sh /entrypoint.sh
 

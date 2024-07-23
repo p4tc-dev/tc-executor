@@ -7,4 +7,4 @@ else
 	timeout 10m ./nipa/contest/remote/vmksft-p.py /tmp/tdc.config
 fi
 
-chown -R hostuser:hostuser /storage 
+chown -R $A_UID:$A_GID /storage 
