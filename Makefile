@@ -42,6 +42,7 @@ uninstall:
 	sudo systemctl disable tc-executor-debug.service
 	sudo systemctl disable tc-executor-debug.timer
 	sudo rm -v /etc/systemd/system/tc-executor.*
+	sudo rm -v /etc/systemd/system/tc-executor-debug.*
 
 help:
 	@echo "TC Executor:"
