@@ -98,7 +98,7 @@ popd
 if [ $REMOTE = true ]; then
 	pushd "$CUR/$STORAGE"
 		# Adjust artifacts browsing on dashboard
-		RESULT="$(find results -name '*-*' -type f | sort -n -r | head -1)"
+		RESULT="$(find results -name '*-*' -type f | sort -n -r | awk 'NR==1')"
 
 		if grep -q 'raw\.githubusercontent' $RESULT; then
 			sed -i 's#raw\.githubusercontent\.com/p4tc-dev/tc-executor/#github.com/p4tc-dev/tc-executor/tree/#g' $RESULT
