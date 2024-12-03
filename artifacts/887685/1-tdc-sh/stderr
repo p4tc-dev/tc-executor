@@ -1,0 +1,154 @@
+[    4.423600] GACT probability on
+[    4.526023] Mirror/redirect action on
+[    4.842198] Simple TC action Loaded
+[    5.515618] u32 classifier
+[    5.515663]     Performance counters on
+[    5.515709]     input device check on
+[    5.515754]     Actions configured
+[    9.186462] ==================================================================
+[    9.186559] BUG: KASAN: slab-use-after-free in cleanup_net+0x809/0x960
+[    9.186642] Read of size 8 at addr ffff8880091a8038 by task kworker/u128:0/11
+[    9.186720] 
+[    9.186751] CPU: 0 UID: 0 PID: 11 Comm: kworker/u128:0 Not tainted 6.12.0-virtme #1
+[    9.186831] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    9.186946] Workqueue: netns cleanup_net
+[    9.186986] Call Trace:
+[    9.187015]  <TASK>
+[    9.187046]  dump_stack_lvl+0x53/0x70
+[    9.187092]  print_report+0xce/0x670
+[    9.187135]  ? __pfx__raw_spin_lock_irqsave+0x10/0x10
+[    9.187187]  ? cleanup_net+0x809/0x960
+[    9.187232]  kasan_report+0xc6/0x100
+[    9.187279]  ? cleanup_net+0x809/0x960
+[    9.187325]  cleanup_net+0x809/0x960
+[    9.187374]  ? __pfx_cleanup_net+0x10/0x10
+[    9.187414]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.187476]  ? _raw_spin_lock_irq+0x86/0xe0
+[    9.187519]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.187574]  ? read_word_at_a_time+0xe/0x20
+[    9.187618]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.187674]  ? sized_strscpy+0xb2/0x290
+[    9.187713]  process_one_work+0x5c6/0xff0
+[    9.187760]  worker_thread+0x797/0x1260
+[    9.187805]  ? __kthread_parkme+0x82/0x140
+[    9.187850]  ? __pfx_worker_thread+0x10/0x10
+[    9.187905]  kthread+0x243/0x300
+[    9.187948]  ? __pfx_kthread+0x10/0x10
+[    9.187990]  ret_from_fork+0x31/0x70
+[    9.188038]  ? __pfx_kthread+0x10/0x10
+[    9.188077]  ret_from_fork_asm+0x1a/0x30
+[    9.188120]  </TASK>
+[    9.188150] 
+[    9.188181] Allocated by task 535:
+[    9.188217]  kasan_save_stack+0x33/0x60
+[    9.188262]  kasan_save_track+0x14/0x30
+[    9.188305]  __kasan_slab_alloc+0x6e/0x70
+[    9.188351]  kmem_cache_alloc_noprof+0xe4/0x2f0
+[    9.188407]  copy_net_ns+0xc1/0x320
+[    9.188453]  create_new_namespaces+0x358/0x920
+[    9.188509]  unshare_nsproxy_namespaces+0x8d/0x130
+[    9.188563]  ksys_unshare+0x286/0x700
+[    9.188611]  __x64_sys_unshare+0x31/0x40
+[    9.188656]  do_syscall_64+0xa6/0x1a0
+[    9.188702]  entry_SYSCALL_64_after_hwframe+0x77/0x7f
+[    9.188755] 
+[    9.188786] Freed by task 11:
+[    9.188829]  kasan_save_stack+0x33/0x60
+[    9.188880]  kasan_save_track+0x14/0x30
+[    9.188920]  kasan_save_free_info+0x3b/0x60
+[    9.188967]  __kasan_slab_free+0x37/0x50
+[    9.189009]  kmem_cache_free+0xcb/0x370
+[    9.189051]  cleanup_net+0x5ee/0x960
+[    9.189096]  process_one_work+0x5c6/0xff0
+[    9.189138]  worker_thread+0x797/0x1260
+[    9.189179]  kthread+0x243/0x300
+[    9.189219]  ret_from_fork+0x31/0x70
+[    9.189261]  ret_from_fork_asm+0x1a/0x30
+[    9.189303] 
+[    9.189331] The buggy address belongs to the object at ffff8880091a8000
+[    9.189331]  which belongs to the cache net_namespace of size 2240
+[    9.189468] The buggy address is located 56 bytes inside of
+[    9.189468]  freed 2240-byte region [ffff8880091a8000, ffff8880091a88c0)
+[    9.189579] 
+[    9.189610] The buggy address belongs to the physical page:
+[    9.189659] page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x91a8
+[    9.189743] head: order:3 mapcount:0 entire_mapcount:0 nr_pages_mapped:0 pincount:0
+[    9.189827] flags: 0x80000000000040(head|node=0|zone=1)
+[    9.189879] page_type: f5(slab)
+[    9.189924] raw: 0080000000000040 ffff8880012d1900 dead000000000122 0000000000000000
+[    9.190008] raw: 0000000000000000 00000000800d000d 00000001f5000000 0000000000000000
+[    9.190098] head: 0080000000000040 ffff8880012d1900 dead000000000122 0000000000000000
+[    9.190182] head: 0000000000000000 00000000800d000d 00000001f5000000 0000000000000000
+[    9.190266] head: 0080000000000003 ffffea0000246a01 ffffffffffffffff 0000000000000000
+[    9.190339] head: 0000000000000008 0000000000000000 00000000ffffffff 0000000000000000
+[    9.190426] page dumped because: kasan: bad access detected
+[    9.190483] 
+[    9.190508] Memory state around the buggy address:
+[    9.190565]  ffff8880091a7f00: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[    9.190647]  ffff8880091a7f80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[    9.190726] >ffff8880091a8000: fa fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[    9.190805]                                         ^
+[    9.190862]  ffff8880091a8080: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[    9.190950]  ffff8880091a8100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+[    9.191029] ==================================================================
+[    9.191118] Disabling lock debugging due to kernel taint
+[    9.502093] netem: version 1.3
+[   17.041558] sch_tbf: burst 1500 is lower than device dummy1id6430 mtu (1514) !
+[   17.149163] sch_tbf: burst 1500 is lower than device dummy1id0518 mtu (1514) !
+[   17.248645] sch_tbf: burst 1500 is lower than device dummy1id320a mtu (1514) !
+[   17.343267] sch_tbf: burst 1500 is lower than device dummy1id239b mtu (1514) !
+[   17.447741] sch_tbf: burst 1500 is lower than device dummy1idc975 mtu (1514) !
+[   17.550140] sch_tbf: burst 1500 is lower than device dummy1id948c mtu (1514) !
+[   17.653331] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[   17.690225] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[   17.794536] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[   17.832660] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[   23.800227] v0p0id5993: entered promiscuous mode
+[   23.834661] v0p0id5993: left promiscuous mode
+[   23.861599] v0p0id5993: entered promiscuous mode
+[   23.901954] v0p0id5993: left promiscuous mode
+[   23.917673] v0p0id5993: entered promiscuous mode
+[   23.950243] v0p0id5993: left promiscuous mode
+[   23.968732] v0p0id5993: entered promiscuous mode
+[   23.997734] v0p0id5993: left promiscuous mode
+[   23.998045] v0p0id5993: entered promiscuous mode
+[   24.034650] v0p0id5993: left promiscuous mode
+[   24.060581] v0p0id5993: entered promiscuous mode
+[   24.084932] v0p0id5993: left promiscuous mode
+[   24.108734] v0p0id5993: entered promiscuous mode
+[   24.141728] v0p0id5993: left promiscuous mode
+[   24.161903] v0p0id5993: entered promiscuous mode
+[   24.185868] v0p0id5993: left promiscuous mode
+[   24.214863] v0p0id5993: entered promiscuous mode
+[   24.244980] v0p0id5993: left promiscuous mode
+[   24.245568] v0p0id5993: entered promiscuous mode
+[   24.279767] v0p0id5993: left promiscuous mode
+[   24.301655] v0p0id5993: entered promiscuous mode
+[   24.323298] v0p0id5993: left promiscuous mode
+[   24.348240] v0p0id5993: entered promiscuous mode
+[   24.380323] v0p0id5993: left promiscuous mode
+[   24.411236] v0p0id5993: entered promiscuous mode
+[   24.434294] v0p0id5993: left promiscuous mode
+[   24.459866] v0p0id5993: entered promiscuous mode
+[   24.474616] v0p0id5993: left promiscuous mode
+[   24.481874] v0p0id5993: entered promiscuous mode
+[   24.494455] v0p0id5993: left promiscuous mode
+[   24.503617] v0p0id5993: entered promiscuous mode
+[   24.518630] v0p0id5993: left promiscuous mode
+[   24.527620] v0p0id5993: entered promiscuous mode
+[   24.542447] v0p0id5993: left promiscuous mode
+[   24.557878] v0p0id5993: entered promiscuous mode
+[   24.582395] v0p0id5993: left promiscuous mode
+[   24.601851] v0p0id5993: entered promiscuous mode
+[   24.626021] v0p0id5993: left promiscuous mode
+[   24.626498] v0p0id5993: entered promiscuous mode
+[   24.631694] v0p0id5993: left promiscuous mode
+[   24.650954] v0p0id5993: entered promiscuous mode
+[   24.682595] v0p0id5993: left promiscuous mode
+[   24.701735] v0p0id5993: entered promiscuous mode
+[   24.732333] v0p0id5993: left promiscuous mode
+[   26.156913] tc (4966) used greatest stack depth: 24680 bytes left
+[   46.448900] v0p0id3992: entered promiscuous mode
+[   46.494790] v0p0id3992: left promiscuous mode
+[   46.505831] v0p0id3992: entered promiscuous mode
+[   46.523594] v0p0id3992: left promiscuous mode
