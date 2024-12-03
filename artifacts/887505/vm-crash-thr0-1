@@ -1,0 +1,36 @@
+======================================
+| [    9.204272] ==================================================================
+| [    9.204403] BUG: KASAN: slab-use-after-free in cleanup_net (net/core/net_namespace.c:462 (discriminator 3) net/core/net_namespace.c:661 (discriminator 3))
+| [    9.204505] Read of size 8 at addr ffff888005fd0038 by task kworker/u128:1/608
+| [    9.204608]
+| [    9.204641] CPU: 27 UID: 0 PID: 608 Comm: kworker/u128:1 Not tainted 6.12.0-virtme #1
+[    9.204752] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    9.204890] Workqueue: netns cleanup_net
+[    9.204948] Call Trace:
+[    9.204984]  <TASK>
+[    9.205023] dump_stack_lvl (lib/dump_stack.c:123)
+[    9.205088] print_report (mm/kasan/report.c:379 mm/kasan/report.c:489)
+[    9.205144] ? __pfx__raw_spin_lock_irqsave (kernel/locking/spinlock.c:161)
+[    9.205218] ? cleanup_net (net/core/net_namespace.c:462 (discriminator 3) net/core/net_namespace.c:661 (discriminator 3))
+[    9.205272] kasan_report (mm/kasan/report.c:604)
+[    9.205323] ? cleanup_net (net/core/net_namespace.c:462 (discriminator 3) net/core/net_namespace.c:661 (discriminator 3))
+[    9.205378] cleanup_net (net/core/net_namespace.c:462 (discriminator 3) net/core/net_namespace.c:661 (discriminator 3))
+[    9.205437] ? __pfx_cleanup_net (net/core/net_namespace.c:592)
+[    9.205487] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.205564] ? _raw_spin_lock_irq (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2170 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1302 (discriminator 4) ./include/asm-generic/qspinlock.h:111 (discriminator 4) ./include/linux/spinlock.h:187 (discriminator 4) ./include/linux/spinlock_api_smp.h:120 (discriminator 4) kernel/locking/spinlock.c:170 (discriminator 4))
+[    9.205628] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.205710] ? read_word_at_a_time (./include/asm-generic/rwonce.h:86 (discriminator 1))
+[    9.205770] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.205850] ? sized_strscpy (lib/string.c:147 (discriminator 1))
+[    9.205899] process_one_work (kernel/workqueue.c:3229)
+[    9.205955] worker_thread (kernel/workqueue.c:3304 (discriminator 2) kernel/workqueue.c:3391 (discriminator 2))
+[    9.206016] ? __kthread_parkme (./arch/x86/include/asm/bitops.h:206 ./arch/x86/include/asm/bitops.h:238 ./include/asm-generic/bitops/instrumented-non-atomic.h:142 kernel/kthread.c:280)
+[    9.206070] ? __pfx_worker_thread (kernel/workqueue.c:3337)
+[    9.206142] kthread (kernel/kthread.c:389)
+[    9.206200] ? __pfx_kthread (kernel/kthread.c:342)
+[    9.206257] ret_from_fork (arch/x86/kernel/process.c:147)
+[    9.206309] ? __pfx_kthread (kernel/kthread.c:342)
+
+
+Finger prints:
+dump_stack_lvl:print_report:kasan_report:cleanup_net
