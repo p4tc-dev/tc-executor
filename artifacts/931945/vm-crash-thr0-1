@@ -1,0 +1,77 @@
+======================================
+| [    3.948938] ------------[ cut here ]------------
+| [    3.948993] RTNL: assertion failed at net/core/link_watch.c (59)
+| [    3.949051] WARNING: CPU: 0 PID: 11 at net/core/link_watch.c:59 rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+| [    3.949110] Modules linked in: sch_ingress sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack libcrc32c nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [    3.949500] CPU: 0 UID: 0 PID: 11 Comm: kworker/u128:0 Not tainted 6.13.0-rc3-virtme #1
+[    3.949564] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    3.949638] Workqueue: netns cleanup_net
+[    3.949675] RIP: 0010:rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[ 3.949714] Code: 80 3d 0a a6 e6 00 00 75 b5 c6 05 01 a6 e6 00 01 90 ba 3b 00 00 00 48 c7 c6 47 30 18 9f 48 c7 c7 e0 30 0a 9f e8 b6 5e 56 ff 90 <0f> 0b 90 90 eb 8e b8 05 00 00 00 e9 0e ff ff ff 0f 1f 44 00 00 90
+All code
+========
+   0:	80 3d 0a a6 e6 00 00 	cmpb   $0x0,0xe6a60a(%rip)        # 0xe6a611
+   7:	75 b5                	jne    0xffffffffffffffbe
+   9:	c6 05 01 a6 e6 00 01 	movb   $0x1,0xe6a601(%rip)        # 0xe6a611
+  10:	90                   	nop
+  11:	ba 3b 00 00 00       	mov    $0x3b,%edx
+  16:	48 c7 c6 47 30 18 9f 	mov    $0xffffffff9f183047,%rsi
+  1d:	48 c7 c7 e0 30 0a 9f 	mov    $0xffffffff9f0a30e0,%rdi
+  24:	e8 b6 5e 56 ff       	call   0xffffffffff565edf
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	90                   	nop
+  2e:	eb 8e                	jmp    0xffffffffffffffbe
+  30:	b8 05 00 00 00       	mov    $0x5,%eax
+  35:	e9 0e ff ff ff       	jmp    0xffffffffffffff48
+  3a:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  3f:	90                   	nop
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	eb 8e                	jmp    0xffffffffffffff94
+   6:	b8 05 00 00 00       	mov    $0x5,%eax
+   b:	e9 0e ff ff ff       	jmp    0xffffffffffffff1e
+  10:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  15:	90                   	nop
+[    3.949841] RSP: 0018:ffffc22b00063d00 EFLAGS: 00010282
+[    3.949879] RAX: 0000000000000000 RBX: ffffa0d548a80000 RCX: 0000000000000000
+[    3.949946] RDX: 0000000000000000 RSI: ffffc22b00063ba8 RDI: 0000000000000001
+[    3.950000] RBP: 0000000000000000 R08: 00000000ffffdfff R09: 0000000000000001
+[    3.950052] R10: 00000000ffffdfff R11: ffffffff9f476980 R12: ffffa0d548a81000
+[    3.950104] R13: dead000000000100 R14: ffffffffffffffc0 R15: ffffa0d548f68920
+[    3.950164] FS:  0000000000000000(0000) GS:ffffa0d57e600000(0000) knlGS:0000000000000000
+[    3.950215] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    3.950254] CR2: 00007fd1ed2657b4 CR3: 0000000028242000 CR4: 0000000000750ef0
+[    3.950309] PKRU: 55555554
+[    3.950330] Call Trace:
+[    3.950354]  <TASK>
+[    3.950374] ? __warn (kernel/panic.c:748)
+[    3.950404] ? rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[    3.950432] ? report_bug (lib/bug.c:180 lib/bug.c:219)
+[    3.950459] ? prb_read_valid (kernel/printk/printk_ringbuffer.c:2183)
+[    3.950487] ? handle_bug (arch/x86/kernel/traps.c:285)
+[    3.950518] ? exc_invalid_op (arch/x86/kernel/traps.c:309 (discriminator 1))
+[    3.950545] ? asm_exc_invalid_op (./arch/x86/include/asm/idtentry.h:621)
+[    3.950577] ? rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[    3.950604] linkwatch_do_dev (net/core/link_watch.c:180)
+[    3.950631] netdev_run_todo (net/core/dev.c:10894 (discriminator 2))
+[    3.950658] ? unregister_netdevice_queue (net/core/dev.c:11456 (discriminator 2))
+[    3.950691] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    3.950726] default_device_exit_batch (net/core/dev.c:12077)
+[    3.950761] cleanup_net (net/core/net_namespace.c:647 (discriminator 3))
+[    3.950790] process_one_work (kernel/workqueue.c:3229)
+[    3.950819] worker_thread (kernel/workqueue.c:3304 (discriminator 2) kernel/workqueue.c:3391 (discriminator 2))
+[    3.950846] ? __pfx_worker_thread (kernel/workqueue.c:3337)
+[    3.950886] kthread (kernel/kthread.c:389)
+[    3.950932] ? __pfx_kthread (kernel/kthread.c:342)
+[    3.950962] ret_from_fork (arch/x86/kernel/process.c:147)
+[    3.950989] ? __pfx_kthread (kernel/kthread.c:342)
+
+
+Finger prints:
+rfc2863_policy:linkwatch_do_dev:netdev_run_todo:default_device_exit_batch

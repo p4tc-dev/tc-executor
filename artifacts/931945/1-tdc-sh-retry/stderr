@@ -1,0 +1,113 @@
+[    1.368621] GACT probability on
+[    1.423210] Mirror/redirect action on
+[    1.591277] Simple TC action Loaded
+[    1.947989] u32 classifier
+[    1.948018]     Performance counters on
+[    1.948046]     input device check on
+[    1.948073]     Actions configured
+[    3.948938] ------------[ cut here ]------------
+[    3.948993] RTNL: assertion failed at net/core/link_watch.c (59)
+[    3.949051] WARNING: CPU: 0 PID: 11 at net/core/link_watch.c:59 rfc2863_policy+0x11b/0x130
+[    3.949110] Modules linked in: sch_ingress sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack libcrc32c nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    3.949500] CPU: 0 UID: 0 PID: 11 Comm: kworker/u128:0 Not tainted 6.13.0-rc3-virtme #1
+[    3.949564] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    3.949638] Workqueue: netns cleanup_net
+[    3.949675] RIP: 0010:rfc2863_policy+0x11b/0x130
+[    3.949714] Code: 80 3d 0a a6 e6 00 00 75 b5 c6 05 01 a6 e6 00 01 90 ba 3b 00 00 00 48 c7 c6 47 30 18 9f 48 c7 c7 e0 30 0a 9f e8 b6 5e 56 ff 90 <0f> 0b 90 90 eb 8e b8 05 00 00 00 e9 0e ff ff ff 0f 1f 44 00 00 90
+[    3.949841] RSP: 0018:ffffc22b00063d00 EFLAGS: 00010282
+[    3.949879] RAX: 0000000000000000 RBX: ffffa0d548a80000 RCX: 0000000000000000
+[    3.949946] RDX: 0000000000000000 RSI: ffffc22b00063ba8 RDI: 0000000000000001
+[    3.950000] RBP: 0000000000000000 R08: 00000000ffffdfff R09: 0000000000000001
+[    3.950052] R10: 00000000ffffdfff R11: ffffffff9f476980 R12: ffffa0d548a81000
+[    3.950104] R13: dead000000000100 R14: ffffffffffffffc0 R15: ffffa0d548f68920
+[    3.950164] FS:  0000000000000000(0000) GS:ffffa0d57e600000(0000) knlGS:0000000000000000
+[    3.950215] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    3.950254] CR2: 00007fd1ed2657b4 CR3: 0000000028242000 CR4: 0000000000750ef0
+[    3.950309] PKRU: 55555554
+[    3.950330] Call Trace:
+[    3.950354]  <TASK>
+[    3.950374]  ? __warn+0x89/0x130
+[    3.950404]  ? rfc2863_policy+0x11b/0x130
+[    3.950432]  ? report_bug+0x164/0x190
+[    3.950459]  ? prb_read_valid+0x1b/0x30
+[    3.950487]  ? handle_bug+0x54/0x90
+[    3.950518]  ? exc_invalid_op+0x17/0x70
+[    3.950545]  ? asm_exc_invalid_op+0x1a/0x20
+[    3.950577]  ? rfc2863_policy+0x11b/0x130
+[    3.950604]  linkwatch_do_dev+0x16/0x60
+[    3.950631]  netdev_run_todo+0xaf/0x540
+[    3.950658]  ? unregister_netdevice_queue+0x2a/0xf0
+[    3.950691]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    3.950726]  default_device_exit_batch+0x2b8/0x320
+[    3.950761]  cleanup_net+0x258/0x3b0
+[    3.950790]  process_one_work+0x15d/0x380
+[    3.950819]  worker_thread+0x2a5/0x3b0
+[    3.950846]  ? __pfx_worker_thread+0x10/0x10
+[    3.950886]  kthread+0xcd/0x100
+[    3.950932]  ? __pfx_kthread+0x10/0x10
+[    3.950962]  ret_from_fork+0x31/0x50
+[    3.950989]  ? __pfx_kthread+0x10/0x10
+[    3.951016]  ret_from_fork_asm+0x1a/0x30
+[    3.951046]  </TASK>
+[    3.951066] ---[ end trace 0000000000000000 ]---
+[    4.112192] netem: version 1.3
+[    7.991095] sch_tbf: burst 1500 is lower than device dummy1id6430 mtu (1514) !
+[    8.039740] sch_tbf: burst 1500 is lower than device dummy1id0518 mtu (1514) !
+[    8.085386] sch_tbf: burst 1500 is lower than device dummy1id320a mtu (1514) !
+[    8.131793] sch_tbf: burst 1500 is lower than device dummy1id239b mtu (1514) !
+[    8.179512] sch_tbf: burst 1500 is lower than device dummy1idc975 mtu (1514) !
+[    8.226596] sch_tbf: burst 1500 is lower than device dummy1id948c mtu (1514) !
+[    8.247361] tc (2836) used greatest stack depth: 12072 bytes left
+[    8.275324] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[    8.288667] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[    8.334962] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[    8.348428] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[   10.222937] tc (3975) used greatest stack depth: 11768 bytes left
+[   10.901830] v0p0id5993: entered promiscuous mode
+[   10.937930] v0p0id5993: left promiscuous mode
+[   10.960004] v0p0id5993: entered promiscuous mode
+[   10.986955] v0p0id5993: left promiscuous mode
+[   10.987499] v0p0id5993: entered promiscuous mode
+[   11.011118] v0p0id5993: left promiscuous mode
+[   11.032101] v0p0id5993: entered promiscuous mode
+[   11.058286] v0p0id5993: left promiscuous mode
+[   11.082687] v0p0id5993: entered promiscuous mode
+[   11.109332] v0p0id5993: left promiscuous mode
+[   11.124078] v0p0id5993: entered promiscuous mode
+[   11.146157] v0p0id5993: left promiscuous mode
+[   11.164100] v0p0id5993: entered promiscuous mode
+[   11.181251] v0p0id5993: left promiscuous mode
+[   11.205081] v0p0id5993: entered promiscuous mode
+[   11.226131] v0p0id5993: left promiscuous mode
+[   11.239082] v0p0id5993: entered promiscuous mode
+[   11.265155] v0p0id5993: left promiscuous mode
+[   11.286115] v0p0id5993: entered promiscuous mode
+[   11.315257] v0p0id5993: left promiscuous mode
+[   11.334092] v0p0id5993: entered promiscuous mode
+[   11.362192] v0p0id5993: left promiscuous mode
+[   11.382104] v0p0id5993: entered promiscuous mode
+[   11.409241] v0p0id5993: left promiscuous mode
+[   11.430105] v0p0id5993: entered promiscuous mode
+[   11.457191] v0p0id5993: left promiscuous mode
+[   11.480094] v0p0id5993: entered promiscuous mode
+[   11.501331] v0p0id5993: left promiscuous mode
+[   11.523089] v0p0id5993: entered promiscuous mode
+[   11.549225] v0p0id5993: left promiscuous mode
+[   11.572116] v0p0id5993: entered promiscuous mode
+[   11.593311] v0p0id5993: left promiscuous mode
+[   11.614123] v0p0id5993: entered promiscuous mode
+[   11.642095] v0p0id5993: left promiscuous mode
+[   11.662104] v0p0id5993: entered promiscuous mode
+[   11.689214] v0p0id5993: left promiscuous mode
+[   11.710092] v0p0id5993: entered promiscuous mode
+[   11.731660] v0p0id5993: left promiscuous mode
+[   11.748108] v0p0id5993: entered promiscuous mode
+[   11.763463] v0p0id5993: left promiscuous mode
+[   11.784112] v0p0id5993: entered promiscuous mode
+[   11.811382] v0p0id5993: left promiscuous mode
+[   11.833114] v0p0id5993: entered promiscuous mode
+[   11.861400] v0p0id5993: left promiscuous mode
+[   22.758390] v0p0id3992: entered promiscuous mode
+[   22.789208] v0p0id3992: left promiscuous mode
+[   22.810160] v0p0id3992: entered promiscuous mode
+[   22.840948] v0p0id3992: left promiscuous mode
