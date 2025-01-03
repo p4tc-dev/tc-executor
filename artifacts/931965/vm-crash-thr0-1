@@ -1,0 +1,103 @@
+======================================
+| [    9.238390] ------------[ cut here ]------------
+| [    9.238466] RTNL: assertion failed at net/core/link_watch.c (59)
+| [    9.238559] WARNING: CPU: 18 PID: 610 at net/core/link_watch.c:59 rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+| [    9.238676] Modules linked in: sch_ingress sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack libcrc32c nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [    9.239358] CPU: 18 UID: 0 PID: 610 Comm: kworker/u128:1 Not tainted 6.13.0-rc3-virtme #1
+[    9.239453] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    9.239573] Workqueue: netns cleanup_net
+[    9.239632] RIP: 0010:rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[ 9.239702] Code: 83 e4 01 0f 85 91 fe ff ff c6 05 b6 e6 d6 01 01 90 ba 3b 00 00 00 48 c7 c6 60 7f ca ab 48 c7 c7 a0 7f ca ab e8 0b bc 03 fe 90 <0f> 0b 90 90 e9 67 fe ff ff 41 bc 05 00 00 00 e9 8a fc ff ff 48 89
+All code
+========
+   0:	83 e4 01             	and    $0x1,%esp
+   3:	0f 85 91 fe ff ff    	jne    0xfffffffffffffe9a
+   9:	c6 05 b6 e6 d6 01 01 	movb   $0x1,0x1d6e6b6(%rip)        # 0x1d6e6c6
+  10:	90                   	nop
+  11:	ba 3b 00 00 00       	mov    $0x3b,%edx
+  16:	48 c7 c6 60 7f ca ab 	mov    $0xffffffffabca7f60,%rsi
+  1d:	48 c7 c7 a0 7f ca ab 	mov    $0xffffffffabca7fa0,%rdi
+  24:	e8 0b bc 03 fe       	call   0xfffffffffe03bc34
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	90                   	nop
+  2e:	e9 67 fe ff ff       	jmp    0xfffffffffffffe9a
+  33:	41 bc 05 00 00 00    	mov    $0x5,%r12d
+  39:	e9 8a fc ff ff       	jmp    0xfffffffffffffcc8
+  3e:	48                   	rex.W
+  3f:	89                   	.byte 0x89
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	e9 67 fe ff ff       	jmp    0xfffffffffffffe70
+   9:	41 bc 05 00 00 00    	mov    $0x5,%r12d
+   f:	e9 8a fc ff ff       	jmp    0xfffffffffffffc9e
+  14:	48                   	rex.W
+  15:	89                   	.byte 0x89
+[    9.239911] RSP: 0018:ffff888004fc7a88 EFLAGS: 00010282
+[    9.239979] RAX: 0000000000000000 RBX: ffff88800e4be000 RCX: 1ffffffff5875680
+[    9.240079] RDX: 0000000000000000 RSI: 0000000000000004 RDI: 0000000000000001
+[    9.240164] RBP: 0000000000000000 R08: 0000000000000000 R09: fffffbfff5875680
+[    9.240256] R10: 0000000000000003 R11: 7361203a4c4e5452 R12: 0000000000000000
+[    9.240348] R13: ffff88800e4bc000 R14: dffffc0000000000 R15: ffff88800e4be508
+[    9.240444] FS:  0000000000000000(0000) GS:ffff888035d00000(0000) knlGS:0000000000000000
+[    9.240546] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    9.240621] CR2: 00007f05ea4de710 CR3: 0000000025906000 CR4: 0000000000750ef0
+[    9.240705] PKRU: 55555554
+[    9.240744] Call Trace:
+[    9.240774]  <TASK>
+[    9.240814] ? __warn (kernel/panic.c:748)
+[    9.240864] ? rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[    9.240918] ? report_bug (lib/bug.c:180 lib/bug.c:219)
+[    9.240971] ? handle_bug (arch/x86/kernel/traps.c:285 (discriminator 1))
+[    9.241019] ? exc_invalid_op (arch/x86/kernel/traps.c:309 (discriminator 1))
+[    9.241067] ? asm_exc_invalid_op (./arch/x86/include/asm/idtentry.h:621)
+[    9.241111] ? rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[    9.241162] ? rfc2863_policy (net/core/link_watch.c:59 (discriminator 1) net/core/link_watch.c:76 (discriminator 1))
+[    9.241212] linkwatch_do_dev (net/core/link_watch.c:180)
+[    9.241272] netdev_run_todo (net/core/dev.c:10894 (discriminator 2))
+[    9.241324] ? __pfx_netdev_run_todo (net/core/dev.c:10867)
+[    9.241383] ? mutex_is_locked (./arch/x86/include/asm/atomic64_64.h:15 ./include/linux/atomic/atomic-arch-fallback.h:2583 ./include/linux/atomic/atomic-long.h:38 ./include/linux/atomic/atomic-instrumented.h:3189 kernel/locking/mutex.h:47 kernel/locking/mutex.c:66)
+[    9.241441] ? mutex_is_locked (./arch/x86/include/asm/atomic64_64.h:15 ./include/linux/atomic/atomic-arch-fallback.h:2583 ./include/linux/atomic/atomic-long.h:38 ./include/linux/atomic/atomic-instrumented.h:3189 kernel/locking/mutex.h:47 kernel/locking/mutex.c:66)
+[    9.241486] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.241543] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.241605] ? unregister_netdevice_queue (net/core/dev.c:11456 (discriminator 2))
+[    9.241668] ? __pfx_unregister_netdevice_queue (net/core/dev.c:11455)
+[    9.241736] ? mutex_lock (kernel/locking/mutex.c:261)
+[    9.241793] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[    9.241842] default_device_exit_batch (net/core/dev.c:12051)
+[    9.241912] ? __pfx_netdev_run_todo (net/core/dev.c:10867)
+[    9.241978] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[    9.242025] ? __pfx_default_device_exit_batch (net/core/dev.c:12051)
+[    9.242087] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.242145] ? mutex_is_locked (./arch/x86/include/asm/atomic64_64.h:15 ./include/linux/atomic/atomic-arch-fallback.h:2583 ./include/linux/atomic/atomic-long.h:38 ./include/linux/atomic/atomic-instrumented.h:3189 kernel/locking/mutex.h:47 kernel/locking/mutex.c:66)
+[    9.242197] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.242264] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.242330] ? nexthop_net_exit_batch_rtnl (net/ipv4/nexthop.c:2664 net/ipv4/nexthop.c:4010)
+[    9.242396] cleanup_net (net/core/net_namespace.c:647 (discriminator 3))
+[    9.242447] ? __pfx_cleanup_net (net/core/net_namespace.c:592)
+[    9.242496] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.242557] ? lock_timer_base (kernel/time/timer.c:1050)
+[    9.242606] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.242676] ? read_word_at_a_time (./include/asm-generic/rwonce.h:86 (discriminator 1))
+[    9.242728] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.242797] ? sized_strscpy (lib/string.c:153 (discriminator 1))
+[    9.242846] process_one_work (kernel/workqueue.c:3229)
+[    9.242899] ? __pfx___schedule (kernel/sched/core.c:6637)
+[    9.242948] worker_thread (kernel/workqueue.c:3304 (discriminator 2) kernel/workqueue.c:3391 (discriminator 2))
+[    9.243000] ? __pfx_set_cpus_allowed_ptr (kernel/sched/core.c:2404)
+[    9.243069] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[    9.243133] ? __pfx_worker_thread (kernel/workqueue.c:3337)
+[    9.243201] kthread (kernel/kthread.c:389)
+[    9.243257] ? recalc_sigpending (./arch/x86/include/asm/bitops.h:75 ./include/asm-generic/bitops/instrumented-atomic.h:42 ./include/linux/thread_info.h:102 kernel/signal.c:180)
+[    9.243320] ? __pfx_kthread (kernel/kthread.c:342)
+[    9.243368] ret_from_fork (arch/x86/kernel/process.c:147)
+[    9.243416] ? __pfx_kthread (kernel/kthread.c:342)
+
+
+Finger prints:
+rfc2863_policy:linkwatch_do_dev:netdev_run_todo:default_device_exit_batch

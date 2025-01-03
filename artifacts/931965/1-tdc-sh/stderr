@@ -1,0 +1,138 @@
+[    4.477853] GACT probability on
+[    4.579911] Mirror/redirect action on
+[    4.893961] Simple TC action Loaded
+[    5.580652] u32 classifier
+[    5.580695]     Performance counters on
+[    5.580739]     input device check on
+[    5.580782]     Actions configured
+[    9.193697] ------------[ cut here ]------------
+[    9.193794] RTNL: assertion failed at net/core/link_watch.c (59)
+[    9.193897] WARNING: CPU: 16 PID: 601 at net/core/link_watch.c:59 rfc2863_policy+0x486/0x500
+[    9.194045] Modules linked in: sch_ingress sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack libcrc32c nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    9.194779] CPU: 16 UID: 0 PID: 601 Comm: kworker/u128:1 Not tainted 6.13.0-rc3-virtme #1
+[    9.194874] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    9.195000] Workqueue: netns cleanup_net
+[    9.195053] RIP: 0010:rfc2863_policy+0x486/0x500
+[    9.195115] Code: 83 e4 01 0f 85 91 fe ff ff c6 05 b6 e6 d6 01 01 90 ba 3b 00 00 00 48 c7 c6 60 7f 0a 9a 48 c7 c7 a0 7f 0a 9a e8 0b bc 03 fe 90 <0f> 0b 90 90 e9 67 fe ff ff 41 bc 05 00 00 00 e9 8a fc ff ff 48 89
+[    9.195353] RSP: 0018:ffff88800fa7fa88 EFLAGS: 00010282
+[    9.195422] RAX: 0000000000000000 RBX: ffff888006260000 RCX: 1ffffffff34f5680
+[    9.195510] RDX: 0000000000000000 RSI: 0000000000000004 RDI: 0000000000000001
+[    9.195596] RBP: 0000000000000000 R08: 0000000000000000 R09: fffffbfff34f5680
+[    9.195685] R10: 0000000000000003 R11: 7361203a4c4e5452 R12: 0000000000000000
+[    9.195776] R13: ffff88800623e000 R14: dffffc0000000000 R15: ffff888006260508
+[    9.195876] FS:  0000000000000000(0000) GS:ffff888035c00000(0000) knlGS:0000000000000000
+[    9.195967] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    9.196045] CR2: 0000000000a283a0 CR3: 0000000030d06000 CR4: 0000000000750ef0
+[    9.196144] PKRU: 55555554
+[    9.196179] Call Trace:
+[    9.196222]  <TASK>
+[    9.196261]  ? __warn+0xd1/0x240
+[    9.196315]  ? rfc2863_policy+0x486/0x500
+[    9.196364]  ? report_bug+0x259/0x2c0
+[    9.196424]  ? handle_bug+0x54/0xa0
+[    9.196475]  ? exc_invalid_op+0x17/0x50
+[    9.196524]  ? asm_exc_invalid_op+0x1a/0x20
+[    9.196571]  ? rfc2863_policy+0x486/0x500
+[    9.196621]  ? rfc2863_policy+0x485/0x500
+[    9.196666]  linkwatch_do_dev+0x2e/0x100
+[    9.196715]  netdev_run_todo+0x183/0xbc0
+[    9.196766]  ? __pfx_netdev_run_todo+0x10/0x10
+[    9.196828]  ? mutex_is_locked+0x1c/0x60
+[    9.196876]  ? mutex_is_locked+0x1c/0x60
+[    9.196920]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.196988]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.197053]  ? unregister_netdevice_queue+0x6d/0x2c0
+[    9.197121]  ? __pfx_unregister_netdevice_queue+0x10/0x10
+[    9.197187]  ? mutex_lock+0xd1/0xe0
+[    9.197233]  ? __pfx_mutex_lock+0x10/0x10
+[    9.197279]  default_device_exit_batch+0x5f1/0x8a0
+[    9.197347]  ? __pfx_netdev_run_todo+0x10/0x10
+[    9.197410]  ? mutex_lock+0x87/0xe0
+[    9.197455]  ? __pfx_default_device_exit_batch+0x10/0x10
+[    9.197520]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.197583]  ? mutex_is_locked+0x1c/0x60
+[    9.197630]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.197704]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.197771]  ? nexthop_net_exit_batch_rtnl+0x96/0x1e0
+[    9.197831]  cleanup_net+0x44f/0x960
+[    9.197881]  ? __pfx_cleanup_net+0x10/0x10
+[    9.197926]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.197992]  ? lock_timer_base+0xeb/0x1c0
+[    9.198041]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.198103]  ? read_word_at_a_time+0xe/0x20
+[    9.198154]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.198223]  ? sized_strscpy+0xad/0x2e0
+[    9.198265]  process_one_work+0x5ee/0xf40
+[    9.198320]  worker_thread+0x763/0x1290
+[    9.198382]  ? __pfx_set_cpus_allowed_ptr+0x7/0x10
+[    9.198446]  ? srso_alias_return_thunk+0x5/0xfbef5
+[    9.198524]  ? __pfx_worker_thread+0x10/0x10
+[    9.198584]  kthread+0x237/0x2f0
+[    9.198632]  ? recalc_sigpending+0x132/0x1b0
+[    9.198695]  ? __pfx_kthread+0x10/0x10
+[    9.198744]  ret_from_fork+0x31/0x70
+[    9.198791]  ? __pfx_kthread+0x10/0x10
+[    9.198837]  ret_from_fork_asm+0x1a/0x30
+[    9.198891]  </TASK>
+[    9.198923] ---[ end trace 0000000000000000 ]---
+[    9.615859] netem: version 1.3
+[   17.183794] tc (2585) used greatest stack depth: 24736 bytes left
+[   18.163915] sch_tbf: burst 1500 is lower than device dummy1id6430 mtu (1514) !
+[   18.269902] sch_tbf: burst 1500 is lower than device dummy1id0518 mtu (1514) !
+[   18.395349] sch_tbf: burst 1500 is lower than device dummy1id320a mtu (1514) !
+[   18.521627] sch_tbf: burst 1500 is lower than device dummy1id239b mtu (1514) !
+[   18.621206] sch_tbf: burst 1500 is lower than device dummy1idc975 mtu (1514) !
+[   18.751329] sch_tbf: burst 1500 is lower than device dummy1id948c mtu (1514) !
+[   18.868120] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[   18.896583] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[   19.012771] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[   19.040329] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[   21.601387] tc (3724) used greatest stack depth: 24472 bytes left
+[   24.580997] v0p0id5993: entered promiscuous mode
+[   24.635675] v0p0id5993: left promiscuous mode
+[   24.659785] v0p0id5993: entered promiscuous mode
+[   24.688945] v0p0id5993: left promiscuous mode
+[   24.706809] v0p0id5993: entered promiscuous mode
+[   24.732304] v0p0id5993: left promiscuous mode
+[   24.733159] v0p0id5993: entered promiscuous mode
+[   24.738167] v0p0id5993: left promiscuous mode
+[   24.756753] v0p0id5993: entered promiscuous mode
+[   24.780170] v0p0id5993: left promiscuous mode
+[   24.780559] v0p0id5993: entered promiscuous mode
+[   24.810535] v0p0id5993: left promiscuous mode
+[   24.838031] v0p0id5993: entered promiscuous mode
+[   24.858109] v0p0id5993: left promiscuous mode
+[   24.878756] v0p0id5993: entered promiscuous mode
+[   24.908092] v0p0id5993: left promiscuous mode
+[   24.930778] v0p0id5993: entered promiscuous mode
+[   24.963099] v0p0id5993: left promiscuous mode
+[   24.982740] v0p0id5993: entered promiscuous mode
+[   25.013543] v0p0id5993: left promiscuous mode
+[   25.034712] v0p0id5993: entered promiscuous mode
+[   25.065165] v0p0id5993: left promiscuous mode
+[   25.086725] v0p0id5993: entered promiscuous mode
+[   25.091672] v0p0id5993: left promiscuous mode
+[   25.113642] v0p0id5993: entered promiscuous mode
+[   25.147252] v0p0id5993: left promiscuous mode
+[   25.165719] v0p0id5993: entered promiscuous mode
+[   25.199316] v0p0id5993: left promiscuous mode
+[   25.222727] v0p0id5993: entered promiscuous mode
+[   25.255860] v0p0id5993: left promiscuous mode
+[   25.285075] v0p0id5993: entered promiscuous mode
+[   25.308204] v0p0id5993: left promiscuous mode
+[   25.336811] v0p0id5993: entered promiscuous mode
+[   25.364206] v0p0id5993: left promiscuous mode
+[   25.386615] v0p0id5993: entered promiscuous mode
+[   25.427118] v0p0id5993: left promiscuous mode
+[   25.428580] v0p0id5993: entered promiscuous mode
+[   25.434135] v0p0id5993: left promiscuous mode
+[   25.441552] v0p0id5993: entered promiscuous mode
+[   25.459033] v0p0id5993: left promiscuous mode
+[   25.471493] v0p0id5993: entered promiscuous mode
+[   25.506203] v0p0id5993: left promiscuous mode
+[   25.520695] v0p0id5993: entered promiscuous mode
+[   25.568284] v0p0id5993: left promiscuous mode
+[   47.580838] v0p0id3992: entered promiscuous mode
+[   47.627521] v0p0id3992: left promiscuous mode
+[   47.650764] v0p0id3992: entered promiscuous mode
+[   47.673860] v0p0id3992: left promiscuous mode
