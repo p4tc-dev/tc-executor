@@ -1,0 +1,293 @@
+======================================
+| [   13.014854] ==================================================================
+| [   13.014984] BUG: KASAN: use-after-free in page_pool_item_uninit (net/core/page_pool.c:523 (discriminator 2))
+| [   13.015081] Read of size 8 at addr ffff888008190008 by task echo/1584
+| [   13.015178]
+| [   13.015218] CPU: 1 UID: 0 PID: 1584 Comm: echo Not tainted 6.13.0-rc5-virtme #1
+[   13.015337] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.015491] Call Trace:
+[   13.015531]  <TASK>
+[   13.015571] dump_stack_lvl (lib/dump_stack.c:123)
+[   13.015633] print_report (mm/kasan/report.c:379 mm/kasan/report.c:489)
+[   13.015692] ? __pfx__raw_spin_lock_irqsave (kernel/locking/spinlock.c:161)
+[   13.015770] ? free_unref_page (./arch/x86/include/asm/preempt.h:94 (discriminator 1) mm/page_alloc.c:2683 (discriminator 1))
+[   13.015832] ? page_pool_item_uninit (net/core/page_pool.c:523 (discriminator 2))
+[   13.015910] kasan_report (mm/kasan/report.c:604)
+[   13.015967] ? page_pool_item_uninit (net/core/page_pool.c:523 (discriminator 2))
+[   13.016045] page_pool_item_uninit (net/core/page_pool.c:523 (discriminator 2))
+[   13.016122] page_pool_release (net/core/page_pool.c:1431 net/core/page_pool.c:1484)
+[   13.016181] ? __pfx_page_pool_release (net/core/page_pool.c:1478)
+[   13.016258] ? __pfx_synchronize_rcu_expedited (kernel/rcu/tree_exp.h:940)
+[   13.016345] ? __pfx_autoremove_wake_function (kernel/sched/wait.c:383)
+[   13.016424] page_pool_destroy (net/core/page_pool.c:1555 (discriminator 1))
+[   13.016484] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.016570] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.016647] ? __netif_napi_del (./include/linux/netdevice.h:4027 net/core/dev.c:6887 net/core/dev.c:6876)
+[   13.016706] nsim_stop (drivers/net/netdevsim/netdev.c:469 drivers/net/netdevsim/netdev.c:483) netdevsim
+[   13.016787] __dev_close_many (net/core/dev.c:1591)
+[   13.016846] ? __pfx___dev_close_many (net/core/dev.c:1555)
+[   13.016927] ? do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   13.016986] dev_close_many (net/core/dev.c:1618)
+[   13.017043] ? __nsim_dev_port_del (drivers/net/netdevsim/dev.c:426 drivers/net/netdevsim/dev.c:1429) netdevsim
+[   13.017125] ? nsim_dev_reload_destroy (drivers/net/netdevsim/dev.c:1438 (discriminator 3) drivers/net/netdevsim/dev.c:1661 (discriminator 3)) netdevsim
+[   13.017220] ? __pfx_dev_close_many (net/core/dev.c:1608)
+[   13.017306] ? device_del (drivers/base/core.c:3855)
+[   13.017376] ? device_unregister (drivers/base/core.c:3772 drivers/base/core.c:3896)
+[   13.017435] ? del_device_store (drivers/net/netdevsim/bus.c:230) netdevsim
+[   13.017510] ? kernfs_fop_write_iter (fs/kernfs/file.c:334)
+[   13.017585] ? vfs_write (fs/read_write.c:586 fs/read_write.c:679)
+[   13.017643] ? ksys_write (fs/read_write.c:731)
+[   13.017708] ? do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   13.017768] ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[   13.017848] unregister_netdevice_many_notify (net/core/dev.c:11562)
+[   13.017926] ? __pfx_unregister_netdevice_many_notify (net/core/dev.c:11529)
+[   13.018027] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.018100] ? _raw_spin_lock (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2170 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1302 (discriminator 4) ./include/asm-generic/qspinlock.h:111 (discriminator 4) ./include/linux/spinlock.h:187 (discriminator 4) ./include/linux/spinlock_api_smp.h:134 (discriminator 4) kernel/locking/spinlock.c:154 (discriminator 4))
+[   13.018158] ? __pfx__raw_spin_lock (kernel/locking/spinlock.c:153)
+[   13.018235] unregister_netdevice_queue (net/core/dev.c:11524)
+[   13.018311] ? __pfx_unregister_netdevice_queue (net/core/dev.c:11513)
+[   13.018389] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[   13.018449] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.018508] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.018586] nsim_destroy (drivers/net/netdevsim/netdev.c:832) netdevsim
+[   13.018664] __nsim_dev_port_del (drivers/net/netdevsim/dev.c:426 drivers/net/netdevsim/dev.c:1429) netdevsim
+[   13.018740] nsim_dev_reload_destroy (drivers/net/netdevsim/dev.c:1438 (discriminator 3) drivers/net/netdevsim/dev.c:1661 (discriminator 3)) netdevsim
+[   13.018832] ? up_write (./arch/x86/include/asm/atomic64_64.h:87 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:2852 (discriminator 5) ./include/linux/atomic/atomic-long.h:268 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:3391 (discriminator 5) kernel/locking/rwsem.c:1372 (discriminator 5) kernel/locking/rwsem.c:1630 (discriminator 5))
+[   13.018893] nsim_drv_remove (drivers/net/netdevsim/dev.c:1678) netdevsim
+[   13.018972] device_release_driver_internal (drivers/base/dd.c:1275 drivers/base/dd.c:1296)
+[   13.019047] ? kobject_put (./arch/x86/include/asm/atomic.h:93 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:949 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:401 (discriminator 4) ./include/linux/refcount.h:264 (discriminator 4) ./include/linux/refcount.h:307 (discriminator 4) ./include/linux/refcount.h:325 (discriminator 4) ./include/linux/kref.h:64 (discriminator 4) lib/kobject.c:737 (discriminator 4))
+[   13.019110] bus_remove_device (./include/linux/kobject.h:193 drivers/base/base.h:73 drivers/base/bus.c:583)
+[   13.019171] device_del (drivers/base/core.c:3855)
+[   13.019236] ? __pfx_device_del (drivers/base/core.c:3809)
+[   13.019294] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[   13.019354] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.019416] device_unregister (drivers/base/core.c:3772 drivers/base/core.c:3896)
+[   13.019475] del_device_store (drivers/net/netdevsim/bus.c:230) netdevsim
+[   13.019551] ? __kasan_kmalloc (mm/kasan/common.c:377 mm/kasan/common.c:394)
+[   13.019607] ? __pfx_del_device_store (drivers/net/netdevsim/bus.c:197) netdevsim
+[   13.019686] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[   13.019744] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.019810] kernfs_fop_write_iter (fs/kernfs/file.c:334)
+[   13.019884] vfs_write (fs/read_write.c:586 fs/read_write.c:679)
+[   13.019945] ? __pfx___handle_mm_fault (mm/memory.c:5853)
+[   13.020024] ? __pfx_vfs_write (fs/read_write.c:660)
+[   13.020081] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.020139] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.020215] ? fdget_pos (fs/file.c:1191)
+[   13.020277] ksys_write (fs/read_write.c:731)
+[   13.020342] ? __pfx_ksys_write (fs/read_write.c:721)
+[   13.020401] ? up_read (./arch/x86/include/asm/atomic64_64.h:79 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:2749 (discriminator 5) ./include/linux/atomic/atomic-long.h:184 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:3317 (discriminator 5) kernel/locking/rwsem.c:1345 (discriminator 5) kernel/locking/rwsem.c:1620 (discriminator 5))
+[   13.020459] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.020542] ? do_user_addr_fault (arch/x86/mm/fault.c:1342)
+[   13.020626] do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   13.020682] entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[   13.020758] RIP: 0033:0x7ff512287574
+[ 13.020817] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d d5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+All code
+========
+   0:	c7 00 16 00 00 00    	movl   $0x16,(%rax)
+   6:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   b:	c3                   	ret
+   c:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  13:	00 00 00 
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d d5 ea 0e 00 00 	cmpb   $0x0,0xeead5(%rip)        # 0xeeaf6
+  21:	74 13                	je     0x36
+  23:	b8 01 00 00 00       	mov    $0x1,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 54                	ja     0x86
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	48                   	rex.W
+  3f:	89                   	.byte 0x89
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 54                	ja     0x5c
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	48                   	rex.W
+  15:	89                   	.byte 0x89
+[   13.021073] RSP: 002b:00007ffec5a80f98 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[   13.021190] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007ff512287574
+[   13.021301] RDX: 0000000000000002 RSI: 000056480406e2f0 RDI: 0000000000000001
+[   13.021417] RBP: 00007ffec5a80fc0 R08: 0000000000000000 R09: 0000000000000000
+[   13.021529] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+[   13.021642] R13: 000056480406e2f0 R14: 00007ff51236f5c0 R15: 00007ff51236cee0
+| [   13.023294] Disabling lock debugging due to kernel taint
+| [   13.023457] Oops: general protection fault, probably for non-canonical address 0xe0da7c19200000c8: 0000 [#1] PREEMPT SMP KASAN NOPTI
+| [   13.023625] KASAN: maybe wild-memory-access in range [0x06d400c900000640-0x06d400c900000647]
+| [   13.023764] CPU: 1 UID: 0 PID: 1584 Comm: echo Tainted: G    B              6.13.0-rc5-virtme #1
+| [   13.023894] Tainted: [B]=BAD_PAGE
+[   13.023948] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.024101] RIP: 0010:page_pool_item_uninit (./arch/x86/include/asm/atomic.h:23 ./include/linux/atomic/atomic-arch-fallback.h:457 ./include/linux/atomic/atomic-instrumented.h:33 ./include/linux/refcount.h:136 net/core/page_pool.c:524)
+[ 13.024181] Code: 00 49 8b 46 08 4c 8d 70 f8 49 39 c4 0f 84 6e 01 00 00 49 8d 5e 1c be 04 00 00 00 48 89 df e8 76 19 77 fe 48 89 d8 48 c1 e8 03 <42> 0f b6 0c 28 48 89 d8 83 e0 07 83 c0 03 38 c8 7c 08 84 c9 0f 85
+All code
+========
+   0:	00 49 8b             	add    %cl,-0x75(%rcx)
+   3:	46 08 4c 8d 70       	or     %r9b,0x70(%rbp,%r9,4)
+   8:	f8                   	clc
+   9:	49 39 c4             	cmp    %rax,%r12
+   c:	0f 84 6e 01 00 00    	je     0x180
+  12:	49 8d 5e 1c          	lea    0x1c(%r14),%rbx
+  16:	be 04 00 00 00       	mov    $0x4,%esi
+  1b:	48 89 df             	mov    %rbx,%rdi
+  1e:	e8 76 19 77 fe       	call   0xfffffffffe771999
+  23:	48 89 d8             	mov    %rbx,%rax
+  26:	48 c1 e8 03          	shr    $0x3,%rax
+  2a:*	42 0f b6 0c 28       	movzbl (%rax,%r13,1),%ecx		<-- trapping instruction
+  2f:	48 89 d8             	mov    %rbx,%rax
+  32:	83 e0 07             	and    $0x7,%eax
+  35:	83 c0 03             	add    $0x3,%eax
+  38:	38 c8                	cmp    %cl,%al
+  3a:	7c 08                	jl     0x44
+  3c:	84 c9                	test   %cl,%cl
+  3e:	0f                   	.byte 0xf
+  3f:	85                   	.byte 0x85
+
+Code starting with the faulting instruction
+===========================================
+   0:	42 0f b6 0c 28       	movzbl (%rax,%r13,1),%ecx
+   5:	48 89 d8             	mov    %rbx,%rax
+   8:	83 e0 07             	and    $0x7,%eax
+   b:	83 c0 03             	add    $0x3,%eax
+   e:	38 c8                	cmp    %cl,%al
+  10:	7c 08                	jl     0x1a
+  12:	84 c9                	test   %cl,%cl
+  14:	0f                   	.byte 0xf
+  15:	85                   	.byte 0x85
+[   13.024438] RSP: 0018:ffff88800f8df4e0 EFLAGS: 00010213
+[   13.024514] RAX: 00da8019200000c8 RBX: 06d400c900000644 RCX: 0000000000000000
+[   13.024624] RDX: 0000000000000000 RSI: 0000000000000004 RDI: ffff88800f8df488
+[   13.024735] RBP: fffffbfff666767a R08: 0000000000000000 R09: fffffbfff69915e8
+[   13.024841] R10: ffffffffb4c8af47 R11: 6e696c6261736944 R12: ffff88800924f560
+[   13.024952] R13: dffffc0000000000 R14: 06d400c900000628 R15: ffffea0000206400
+[   13.025062] FS:  00007ff512168740(0000) GS:ffff888035480000(0000) knlGS:0000000000000000
+[   13.025173] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.025267] CR2: 000056480406f2f8 CR3: 000000000e9fe000 CR4: 0000000000750ef0
+[   13.025383] PKRU: 55555554
+[   13.025422] Call Trace:
+[   13.025463]  <TASK>
+[   13.025502] ? die_addr (arch/x86/kernel/dumpstack.c:421 arch/x86/kernel/dumpstack.c:460)
+[   13.025563] ? exc_general_protection (arch/x86/kernel/traps.c:751 arch/x86/kernel/traps.c:693)
+[   13.025642] ? asm_exc_general_protection (./arch/x86/include/asm/idtentry.h:617)
+[   13.025719] ? page_pool_item_uninit (./arch/x86/include/asm/atomic.h:23 ./include/linux/atomic/atomic-arch-fallback.h:457 ./include/linux/atomic/atomic-instrumented.h:33 ./include/linux/refcount.h:136 net/core/page_pool.c:524)
+[   13.025793] page_pool_release (net/core/page_pool.c:1431 net/core/page_pool.c:1484)
+[   13.025851] ? __pfx_page_pool_release (net/core/page_pool.c:1478)
+[   13.025923] ? __pfx_synchronize_rcu_expedited (kernel/rcu/tree_exp.h:940)
+[   13.025999] ? __pfx_autoremove_wake_function (kernel/sched/wait.c:383)
+[   13.026075] page_pool_destroy (net/core/page_pool.c:1555 (discriminator 1))
+[   13.026131] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.026206] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.026280] ? __netif_napi_del (./include/linux/netdevice.h:4027 net/core/dev.c:6887 net/core/dev.c:6876)
+[   13.026344] nsim_stop (drivers/net/netdevsim/netdev.c:469 drivers/net/netdevsim/netdev.c:483) netdevsim
+[   13.026417] __dev_close_many (net/core/dev.c:1591)
+[   13.026473] ? __pfx___dev_close_many (net/core/dev.c:1555)
+[   13.026543] ? do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   13.026603] dev_close_many (net/core/dev.c:1618)
+[   13.026662] ? __nsim_dev_port_del (drivers/net/netdevsim/dev.c:426 drivers/net/netdevsim/dev.c:1429) netdevsim
+[   13.026739] ? nsim_dev_reload_destroy (drivers/net/netdevsim/dev.c:1438 (discriminator 3) drivers/net/netdevsim/dev.c:1661 (discriminator 3)) netdevsim
+[   13.026830] ? __pfx_dev_close_many (net/core/dev.c:1608)
+[   13.026902] ? device_del (drivers/base/core.c:3855)
+[   13.026959] ? device_unregister (drivers/base/core.c:3772 drivers/base/core.c:3896)
+[   13.027016] ? del_device_store (drivers/net/netdevsim/bus.c:230) netdevsim
+[   13.027091] ? kernfs_fop_write_iter (fs/kernfs/file.c:334)
+[   13.027164] ? vfs_write (fs/read_write.c:586 fs/read_write.c:679)
+[   13.027221] ? ksys_write (fs/read_write.c:731)
+[   13.027278] ? do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   13.027336] ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[   13.027415] unregister_netdevice_many_notify (net/core/dev.c:11562)
+[   13.027491] ? __pfx_unregister_netdevice_many_notify (net/core/dev.c:11529)
+[   13.027585] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.027658] ? _raw_spin_lock (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2170 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1302 (discriminator 4) ./include/asm-generic/qspinlock.h:111 (discriminator 4) ./include/linux/spinlock.h:187 (discriminator 4) ./include/linux/spinlock_api_smp.h:134 (discriminator 4) kernel/locking/spinlock.c:154 (discriminator 4))
+[   13.027721] ? __pfx__raw_spin_lock (kernel/locking/spinlock.c:153)
+[   13.027799] unregister_netdevice_queue (net/core/dev.c:11524)
+[   13.027875] ? __pfx_unregister_netdevice_queue (net/core/dev.c:11513)
+[   13.027951] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[   13.028007] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.028064] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.028138] nsim_destroy (drivers/net/netdevsim/netdev.c:832) netdevsim
+[   13.028212] __nsim_dev_port_del (drivers/net/netdevsim/dev.c:426 drivers/net/netdevsim/dev.c:1429) netdevsim
+[   13.028291] nsim_dev_reload_destroy (drivers/net/netdevsim/dev.c:1438 (discriminator 3) drivers/net/netdevsim/dev.c:1661 (discriminator 3)) netdevsim
+[   13.028384] ? up_write (./arch/x86/include/asm/atomic64_64.h:87 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:2852 (discriminator 5) ./include/linux/atomic/atomic-long.h:268 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:3391 (discriminator 5) kernel/locking/rwsem.c:1372 (discriminator 5) kernel/locking/rwsem.c:1630 (discriminator 5))
+[   13.028442] nsim_drv_remove (drivers/net/netdevsim/dev.c:1678) netdevsim
+[   13.028520] device_release_driver_internal (drivers/base/dd.c:1275 drivers/base/dd.c:1296)
+[   13.028594] ? kobject_put (./arch/x86/include/asm/atomic.h:93 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:949 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:401 (discriminator 4) ./include/linux/refcount.h:264 (discriminator 4) ./include/linux/refcount.h:307 (discriminator 4) ./include/linux/refcount.h:325 (discriminator 4) ./include/linux/kref.h:64 (discriminator 4) lib/kobject.c:737 (discriminator 4))
+[   13.028651] bus_remove_device (./include/linux/kobject.h:193 drivers/base/base.h:73 drivers/base/bus.c:583)
+[   13.028715] device_del (drivers/base/core.c:3855)
+[   13.028773] ? __pfx_device_del (drivers/base/core.c:3809)
+[   13.028831] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[   13.028894] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.028953] device_unregister (drivers/base/core.c:3772 drivers/base/core.c:3896)
+[   13.029009] del_device_store (drivers/net/netdevsim/bus.c:230) netdevsim
+[   13.029088] ? __kasan_kmalloc (mm/kasan/common.c:377 mm/kasan/common.c:394)
+[   13.029143] ? __pfx_del_device_store (drivers/net/netdevsim/bus.c:197) netdevsim
+[   13.029222] ? mutex_lock (./arch/x86/include/asm/atomic64_64.h:101 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:4296 (discriminator 5) ./include/linux/atomic/atomic-long.h:1482 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:4458 (discriminator 5) kernel/locking/mutex.c:146 (discriminator 5) kernel/locking/mutex.c:260 (discriminator 5))
+[   13.029281] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.029338] kernfs_fop_write_iter (fs/kernfs/file.c:334)
+[   13.029414] vfs_write (fs/read_write.c:586 fs/read_write.c:679)
+[   13.029469] ? __pfx___handle_mm_fault (mm/memory.c:5853)
+[   13.029544] ? __pfx_vfs_write (fs/read_write.c:660)
+[   13.029602] ? __pfx_mutex_lock (kernel/locking/mutex.c:257)
+[   13.029660] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.029733] ? fdget_pos (fs/file.c:1191)
+[   13.029789] ksys_write (fs/read_write.c:731)
+[   13.029845] ? __pfx_ksys_write (fs/read_write.c:721)
+[   13.029903] ? up_read (./arch/x86/include/asm/atomic64_64.h:79 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:2749 (discriminator 5) ./include/linux/atomic/atomic-long.h:184 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:3317 (discriminator 5) kernel/locking/rwsem.c:1345 (discriminator 5) kernel/locking/rwsem.c:1620 (discriminator 5))
+[   13.029962] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   13.030038] ? do_user_addr_fault (arch/x86/mm/fault.c:1342)
+[   13.030115] do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   13.030172] entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[   13.030247] RIP: 0033:0x7ff512287574
+[ 13.030310] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d d5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+All code
+========
+   0:	c7 00 16 00 00 00    	movl   $0x16,(%rax)
+   6:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   b:	c3                   	ret
+   c:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  13:	00 00 00 
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d d5 ea 0e 00 00 	cmpb   $0x0,0xeead5(%rip)        # 0xeeaf6
+  21:	74 13                	je     0x36
+  23:	b8 01 00 00 00       	mov    $0x1,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 54                	ja     0x86
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	48                   	rex.W
+  3f:	89                   	.byte 0x89
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 54                	ja     0x5c
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	48                   	rex.W
+  15:	89                   	.byte 0x89
+[   13.030565] RSP: 002b:00007ffec5a80f98 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[   13.030677] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007ff512287574
+[   13.030789] RDX: 0000000000000002 RSI: 000056480406e2f0 RDI: 0000000000000001
+[   13.030902] RBP: 00007ffec5a80fc0 R08: 0000000000000000 R09: 0000000000000000
+[   13.031011] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+
+
+Finger prints:
+dump_stack_lvl:print_report:kasan_report:page_pool_item_uninit
+page_pool_item_uninit:page_pool_release:page_pool_destroy:nsim_stop

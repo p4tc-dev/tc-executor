@@ -1,0 +1,290 @@
+[    4.550313] GACT probability on
+[    4.652031] Mirror/redirect action on
+[    4.961836] Simple TC action Loaded
+[    5.633539] u32 classifier
+[    5.633580]     Performance counters on
+[    5.633630]     input device check on
+[    5.633679]     Actions configured
+[    9.601231] netem: version 1.3
+[   13.014854] ==================================================================
+[   13.014984] BUG: KASAN: use-after-free in page_pool_item_uninit+0x22a/0x2c0
+[   13.015081] Read of size 8 at addr ffff888008190008 by task echo/1584
+[   13.015178] 
+[   13.015218] CPU: 1 UID: 0 PID: 1584 Comm: echo Not tainted 6.13.0-rc5-virtme #1
+[   13.015337] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.015491] Call Trace:
+[   13.015531]  <TASK>
+[   13.015571]  dump_stack_lvl+0x53/0x70
+[   13.015633]  print_report+0xd0/0x660
+[   13.015692]  ? __pfx__raw_spin_lock_irqsave+0x10/0x10
+[   13.015770]  ? free_unref_page+0x588/0xd30
+[   13.015832]  ? page_pool_item_uninit+0x22a/0x2c0
+[   13.015910]  kasan_report+0xc6/0x100
+[   13.015967]  ? page_pool_item_uninit+0x22a/0x2c0
+[   13.016045]  page_pool_item_uninit+0x22a/0x2c0
+[   13.016122]  page_pool_release+0x5dc/0x7e0
+[   13.016181]  ? __pfx_page_pool_release+0x10/0x10
+[   13.016258]  ? __pfx_synchronize_rcu_expedited+0x10/0x10
+[   13.016345]  ? __pfx_autoremove_wake_function+0x10/0x10
+[   13.016424]  page_pool_destroy+0x128/0x8a0
+[   13.016484]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.016570]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.016647]  ? __netif_napi_del+0x181/0x430
+[   13.016706]  nsim_stop+0x1fb/0x310 [netdevsim]
+[   13.016787]  __dev_close_many+0x18f/0x2c0
+[   13.016846]  ? __pfx___dev_close_many+0x10/0x10
+[   13.016927]  ? do_syscall_64+0x9e/0x1a0
+[   13.016986]  dev_close_many+0x1b1/0x440
+[   13.017043]  ? __nsim_dev_port_del+0x114/0x1b0 [netdevsim]
+[   13.017125]  ? nsim_dev_reload_destroy+0x12b/0x490 [netdevsim]
+[   13.017220]  ? __pfx_dev_close_many+0x10/0x10
+[   13.017306]  ? device_del+0x373/0xd60
+[   13.017376]  ? device_unregister+0x12/0x30
+[   13.017435]  ? del_device_store+0x290/0x3b0 [netdevsim]
+[   13.017510]  ? kernfs_fop_write_iter+0x2f5/0x490
+[   13.017585]  ? vfs_write+0x5f5/0xf60
+[   13.017643]  ? ksys_write+0xfd/0x1d0
+[   13.017708]  ? do_syscall_64+0x9e/0x1a0
+[   13.017768]  ? entry_SYSCALL_64_after_hwframe+0x77/0x7f
+[   13.017848]  unregister_netdevice_many_notify+0x368/0x1ab0
+[   13.017926]  ? __pfx_unregister_netdevice_many_notify+0x10/0x10
+[   13.018027]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.018100]  ? _raw_spin_lock+0x85/0xe0
+[   13.018158]  ? __pfx__raw_spin_lock+0x10/0x10
+[   13.018235]  unregister_netdevice_queue+0x20c/0x2c0
+[   13.018311]  ? __pfx_unregister_netdevice_queue+0x10/0x10
+[   13.018389]  ? mutex_lock+0x87/0xe0
+[   13.018449]  ? __pfx_mutex_lock+0x10/0x10
+[   13.018508]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.018586]  nsim_destroy+0xe4/0x5a0 [netdevsim]
+[   13.018664]  __nsim_dev_port_del+0x114/0x1b0 [netdevsim]
+[   13.018740]  nsim_dev_reload_destroy+0x12b/0x490 [netdevsim]
+[   13.018832]  ? up_write+0x52/0xa0
+[   13.018893]  nsim_drv_remove+0x51/0x1d0 [netdevsim]
+[   13.018972]  device_release_driver_internal+0x3bf/0x580
+[   13.019047]  ? kobject_put+0x61/0x290
+[   13.019110]  bus_remove_device+0x1db/0x2f0
+[   13.019171]  device_del+0x373/0xd60
+[   13.019236]  ? __pfx_device_del+0x10/0x10
+[   13.019294]  ? mutex_lock+0x87/0xe0
+[   13.019354]  ? __pfx_mutex_lock+0x10/0x10
+[   13.019416]  device_unregister+0x12/0x30
+[   13.019475]  del_device_store+0x290/0x3b0 [netdevsim]
+[   13.019551]  ? __kasan_kmalloc+0x8f/0xa0
+[   13.019607]  ? __pfx_del_device_store+0x10/0x10 [netdevsim]
+[   13.019686]  ? mutex_lock+0x87/0xe0
+[   13.019744]  ? __pfx_mutex_lock+0x10/0x10
+[   13.019810]  kernfs_fop_write_iter+0x2f5/0x490
+[   13.019884]  vfs_write+0x5f5/0xf60
+[   13.019945]  ? __pfx___handle_mm_fault+0x10/0x10
+[   13.020024]  ? __pfx_vfs_write+0x10/0x10
+[   13.020081]  ? __pfx_mutex_lock+0x10/0x10
+[   13.020139]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.020215]  ? fdget_pos+0x25c/0x4c0
+[   13.020277]  ksys_write+0xfd/0x1d0
+[   13.020342]  ? __pfx_ksys_write+0x10/0x10
+[   13.020401]  ? up_read+0x1f/0xb0
+[   13.020459]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.020542]  ? do_user_addr_fault+0x43e/0x960
+[   13.020626]  do_syscall_64+0x9e/0x1a0
+[   13.020682]  entry_SYSCALL_64_after_hwframe+0x77/0x7f
+[   13.020758] RIP: 0033:0x7ff512287574
+[   13.020817] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d d5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+[   13.021073] RSP: 002b:00007ffec5a80f98 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[   13.021190] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007ff512287574
+[   13.021301] RDX: 0000000000000002 RSI: 000056480406e2f0 RDI: 0000000000000001
+[   13.021417] RBP: 00007ffec5a80fc0 R08: 0000000000000000 R09: 0000000000000000
+[   13.021529] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+[   13.021642] R13: 000056480406e2f0 R14: 00007ff51236f5c0 R15: 00007ff51236cee0
+[   13.021756]  </TASK>
+[   13.021795] 
+[   13.021832] The buggy address belongs to the physical page:
+[   13.021908] page: refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x8190
+[   13.022021] flags: 0x80000000000000(node=0|zone=1)
+[   13.022099] page_type: f5(slab)
+[   13.022160] raw: 0080000000000000 ffff88800104c640 dead000000000122 0000000000000000
+[   13.022273] raw: 0000000000000000 0000000000800080 00000001f5000000 0000000000000000
+[   13.022381] page dumped because: kasan: bad access detected
+[   13.022453] 
+[   13.022490] Memory state around the buggy address:
+[   13.022566]  ffff88800818ff00: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[   13.022675]  ffff88800818ff80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+[   13.022786] >ffff888008190000: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+[   13.022893]                       ^
+[   13.022957]  ffff888008190080: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+[   13.023066]  ffff888008190100: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+[   13.023177] ==================================================================
+[   13.023294] Disabling lock debugging due to kernel taint
+[   13.023457] Oops: general protection fault, probably for non-canonical address 0xe0da7c19200000c8: 0000 [#1] PREEMPT SMP KASAN NOPTI
+[   13.023625] KASAN: maybe wild-memory-access in range [0x06d400c900000640-0x06d400c900000647]
+[   13.023764] CPU: 1 UID: 0 PID: 1584 Comm: echo Tainted: G    B              6.13.0-rc5-virtme #1
+[   13.023894] Tainted: [B]=BAD_PAGE
+[   13.023948] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.024101] RIP: 0010:page_pool_item_uninit+0xa1/0x2c0
+[   13.024181] Code: 00 49 8b 46 08 4c 8d 70 f8 49 39 c4 0f 84 6e 01 00 00 49 8d 5e 1c be 04 00 00 00 48 89 df e8 76 19 77 fe 48 89 d8 48 c1 e8 03 <42> 0f b6 0c 28 48 89 d8 83 e0 07 83 c0 03 38 c8 7c 08 84 c9 0f 85
+[   13.024438] RSP: 0018:ffff88800f8df4e0 EFLAGS: 00010213
+[   13.024514] RAX: 00da8019200000c8 RBX: 06d400c900000644 RCX: 0000000000000000
+[   13.024624] RDX: 0000000000000000 RSI: 0000000000000004 RDI: ffff88800f8df488
+[   13.024735] RBP: fffffbfff666767a R08: 0000000000000000 R09: fffffbfff69915e8
+[   13.024841] R10: ffffffffb4c8af47 R11: 6e696c6261736944 R12: ffff88800924f560
+[   13.024952] R13: dffffc0000000000 R14: 06d400c900000628 R15: ffffea0000206400
+[   13.025062] FS:  00007ff512168740(0000) GS:ffff888035480000(0000) knlGS:0000000000000000
+[   13.025173] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.025267] CR2: 000056480406f2f8 CR3: 000000000e9fe000 CR4: 0000000000750ef0
+[   13.025383] PKRU: 55555554
+[   13.025422] Call Trace:
+[   13.025463]  <TASK>
+[   13.025502]  ? die_addr+0x40/0xa0
+[   13.025563]  ? exc_general_protection+0x151/0x220
+[   13.025642]  ? asm_exc_general_protection+0x26/0x30
+[   13.025719]  ? page_pool_item_uninit+0xa1/0x2c0
+[   13.025793]  page_pool_release+0x5dc/0x7e0
+[   13.025851]  ? __pfx_page_pool_release+0x10/0x10
+[   13.025923]  ? __pfx_synchronize_rcu_expedited+0x10/0x10
+[   13.025999]  ? __pfx_autoremove_wake_function+0x10/0x10
+[   13.026075]  page_pool_destroy+0x128/0x8a0
+[   13.026131]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.026206]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.026280]  ? __netif_napi_del+0x181/0x430
+[   13.026344]  nsim_stop+0x1fb/0x310 [netdevsim]
+[   13.026417]  __dev_close_many+0x18f/0x2c0
+[   13.026473]  ? __pfx___dev_close_many+0x10/0x10
+[   13.026543]  ? do_syscall_64+0x9e/0x1a0
+[   13.026603]  dev_close_many+0x1b1/0x440
+[   13.026662]  ? __nsim_dev_port_del+0x114/0x1b0 [netdevsim]
+[   13.026739]  ? nsim_dev_reload_destroy+0x12b/0x490 [netdevsim]
+[   13.026830]  ? __pfx_dev_close_many+0x10/0x10
+[   13.026902]  ? device_del+0x373/0xd60
+[   13.026959]  ? device_unregister+0x12/0x30
+[   13.027016]  ? del_device_store+0x290/0x3b0 [netdevsim]
+[   13.027091]  ? kernfs_fop_write_iter+0x2f5/0x490
+[   13.027164]  ? vfs_write+0x5f5/0xf60
+[   13.027221]  ? ksys_write+0xfd/0x1d0
+[   13.027278]  ? do_syscall_64+0x9e/0x1a0
+[   13.027336]  ? entry_SYSCALL_64_after_hwframe+0x77/0x7f
+[   13.027415]  unregister_netdevice_many_notify+0x368/0x1ab0
+[   13.027491]  ? __pfx_unregister_netdevice_many_notify+0x10/0x10
+[   13.027585]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.027658]  ? _raw_spin_lock+0x85/0xe0
+[   13.027721]  ? __pfx__raw_spin_lock+0x10/0x10
+[   13.027799]  unregister_netdevice_queue+0x20c/0x2c0
+[   13.027875]  ? __pfx_unregister_netdevice_queue+0x10/0x10
+[   13.027951]  ? mutex_lock+0x87/0xe0
+[   13.028007]  ? __pfx_mutex_lock+0x10/0x10
+[   13.028064]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.028138]  nsim_destroy+0xe4/0x5a0 [netdevsim]
+[   13.028212]  __nsim_dev_port_del+0x114/0x1b0 [netdevsim]
+[   13.028291]  nsim_dev_reload_destroy+0x12b/0x490 [netdevsim]
+[   13.028384]  ? up_write+0x52/0xa0
+[   13.028442]  nsim_drv_remove+0x51/0x1d0 [netdevsim]
+[   13.028520]  device_release_driver_internal+0x3bf/0x580
+[   13.028594]  ? kobject_put+0x61/0x290
+[   13.028651]  bus_remove_device+0x1db/0x2f0
+[   13.028715]  device_del+0x373/0xd60
+[   13.028773]  ? __pfx_device_del+0x10/0x10
+[   13.028831]  ? mutex_lock+0x87/0xe0
+[   13.028894]  ? __pfx_mutex_lock+0x10/0x10
+[   13.028953]  device_unregister+0x12/0x30
+[   13.029009]  del_device_store+0x290/0x3b0 [netdevsim]
+[   13.029088]  ? __kasan_kmalloc+0x8f/0xa0
+[   13.029143]  ? __pfx_del_device_store+0x10/0x10 [netdevsim]
+[   13.029222]  ? mutex_lock+0x87/0xe0
+[   13.029281]  ? __pfx_mutex_lock+0x10/0x10
+[   13.029338]  kernfs_fop_write_iter+0x2f5/0x490
+[   13.029414]  vfs_write+0x5f5/0xf60
+[   13.029469]  ? __pfx___handle_mm_fault+0x10/0x10
+[   13.029544]  ? __pfx_vfs_write+0x10/0x10
+[   13.029602]  ? __pfx_mutex_lock+0x10/0x10
+[   13.029660]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.029733]  ? fdget_pos+0x25c/0x4c0
+[   13.029789]  ksys_write+0xfd/0x1d0
+[   13.029845]  ? __pfx_ksys_write+0x10/0x10
+[   13.029903]  ? up_read+0x1f/0xb0
+[   13.029962]  ? srso_alias_return_thunk+0x5/0xfbef5
+[   13.030038]  ? do_user_addr_fault+0x43e/0x960
+[   13.030115]  do_syscall_64+0x9e/0x1a0
+[   13.030172]  entry_SYSCALL_64_after_hwframe+0x77/0x7f
+[   13.030247] RIP: 0033:0x7ff512287574
+[   13.030310] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d d5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+[   13.030565] RSP: 002b:00007ffec5a80f98 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[   13.030677] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007ff512287574
+[   13.030789] RDX: 0000000000000002 RSI: 000056480406e2f0 RDI: 0000000000000001
+[   13.030902] RBP: 00007ffec5a80fc0 R08: 0000000000000000 R09: 0000000000000000
+[   13.031011] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+[   13.031123] R13: 000056480406e2f0 R14: 00007ff51236f5c0 R15: 00007ff51236cee0
+[   13.031235]  </TASK>
+[   13.031272] Modules linked in: sch_taprio sch_mqprio_lib sch_prio sch_netem sch_ingress sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack libcrc32c nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[   13.032152] ---[ end trace 0000000000000000 ]---
+[   13.032226] RIP: 0010:page_pool_item_uninit+0xa1/0x2c0
+[   13.032356] Code: 00 49 8b 46 08 4c 8d 70 f8 49 39 c4 0f 84 6e 01 00 00 49 8d 5e 1c be 04 00 00 00 48 89 df e8 76 19 77 fe 48 89 d8 48 c1 e8 03 <42> 0f b6 0c 28 48 89 d8 83 e0 07 83 c0 03 38 c8 7c 08 84 c9 0f 85
+[   13.032610] RSP: 0018:ffff88800f8df4e0 EFLAGS: 00010213
+[   13.032683] RAX: 00da8019200000c8 RBX: 06d400c900000644 RCX: 0000000000000000
+[   13.032791] RDX: 0000000000000000 RSI: 0000000000000004 RDI: ffff88800f8df488
+[   13.032903] RBP: fffffbfff666767a R08: 0000000000000000 R09: fffffbfff69915e8
+[   13.033021] R10: ffffffffb4c8af47 R11: 6e696c6261736944 R12: ffff88800924f560
+[   13.033128] R13: dffffc0000000000 R14: 06d400c900000628 R15: ffffea0000206400
+[   13.033236] FS:  00007ff512168740(0000) GS:ffff888035480000(0000) knlGS:0000000000000000
+[   13.033397] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.033489] CR2: 000056480406f2f8 CR3: 000000000e9fe000 CR4: 0000000000750ef0
+[   13.033598] PKRU: 55555554
+[   13.033636] Kernel panic - not syncing: Fatal exception
+[   13.033940] Kernel Offset: 0x2ee00000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[   13.034091] Rebooting in 60 seconds..
+[    3.004361] loop: module loaded
+[    3.006769] scsi host0: ata_piix
+[    3.007499] scsi host1: ata_piix
+[    3.007761] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc0c0 irq 14 lpm-pol 0
+[    3.007846] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc0c8 irq 15 lpm-pol 0
+[    3.009457] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    3.010254] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    3.010356] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    3.010837] rtc_cmos 00:04: RTC can wake from S4
+[    3.011918] rtc_cmos 00:04: registered as rtc0
+[    3.012081] rtc_cmos 00:04: setting system clock to 2025-01-06T21:29:15 UTC (1736198955)
+[    3.012420] rtc_cmos 00:04: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    3.013205] i6300ESB timer 0000:00:04.0: initialized. heartbeat=30 sec (nowayout=0)
+[    3.013557] device-mapper: ioctl: 4.48.0-ioctl (2023-03-01) initialised: dm-devel@lists.linux.dev
+[    3.015228] NET: Registered PF_PACKET protocol family
+[    3.015352] 9pnet: Installing 9P2000 support
+[    3.016787] Key type dns_resolver registered
+[    3.017290] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input2
+[    3.018136] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input3
+[    3.023308] IPI shorthand broadcast: enabled
+[    3.044528] sched_clock: Marking stable (3041001230, 3323687)->(3055437979, -11113062)
+[    3.045184] registered taskstats version 1
+[    3.046786] Loading compiled-in X.509 certificates
+[    3.062002] Demotion targets for Node 0: null
+[    3.062442] PM:   Magic number: 9:573:499
+[    3.062561] printk: legacy console [netcon0] enabled
+[    3.062624] netconsole: network logging started
+[    3.062837] ALSA device list:
+[    3.062902]   No soundcards found.
+[    3.164990] ata2: found unknown device (class 0)
+[    3.165748] ata2.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+[    3.167118] scsi 1:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+[    3.187346] scsi 1:0:0:0: Attached scsi generic sg0 type 5
+[    3.187818] md: Skipping autodetection of RAID arrays. (raid=autodetect will force)
+[    3.188135] 9pnet_virtio: no channels available for device 
+[    3.189167] VFS: Mounted root (9p filesystem) readonly on device 0:20.
+[    3.189525] devtmpfs: mounted
+[    3.194002] Freeing unused kernel image (initmem) memory: 6052K
+[    3.194108] Write protecting the kernel read-only data: 55296k
+[    3.194548] Freeing unused kernel image (rodata/data gap) memory: 148K
+[    3.228328] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    3.228451] Run /usr/lib/python3/dist-packages/virtme/guest/virtme-init as init process
+[    3.305436] mount (270) used greatest stack depth: 26608 bytes left
+[    3.391219] mkdir (274) used greatest stack depth: 26184 bytes left
+[    3.453028] uname (288) used greatest stack depth: 25920 bytes left
+[    3.575884] virtme-init: basic initialization done
+[    3.586328] virtme-init: running systemd-tmpfiles
+[    3.587492] virtme-init: udevd not found
+[    3.676000] virtme-init: Setting hostname to virtme-ng...
+[    3.703531] ip (343) used greatest stack depth: 24600 bytes left
+
+WAIT TIMEOUT stderr
+
+Ctrl-C stderr
+
+Ctrl-C stderr
+
+WAIT TIMEOUT stderr
