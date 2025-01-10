@@ -1,0 +1,137 @@
+======================================
+| [   12.597927] #PF: supervisor read access in kernel mode
+| [   12.597968] #PF: error_code(0x0000) - not-present page
+| [   12.598005] PGD 0 P4D 0
+| [   12.598029] Oops: Oops: 0000 [#1] PREEMPT SMP NOPTI
+| [   12.598065] CPU: 19 UID: 0 PID: 5067 Comm: tc Not tainted 6.13.0-rc6-virtme #1
+[   12.598117] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   12.598185] RIP: 0010:ets_class_dump (net/sched/sch_ets.c:308) sch_ets
+[ 12.598225] Code: ff ff ff 48 b8 cd cc cc cc cc cc cc cc 49 c1 fc 04 4c 0f af e0 8b 45 38 66 31 c0 41 8d 54 24 01 0f b7 d2 09 d0 31 d2 89 41 08 <49> 8b 46 10 8b 40 38 89 41 10 31 c9 44 8b ab b8 00 00 00 4c 03 ab
+All code
+========
+   0:	ff                   	(bad)
+   1:	ff                   	(bad)
+   2:	ff 48 b8             	decl   -0x48(%rax)
+   5:	cd cc                	int    $0xcc
+   7:	cc                   	int3
+   8:	cc                   	int3
+   9:	cc                   	int3
+   a:	cc                   	int3
+   b:	cc                   	int3
+   c:	cc                   	int3
+   d:	49 c1 fc 04          	sar    $0x4,%r12
+  11:	4c 0f af e0          	imul   %rax,%r12
+  15:	8b 45 38             	mov    0x38(%rbp),%eax
+  18:	66 31 c0             	xor    %ax,%ax
+  1b:	41 8d 54 24 01       	lea    0x1(%r12),%edx
+  20:	0f b7 d2             	movzwl %dx,%edx
+  23:	09 d0                	or     %edx,%eax
+  25:	31 d2                	xor    %edx,%edx
+  27:	89 41 08             	mov    %eax,0x8(%rcx)
+  2a:*	49 8b 46 10          	mov    0x10(%r14),%rax		<-- trapping instruction
+  2e:	8b 40 38             	mov    0x38(%rax),%eax
+  31:	89 41 10             	mov    %eax,0x10(%rcx)
+  34:	31 c9                	xor    %ecx,%ecx
+  36:	44 8b ab b8 00 00 00 	mov    0xb8(%rbx),%r13d
+  3d:	4c                   	rex.WR
+  3e:	03                   	.byte 0x3
+  3f:	ab                   	stos   %eax,%es:(%rdi)
+
+Code starting with the faulting instruction
+===========================================
+   0:	49 8b 46 10          	mov    0x10(%r14),%rax
+   4:	8b 40 38             	mov    0x38(%rax),%eax
+   7:	89 41 10             	mov    %eax,0x10(%rcx)
+   a:	31 c9                	xor    %ecx,%ecx
+   c:	44 8b ab b8 00 00 00 	mov    0xb8(%rbx),%r13d
+  13:	4c                   	rex.WR
+  14:	03                   	.byte 0x3
+  15:	ab                   	stos   %eax,%es:(%rdi)
+[   12.598337] RSP: 0018:ffffb4f6c1143768 EFLAGS: 00010246
+[   12.598371] RAX: 000000000001c915 RBX: ffff96274247c100 RCX: ffff96274df18138
+[   12.598423] RDX: 0000000000000000 RSI: 0000000000000002 RDI: ffff96274247c100
+[   12.598476] RBP: ffff96274e712800 R08: 0000000000000014 R09: ffff96274df18154
+[   12.598527] R10: ffff96274247c100 R11: 0000000000000006 R12: 666667b91bd1c914
+[   12.598576] R13: ffff96274df18128 R14: 0000000000000000 R15: ffff96274e712800
+[   12.598628] FS:  00007fc67ae65300(0000) GS:ffff96277eac0000(0000) knlGS:0000000000000000
+[   12.598681] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   12.598727] CR2: 0000000000000010 CR3: 000000000dd68000 CR4: 0000000000750ef0
+[   12.598799] PKRU: 55555554
+[   12.598830] Call Trace:
+[   12.598848]  <TASK>
+[   12.598876] ? __die (arch/x86/kernel/dumpstack.c:421 arch/x86/kernel/dumpstack.c:434)
+[   12.598905] ? page_fault_oops (arch/x86/mm/fault.c:715)
+[   12.598934] ? exc_page_fault (./arch/x86/include/asm/irqflags.h:37 ./arch/x86/include/asm/irqflags.h:92 arch/x86/mm/fault.c:1489 arch/x86/mm/fault.c:1539)
+[   12.598964] ? asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:623)
+[   12.599001] ? ets_class_dump (net/sched/sch_ets.c:308) sch_ets
+[   12.599042] ? __nlmsg_put (net/netlink/af_netlink.c:2151)
+[   12.599084] ? srso_alias_return_thunk (arch/x86/lib/retpoline.S:182)
+[   12.599125] tc_fill_tclass (net/sched/sch_api.c:1940 (discriminator 1))
+[   12.599168] qdisc_class_dump (net/sched/sch_api.c:2278 (discriminator 1))
+[   12.599204] ets_qdisc_walk (./include/net/pkt_sched.h:284 (discriminator 1) net/sched/sch_ets.c:346 (discriminator 1) net/sched/sch_ets.c:337 (discriminator 1)) sch_ets
+[   12.599252] tc_dump_tclass_qdisc (net/sched/sch_api.c:2304)
+[   12.599294] ? __pfx_qdisc_class_dump (net/sched/sch_api.c:2275)
+[   12.599348] tc_dump_tclass_root (net/sched/sch_api.c:2322 (discriminator 1))
+[   12.599383] tc_dump_tclass (net/sched/sch_api.c:2360 (discriminator 1))
+[   12.599416] ? __pfx_tc_dump_tclass (net/sched/sch_api.c:2344)
+[   12.599453] rtnl_dumpit (net/core/rtnetlink.c:6780)
+[   12.599494] netlink_dump (net/netlink/af_netlink.c:2318)
+[   12.599526] __netlink_dump_start (net/netlink/af_netlink.c:2433)
+[   12.599565] ? __pfx_tc_dump_tclass (net/sched/sch_api.c:2344)
+[   12.599617] rtnetlink_rcv_msg (net/core/rtnetlink.c:6880)
+[   12.599654] ? __pfx_rtnl_dumpit (net/core/rtnetlink.c:6767)
+[   12.599690] ? __pfx_tc_dump_tclass (net/sched/sch_api.c:2344)
+[   12.599732] ? __pfx_rtnetlink_rcv_msg (net/core/rtnetlink.c:6814)
+[   12.599783] netlink_rcv_skb (net/netlink/af_netlink.c:2543)
+[   12.599822] netlink_unicast (net/netlink/af_netlink.c:1322 net/netlink/af_netlink.c:1348)
+[   12.599853] netlink_sendmsg (net/netlink/af_netlink.c:1892)
+[   12.599888] ____sys_sendmsg (net/socket.c:713 (discriminator 1) net/socket.c:728 (discriminator 1) net/socket.c:2596 (discriminator 1))
+[   12.599926] ___sys_sendmsg (net/socket.c:2652)
+[   12.599962] __sys_sendmsg (net/socket.c:2682 (discriminator 1))
+[   12.599995] do_syscall_64 (arch/x86/entry/common.c:52 (discriminator 1) arch/x86/entry/common.c:83 (discriminator 1))
+[   12.600040] entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[   12.600082] RIP: 0033:0x7fc67b068004
+[ 12.600114] Code: 15 19 6e 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 45 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 19 6e 0d 00       	adc    $0xd6e19,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 45 f0 0d 00 00 	cmpb   $0x0,0xdf045(%rip)        # 0xdf066
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   12.600237] RSP: 002b:00007ffd9439fbb8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   12.600291] RAX: ffffffffffffffda RBX: 0000556e8122e480 RCX: 00007fc67b068004
+[   12.600349] RDX: 0000000000000000 RSI: 00007ffd9439fbe0 RDI: 0000000000000003
+[   12.600406] RBP: 00007ffd9439fca0 R08: 0000000000000010 R09: 0000000000000000
+[   12.600463] R10: 0000556ea062b890 R11: 0000000000000202 R12: 00007ffd943a02a8
+
+
+Finger prints:
+ets_class_dump:tc_fill_tclass:qdisc_class_dump:ets_qdisc_walk
