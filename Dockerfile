@@ -44,7 +44,8 @@ RUN apt update && apt install -y \
    libssl-dev \
    bc \
    kbd \
-   pkg-config
+   pkg-config \
+   iputils-ping
 
 RUN echo $DEBUG > debug-mode
 
