@@ -59,12 +59,12 @@ if [ $REMOTE = true ]; then
 	fi
 
 	pushd "$CUR/$STORAGE"
-		git checkout "$STORAGE_BRANCH"
+		git checkout -f "$STORAGE_BRANCH"
 		date -u > checkpoint
 		mkdir -p artifacts
 		mkdir -p results
 		if [ $INTERNET = "n" ]; then
-			echo "$(date -u): No connection to the internet" >> failure
+			echo "$(date -u): No connection to the internet" >> ../failure
 			exit 1
 		fi
 	popd
@@ -75,7 +75,7 @@ else
 		mkdir -p artifacts
 		mkdir -p results
 		if [ $INTERNET = "n" ]; then
-			echo "$(date -u): No connection to the internet" >> failure
+			echo "$(date -u): No connection to the internet" >> ../failure
 			exit 1
 		fi
 	popd
@@ -98,7 +98,7 @@ popd
 if [ $REMOTE = true ]; then
 	pushd "$CUR/$STORAGE"
 		# Adjust artifacts browsing on dashboard
-		RESULT="$(find results -name '*-*' -type f | sort -n -r | awk 'NR==1')"
+		RESULT="$(find results -name '*-*' -type f | sort -n -r -t'-' -k2 | awk 'NR==1')"
 
 		if grep -q 'raw\.githubusercontent' $RESULT; then
 			sed -i 's#raw\.githubusercontent\.com/p4tc-dev/tc-executor/#github.com/p4tc-dev/tc-executor/tree/#g' $RESULT
@@ -107,6 +107,8 @@ if [ $REMOTE = true ]; then
 			ARTPATH="$CUR/$STORAGE/$(jq .link "$RESULT" | grep -o -P 'artifacts\/[0-9]+')"
 			cp /tmp/tc-executor-output "$ARTPATH/executor.log"
 		fi
+
+		cp /tmp/tc-executor-output "$CUR/$STORAGE/last-executor.log"
 
 		# Push changes
 		git add .
