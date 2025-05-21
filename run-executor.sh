@@ -12,6 +12,7 @@ trap cleanup EXIT SIGINT SIGTERM
 CUR=$(dirname -- "$( readlink -f -- "$0"; )";)
 REMOTE=true
 DEBUG=false
+KERNEL_DIR="testing"
 STORAGE="tc-executor-storage"
 STORAGE_BRANCH="storage"
 
@@ -82,6 +83,7 @@ else
 fi
 
 pushd "$CUR"
+	bash make-testing.sh sync
 	docker image rmi nipa-executor || true
 	docker build --no-cache \
 		--build-arg UID=$(id -u) \
@@ -91,8 +93,10 @@ pushd "$CUR"
 	docker run --device=/dev/kvm \
 		--rm \
 		-v $(realpath .)/$STORAGE:/storage \
+		-v $(realpath .)/$KERNEL_DIR:/nipa-data/kernel \
 		-it \
 		nipa-executor
+	bash make-testing.sh clean
 popd
 
 if [ $REMOTE = true ]; then
