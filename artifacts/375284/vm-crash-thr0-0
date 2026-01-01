@@ -1,0 +1,230 @@
+======================================
+| [    4.472598] ------------[ cut here ]------------
+| [    4.472656] refcount_t: underflow; use-after-free.
+| [    4.472703] WARNING: CPU: 2 PID: 618 at lib/refcount.c:28 refcount_warn_saturate (lib/refcount.c:28 (discriminator 1))
+| [    4.472770] Modules linked in: sch_ingress sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [    4.473317] CPU: 2 UID: 0 PID: 618 Comm: ip Not tainted 6.18.0-rc4-virtme #1 PREEMPT(voluntary)
+[    4.473410] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.473500] RIP: 0010:refcount_warn_saturate (lib/refcount.c:28 (discriminator 1))
+[    4.473543] Code: bc e8 f8 28 ba ff 90 0f 0b 90 90 c3 80 3d c9 ba ea 00 00 75 89 c6 05 c0 ba ea 00 01 90 48 c7 c7 e8 74 12 bc e8 d5 28 ba ff 90 <0f> 0b 90 90 c3 80 3d a7 ba ea 00 00 0f 85 62 ff ff ff c6 05 9a ba
+All code
+========
+   0:	bc e8 f8 28 ba       	mov    $0xba28f8e8,%esp
+   5:	ff 90 0f 0b 90 90    	call   *-0x6f6ff4f1(%rax)
+   b:	c3                   	ret
+   c:	80 3d c9 ba ea 00 00 	cmpb   $0x0,0xeabac9(%rip)        # 0xeabadc
+  13:	75 89                	jne    0xffffffffffffff9e
+  15:	c6 05 c0 ba ea 00 01 	movb   $0x1,0xeabac0(%rip)        # 0xeabadc
+  1c:	90                   	nop
+  1d:	48 c7 c7 e8 74 12 bc 	mov    $0xffffffffbc1274e8,%rdi
+  24:	e8 d5 28 ba ff       	call   0xffffffffffba28fe
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	90                   	nop
+  2e:	c3                   	ret
+  2f:	80 3d a7 ba ea 00 00 	cmpb   $0x0,0xeabaa7(%rip)        # 0xeabadd
+  36:	0f 85 62 ff ff ff    	jne    0xffffffffffffff9e
+  3c:	c6                   	.byte 0xc6
+  3d:	05                   	.byte 0x5
+  3e:	9a                   	(bad)
+  3f:	ba                   	.byte 0xba
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	c3                   	ret
+   5:	80 3d a7 ba ea 00 00 	cmpb   $0x0,0xeabaa7(%rip)        # 0xeabab3
+   c:	0f 85 62 ff ff ff    	jne    0xffffffffffffff74
+  12:	c6                   	.byte 0xc6
+  13:	05                   	.byte 0x5
+  14:	9a                   	(bad)
+  15:	ba                   	.byte 0xba
+[    4.473731] RSP: 0018:ffffbd5700bff708 EFLAGS: 00010286
+[    4.473777] RAX: 0000000000000000 RBX: ffffbd5700bff730 RCX: 0000000000000000
+[    4.473845] RDX: 0000000000000000 RSI: ffffbd5700bff5b0 RDI: 00000000ffffffea
+[    4.473921] RBP: ffffbd5700bff250 R08: 00000000ffffdfff R09: 0000000000000001
+[    4.473988] R10: 00000000ffffdfff R11: ffffffffbc476a40 R12: ffffbd5700bff250
+[    4.474061] R13: 0000000000000000 R14: 00000000fffb7d3e R15: ffff94d283306000
+[    4.474133] FS:  00007f97670bab80(0000) GS:ffff94d301a86000(0000) knlGS:0000000000000000
+[    4.474197] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.474266] CR2: 00007f97672aa710 CR3: 0000000002e2a000 CR4: 0000000000750ef0
+[    4.474334] PKRU: 55555554
+[    4.474355] Call Trace:
+[    4.474377]  <TASK>
+[    4.474401]  netdev_run_todo (./include/linux/list.h:381 (discriminator 2) net/core/dev.c:11670 (discriminator 2))
+[    4.474442]  rtnl_dellink (net/core/rtnetlink.c:3580)
+[    4.474474]  ? __rtnl_unlock (net/core/rtnetlink.c:145)
+[    4.474513]  ? netdev_run_todo (./include/linux/list.h:381 (discriminator 2) net/core/dev.c:11653 (discriminator 2))
+[    4.474548]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:3536)
+[    4.474605]  rtnetlink_rcv_msg (net/core/rtnetlink.c:6959)
+[    4.474647]  ? get_page_from_freelist (mm/page_alloc.c:1226 (discriminator 1) mm/page_alloc.c:1848 (discriminator 1) mm/page_alloc.c:1858 (discriminator 1) mm/page_alloc.c:3884 (discriminator 1))
+[    4.474692]  ? rtnl_calcit.isra.0 (net/core/rtnetlink.c:6861)
+[    4.474733]  netlink_rcv_skb (net/netlink/af_netlink.c:2550)
+[    4.474770]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1344)
+[    4.474800]  ? __alloc_skb (net/core/skbuff.c:690)
+[    4.474836]  netlink_sendmsg (net/netlink/af_netlink.c:1894)
+[    4.474869]  ____sys_sendmsg (net/socket.c:727 (discriminator 1) net/socket.c:742 (discriminator 1) net/socket.c:2630 (discriminator 1))
+[    4.474900]  ___sys_sendmsg (net/socket.c:2686)
+[    4.474932]  __sys_sendmsg (net/socket.c:2716 (discriminator 1))
+[    4.474967]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    4.475010]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    4.475055] RIP: 0033:0x7f97672c0034
+[    4.475102] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[    4.475260] RSP: 002b:00007fff2c1ad718 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.475327] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f97672c0034
+[    4.475395] RDX: 0000000000000000 RSI: 00007fff2c1ad780 RDI: 0000000000000003
+[    4.475461] RBP: 00000000690de09e R08: 0000000000000010 R09: 0000000000000060
+[    4.475530] R10: 0000000000000001 R11: 0000000000000202 R12: 00007fff2c1ad780
+[    4.475608] R13: 000055bb3b1c1020 R14: 00007fff2c1ad850 R15: 0000000000000000
+| [    4.860593] ------------[ cut here ]------------
+| [    4.860667] kernel BUG at net/core/net-sysfs.c:2246!
+| [    4.860721] Oops: invalid opcode: 0000 [#1] SMP
+| [    4.860777] CPU: 4 UID: 0 PID: 826 Comm: echo Tainted: G        W           6.18.0-rc4-virtme #1 PREEMPT(voluntary)
+| [    4.860871] Tainted: [W]=WARN
+[    4.860904] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.860992] RIP: 0010:netdev_release (net/core/net-sysfs.c:2246 (discriminator 1) net/core/net-sysfs.c:2242 (discriminator 1))
+[    4.861043] Code: fa 0f 1f 44 00 00 80 7f e0 04 75 1d 53 48 8d 9f d8 fa ff ff 48 8b bf 10 fc ff ff e8 8d f1 a5 ff 48 89 df 5b e9 14 f8 a5 ff 90 <0f> 0b 90 f3 0f 1e fa 0f 1f 44 00 00 55 48 8d 97 f8 fb ff ff 48 89
+All code
+========
+   0:	fa                   	cli
+   1:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   6:	80 7f e0 04          	cmpb   $0x4,-0x20(%rdi)
+   a:	75 1d                	jne    0x29
+   c:	53                   	push   %rbx
+   d:	48 8d 9f d8 fa ff ff 	lea    -0x528(%rdi),%rbx
+  14:	48 8b bf 10 fc ff ff 	mov    -0x3f0(%rdi),%rdi
+  1b:	e8 8d f1 a5 ff       	call   0xffffffffffa5f1ad
+  20:	48 89 df             	mov    %rbx,%rdi
+  23:	5b                   	pop    %rbx
+  24:	e9 14 f8 a5 ff       	jmp    0xffffffffffa5f83d
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	f3 0f 1e fa          	endbr64
+  31:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  36:	55                   	push   %rbp
+  37:	48 8d 97 f8 fb ff ff 	lea    -0x408(%rdi),%rdx
+  3e:	48                   	rex.W
+  3f:	89                   	.byte 0x89
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	f3 0f 1e fa          	endbr64
+   7:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   c:	55                   	push   %rbp
+   d:	48 8d 97 f8 fb ff ff 	lea    -0x408(%rdi),%rdx
+  14:	48                   	rex.W
+  15:	89                   	.byte 0x89
+[    4.861220] RSP: 0018:ffffbd5700b17bd8 EFLAGS: 00010297
+[    4.861266] RAX: ffffffffbbb45730 RBX: ffff94d283d80528 RCX: 0000000000000003
+[    4.861338] RDX: 0000000000000007 RSI: ffffffffbb95c6e3 RDI: ffff94d283d80528
+[    4.861409] RBP: ffff94d283d6d000 R08: ffff94d28443d800 R09: 0000000000000000
+[    4.861480] R10: 0000000000000000 R11: 0000000000000005 R12: ffffffffbbeb11e0
+[    4.861549] R13: ffff94d282cdf238 R14: 0000000000000000 R15: ffff94d283d80000
+[    4.861574] FS:  00007f737e572740(0000) GS:ffff94d301b06000(0000) knlGS:0000000000000000
+[    4.861574] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.861574] CR2: 000055a23a9902f8 CR3: 0000000002d2c000 CR4: 0000000000750ef0
+[    4.861574] PKRU: 55555554
+[    4.861574] Call Trace:
+[    4.861574]  <TASK>
+[    4.861574]  device_release (drivers/base/core.c:2569)
+[    4.861574]  kobject_put (lib/kobject.c:693 lib/kobject.c:720 ./include/linux/kref.h:65 lib/kobject.c:737)
+[    4.861574]  netdev_run_todo (./include/linux/list.h:381 (discriminator 2) net/core/dev.c:11670 (discriminator 2))
+[    4.861574] nsim_destroy (drivers/net/netdevsim/netdevsim.h:396 drivers/net/netdevsim/netdev.c:1186) netdevsim
+[    4.861574] __nsim_dev_port_del (drivers/net/netdevsim/dev.c:441 drivers/net/netdevsim/dev.c:1474) netdevsim
+[    4.861574] nsim_dev_reload_destroy (drivers/net/netdevsim/dev.c:1483 (discriminator 3) drivers/net/netdevsim/dev.c:1707 (discriminator 3)) netdevsim
+[    4.861574] nsim_drv_remove (drivers/net/netdevsim/dev.c:1724) netdevsim
+[    4.861574]  device_release_driver_internal (drivers/base/dd.c:1276 drivers/base/dd.c:1297)
+[    4.861574]  bus_remove_device (./include/linux/kobject.h:193 drivers/base/base.h:73 drivers/base/bus.c:586)
+[    4.861574]  device_del (drivers/base/core.c:3879)
+[    4.861574]  device_unregister (drivers/base/core.c:3796 drivers/base/core.c:3920)
+[    4.861574] del_device_store (drivers/net/netdevsim/bus.c:248) netdevsim
+[    4.861574]  kernfs_fop_write_iter (fs/kernfs/file.c:88 fs/kernfs/file.c:356)
+[    4.861574]  vfs_write (fs/read_write.c:593 fs/read_write.c:686)
+[    4.861574]  ksys_write (fs/read_write.c:738)
+[    4.861574]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    4.861574]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    4.861574] RIP: 0033:0x7f737e6915a4
+[    4.861574] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d a5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+All code
+========
+   0:	c7 00 16 00 00 00    	movl   $0x16,(%rax)
+   6:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   b:	c3                   	ret
+   c:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  13:	00 00 00 
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d a5 ea 0e 00 00 	cmpb   $0x0,0xeeaa5(%rip)        # 0xeeac6
+  21:	74 13                	je     0x36
+  23:	b8 01 00 00 00       	mov    $0x1,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 54                	ja     0x86
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	48                   	rex.W
+  3f:	89                   	.byte 0x89
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 54                	ja     0x5c
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	48                   	rex.W
+  15:	89                   	.byte 0x89
+[    4.861574] RSP: 002b:00007ffdce5a6588 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[    4.861574] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f737e6915a4
+[    4.861574] RDX: 0000000000000002 RSI: 000055a23a98f2f0 RDI: 0000000000000001
+[    4.861574] RBP: 00007ffdce5a65b0 R08: 0000000000000000 R09: 0000000000000000
+[    4.861574] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+
+
+Finger prints:
+refcount_warn_saturate:netdev_run_todo:rtnl_dellink:rtnetlink_rcv_msg
+netdev_release:device_release:kobject_put:netdev_run_todo

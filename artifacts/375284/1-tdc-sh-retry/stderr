@@ -1,0 +1,188 @@
+[    1.404265] GACT probability on
+[    1.469549] Mirror/redirect action on
+[    1.666881] Simple TC action Loaded
+[    2.234575] u32 classifier
+[    2.234611]     Performance counters on
+[    2.234646]     input device check on
+[    2.234690]     Actions configured
+[    4.483711] ------------[ cut here ]------------
+[    4.483787] refcount_t: underflow; use-after-free.
+[    4.483855] WARNING: CPU: 28 PID: 617 at lib/refcount.c:28 refcount_warn_saturate+0xbc/0x110
+[    4.483967] Modules linked in: sch_ingress sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.484489] CPU: 28 UID: 0 PID: 617 Comm: ip Not tainted 6.18.0-rc4-virtme #1 PREEMPT(voluntary) 
+[    4.484568] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.484656] RIP: 0010:refcount_warn_saturate+0xbc/0x110
+[    4.484715] Code: 9a e8 f8 28 ba ff 90 0f 0b 90 90 c3 80 3d c9 ba ea 00 00 75 89 c6 05 c0 ba ea 00 01 90 48 c7 c7 e8 74 72 9a e8 d5 28 ba ff 90 <0f> 0b 90 90 c3 80 3d a7 ba ea 00 00 0f 85 62 ff ff ff c6 05 9a ba
+[    4.484901] RSP: 0018:ffffb4084302f708 EFLAGS: 00010286
+[    4.484949] RAX: 0000000000000000 RBX: ffffb4084302f730 RCX: 0000000000000000
+[    4.485022] RDX: 0000000000000000 RSI: ffffb4084302f5b0 RDI: 00000000ffffffea
+[    4.485088] RBP: ffffb4084302f250 R08: 00000000ffffdfff R09: 0000000000000001
+[    4.485154] R10: 00000000ffffdfff R11: ffffffff9aa76a40 R12: ffffb4084302f250
+[    4.485223] R13: 0000000000000000 R14: 00000000fffb7d49 R15: ffff923584f0b000
+[    4.485304] FS:  00007f22a0fc3b80(0000) GS:ffff923623b06000(0000) knlGS:0000000000000000
+[    4.485377] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.485433] CR2: 000055b0da0b8100 CR3: 0000000009386000 CR4: 0000000000750ef0
+[    4.485507] PKRU: 55555554
+[    4.485530] Call Trace:
+[    4.485553]  <TASK>
+[    4.485578]  netdev_run_todo+0x21d/0x550
+[    4.485609]  rtnl_dellink+0x17f/0x3a0
+[    4.485643]  ? __rtnl_unlock+0x37/0x60
+[    4.485691]  ? netdev_run_todo+0x63/0x550
+[    4.485736]  ? rtnl_bridge_getlink+0x1c0/0x1c0
+[    4.485791]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.485827]  ? get_page_from_freelist+0x153d/0x1760
+[    4.485873]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.485921]  netlink_rcv_skb+0x57/0x100
+[    4.485954]  netlink_unicast+0x24c/0x390
+[    4.485988]  ? __alloc_skb+0xdd/0x1a0
+[    4.486021]  netlink_sendmsg+0x1e2/0x440
+[    4.486056]  ____sys_sendmsg+0x161/0x250
+[    4.486091]  ___sys_sendmsg+0x99/0xe0
+[    4.486133]  __sys_sendmsg+0x88/0xe0
+[    4.486181]  do_syscall_64+0xa4/0xfd0
+[    4.486223]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.486272] RIP: 0033:0x7f22a11c9034
+[    4.486306] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.486477] RSP: 002b:00007ffc13cede28 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.486544] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f22a11c9034
+[    4.486626] RDX: 0000000000000000 RSI: 00007ffc13cede90 RDI: 0000000000000003
+[    4.486724] RBP: 00000000690de0da R08: 0000000000000010 R09: 0000000000000060
+[    4.486810] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffc13cede90
+[    4.486882] R13: 000055b0da06c020 R14: 00007ffc13cedf60 R15: 0000000000000000
+[    4.486951]  </TASK>
+[    4.486971] ---[ end trace 0000000000000000 ]---
+[    4.487476] ip (617) used greatest stack depth: 11704 bytes left
+[    4.748180] netem: version 1.3
+[    4.862718] ------------[ cut here ]------------
+[    4.862777] kernel BUG at net/core/net-sysfs.c:2246!
+[    4.862822] Oops: invalid opcode: 0000 [#1] SMP
+[    4.862873] CPU: 28 UID: 0 PID: 816 Comm: echo Tainted: G        W           6.18.0-rc4-virtme #1 PREEMPT(voluntary) 
+[    4.862962] Tainted: [W]=WARN
+[    4.862992] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.863079] RIP: 0010:netdev_release+0x2d/0x30
+[    4.863130] Code: fa 0f 1f 44 00 00 80 7f e0 04 75 1d 53 48 8d 9f d8 fa ff ff 48 8b bf 10 fc ff ff e8 8d f1 a5 ff 48 89 df 5b e9 14 f8 a5 ff 90 <0f> 0b 90 f3 0f 1e fa 0f 1f 44 00 00 55 48 8d 97 f8 fb ff ff 48 89
+[    4.863284] RSP: 0018:ffffb40843007bd8 EFLAGS: 00010297
+[    4.863326] RAX: ffffffff9a145730 RBX: ffff92358407c528 RCX: 0000000000000004
+[    4.863390] RDX: 0000000000000008 RSI: ffffffff99f5c6e3 RDI: ffff92358407c528
+[    4.863457] RBP: ffff9235840a1700 R08: ffff923584405800 R09: ffff92358795c380
+[    4.863519] R10: 0000000000000000 R11: 0000000000000006 R12: ffffffff9a4b11e0
+[    4.863585] R13: ffff923582e212f8 R14: 0000000000000000 R15: ffff92358407c000
+[    4.863649] FS:  00007fcaa51cd740(0000) GS:ffff923623b06000(0000) knlGS:0000000000000000
+[    4.863699] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.863699] CR2: 00005570b94532f8 CR3: 000000000f8af000 CR4: 0000000000750ef0
+[    4.863699] PKRU: 55555554
+[    4.863699] Call Trace:
+[    4.863699]  <TASK>
+[    4.863699]  device_release+0x34/0x90
+[    4.863699]  kobject_put+0x64/0xf0
+[    4.863699]  netdev_run_todo+0x21d/0x550
+[    4.863699]  nsim_destroy+0x95/0x180 [netdevsim]
+[    4.863699]  __nsim_dev_port_del+0x46/0x70 [netdevsim]
+[    4.863699]  nsim_dev_reload_destroy+0x5b/0x130 [netdevsim]
+[    4.863699]  nsim_drv_remove+0x2f/0xb0 [netdevsim]
+[    4.863699]  device_release_driver_internal+0x19b/0x200
+[    4.863699]  bus_remove_device+0xc1/0x100
+[    4.863699]  device_del+0x15f/0x4a0
+[    4.863699]  device_unregister+0x12/0x30
+[    4.863699]  del_device_store+0x11f/0x1a0 [netdevsim]
+[    4.863699]  kernfs_fop_write_iter+0x12e/0x1c0
+[    4.863699]  vfs_write+0x290/0x480
+[    4.863699]  ksys_write+0x6d/0xe0
+[    4.863699]  do_syscall_64+0xa4/0xfd0
+[    4.863699]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.863699] RIP: 0033:0x7fcaa52ec5a4
+[    4.863699] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d a5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+[    4.863699] RSP: 002b:00007ffe0b3e8da8 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[    4.863699] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007fcaa52ec5a4
+[    4.863699] RDX: 0000000000000002 RSI: 00005570b94522f0 RDI: 0000000000000001
+[    4.863699] RBP: 00007ffe0b3e8dd0 R08: 0000000000000000 R09: 0000000000000000
+[    4.863699] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+[    4.863699] R13: 00005570b94522f0 R14: 00007fcaa53d45c0 R15: 00007fcaa53d1ee0
+[    4.863699]  </TASK>
+[    4.863699] Modules linked in: sch_netem sch_ingress sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.865627] ---[ end trace 0000000000000000 ]---
+[    4.865671] RIP: 0010:netdev_release+0x2d/0x30
+[    4.865727] Code: fa 0f 1f 44 00 00 80 7f e0 04 75 1d 53 48 8d 9f d8 fa ff ff 48 8b bf 10 fc ff ff e8 8d f1 a5 ff 48 89 df 5b e9 14 f8 a5 ff 90 <0f> 0b 90 f3 0f 1e fa 0f 1f 44 00 00 55 48 8d 97 f8 fb ff ff 48 89
+[    4.865881] RSP: 0018:ffffb40843007bd8 EFLAGS: 00010297
+[    4.865927] RAX: ffffffff9a145730 RBX: ffff92358407c528 RCX: 0000000000000004
+[    4.865989] RDX: 0000000000000008 RSI: ffffffff99f5c6e3 RDI: ffff92358407c528
+[    4.866052] RBP: ffff9235840a1700 R08: ffff923584405800 R09: ffff92358795c380
+[    4.866119] R10: 0000000000000000 R11: 0000000000000006 R12: ffffffff9a4b11e0
+[    4.866178] R13: ffff923582e212f8 R14: 0000000000000000 R15: ffff92358407c000
+[    4.866234] FS:  00007fcaa51cd740(0000) GS:ffff923623b06000(0000) knlGS:0000000000000000
+[    4.866291] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.866338] CR2: 00005570b94532f8 CR3: 000000000f8af000 CR4: 0000000000750ef0
+[    4.866398] PKRU: 55555554
+[    5.767775] netem: change failed
+[    5.879957] netem: change failed
+[    5.949380] v0p0id6158: entered promiscuous mode
+[    5.990728] v0p0id6158: left promiscuous mode
+[    6.011978] v0p0id6158: entered promiscuous mode
+[    6.029432] v0p0id6158: left promiscuous mode
+[    6.051903] v0p0id6158: entered promiscuous mode
+[    6.071442] v0p0id6158: left promiscuous mode
+[    6.089905] v0p0id6158: entered promiscuous mode
+[    6.113484] v0p0id6158: left promiscuous mode
+[    6.132915] v0p0id6158: entered promiscuous mode
+[    6.157420] v0p0id6158: left promiscuous mode
+[    6.175897] v0p0id6158: entered promiscuous mode
+[    6.199236] v0p0id6158: left promiscuous mode
+[    6.222898] v0p0id6158: entered promiscuous mode
+[    6.255406] v0p0id6158: left promiscuous mode
+[    6.275740] v0p0id6158: entered promiscuous mode
+[    6.301395] v0p0id6158: left promiscuous mode
+[    6.315889] v0p0id6158: entered promiscuous mode
+[    6.346723] v0p0id6158: left promiscuous mode
+[    6.347021] v0p0id6158: entered promiscuous mode
+[    6.363761] v0p0id6158: left promiscuous mode
+[    7.338734] v0p0id9479: entered promiscuous mode
+[    7.364891] v0p0id9479: left promiscuous mode
+[    7.384885] v0p0id9479: entered promiscuous mode
+[    7.405592] v0p0id9479: left promiscuous mode
+[    7.423888] v0p0id9479: entered promiscuous mode
+[    7.442970] v0p0id9479: left promiscuous mode
+[    7.463748] v0p0id9479: entered promiscuous mode
+[    7.488715] v0p0id9479: left promiscuous mode
+[    7.506885] v0p0id9479: entered promiscuous mode
+[    7.536543] v0p0id9479: left promiscuous mode
+[    7.559754] v0p0id9479: entered promiscuous mode
+[    7.591776] v0p0id9479: left promiscuous mode
+[    7.608752] v0p0id9479: entered promiscuous mode
+[    7.633723] v0p0id9479: left promiscuous mode
+[    7.654901] v0p0id9479: entered promiscuous mode
+[    7.681586] v0p0id9479: left promiscuous mode
+[    7.700897] v0p0id9479: entered promiscuous mode
+[    7.724619] v0p0id9479: left promiscuous mode
+[    7.749907] v0p0id9479: entered promiscuous mode
+[    7.772455] v0p0id9479: left promiscuous mode
+[   10.320519] v0p0id83bf: entered promiscuous mode
+[   10.343203] v0p0id83bf: left promiscuous mode
+[   10.356037] v0p0id83bf: entered promiscuous mode
+[   10.379892] v0p0id83bf: left promiscuous mode
+[   10.404895] v0p0id83bf: entered promiscuous mode
+[   10.431971] v0p0id83bf: left promiscuous mode
+[   10.449781] v0p0id83bf: entered promiscuous mode
+[   10.474850] v0p0id83bf: left promiscuous mode
+[   10.490754] v0p0id83bf: entered promiscuous mode
+[   10.510634] v0p0id83bf: left promiscuous mode
+[   10.528930] v0p0id83bf: entered promiscuous mode
+[   10.546459] v0p0id83bf: left promiscuous mode
+[   10.569928] v0p0id83bf: entered promiscuous mode
+[   10.590517] v0p0id83bf: left promiscuous mode
+[   10.610898] v0p0id83bf: entered promiscuous mode
+[   10.632590] v0p0id83bf: left promiscuous mode
+[   10.653751] v0p0id83bf: entered promiscuous mode
+[   10.680508] v0p0id83bf: left promiscuous mode
+[   10.704873] v0p0id83bf: entered promiscuous mode
+[   10.734567] v0p0id83bf: left promiscuous mode
+[   10.817121] sch_tbf: burst 1500 is lower than device dummy1id6430 mtu (1514) !
+[   10.864778] sch_tbf: burst 1500 is lower than device dummy1id0518 mtu (1514) !
+[   10.912366] sch_tbf: burst 1500 is lower than device dummy1id320a mtu (1514) !
+[   10.957962] sch_tbf: burst 1500 is lower than device dummy1id239b mtu (1514) !
+[   11.005860] sch_tbf: burst 1500 is lower than device dummy1idc975 mtu (1514) !
+[   11.055668] sch_tbf: burst 1500 is lower than device dummy1id948c mtu (1514) !
+[   11.103449] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[   11.118337] sch_tbf: burst 1500 is lower than device dummy1id3549 mtu (1514) !
+[   11.165447] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
+[   11.181573] sch_tbf: burst 1500 is lower than device dummy1idf948 mtu (1514) !
