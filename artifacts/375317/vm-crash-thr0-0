@@ -1,0 +1,384 @@
+======================================
+| [    7.334189] ==================================================================
+| [    7.334289] BUG: KASAN: slab-use-after-free in kobject_put (lib/kobject.c:733)
+| [    7.334367] Read of size 1 at addr ffff888008420564 by task ip/614
+| [    7.334446]
+| [    7.334476] CPU: 13 UID: 0 PID: 614 Comm: ip Not tainted 6.18.0-rc4-virtme #1 PREEMPT(voluntary)
+[    7.334479] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.334480] Call Trace:
+[    7.334481]  <TASK>
+[    7.334482]  dump_stack_lvl (lib/dump_stack.c:123)
+[    7.334484]  print_report (mm/kasan/report.c:379 mm/kasan/report.c:482)
+[    7.334487]  ? _raw_write_unlock_irq (kernel/locking/spinlock.c:161)
+[    7.334490]  ? kobject_put (lib/kobject.c:733)
+[    7.334491]  kasan_report (mm/kasan/report.c:597)
+[    7.334493]  ? kobject_put (lib/kobject.c:733)
+[    7.334494]  kobject_put (lib/kobject.c:733)
+[    7.334496]  netdev_run_todo (./include/linux/list.h:381 (discriminator 2) net/core/dev.c:11670 (discriminator 2))
+[    7.334498]  ? generic_xdp_install (net/core/dev.c:11630)
+[    7.334499]  ? dev_ingress_queue_create (net/core/dev.c:12299)
+[    7.334500]  ? rtnl_is_locked (net/core/rtnetlink.c:169 (discriminator 1))
+[    7.334503]  ? unregister_netdevice_queue (net/core/dev.c:12242 (discriminator 2))
+[    7.334504]  ? unregister_netdevice_many (net/core/dev.c:12241)
+[    7.334505]  rtnl_dellink (net/core/rtnetlink.c:3580)
+[    7.334506]  ? rtnl_getlink (./include/net/netlink.h:1199 net/core/rtnetlink.c:949 net/core/rtnetlink.c:4199)
+[    7.334507]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:3536)
+[    7.334510]  ? stack_trace_save (kernel/stacktrace.c:123)
+[    7.334514]  ? stack_trace_snprint (kernel/stacktrace.c:114)
+[    7.334515]  ? stack_depot_save_flags (lib/stackdepot.c:659)
+[    7.334517]  ? stack_trace_save (kernel/stacktrace.c:123)
+[    7.334519]  ? stack_trace_snprint (kernel/stacktrace.c:114)
+[    7.334520]  ? kasan_save_stack (mm/kasan/common.c:58)
+[    7.334522]  ? kasan_save_stack (mm/kasan/common.c:57)
+[    7.334523]  ? kasan_save_track (./arch/x86/include/asm/current.h:25 (discriminator 1) mm/kasan/common.c:69 (discriminator 1) mm/kasan/common.c:78 (discriminator 1))
+[    7.334524]  ? __kasan_slab_alloc (mm/kasan/common.c:342 mm/kasan/common.c:368)
+[    7.334525]  ? kmem_cache_alloc_node_noprof (./include/linux/kasan.h:252 mm/slub.c:4970 mm/slub.c:5280 mm/slub.c:5332)
+[    7.334528]  ? kmalloc_reserve (net/core/skbuff.c:586 (discriminator 88))
+[    7.334530]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:3536)
+[    7.334531]  rtnetlink_rcv_msg (net/core/rtnetlink.c:6958)
+[    7.334533]  ? rtnl_calcit.isra.0 (net/core/rtnetlink.c:6861)
+[    7.334535]  netlink_rcv_skb (net/netlink/af_netlink.c:2550)
+[    7.334538]  ? rtnl_calcit.isra.0 (net/core/rtnetlink.c:6861)
+[    7.334539]  ? netlink_ack (net/netlink/af_netlink.c:2527)
+[    7.334540]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 2))
+[    7.334542]  ? kasan_save_track (./arch/x86/include/asm/current.h:25 (discriminator 1) mm/kasan/common.c:69 (discriminator 1) mm/kasan/common.c:78 (discriminator 1))
+[    7.334544]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1344)
+[    7.334545]  ? netlink_attachskb (net/netlink/af_netlink.c:1329)
+[    7.334546]  ? unwind_next_frame (./include/linux/rcupdate.h:1195 arch/x86/kernel/unwind_orc.c:479)
+[    7.334549]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    7.334552]  netlink_sendmsg (net/netlink/af_netlink.c:1894)
+[    7.334553]  ? netlink_unicast (net/netlink/af_netlink.c:1813)
+[    7.334554]  ? __import_iovec (lib/iov_iter.c:1346 (discriminator 1) lib/iov_iter.c:1361 (discriminator 1))
+[    7.334556]  ____sys_sendmsg (net/socket.c:730 (discriminator 1) net/socket.c:742 (discriminator 1) net/socket.c:2630 (discriminator 1))
+[    7.334559]  ? sock_read_iter (net/socket.c:2576)
+[    7.334560]  ? __copy_msghdr (net/socket.c:2556)
+[    7.334561]  ? stack_trace_save (kernel/stacktrace.c:123)
+[    7.334563]  ___sys_sendmsg (net/socket.c:2686)
+[    7.334564]  ? __x64_sys_close (fs/open.c:1592 fs/open.c:1574 fs/open.c:1574)
+[    7.334567]  ? do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    7.334569]  ? copy_msghdr_from_user (net/socket.c:2673)
+[    7.334571]  ? fdget (./include/linux/atomic/atomic-arch-fallback.h:479 (discriminator 2) ./include/linux/atomic/atomic-instrumented.h:50 (discriminator 2) fs/file.c:1167 (discriminator 2) fs/file.c:1181 (discriminator 2))
+[    7.334574]  __sys_sendmsg (net/socket.c:2716 (discriminator 1))
+[    7.334575]  ? __sys_sendmsg_sock (net/socket.c:2701)
+[    7.334577]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    7.334578]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    7.334579] RIP: 0033:0x7f45bd00b034
+[    7.334581] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[    7.334582] RSP: 002b:00007fff5ccaaa28 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    7.334584] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f45bd00b034
+[    7.334585] RDX: 0000000000000000 RSI: 00007fff5ccaaa90 RDI: 0000000000000003
+[    7.334586] RBP: 00000000690de87c R08: 0000000000000010 R09: 0000000000000060
+[    7.334587] R10: 0000000000000001 R11: 0000000000000202 R12: 00007fff5ccaaa90
+[    7.334587] R13: 000055bd547db020 R14: 00007fff5ccaab60 R15: 0000000000000000
+| [    7.342938] refcount_t: underflow; use-after-free.
+| [    7.342992] WARNING: CPU: 13 PID: 614 at lib/refcount.c:28 refcount_warn_saturate (lib/refcount.c:28 (discriminator 1))
+| [    7.343082] Modules linked in: sch_ingress sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [    7.343657] CPU: 13 UID: 0 PID: 614 Comm: ip Tainted: G    B               6.18.0-rc4-virtme #1 PREEMPT(voluntary)
+| [    7.343754] Tainted: [B]=BAD_PAGE
+[    7.343801] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.343910] RIP: 0010:refcount_warn_saturate (lib/refcount.c:28 (discriminator 1))
+[    7.343962] Code: 0f b6 1d 19 91 26 02 80 fb 01 0f 87 5c aa ee fe 83 e3 01 75 88 c6 05 04 91 26 02 01 90 48 c7 c7 60 f2 7e af e8 39 62 29 ff 90 <0f> 0b 90 90 e9 6a ff ff ff 0f b6 1d e7 90 26 02 80 fb 01 0f 87 15
+All code
+========
+   0:	0f b6 1d 19 91 26 02 	movzbl 0x2269119(%rip),%ebx        # 0x2269120
+   7:	80 fb 01             	cmp    $0x1,%bl
+   a:	0f 87 5c aa ee fe    	ja     0xfffffffffeeeaa6c
+  10:	83 e3 01             	and    $0x1,%ebx
+  13:	75 88                	jne    0xffffffffffffff9d
+  15:	c6 05 04 91 26 02 01 	movb   $0x1,0x2269104(%rip)        # 0x2269120
+  1c:	90                   	nop
+  1d:	48 c7 c7 60 f2 7e af 	mov    $0xffffffffaf7ef260,%rdi
+  24:	e8 39 62 29 ff       	call   0xffffffffff296262
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	90                   	nop
+  2e:	e9 6a ff ff ff       	jmp    0xffffffffffffff9d
+  33:	0f b6 1d e7 90 26 02 	movzbl 0x22690e7(%rip),%ebx        # 0x2269121
+  3a:	80 fb 01             	cmp    $0x1,%bl
+  3d:	0f                   	.byte 0xf
+  3e:	87                   	.byte 0x87
+  3f:	15                   	.byte 0x15
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	90                   	nop
+   4:	e9 6a ff ff ff       	jmp    0xffffffffffffff73
+   9:	0f b6 1d e7 90 26 02 	movzbl 0x22690e7(%rip),%ebx        # 0x22690f7
+  10:	80 fb 01             	cmp    $0x1,%bl
+  13:	0f                   	.byte 0xf
+  14:	87                   	.byte 0x87
+  15:	15                   	.byte 0x15
+[    7.344151] RSP: 0018:ffff88800abef1a8 EFLAGS: 00010286
+[    7.344202] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffffad7c8dba
+[    7.344269] RDX: 0000000000000000 RSI: 0000000000000004 RDI: 0000000000000001
+[    7.344337] RBP: 0000000000000003 R08: 0000000000000000 R09: fffffbfff5ff6270
+[    7.344405] R10: 0000000000000003 R11: ffff88800abeedc0 R12: 0000000000000001
+[    7.344472] R13: ffff88800abef238 R14: fffffbfff5fc1b38 R15: ffff888008420000
+[    7.344538] FS:  00007f45bce05b80(0000) GS:ffff8880850ee000(0000) knlGS:0000000000000000
+[    7.344606] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    7.344674] CR2: 000055bd54827100 CR3: 000000000474d000 CR4: 0000000000750ef0
+[    7.344750] PKRU: 55555554
+[    7.344780] Call Trace:
+[    7.344801]  <TASK>
+[    7.344824]  netdev_run_todo (./include/linux/list.h:381 (discriminator 2) net/core/dev.c:11670 (discriminator 2))
+[    7.344869]  ? generic_xdp_install (net/core/dev.c:11630)
+[    7.344925]  ? dev_ingress_queue_create (net/core/dev.c:12299)
+[    7.344976]  ? rtnl_is_locked (net/core/rtnetlink.c:169 (discriminator 1))
+[    7.345015]  ? unregister_netdevice_queue (net/core/dev.c:12242 (discriminator 2))
+[    7.345063]  ? unregister_netdevice_many (net/core/dev.c:12241)
+[    7.345140]  rtnl_dellink (net/core/rtnetlink.c:3580)
+[    7.345180]  ? rtnl_getlink (./include/net/netlink.h:1199 net/core/rtnetlink.c:949 net/core/rtnetlink.c:4199)
+[    7.345218]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:3536)
+[    7.345269]  ? stack_trace_save (kernel/stacktrace.c:123)
+[    7.345319]  ? stack_trace_snprint (kernel/stacktrace.c:114)
+[    7.345379]  ? stack_depot_save_flags (lib/stackdepot.c:659)
+[    7.345428]  ? stack_trace_save (kernel/stacktrace.c:123)
+[    7.345479]  ? stack_trace_snprint (kernel/stacktrace.c:114)
+[    7.345528]  ? kasan_save_stack (mm/kasan/common.c:58)
+[    7.345570]  ? kasan_save_stack (mm/kasan/common.c:57)
+[    7.345609]  ? kasan_save_track (./arch/x86/include/asm/current.h:25 (discriminator 1) mm/kasan/common.c:69 (discriminator 1) mm/kasan/common.c:78 (discriminator 1))
+[    7.345661]  ? __kasan_slab_alloc (mm/kasan/common.c:342 mm/kasan/common.c:368)
+[    7.345702]  ? kmem_cache_alloc_node_noprof (./include/linux/kasan.h:252 mm/slub.c:4970 mm/slub.c:5280 mm/slub.c:5332)
+[    7.345752]  ? kmalloc_reserve (net/core/skbuff.c:586 (discriminator 88))
+[    7.345798]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:3536)
+[    7.345840]  rtnetlink_rcv_msg (net/core/rtnetlink.c:6958)
+[    7.345880]  ? rtnl_calcit.isra.0 (net/core/rtnetlink.c:6861)
+[    7.345930]  netlink_rcv_skb (net/netlink/af_netlink.c:2550)
+[    7.345976]  ? rtnl_calcit.isra.0 (net/core/rtnetlink.c:6861)
+[    7.346028]  ? netlink_ack (net/netlink/af_netlink.c:2527)
+[    7.346064]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 2))
+[    7.346122]  ? kasan_save_track (./arch/x86/include/asm/current.h:25 (discriminator 1) mm/kasan/common.c:69 (discriminator 1) mm/kasan/common.c:78 (discriminator 1))
+[    7.346161]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1344)
+[    7.346203]  ? netlink_attachskb (net/netlink/af_netlink.c:1329)
+[    7.346264]  ? unwind_next_frame (./include/linux/rcupdate.h:1195 arch/x86/kernel/unwind_orc.c:479)
+[    7.346321]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    7.346377]  netlink_sendmsg (net/netlink/af_netlink.c:1894)
+[    7.346418]  ? netlink_unicast (net/netlink/af_netlink.c:1813)
+[    7.346462]  ? __import_iovec (lib/iov_iter.c:1346 (discriminator 1) lib/iov_iter.c:1361 (discriminator 1))
+[    7.346501]  ____sys_sendmsg (net/socket.c:730 (discriminator 1) net/socket.c:742 (discriminator 1) net/socket.c:2630 (discriminator 1))
+[    7.346541]  ? sock_read_iter (net/socket.c:2576)
+[    7.346586]  ? __copy_msghdr (net/socket.c:2556)
+[    7.346631]  ? stack_trace_save (kernel/stacktrace.c:123)
+[    7.346668]  ___sys_sendmsg (net/socket.c:2686)
+[    7.346706]  ? __x64_sys_close (fs/open.c:1592 fs/open.c:1574 fs/open.c:1574)
+[    7.346750]  ? do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    7.346788]  ? copy_msghdr_from_user (net/socket.c:2673)
+[    7.346850]  ? fdget (./include/linux/atomic/atomic-arch-fallback.h:479 (discriminator 2) ./include/linux/atomic/atomic-instrumented.h:50 (discriminator 2) fs/file.c:1167 (discriminator 2) fs/file.c:1181 (discriminator 2))
+[    7.346896]  __sys_sendmsg (net/socket.c:2716 (discriminator 1))
+[    7.346936]  ? __sys_sendmsg_sock (net/socket.c:2701)
+[    7.346982]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    7.347019]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    7.347093] RIP: 0033:0x7f45bd00b034
+[    7.347130] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[    7.347314] RSP: 002b:00007fff5ccaaa28 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    7.347408] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f45bd00b034
+[    7.347493] RDX: 0000000000000000 RSI: 00007fff5ccaaa90 RDI: 0000000000000003
+[    7.347570] RBP: 00000000690de87c R08: 0000000000000010 R09: 0000000000000060
+[    7.347643] R10: 0000000000000001 R11: 0000000000000202 R12: 00007fff5ccaaa90
+[    7.347721] R13: 000055bd547db020 R14: 00007fff5ccaab60 R15: 0000000000000000
+| [    7.840157] ------------[ cut here ]------------
+| [    7.840234] kernel BUG at net/core/net-sysfs.c:2246!
+| [    7.840306] Oops: invalid opcode: 0000 [#1] SMP KASAN
+| [    7.840372] CPU: 1 UID: 0 PID: 795 Comm: echo Tainted: G    B   W           6.18.0-rc4-virtme #1 PREEMPT(voluntary)
+| [    7.840512] Tainted: [B]=BAD_PAGE, [W]=WARN
+[    7.840570] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.840676] RIP: 0010:netdev_release (net/core/net-sysfs.c:2246 (discriminator 1) net/core/net-sysfs.c:2242 (discriminator 1))
+[    7.840751] Code: 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 80 3c 02 00 75 20 48 8b bb 10 fc ff ff e8 3c 73 e5 fe 48 89 ef 5b 5d e9 92 7d e5 fe 90 <0f> 0b e8 6a 7c eb fe eb bc e8 c3 7c eb fe eb d9 90 f3 0f 1e fa 0f
+All code
+========
+   0:	00 00                	add    %al,(%rax)
+   2:	00 fc                	add    %bh,%ah
+   4:	ff                   	lcall  (bad)
+   5:	df 48 89             	fisttps -0x77(%rax)
+   8:	fa                   	cli
+   9:	48 c1 ea 03          	shr    $0x3,%rdx
+   d:	80 3c 02 00          	cmpb   $0x0,(%rdx,%rax,1)
+  11:	75 20                	jne    0x33
+  13:	48 8b bb 10 fc ff ff 	mov    -0x3f0(%rbx),%rdi
+  1a:	e8 3c 73 e5 fe       	call   0xfffffffffee5735b
+  1f:	48 89 ef             	mov    %rbp,%rdi
+  22:	5b                   	pop    %rbx
+  23:	5d                   	pop    %rbp
+  24:	e9 92 7d e5 fe       	jmp    0xfffffffffee57dbb
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	e8 6a 7c eb fe       	call   0xfffffffffeeb7c9b
+  31:	eb bc                	jmp    0xffffffffffffffef
+  33:	e8 c3 7c eb fe       	call   0xfffffffffeeb7cfb
+  38:	eb d9                	jmp    0x13
+  3a:	90                   	nop
+  3b:	f3 0f 1e fa          	endbr64
+  3f:	0f                   	.byte 0xf
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	e8 6a 7c eb fe       	call   0xfffffffffeeb7c71
+   7:	eb bc                	jmp    0xffffffffffffffc5
+   9:	e8 c3 7c eb fe       	call   0xfffffffffeeb7cd1
+   e:	eb d9                	jmp    0xffffffffffffffe9
+  10:	90                   	nop
+  11:	f3 0f 1e fa          	endbr64
+  15:	0f                   	.byte 0xf
+[    7.840964] RSP: 0018:ffff8880117df878 EFLAGS: 00010297
+[    7.841031] RAX: 0000000000000000 RBX: ffff8880124f4528 RCX: ffffffffaf5250f1
+[    7.841095] RDX: 1ffff1100249e8a1 RSI: ffffffffaead9739 RDI: ffff8880124f4508
+[    7.841095] RBP: ffff8880124f4000 R08: 0000000000000001 R09: ffffed100249e8ac
+[    7.841095] R10: ffff8880124f4563 R11: 0000000000000040 R12: ffffffffaf9ba360
+[    7.841095] R13: dffffc0000000000 R14: ffff88800532a940 R15: 0000000000000000
+[    7.841095] FS:  00007f5c414fa740(0000) GS:ffff888084dee000(0000) knlGS:0000000000000000
+[    7.841095] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    7.841095] CR2: 0000560c9a4812f8 CR3: 000000000b8f3000 CR4: 0000000000750ef0
+[    7.841095] PKRU: 55555554
+[    7.841095] Call Trace:
+[    7.841095]  <TASK>
+[    7.841095]  device_release (drivers/base/core.c:2570)
+[    7.841095]  kobject_put (lib/kobject.c:693 lib/kobject.c:720 ./include/linux/kref.h:65 lib/kobject.c:737)
+[    7.841095]  netdev_run_todo (./include/linux/list.h:381 (discriminator 2) net/core/dev.c:11670 (discriminator 2))
+[    7.841095]  ? generic_xdp_install (net/core/dev.c:11630)
+[    7.841095]  ? kasan_save_track (./arch/x86/include/asm/current.h:25 (discriminator 1) mm/kasan/common.c:69 (discriminator 1) mm/kasan/common.c:78 (discriminator 1))
+[    7.841095]  ? nsim_destroy (drivers/net/netdevsim/netdev.c:1024 drivers/net/netdevsim/netdev.c:1183) netdevsim
+[    7.841095]  ? kfree (mm/slub.c:6630 (discriminator 3) mm/slub.c:6837 (discriminator 3))
+[    7.841095] nsim_destroy (drivers/net/netdevsim/netdev.c:1186) netdevsim
+[    7.841095] __nsim_dev_port_del (drivers/net/netdevsim/dev.c:441 drivers/net/netdevsim/dev.c:1474) netdevsim
+[    7.841095] nsim_dev_reload_destroy (drivers/net/netdevsim/dev.c:1483 (discriminator 3) drivers/net/netdevsim/dev.c:1707 (discriminator 3)) netdevsim
+[    7.841095]  ? up_write (./arch/x86/include/asm/atomic64_64.h:87 (discriminator 5) ./include/linux/atomic/atomic-arch-fallback.h:2852 (discriminator 5) ./include/linux/atomic/atomic-long.h:268 (discriminator 5) ./include/linux/atomic/atomic-instrumented.h:3391 (discriminator 5) kernel/locking/rwsem.c:1385 (discriminator 5) kernel/locking/rwsem.c:1643 (discriminator 5))
+[    7.841095] nsim_drv_remove (drivers/net/netdevsim/dev.c:1724) netdevsim
+[    7.841095]  device_release_driver_internal (drivers/base/dd.c:1276 drivers/base/dd.c:1297)
+[    7.841095]  ? kobject_put (./arch/x86/include/asm/atomic.h:93 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:949 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:401 (discriminator 4) ./include/linux/refcount.h:389 (discriminator 4) ./include/linux/refcount.h:432 (discriminator 4) ./include/linux/refcount.h:450 (discriminator 4) ./include/linux/kref.h:64 (discriminator 4) lib/kobject.c:737 (discriminator 4))
+[    7.841095]  bus_remove_device (./include/linux/kobject.h:193 drivers/base/base.h:73 drivers/base/bus.c:586)
+[    7.841095]  device_del (drivers/base/core.c:3879)
+[    7.841095]  ? device_is_dependent (drivers/base/core.c:3833)
+[    7.841095]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.841095]  device_unregister (drivers/base/core.c:3796 drivers/base/core.c:3920)
+[    7.841095] del_device_store (drivers/net/netdevsim/bus.c:248) netdevsim
+[    7.841095]  ? nsim_bus_dev_numvfs_show (drivers/net/netdevsim/bus.c:215) netdevsim
+[    7.841095]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.841095]  kernfs_fop_write_iter (fs/kernfs/file.c:88 fs/kernfs/file.c:356)
+[    7.841095]  vfs_write (fs/read_write.c:594 (discriminator 1) fs/read_write.c:686 (discriminator 1))
+[    7.841095]  ? __pmd_alloc (mm/memory.c:6229)
+[    7.841095]  ? kernel_write (fs/read_write.c:667)
+[    7.841095]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.841095]  ? fdget_pos (fs/file.c:1232)
+[    7.841095]  ksys_write (fs/read_write.c:738)
+[    7.841095]  ? __ia32_sys_read (fs/read_write.c:728)
+[    7.841095]  ? do_user_addr_fault (./arch/x86/include/asm/atomic.h:93 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:949 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:401 (discriminator 4) ./include/linux/refcount.h:389 (discriminator 4) ./include/linux/refcount.h:432 (discriminator 4) ./include/linux/mmap_lock.h:143 (discriminator 4) ./include/linux/mmap_lock.h:182 (discriminator 4) arch/x86/mm/fault.c:1338 (discriminator 4))
+[    7.841095]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 (discriminator 1) arch/x86/entry/syscall_64.c:94 (discriminator 1))
+[    7.841095]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:130)
+[    7.841095] RIP: 0033:0x7f5c416195a4
+[    7.841095] Code: c7 00 16 00 00 00 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 f3 0f 1e fa 80 3d a5 ea 0e 00 00 74 13 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 54 c3 0f 1f 00 55 48 89 e5 48 83 ec 20 48 89
+All code
+========
+   0:	c7 00 16 00 00 00    	movl   $0x16,(%rax)
+   6:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   b:	c3                   	ret
+   c:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  13:	00 00 00 
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d a5 ea 0e 00 00 	cmpb   $0x0,0xeeaa5(%rip)        # 0xeeac6
+  21:	74 13                	je     0x36
+  23:	b8 01 00 00 00       	mov    $0x1,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 54                	ja     0x86
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	48                   	rex.W
+  3f:	89                   	.byte 0x89
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 54                	ja     0x5c
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	48                   	rex.W
+  15:	89                   	.byte 0x89
+[    7.841095] RSP: 002b:00007ffec97e3678 EFLAGS: 00000202 ORIG_RAX: 0000000000000001
+[    7.841095] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f5c416195a4
+[    7.841095] RDX: 0000000000000002 RSI: 0000560c9a4802f0 RDI: 0000000000000001
+[    7.841095] RBP: 00007ffec97e36a0 R08: 0000000000000000 R09: 0000000000000000
+[    7.841095] R10: 0000000000000001 R11: 0000000000000202 R12: 0000000000000002
+
+
+Finger prints:
+dump_stack_lvl:print_report:kasan_report:kobject_put
+refcount_warn_saturate:netdev_run_todo:rtnl_dellink:rtnetlink_rcv_msg
+netdev_release:device_release:kobject_put:netdev_run_todo

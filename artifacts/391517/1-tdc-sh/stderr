@@ -1,0 +1,237 @@
+[    3.134303] GACT probability on
+[    3.222325] Mirror/redirect action on
+[    3.495077] Simple TC action Loaded
+[    4.280637] u32 classifier
+[    4.280677]     Performance counters on
+[    4.280718]     input device check on
+[    4.280750]     Actions configured
+[    7.470210] ==================================================================
+[    7.470310] BUG: KASAN: null-ptr-deref in work_grab_pending+0x81/0x780
+[    7.470379] Write of size 8 at addr 0000000000000000 by task kworker/u128:0/12
+[    7.470456] 
+[    7.470481] CPU: 0 UID: 0 PID: 12 Comm: kworker/u128:0 Not tainted 6.18.0-rc5-virtme #1 PREEMPT(voluntary) 
+[    7.470484] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.470485] Workqueue: netns cleanup_net
+[    7.470489] Call Trace:
+[    7.470491]  <TASK>
+[    7.470491]  dump_stack_lvl+0x53/0x70
+[    7.470495]  kasan_report+0xce/0x100
+[    7.470497]  ? work_grab_pending+0x81/0x780
+[    7.470499]  kasan_check_range+0xfd/0x1a0
+[    7.470501]  work_grab_pending+0x81/0x780
+[    7.470502]  ? _raw_spin_lock+0x84/0xe0
+[    7.470505]  ? _raw_read_lock_irq+0x40/0x40
+[    7.470506]  __cancel_work+0x7b/0x200
+[    7.470508]  ? enable_delayed_work+0x10/0x10
+[    7.470509]  ? dev_reset_queue+0x7b/0x120
+[    7.470511]  ? dev_deactivate_many+0x5c9/0x970
+[    7.470512]  __cancel_work_sync+0x18/0xb0
+[    7.470514]  __dev_close_many+0x2dd/0x920
+[    7.470516]  ? netdev_notify_peers+0x20/0x20
+[    7.470518]  ? osq_unlock+0x8f/0x230
+[    7.470520]  ? osq_lock+0x520/0x520
+[    7.470522]  netif_close_many+0x1b0/0x440
+[    7.470523]  ? __dev_close_many+0x920/0x920
+[    7.470525]  ? __mutex_lock_slowpath+0x10/0x10
+[    7.470527]  unregister_netdevice_many_notify+0x28a/0x2290
+[    7.470529]  ? dev_ingress_queue_create+0x230/0x230
+[    7.470530]  ? mutex_is_locked+0x1c/0x50
+[    7.470532]  ? rtnl_is_locked+0x15/0x20
+[    7.470533]  ? unregister_netdevice_queue+0x6c/0x2c0
+[    7.470534]  ? unregister_netdevice_many+0x20/0x20
+[    7.470536]  ? __mutex_lock_slowpath+0x10/0x10
+[    7.470537]  default_device_exit_batch+0x5e6/0x890
+[    7.470538]  ? generic_xdp_install+0x3b0/0x3b0
+[    7.470539]  ? dev_ingress_queue_create+0x230/0x230
+[    7.470540]  ? unregister_netdev+0x60/0x60
+[    7.470541]  ? mutex_lock+0xcf/0xe0
+[    7.470543]  ? __mutex_unlock_slowpath.isra.0+0x370/0x370
+[    7.470544]  ops_undo_list+0x29e/0x700
+[    7.470546]  ? net_ns_barrier+0x30/0x30
+[    7.470547]  ? idr_destroy+0x11e/0x230
+[    7.470549]  cleanup_net+0x316/0x610
+[    7.470551]  ? net_passive_dec+0x180/0x180
+[    7.470552]  ? lock_timer_base+0xbd/0x160
+[    7.470554]  ? detach_if_pending+0x1f4/0x2a0
+[    7.470556]  process_one_work+0x5c4/0xff0
+[    7.470558]  worker_thread+0x79c/0x1270
+[    7.470560]  ? rescuer_thread+0x15b0/0x15b0
+[    7.470561]  kthread+0x329/0x640
+[    7.470563]  ? kthread_is_per_cpu+0xc0/0xc0
+[    7.470564]  ? _raw_spin_lock_bh+0xe0/0xe0
+[    7.470566]  ? kthread_is_per_cpu+0xc0/0xc0
+[    7.470567]  ret_from_fork+0x181/0x230
+[    7.470569]  ? kthread_is_per_cpu+0xc0/0xc0
+[    7.470570]  ret_from_fork_asm+0x11/0x20
+[    7.470574]  </TASK>
+[    7.470574] ==================================================================
+[    7.471095] Disabling lock debugging due to kernel taint
+[    7.471095] BUG: kernel NULL pointer dereference, address: 0000000000000000
+[    7.471095] #PF: supervisor write access in kernel mode
+[    7.471095] #PF: error_code(0x0002) - not-present page
+[    7.471095] PGD 0 P4D 0 
+[    7.471095] Oops: Oops: 0002 [#1] SMP KASAN
+[    7.471095] CPU: 0 UID: 0 PID: 12 Comm: kworker/u128:0 Tainted: G    B               6.18.0-rc5-virtme #1 PREEMPT(voluntary) 
+[    7.471095] Tainted: [B]=BAD_PAGE
+[    7.471095] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.471095] Workqueue: netns cleanup_net
+[    7.471095] RIP: 0010:work_grab_pending+0x81/0x780
+[    7.471095] Code: e8 f4 f3 1a 00 85 c0 74 14 b8 01 00 00 00 48 83 c4 40 5b 5d 41 5c 41 5d 41 5e 41 5f c3 be 08 00 00 00 48 89 df e8 2f 41 77 00 <f0> 48 0f ba 2b 00 0f 92 c0 73 d9 e8 af f3 14 00 be 08 00 00 00 48
+[    7.471095] RSP: 0018:ffff88800185f6c0 EFLAGS: 00010046
+[    7.471095] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff831c8d6a
+[    7.471095] RDX: fffffbfff0d56a2d RSI: 0000000000000008 RDI: ffffffff86ab5160
+[    7.471095] RBP: ffffed100030beeb R08: 0000000000000001 R09: fffffbfff0d56a2c
+[    7.471095] R10: ffffffff86ab5167 R11: ffff88800185f200 R12: 0000000000000000
+[    7.471095] R13: dffffc0000000000 R14: 0000000000000286 R15: ffff88800185f758
+[    7.471095] FS:  0000000000000000(0000) GS:ffff8880af3ae000(0000) knlGS:0000000000000000
+[    7.471095] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    7.471095] CR2: 0000000000000000 CR3: 000000001630a000 CR4: 0000000000750ef0
+[    7.471095] PKRU: 55555554
+[    7.471095] Call Trace:
+[    7.471095]  <TASK>
+[    7.471095]  ? _raw_spin_lock+0x84/0xe0
+[    7.471095]  ? _raw_read_lock_irq+0x40/0x40
+[    7.471095]  __cancel_work+0x7b/0x200
+[    7.471095]  ? enable_delayed_work+0x10/0x10
+[    7.471095]  ? dev_reset_queue+0x7b/0x120
+[    7.471095]  ? dev_deactivate_many+0x5c9/0x970
+[    7.471095]  __cancel_work_sync+0x18/0xb0
+[    7.471095]  __dev_close_many+0x2dd/0x920
+[    7.471095]  ? netdev_notify_peers+0x20/0x20
+[    7.471095]  ? osq_unlock+0x8f/0x230
+[    7.471095]  ? osq_lock+0x520/0x520
+[    7.471095]  netif_close_many+0x1b0/0x440
+[    7.471095]  ? __dev_close_many+0x920/0x920
+[    7.471095]  ? __mutex_lock_slowpath+0x10/0x10
+[    7.471095]  unregister_netdevice_many_notify+0x28a/0x2290
+[    7.471095]  ? dev_ingress_queue_create+0x230/0x230
+[    7.471095]  ? mutex_is_locked+0x1c/0x50
+[    7.471095]  ? rtnl_is_locked+0x15/0x20
+[    7.471095]  ? unregister_netdevice_queue+0x6c/0x2c0
+[    7.471095]  ? unregister_netdevice_many+0x20/0x20
+[    7.471095]  ? __mutex_lock_slowpath+0x10/0x10
+[    7.471095]  default_device_exit_batch+0x5e6/0x890
+[    7.471095]  ? generic_xdp_install+0x3b0/0x3b0
+[    7.471095]  ? dev_ingress_queue_create+0x230/0x230
+[    7.471095]  ? unregister_netdev+0x60/0x60
+[    7.471095]  ? mutex_lock+0xcf/0xe0
+[    7.471095]  ? __mutex_unlock_slowpath.isra.0+0x370/0x370
+[    7.471095]  ops_undo_list+0x29e/0x700
+[    7.471095]  ? net_ns_barrier+0x30/0x30
+[    7.471095]  ? idr_destroy+0x11e/0x230
+[    7.471095]  cleanup_net+0x316/0x610
+[    7.471095]  ? net_passive_dec+0x180/0x180
+[    7.471095]  ? lock_timer_base+0xbd/0x160
+[    7.471095]  ? detach_if_pending+0x1f4/0x2a0
+[    7.471095]  process_one_work+0x5c4/0xff0
+[    7.471095]  worker_thread+0x79c/0x1270
+[    7.471095]  ? rescuer_thread+0x15b0/0x15b0
+[    7.471095]  kthread+0x329/0x640
+[    7.471095]  ? kthread_is_per_cpu+0xc0/0xc0
+[    7.471095]  ? _raw_spin_lock_bh+0xe0/0xe0
+[    7.471095]  ? kthread_is_per_cpu+0xc0/0xc0
+[    7.471095]  ret_from_fork+0x181/0x230
+[    7.471095]  ? kthread_is_per_cpu+0xc0/0xc0
+[    7.471095]  ret_from_fork_asm+0x11/0x20
+[    7.471095]  </TASK>
+[    7.471095] Modules linked in: sch_ingress sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    7.471095] CR2: 0000000000000000
+[    7.471095] ---[ end trace 0000000000000000 ]---
+[    7.471095] RIP: 0010:work_grab_pending+0x81/0x780
+[    7.471095] Code: e8 f4 f3 1a 00 85 c0 74 14 b8 01 00 00 00 48 83 c4 40 5b 5d 41 5c 41 5d 41 5e 41 5f c3 be 08 00 00 00 48 89 df e8 2f 41 77 00 <f0> 48 0f ba 2b 00 0f 92 c0 73 d9 e8 af f3 14 00 be 08 00 00 00 48
+[    7.471095] RSP: 0018:ffff88800185f6c0 EFLAGS: 00010046
+[    7.471095] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff831c8d6a
+[    7.471095] RDX: fffffbfff0d56a2d RSI: 0000000000000008 RDI: ffffffff86ab5160
+[    7.471095] RBP: ffffed100030beeb R08: 0000000000000001 R09: fffffbfff0d56a2c
+[    7.471095] R10: ffffffff86ab5167 R11: ffff88800185f200 R12: 0000000000000000
+[    7.471095] R13: dffffc0000000000 R14: 0000000000000286 R15: ffff88800185f758
+[    7.471095] FS:  0000000000000000(0000) GS:ffff8880af3ae000(0000) knlGS:0000000000000000
+[    7.471095] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    7.471095] CR2: 0000000000000000 CR3: 000000001630a000 CR4: 0000000000750ef0
+[    7.471095] PKRU: 55555554
+[    7.471095] Kernel panic - not syncing: Fatal exception
+[    7.471095] Kernel Offset: 0x1c00000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[    7.471095] Rebooting in 60 seconds..
+[    1.718714] loop: module loaded
+[    1.720110] scsi host0: ata_piix
+[    1.720471] scsi host1: ata_piix
+[    1.720624] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc0c0 irq 14 lpm-pol 0
+[    1.720706] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc0c8 irq 15 lpm-pol 0
+[    1.721601] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    1.722401] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    1.722461] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    1.722758] rtc_cmos 00:04: RTC can wake from S4
+[    1.723786] rtc_cmos 00:04: registered as rtc0
+[    1.723955] rtc_cmos 00:04: setting system clock to 2025-11-18T18:40:32 UTC (1763491232)
+[    1.724202] rtc_cmos 00:04: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    1.724662] i6300ESB timer 0000:00:04.0: initialized. heartbeat=30 sec (nowayout=0)
+[    1.724904] device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: dm-devel@lists.linux.dev
+[    1.725891] NET: Registered PF_PACKET protocol family
+[    1.725964] 9pnet: Installing 9P2000 support
+[    1.727330] Key type dns_resolver registered
+[    1.727814] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input2
+[    1.728372] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input3
+[    1.730339] IPI shorthand broadcast: enabled
+[    1.738261] registered taskstats version 1
+[    1.739073] Loading compiled-in X.509 certificates
+[    1.745230] Demotion targets for Node 0: null
+[    1.745434] PM:   Magic number: 1:427:696
+[    1.745503] acpi LNXCPU:0a: hash matches
+[    1.745554] netconsole: network logging started
+[    1.745716] Unstable clock detected, switching default tracing clock to "global"
+[    1.745716] If you want to keep using the local clock, then add:
+[    1.745716]   "trace_clock=local"
+[    1.745716] on the kernel command line
+[    1.745969] ALSA device list:
+[    1.746014]   No soundcards found.
+[    1.746095] check access for rdinit=/init failed: -2, ignoring
+[    1.876252] ata2: found unknown device (class 0)
+[    1.876838] ata2.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+[    1.877933] scsi 1:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+[    1.891608] scsi 1:0:0:0: Attached scsi generic sg0 type 5
+[    1.891749] md: Skipping autodetection of RAID arrays. (raid=autodetect will force)
+[    1.891862] 9pnet_virtio: no channels available for device 
+[    1.892367] VFS: Mounted root (9p filesystem) readonly on device 0:20.
+[    1.892599] devtmpfs: mounted
+[    1.895037] Freeing unused kernel image (initmem) memory: 2584K
+[    1.895114] Write protecting the kernel read-only data: 45056k
+[    1.895453] Freeing unused kernel image (text/rodata gap) memory: 144K
+[    1.895661] Freeing unused kernel image (rodata/data gap) memory: 600K
+[    1.921729] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    1.921806] Run /usr/lib/python3/dist-packages/virtme/guest/virtme-init as init process
+[    1.982534] mount (268) used greatest stack depth: 26736 bytes left
+[    2.039147] mount (274) used greatest stack depth: 25952 bytes left
+[    2.066376] overlayfs: failed to set xattr on upper
+[    2.066432] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.066495] overlayfs: ...falling back to uuid=null.
+[    2.070190] overlayfs: failed to set xattr on upper
+[    2.070245] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.070306] overlayfs: ...falling back to uuid=null.
+[    2.081059] overlayfs: failed to set xattr on upper
+[    2.081130] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.081204] overlayfs: ...falling back to uuid=null.
+[    2.083760] overlayfs: failed to set xattr on upper
+[    2.083814] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.083869] overlayfs: ...falling back to uuid=null.
+[    2.090167] overlayfs: failed to set xattr on upper
+[    2.090226] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.090289] overlayfs: ...falling back to uuid=null.
+[    2.095880] overlayfs: failed to set xattr on upper
+[    2.095944] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.096023] overlayfs: ...falling back to uuid=null.
+[    2.103150] overlayfs: failed to set xattr on upper
+[    2.103211] overlayfs: ...falling back to redirect_dir=nofollow.
+[    2.103271] overlayfs: ...falling back to uuid=null.
+[    2.199422] virtme-init: basic initialization done
+[    2.207814] virtme-init: running systemd-tmpfiles
+[    2.209537] virtme-init: udevd not found
+[    2.302453] virtme-init: Setting hostname to virtme-ng...
+[    2.325730] ip (369) used greatest stack depth: 24400 bytes left
+
+WAIT TIMEOUT stderr
+
+Ctrl-C stderr
+
+Ctrl-C stderr
+
+WAIT TIMEOUT stderr

@@ -1,0 +1,160 @@
+======================================
+| [    7.470210] ==================================================================
+| [    7.470310] BUG: KASAN: null-ptr-deref in work_grab_pending (./arch/x86/include/asm/bitops.h:136 (discriminator 1) ./include/asm-generic/bitops/instrumented-atomic.h:72 (discriminator 1) kernel/workqueue.c:2072 (discriminator 1) kernel/workqueue.c:2160 (discriminator 1))
+| [    7.470379] Write of size 8 at addr 0000000000000000 by task kworker/u128:0/12
+| [    7.470456]
+| [    7.470481] CPU: 0 UID: 0 PID: 12 Comm: kworker/u128:0 Not tainted 6.18.0-rc5-virtme #1 PREEMPT(voluntary)
+[    7.470484] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.470485] Workqueue: netns cleanup_net
+[    7.470489] Call Trace:
+[    7.470491]  <TASK>
+[    7.470491]  dump_stack_lvl (lib/dump_stack.c:123)
+[    7.470495]  kasan_report (mm/kasan/report.c:597)
+[    7.470497]  ? work_grab_pending (./arch/x86/include/asm/bitops.h:136 (discriminator 1) ./include/asm-generic/bitops/instrumented-atomic.h:72 (discriminator 1) kernel/workqueue.c:2072 (discriminator 1) kernel/workqueue.c:2160 (discriminator 1))
+[    7.470499]  kasan_check_range (mm/kasan/generic.c:186 (discriminator 1) mm/kasan/generic.c:200 (discriminator 1))
+[    7.470501]  work_grab_pending (./arch/x86/include/asm/bitops.h:136 (discriminator 1) ./include/asm-generic/bitops/instrumented-atomic.h:72 (discriminator 1) kernel/workqueue.c:2072 (discriminator 1) kernel/workqueue.c:2160 (discriminator 1))
+[    7.470502]  ? _raw_spin_lock (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2170 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1302 (discriminator 4) ./include/asm-generic/qspinlock.h:111 (discriminator 4) ./include/linux/spinlock.h:187 (discriminator 4) ./include/linux/spinlock_api_smp.h:134 (discriminator 4) kernel/locking/spinlock.c:154 (discriminator 4))
+[    7.470505]  ? _raw_read_lock_irq (kernel/locking/spinlock.c:153)
+[    7.470506]  __cancel_work (kernel/workqueue.c:4364)
+[    7.470508]  ? enable_delayed_work (kernel/workqueue.c:4359)
+[    7.470509]  ? dev_reset_queue (./include/linux/spinlock.h:396 net/sched/sch_generic.c:1316)
+[    7.470511]  ? dev_deactivate_many (net/sched/sch_generic.c:1324 (discriminator 1) net/sched/sch_generic.c:1382 (discriminator 1))
+[    7.470512]  __cancel_work_sync (kernel/workqueue.c:4383)
+[    7.470514]  __dev_close_many (net/core/dev.c:1879 net/core/dev.c:1932)
+[    7.470516]  ? netdev_notify_peers (net/core/dev.c:1891)
+[    7.470518]  ? osq_unlock (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2203 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1325 (discriminator 4) kernel/locking/osq_lock.c:218 (discriminator 4))
+[    7.470520]  ? osq_lock (kernel/locking/osq_lock.c:211)
+[    7.470522]  netif_close_many (net/core/dev.c:1959)
+[    7.470523]  ? __dev_close_many (net/core/dev.c:1949)
+[    7.470525]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.470527]  unregister_netdevice_many_notify (net/core/dev.c:12476 net/core/dev.c:12537)
+[    7.470529]  ? dev_ingress_queue_create (net/core/dev.c:12499)
+[    7.470530]  ? mutex_is_locked (./arch/x86/include/asm/atomic64_64.h:15 ./include/linux/atomic/atomic-arch-fallback.h:2583 ./include/linux/atomic/atomic-long.h:38 ./include/linux/atomic/atomic-instrumented.h:3189 kernel/locking/mutex.h:47 kernel/locking/mutex.c:67)
+[    7.470532]  ? rtnl_is_locked (net/core/rtnetlink.c:169 (discriminator 1))
+[    7.470533]  ? unregister_netdevice_queue (net/core/dev.c:12442 (discriminator 2))
+[    7.470534]  ? unregister_netdevice_many (net/core/dev.c:12441)
+[    7.470536]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.470537]  default_device_exit_batch (net/core/dev.c:13229)
+[    7.470538]  ? generic_xdp_install (net/core/dev.c:11830)
+[    7.470539]  ? dev_ingress_queue_create (net/core/dev.c:12499)
+[    7.470540]  ? unregister_netdev (net/core/dev.c:13204)
+[    7.470541]  ? mutex_lock (kernel/locking/mutex.c:274)
+[    7.470543]  ? __mutex_unlock_slowpath.isra.0 (kernel/locking/mutex.c:531)
+[    7.470544]  ops_undo_list (net/core/net_namespace.c:251 (discriminator 3))
+[    7.470546]  ? net_ns_barrier (net/core/net_namespace.c:223)
+[    7.470547]  ? idr_destroy (lib/radix-tree.c:675 (discriminator 1) lib/radix-tree.c:1563 (discriminator 1))
+[    7.470549]  cleanup_net (net/core/net_namespace.c:698)
+[    7.470551]  ? net_passive_dec (net/core/net_namespace.c:660)
+[    7.470552]  ? lock_timer_base (kernel/time/timer.c:1004)
+[    7.470554]  ? detach_if_pending (./arch/x86/include/asm/bitops.h:94 ./include/asm-generic/bitops/instrumented-non-atomic.h:45 kernel/time/timer.c:906)
+[    7.470556]  process_one_work (kernel/workqueue.c:3268)
+[    7.470558]  worker_thread (kernel/workqueue.c:3340 (discriminator 2) kernel/workqueue.c:3427 (discriminator 2))
+[    7.470560]  ? rescuer_thread (kernel/workqueue.c:3373)
+[    7.470561]  kthread (kernel/kthread.c:463)
+[    7.470563]  ? kthread_is_per_cpu (kernel/kthread.c:412)
+[    7.470564]  ? _raw_spin_lock_bh (kernel/locking/spinlock.c:169)
+[    7.470566]  ? kthread_is_per_cpu (kernel/kthread.c:412)
+[    7.470567]  ret_from_fork (arch/x86/kernel/process.c:164)
+[    7.470569]  ? kthread_is_per_cpu (kernel/kthread.c:412)
+[    7.470570]  ret_from_fork_asm (arch/x86/entry/entry_64.S:255)
+| [    7.471095] #PF: error_code(0x0002) - not-present page
+| [    7.471095] PGD 0 P4D 0
+| [    7.471095] Oops: Oops: 0002 [#1] SMP KASAN
+| [    7.471095] CPU: 0 UID: 0 PID: 12 Comm: kworker/u128:0 Tainted: G    B               6.18.0-rc5-virtme #1 PREEMPT(voluntary)
+| [    7.471095] Tainted: [B]=BAD_PAGE
+[    7.471095] Hardware name: QEMU Ubuntu 24.04 PC (i440FX + PIIX, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    7.471095] Workqueue: netns cleanup_net
+[    7.471095] RIP: 0010:work_grab_pending (./arch/x86/include/asm/bitops.h:136 (discriminator 1) ./include/asm-generic/bitops/instrumented-atomic.h:72 (discriminator 1) kernel/workqueue.c:2072 (discriminator 1) kernel/workqueue.c:2160 (discriminator 1))
+[    7.471095] Code: e8 f4 f3 1a 00 85 c0 74 14 b8 01 00 00 00 48 83 c4 40 5b 5d 41 5c 41 5d 41 5e 41 5f c3 be 08 00 00 00 48 89 df e8 2f 41 77 00 <f0> 48 0f ba 2b 00 0f 92 c0 73 d9 e8 af f3 14 00 be 08 00 00 00 48
+All code
+========
+   0:	e8 f4 f3 1a 00       	call   0x1af3f9
+   5:	85 c0                	test   %eax,%eax
+   7:	74 14                	je     0x1d
+   9:	b8 01 00 00 00       	mov    $0x1,%eax
+   e:	48 83 c4 40          	add    $0x40,%rsp
+  12:	5b                   	pop    %rbx
+  13:	5d                   	pop    %rbp
+  14:	41 5c                	pop    %r12
+  16:	41 5d                	pop    %r13
+  18:	41 5e                	pop    %r14
+  1a:	41 5f                	pop    %r15
+  1c:	c3                   	ret
+  1d:	be 08 00 00 00       	mov    $0x8,%esi
+  22:	48 89 df             	mov    %rbx,%rdi
+  25:	e8 2f 41 77 00       	call   0x774159
+  2a:*	f0 48 0f ba 2b 00    	lock btsq $0x0,(%rbx)		<-- trapping instruction
+  30:	0f 92 c0             	setb   %al
+  33:	73 d9                	jae    0xe
+  35:	e8 af f3 14 00       	call   0x14f3e9
+  3a:	be 08 00 00 00       	mov    $0x8,%esi
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	f0 48 0f ba 2b 00    	lock btsq $0x0,(%rbx)
+   6:	0f 92 c0             	setb   %al
+   9:	73 d9                	jae    0xffffffffffffffe4
+   b:	e8 af f3 14 00       	call   0x14f3bf
+  10:	be 08 00 00 00       	mov    $0x8,%esi
+  15:	48                   	rex.W
+[    7.471095] RSP: 0018:ffff88800185f6c0 EFLAGS: 00010046
+[    7.471095] RAX: 0000000000000000 RBX: 0000000000000000 RCX: ffffffff831c8d6a
+[    7.471095] RDX: fffffbfff0d56a2d RSI: 0000000000000008 RDI: ffffffff86ab5160
+[    7.471095] RBP: ffffed100030beeb R08: 0000000000000001 R09: fffffbfff0d56a2c
+[    7.471095] R10: ffffffff86ab5167 R11: ffff88800185f200 R12: 0000000000000000
+[    7.471095] R13: dffffc0000000000 R14: 0000000000000286 R15: ffff88800185f758
+[    7.471095] FS:  0000000000000000(0000) GS:ffff8880af3ae000(0000) knlGS:0000000000000000
+[    7.471095] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    7.471095] CR2: 0000000000000000 CR3: 000000001630a000 CR4: 0000000000750ef0
+[    7.471095] PKRU: 55555554
+[    7.471095] Call Trace:
+[    7.471095]  <TASK>
+[    7.471095]  ? _raw_spin_lock (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2170 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1302 (discriminator 4) ./include/asm-generic/qspinlock.h:111 (discriminator 4) ./include/linux/spinlock.h:187 (discriminator 4) ./include/linux/spinlock_api_smp.h:134 (discriminator 4) kernel/locking/spinlock.c:154 (discriminator 4))
+[    7.471095]  ? _raw_read_lock_irq (kernel/locking/spinlock.c:153)
+[    7.471095]  __cancel_work (kernel/workqueue.c:4364)
+[    7.471095]  ? enable_delayed_work (kernel/workqueue.c:4359)
+[    7.471095]  ? dev_reset_queue (./include/linux/spinlock.h:396 net/sched/sch_generic.c:1316)
+[    7.471095]  ? dev_deactivate_many (net/sched/sch_generic.c:1324 (discriminator 1) net/sched/sch_generic.c:1382 (discriminator 1))
+[    7.471095]  __cancel_work_sync (kernel/workqueue.c:4383)
+[    7.471095]  __dev_close_many (net/core/dev.c:1879 net/core/dev.c:1932)
+[    7.471095]  ? netdev_notify_peers (net/core/dev.c:1891)
+[    7.471095]  ? osq_unlock (./arch/x86/include/asm/atomic.h:107 (discriminator 4) ./include/linux/atomic/atomic-arch-fallback.h:2203 (discriminator 4) ./include/linux/atomic/atomic-instrumented.h:1325 (discriminator 4) kernel/locking/osq_lock.c:218 (discriminator 4))
+[    7.471095]  ? osq_lock (kernel/locking/osq_lock.c:211)
+[    7.471095]  netif_close_many (net/core/dev.c:1959)
+[    7.471095]  ? __dev_close_many (net/core/dev.c:1949)
+[    7.471095]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.471095]  unregister_netdevice_many_notify (net/core/dev.c:12476 net/core/dev.c:12537)
+[    7.471095]  ? dev_ingress_queue_create (net/core/dev.c:12499)
+[    7.471095]  ? mutex_is_locked (./arch/x86/include/asm/atomic64_64.h:15 ./include/linux/atomic/atomic-arch-fallback.h:2583 ./include/linux/atomic/atomic-long.h:38 ./include/linux/atomic/atomic-instrumented.h:3189 kernel/locking/mutex.h:47 kernel/locking/mutex.c:67)
+[    7.471095]  ? rtnl_is_locked (net/core/rtnetlink.c:169 (discriminator 1))
+[    7.471095]  ? unregister_netdevice_queue (net/core/dev.c:12442 (discriminator 2))
+[    7.471095]  ? unregister_netdevice_many (net/core/dev.c:12441)
+[    7.471095]  ? __mutex_lock_slowpath (kernel/locking/mutex.c:270)
+[    7.471095]  default_device_exit_batch (net/core/dev.c:13229)
+[    7.471095]  ? generic_xdp_install (net/core/dev.c:11830)
+[    7.471095]  ? dev_ingress_queue_create (net/core/dev.c:12499)
+[    7.471095]  ? unregister_netdev (net/core/dev.c:13204)
+[    7.471095]  ? mutex_lock (kernel/locking/mutex.c:274)
+[    7.471095]  ? __mutex_unlock_slowpath.isra.0 (kernel/locking/mutex.c:531)
+[    7.471095]  ops_undo_list (net/core/net_namespace.c:251 (discriminator 3))
+[    7.471095]  ? net_ns_barrier (net/core/net_namespace.c:223)
+[    7.471095]  ? idr_destroy (lib/radix-tree.c:675 (discriminator 1) lib/radix-tree.c:1563 (discriminator 1))
+[    7.471095]  cleanup_net (net/core/net_namespace.c:698)
+[    7.471095]  ? net_passive_dec (net/core/net_namespace.c:660)
+[    7.471095]  ? lock_timer_base (kernel/time/timer.c:1004)
+[    7.471095]  ? detach_if_pending (./arch/x86/include/asm/bitops.h:94 ./include/asm-generic/bitops/instrumented-non-atomic.h:45 kernel/time/timer.c:906)
+[    7.471095]  process_one_work (kernel/workqueue.c:3268)
+[    7.471095]  worker_thread (kernel/workqueue.c:3340 (discriminator 2) kernel/workqueue.c:3427 (discriminator 2))
+[    7.471095]  ? rescuer_thread (kernel/workqueue.c:3373)
+[    7.471095]  kthread (kernel/kthread.c:463)
+[    7.471095]  ? kthread_is_per_cpu (kernel/kthread.c:412)
+[    7.471095]  ? _raw_spin_lock_bh (kernel/locking/spinlock.c:169)
+[    7.471095]  ? kthread_is_per_cpu (kernel/kthread.c:412)
+[    7.471095]  ret_from_fork (arch/x86/kernel/process.c:164)
+[    7.471095]  ? kthread_is_per_cpu (kernel/kthread.c:412)
+
+
+Finger prints:
+dump_stack_lvl:kasan_report:kasan_check_range:work_grab_pending
+work_grab_pending:__cancel_work:__cancel_work_sync:__dev_close_many
