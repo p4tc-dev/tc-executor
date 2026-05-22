@@ -1,0 +1,1809 @@
+[    2.051010] GACT probability on
+[    2.106445] Mirror/redirect action on
+[    2.274315] Simple TC action Loaded
+[    2.763240] u32 classifier
+[    2.763296]     Performance counters on
+[    2.763323]     input device check on
+[    2.763351]     Actions configured
+[    3.397086] ------------[ cut here ]------------
+[    3.397134] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#15: modprobe/550
+[    3.397206] Modules linked in: sch_teql(+) sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    3.397540] CPU: 15 UID: 0 PID: 550 Comm: modprobe Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    3.397603] Tainted: [W]=WARN
+[    3.397626] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    3.397692] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    3.397727] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    3.397837] RSP: 0018:ffffd375c17dfbf8 EFLAGS: 00010246
+[    3.397874] RAX: 00000000ffffffa6 RBX: ffff8b88c2d68700 RCX: 0000000000000000
+[    3.397918] RDX: ffff8b88c4448000 RSI: 0000000000000000 RDI: ffff8b88c2d68700
+[    3.397962] RBP: 0000000000000010 R08: ffff8b88c2e7cf50 R09: ffff8b88c5d48030
+[    3.398007] R10: ffff8b88c4492120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    3.398049] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4492000
+[    3.398095] FS:  00007f0e6cd9a480(0000) GS:ffff8b8946b9b000(0000) knlGS:0000000000000000
+[    3.398149] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    3.398189] CR2: 00007f0e6cd80b0a CR3: 0000000001fe1000 CR4: 0000000000750ef0
+[    3.398231] PKRU: 55555554
+[    3.398252] Call Trace:
+[    3.398267]  <TASK>
+[    3.398289]  rtmsg_ifinfo+0x38/0x90
+[    3.398321]  register_netdevice+0x888/0x9a0
+[    3.398349]  register_netdev+0x1e/0x30
+[    3.398378]  teql_init+0x2b/0xf40 [sch_teql]
+[    3.398414]  ? teql_master_setup+0xc0/0xc0 [sch_teql]
+[    3.398448]  do_one_initcall+0x59/0x220
+[    3.398477]  do_init_module+0x60/0x250
+[    3.398505]  init_module_from_file+0xc4/0xe0
+[    3.398542]  idempotent_init_module+0x113/0x300
+[    3.398576]  __x64_sys_finit_module+0x5f/0xa0
+[    3.398611]  do_syscall_64+0x10e/0xfc0
+[    3.398643]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    3.398680] RIP: 0033:0x7f0e6cec228d
+[    3.398708] Code: ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 5b bb 0d 00 f7 d8 64 89 01 48
+[    3.398812] RSP: 002b:00007ffdc2d24c18 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[    3.398855] RAX: ffffffffffffffda RBX: 000055872c27b950 RCX: 00007f0e6cec228d
+[    3.398897] RDX: 0000000000000000 RSI: 000055870ac74e52 RDI: 0000000000000005
+[    3.398942] RBP: 00007ffdc2d24cd0 R08: 0000000000000040 R09: 0000000000000002
+[    3.398986] R10: 00007f0e6cf9eb20 R11: 0000000000000246 R12: 000055870ac74e52
+[    3.399028] R13: 0000000000040000 R14: 000055872c27b9d0 R15: 0000000000000000
+[    3.399071]  </TASK>
+[    3.399085] ---[ end trace 0000000000000000 ]---
+[    4.549582] ------------[ cut here ]------------
+[    4.549632] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#1: ip/571
+[    4.549714] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.550178] CPU: 1 UID: 0 PID: 571 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.550249] Tainted: [W]=WARN
+[    4.550273] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.550350] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.550382] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.550495] RSP: 0018:ffffd375c0a97838 EFLAGS: 00010246
+[    4.550527] RAX: 00000000ffffffa6 RBX: ffff8b88c25e0200 RCX: 0000000000000000
+[    4.550576] RDX: ffff8b88c741ae00 RSI: 0000000000000000 RDI: ffff8b88c25e0200
+[    4.550624] RBP: 0000000000000010 R08: ffff8b88c2fef810 R09: ffff8b88c3ebc038
+[    4.550673] R10: ffff8b88c3e9b120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.550721] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c3e9b000
+[    4.550771] FS:  00007f8599095b80(0000) GS:ffff8b894681b000(0000) knlGS:0000000000000000
+[    4.550827] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.550871] CR2: 00005571e260d198 CR3: 000000000259f000 CR4: 0000000000750ef0
+[    4.550921] PKRU: 55555554
+[    4.550937] Call Trace:
+[    4.550954]  <TASK>
+[    4.550970]  rtmsg_ifinfo+0x38/0x90
+[    4.551002]  __dev_notify_flags+0xb0/0xf0
+[    4.551035]  ? register_netdevice+0x736/0x9a0
+[    4.551075]  rtnl_configure_link+0x6f/0xa0
+[    4.551108]  rtnl_newlink+0x5c4/0xc80
+[    4.551137]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.551173]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.551198]  ? refill_objects+0x215/0x2e0
+[    4.551230]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.551263]  netlink_rcv_skb+0x57/0x100
+[    4.551296]  netlink_unicast+0x23a/0x380
+[    4.551320]  netlink_sendmsg+0x1e2/0x430
+[    4.551345]  ____sys_sendmsg+0x161/0x250
+[    4.551378]  ___sys_sendmsg+0x99/0xe0
+[    4.551403]  __sys_sendmsg+0x88/0xe0
+[    4.551435]  do_syscall_64+0x10e/0xfc0
+[    4.551467]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.551508] RIP: 0033:0x7f859929b034
+[    4.551532] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.551646] RSP: 002b:00007ffe0c4eb4c8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.551695] RAX: ffffffffffffffda RBX: 00007ffe0c4ebc50 RCX: 00007f859929b034
+[    4.551744] RDX: 0000000000000000 RSI: 00007ffe0c4eb530 RDI: 0000000000000003
+[    4.551793] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.551846] R10: 00005571e255a738 R11: 0000000000000202 R12: 00007ffe0c4eb530
+[    4.551895] R13: 00005571e2605020 R14: 00007ffe0c4eb600 R15: 0000000000000000
+[    4.551945]  </TASK>
+[    4.551961] ---[ end trace 0000000000000000 ]---
+[    4.552033] ------------[ cut here ]------------
+[    4.552071] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#27: python3/565
+[    4.552151] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.552578] CPU: 27 UID: 0 PID: 565 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.552652] Tainted: [W]=WARN
+[    4.552676] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.552750] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.552783] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.552902] RSP: 0018:ffffd375c097fcb8 EFLAGS: 00010246
+[    4.552935] RAX: 00000000ffffffa6 RBX: ffff8b88c25e1f00 RCX: 0000000000000000
+[    4.552988] RDX: ffff8b88c4ed0000 RSI: 0000000000000000 RDI: ffff8b88c25e1f00
+[    4.553042] RBP: 0000000000000010 R08: ffff8b88c5c614d0 R09: ffff8b88c464082c
+[    4.553092] R10: ffff8b88c4610120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.553145] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4610000
+[    4.553201] FS:  00007f4119489640(0000) GS:ffff8b8946e9b000(0000) knlGS:0000000000000000
+[    4.553258] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.553298] CR2: 0000000000b94668 CR3: 0000000004e31000 CR4: 0000000000750ef0
+[    4.553348] PKRU: 55555554
+[    4.553364] Call Trace:
+[    4.553381]  <TASK>
+[    4.553399]  rtmsg_ifinfo+0x38/0x90
+[    4.553430]  register_netdevice+0x888/0x9a0
+[    4.553455]  register_netdev+0x1e/0x30
+[    4.553479]  loopback_net_init+0x4f/0xa0
+[    4.553513]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    4.553553]  ops_init+0x68/0x110
+[    4.553586]  setup_net+0x7d/0x130
+[    4.553611]  copy_net_ns+0xe4/0x1d0
+[    4.553644]  create_new_namespaces+0x113/0x2e0
+[    4.553685]  unshare_nsproxy_namespaces+0x73/0xa0
+[    4.553728]  ksys_unshare+0x150/0x3d0
+[    4.553766]  __x64_sys_unshare+0x12/0x20
+[    4.553793]  do_syscall_64+0x10e/0xfc0
+[    4.553819]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.553858] RIP: 0033:0x7f41195b51db
+[    4.553886] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    4.554016] RSP: 002b:00007ffe9d7e66a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    4.554070] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    4.554128] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    4.554189] RBP: 00007ffe9d7e66b0 R08: 00007f4116c70830 R09: 0000000000000000
+[    4.554245] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6858
+[    4.554299] R13: 00007ffe9d7e6920 R14: 00007ffe9d7e6770 R15: 00007ffe9d7e6848
+[    4.554354]  </TASK>
+[    4.554370] ---[ end trace 0000000000000000 ]---
+[    4.554487] ------------[ cut here ]------------
+[    4.554533] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#28: python3/566
+[    4.554602] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.555033] CPU: 28 UID: 0 PID: 566 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.555130] Tainted: [W]=WARN
+[    4.555165] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.555264] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.555317] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.555459] RSP: 0018:ffffd375c0c17cb8 EFLAGS: 00010246
+[    4.555504] RAX: 00000000ffffffa6 RBX: ffff8b88c2e1fb00 RCX: 0000000000000000
+[    4.555567] RDX: ffff8b88c6c55c00 RSI: 0000000000000000 RDI: ffff8b88c2e1fb00
+[    4.555627] RBP: 0000000000000010 R08: ffff8b88c2ae0410 R09: ffff8b88c464602c
+[    4.555694] R10: ffff8b88c4614120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.555759] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4614000
+[    4.555826] FS:  00007f4119489640(0000) GS:ffff8b8946edb000(0000) knlGS:0000000000000000
+[    4.555906] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.555967] CR2: 0000000000b94668 CR3: 000000000451c000 CR4: 0000000000750ef0
+[    4.556033] PKRU: 55555554
+[    4.556058] Call Trace:
+[    4.556081]  <TASK>
+[    4.556111]  rtmsg_ifinfo+0x38/0x90
+[    4.556161]  register_netdevice+0x888/0x9a0
+[    4.556197]  register_netdev+0x1e/0x30
+[    4.556238]  loopback_net_init+0x4f/0xa0
+[    4.556277]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    4.556325]  ops_init+0x68/0x110
+[    4.556362]  setup_net+0x7d/0x130
+[    4.556398]  copy_net_ns+0xe4/0x1d0
+[    4.556438]  create_new_namespaces+0x113/0x2e0
+[    4.556491]  unshare_nsproxy_namespaces+0x73/0xa0
+[    4.556541]  ksys_unshare+0x150/0x3d0
+[    4.556577]  __x64_sys_unshare+0x12/0x20
+[    4.556621]  do_syscall_64+0x10e/0xfc0
+[    4.556661]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.556716] RIP: 0033:0x7f41195b51db
+[    4.556755] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    4.556915] RSP: 002b:00007ffe9d7e66a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    4.556985] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    4.557049] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    4.557111] RBP: 00007ffe9d7e66b0 R08: 00007f4116c70830 R09: 0000000000000000
+[    4.557186] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6858
+[    4.557251] R13: 00007ffe9d7e6920 R14: 00007ffe9d7e6770 R15: 00007ffe9d7e6848
+[    4.557316]  </TASK>
+[    4.557337] ---[ end trace 0000000000000000 ]---
+[    4.557429] ------------[ cut here ]------------
+[    4.557473] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#30: python3/568
+[    4.557559] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.558054] CPU: 30 UID: 0 PID: 568 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.558158] Tainted: [W]=WARN
+[    4.558192] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.558292] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.558343] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.558486] RSP: 0018:ffffd375c16b7cb8 EFLAGS: 00010246
+[    4.558528] RAX: 00000000ffffffa6 RBX: ffff8b88c3b7b700 RCX: 0000000000000000
+[    4.558596] RDX: ffff8b88c5d10000 RSI: 0000000000000000 RDI: ffff8b88c3b7b700
+[    4.558668] RBP: 0000000000000010 R08: ffff8b88c5e5d7d0 R09: ffff8b88c467c82c
+[    4.558737] R10: ffff8b88c4684120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.558809] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4684000
+[    4.558897] FS:  00007f4119489640(0000) GS:ffff8b8946f5b000(0000) knlGS:0000000000000000
+[    4.558983] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.559040] CR2: 00007f411694e130 CR3: 0000000005e1e000 CR4: 0000000000750ef0
+[    4.559114] PKRU: 55555554
+[    4.559176] Call Trace:
+[    4.559200]  <TASK>
+[    4.559220]  rtmsg_ifinfo+0x38/0x90
+[    4.559259]  register_netdevice+0x888/0x9a0
+[    4.559292]  register_netdev+0x1e/0x30
+[    4.559322]  loopback_net_init+0x4f/0xa0
+[    4.559361]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    4.559415]  ops_init+0x68/0x110
+[    4.559455]  setup_net+0x7d/0x130
+[    4.559498]  copy_net_ns+0xe4/0x1d0
+[    4.559547]  create_new_namespaces+0x113/0x2e0
+[    4.559605]  unshare_nsproxy_namespaces+0x73/0xa0
+[    4.559649]  ksys_unshare+0x150/0x3d0
+[    4.559687]  __x64_sys_unshare+0x12/0x20
+[    4.559721]  do_syscall_64+0x10e/0xfc0
+[    4.559753]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.559795] RIP: 0033:0x7f41195b51db
+[    4.559828] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    4.559970] RSP: 002b:00007ffe9d7e66a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    4.560036] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    4.560102] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    4.560177] RBP: 00007ffe9d7e66b0 R08: 00007f4116c70830 R09: 0000000000000000
+[    4.560247] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6858
+[    4.560312] R13: 00007ffe9d7e6920 R14: 00007ffe9d7e6770 R15: 00007ffe9d7e6848
+[    4.560383]  </TASK>
+[    4.560408] ---[ end trace 0000000000000000 ]---
+[    4.560606] ------------[ cut here ]------------
+[    4.560643] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#19: python3/558
+[    4.560710] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.561180] CPU: 19 UID: 0 PID: 558 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.561273] Tainted: [W]=WARN
+[    4.561304] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.561393] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.561437] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.561591] RSP: 0018:ffffd375c30476e8 EFLAGS: 00010246
+[    4.561636] RAX: 00000000ffffffa6 RBX: ffff8b88c9851200 RCX: 0000000000000000
+[    4.561695] RDX: ffff8b88c5eb5c00 RSI: 0000000000000000 RDI: ffff8b88c9851200
+[    4.561756] RBP: 0000000000000010 R08: ffff8b88c251da90 R09: ffff8b88c7475834
+[    4.561834] R10: ffff8b88c44fb120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.561900] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44fb000
+[    4.561969] FS:  00007f4119489640(0000) GS:ffff8b8946c9b000(0000) knlGS:0000000000000000
+[    4.562051] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.562111] CR2: 00007f411949ec6c CR3: 0000000009944000 CR4: 0000000000750ef0
+[    4.562175] PKRU: 55555554
+[    4.562199] Call Trace:
+[    4.562222]  <TASK>
+[    4.562245]  rtmsg_ifinfo+0x38/0x90
+[    4.562277]  __dev_notify_flags+0xb0/0xf0
+[    4.562310]  rtnl_configure_link+0x6f/0xa0
+[    4.562352]  veth_newlink+0x16e/0x450
+[    4.562393]  rtnl_newlink+0x58a/0xc80
+[    4.562441]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.562490]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.562525]  ? refill_objects+0x215/0x2e0
+[    4.562556]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.562600]  netlink_rcv_skb+0x57/0x100
+[    4.562630]  netlink_unicast+0x23a/0x380
+[    4.562662]  netlink_sendmsg+0x1e2/0x430
+[    4.562692]  __sys_sendto+0x146/0x1d0
+[    4.562734]  __x64_sys_sendto+0x24/0x30
+[    4.562764]  do_syscall_64+0x10e/0xfc0
+[    4.562798]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.562837] RIP: 0033:0x7f41195b60d7
+[    4.562869] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.563012] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.563071] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.563127] RDX: 0000000000000070 RSI: 00007f41167d3d80 RDI: 0000000000000011
+[    4.563187] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.563244] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.563304] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.563370]  </TASK>
+[    4.563387] ---[ end trace 0000000000000000 ]---
+[    4.563685] ------------[ cut here ]------------
+[    4.563725] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#19: python3/558
+[    4.563798] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.564222] CPU: 19 UID: 0 PID: 558 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.564298] Tainted: [W]=WARN
+[    4.564327] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.564404] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.564442] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.564558] RSP: 0018:ffffd375c3047978 EFLAGS: 00010246
+[    4.564591] RAX: 00000000ffffffa6 RBX: ffff8b88c9851200 RCX: 0000000000000000
+[    4.564640] RDX: ffff8b88c5eb5c00 RSI: 0000000000000000 RDI: ffff8b88c9851200
+[    4.564690] RBP: 0000000000000010 R08: ffff8b88c28f1110 R09: ffff8b88c7474034
+[    4.564739] R10: ffff8b88c44f9120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.564789] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44f9000
+[    4.564845] FS:  00007f4119489640(0000) GS:ffff8b8946c9b000(0000) knlGS:0000000000000000
+[    4.564905] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.564946] CR2: 00007f411949ec6c CR3: 0000000009944000 CR4: 0000000000750ef0
+[    4.564996] PKRU: 55555554
+[    4.565012] Call Trace:
+[    4.565029]  <TASK>
+[    4.565045]  rtmsg_ifinfo+0x38/0x90
+[    4.565070]  __dev_notify_flags+0xb0/0xf0
+[    4.565095]  rtnl_configure_link+0x6f/0xa0
+[    4.565122]  rtnl_newlink+0x5c4/0xc80
+[    4.565153]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.565194]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.565219]  ? refill_objects+0x215/0x2e0
+[    4.565244]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.565277]  netlink_rcv_skb+0x57/0x100
+[    4.565302]  netlink_unicast+0x23a/0x380
+[    4.565326]  netlink_sendmsg+0x1e2/0x430
+[    4.565351]  __sys_sendto+0x146/0x1d0
+[    4.565376]  __x64_sys_sendto+0x24/0x30
+[    4.565400]  do_syscall_64+0x10e/0xfc0
+[    4.565425]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.565458] RIP: 0033:0x7f41195b60d7
+[    4.565483] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.565598] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.565648] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.565697] RDX: 0000000000000070 RSI: 00007f41167d3d80 RDI: 0000000000000011
+[    4.565746] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.565796] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.565845] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.565895]  </TASK>
+[    4.565911] ---[ end trace 0000000000000000 ]---
+[    4.566050] ------------[ cut here ]------------
+[    4.566094] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#22: python3/560
+[    4.566163] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.566544] CPU: 22 UID: 0 PID: 560 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.566618] Tainted: [W]=WARN
+[    4.566642] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.566716] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.566750] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.566865] RSP: 0018:ffffd375c30576e8 EFLAGS: 00010246
+[    4.566898] RAX: 00000000ffffffa6 RBX: ffff8b88c3634e00 RCX: 0000000000000000
+[    4.566948] RDX: ffff8b88c6c19700 RSI: 0000000000000000 RDI: ffff8b88c3634e00
+[    4.566997] RBP: 0000000000000010 R08: ffff8b88c84bbd90 R09: ffff8b88c4f43834
+[    4.567047] R10: ffff8b88c456e120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.567096] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c456e000
+[    4.567151] FS:  00007f4119489640(0000) GS:ffff8b8946d5b000(0000) knlGS:0000000000000000
+[    4.567204] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.567245] CR2: 00007f411949ec6c CR3: 0000000007792000 CR4: 0000000000750ef0
+[    4.567295] PKRU: 55555554
+[    4.567311] Call Trace:
+[    4.567328]  <TASK>
+[    4.567345]  rtmsg_ifinfo+0x38/0x90
+[    4.567369]  __dev_notify_flags+0xb0/0xf0
+[    4.567394]  rtnl_configure_link+0x6f/0xa0
+[    4.567419]  veth_newlink+0x16e/0x450
+[    4.567445]  rtnl_newlink+0x58a/0xc80
+[    4.567477]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.567509]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.567534]  ? refill_objects+0x215/0x2e0
+[    4.567559]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.567592]  netlink_rcv_skb+0x57/0x100
+[    4.567617]  netlink_unicast+0x23a/0x380
+[    4.567641]  netlink_sendmsg+0x1e2/0x430
+[    4.567666]  __sys_sendto+0x146/0x1d0
+[    4.567692]  __x64_sys_sendto+0x24/0x30
+[    4.567716]  do_syscall_64+0x10e/0xfc0
+[    4.567741]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.567774] RIP: 0033:0x7f41195b60d7
+[    4.567799] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.567914] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.567964] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.568013] RDX: 0000000000000070 RSI: 00007f41167d3c60 RDI: 0000000000000015
+[    4.568062] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.568112] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.568165] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.568220]  </TASK>
+[    4.568236] ---[ end trace 0000000000000000 ]---
+[    4.568518] ------------[ cut here ]------------
+[    4.568554] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#22: python3/560
+[    4.568620] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.568989] CPU: 22 UID: 0 PID: 560 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.569054] Tainted: [W]=WARN
+[    4.569079] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.569156] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.569194] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.569309] RSP: 0018:ffffd375c3057978 EFLAGS: 00010246
+[    4.569342] RAX: 00000000ffffffa6 RBX: ffff8b88c3634e00 RCX: 0000000000000000
+[    4.569392] RDX: ffff8b88c6c19700 RSI: 0000000000000000 RDI: ffff8b88c3634e00
+[    4.569441] RBP: 0000000000000010 R08: ffff8b88c84bbd50 R09: ffff8b88c97cb834
+[    4.569491] R10: ffff8b88c456d120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.569540] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c456d000
+[    4.569591] FS:  00007f4119489640(0000) GS:ffff8b8946d5b000(0000) knlGS:0000000000000000
+[    4.569648] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.569688] CR2: 00007f411949ec6c CR3: 0000000007792000 CR4: 0000000000750ef0
+[    4.569739] PKRU: 55555554
+[    4.569754] Call Trace:
+[    4.569771]  <TASK>
+[    4.569787]  rtmsg_ifinfo+0x38/0x90
+[    4.569812]  __dev_notify_flags+0xb0/0xf0
+[    4.569837]  rtnl_configure_link+0x6f/0xa0
+[    4.569862]  rtnl_newlink+0x5c4/0xc80
+[    4.569887]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.569923]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.569948]  ? refill_objects+0x215/0x2e0
+[    4.569973]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.570005]  netlink_rcv_skb+0x57/0x100
+[    4.570030]  netlink_unicast+0x23a/0x380
+[    4.570055]  netlink_sendmsg+0x1e2/0x430
+[    4.570080]  __sys_sendto+0x146/0x1d0
+[    4.570105]  __x64_sys_sendto+0x24/0x30
+[    4.570132]  do_syscall_64+0x10e/0xfc0
+[    4.570162]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.570195] RIP: 0033:0x7f41195b60d7
+[    4.570220] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.570338] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.570387] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.570437] RDX: 0000000000000070 RSI: 00007f41167d3c60 RDI: 0000000000000015
+[    4.570486] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.570535] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.570585] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.570635]  </TASK>
+[    4.570650] ---[ end trace 0000000000000000 ]---
+[    4.570829] ------------[ cut here ]------------
+[    4.570872] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#20: python3/559
+[    4.570934] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.571323] CPU: 20 UID: 0 PID: 559 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.571396] Tainted: [W]=WARN
+[    4.571422] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.571499] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.571533] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.571654] RSP: 0018:ffffd375c304f6e8 EFLAGS: 00010246
+[    4.571688] RAX: 00000000ffffffa6 RBX: ffff8b88c34baa00 RCX: 0000000000000000
+[    4.571740] RDX: ffff8b88c6c1ae00 RSI: 0000000000000000 RDI: ffff8b88c34baa00
+[    4.571791] RBP: 0000000000000010 R08: ffff8b88c6fae410 R09: ffff8b88c6fea034
+[    4.571842] R10: ffff8b88c44ff120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.571893] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44ff000
+[    4.571946] FS:  00007f4119489640(0000) GS:ffff8b8946cdb000(0000) knlGS:0000000000000000
+[    4.572005] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.572056] CR2: 00007f411949ec6c CR3: 0000000009915000 CR4: 0000000000750ef0
+[    4.572108] PKRU: 55555554
+[    4.572127] Call Trace:
+[    4.572151]  <TASK>
+[    4.572168]  rtmsg_ifinfo+0x38/0x90
+[    4.572202]  __dev_notify_flags+0xb0/0xf0
+[    4.572227]  rtnl_configure_link+0x6f/0xa0
+[    4.572261]  veth_newlink+0x16e/0x450
+[    4.572297]  rtnl_newlink+0x58a/0xc80
+[    4.572330]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.572372]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.572398]  ? __alloc_frozen_pages_noprof+0x198/0x1330
+[    4.572440]  ? proc_ns_get_link+0xd0/0xf0
+[    4.572474]  ? dput.part.0+0x93/0x100
+[    4.572508]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.572542]  netlink_rcv_skb+0x57/0x100
+[    4.572576]  netlink_unicast+0x23a/0x380
+[    4.572610]  netlink_sendmsg+0x1e2/0x430
+[    4.572636]  __sys_sendto+0x146/0x1d0
+[    4.572670]  __x64_sys_sendto+0x24/0x30
+[    4.572704]  do_syscall_64+0x10e/0xfc0
+[    4.572730]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.572764] RIP: 0033:0x7f41195b60d7
+[    4.572790] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.572910] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.572962] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.573013] RDX: 0000000000000070 RSI: 00007f411667dbc0 RDI: 0000000000000013
+[    4.573064] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.573121] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.573176] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.573227]  </TASK>
+[    4.573244] ---[ end trace 0000000000000000 ]---
+[    4.573539] ------------[ cut here ]------------
+[    4.573578] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#20: python3/559
+[    4.573646] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.574032] CPU: 20 UID: 0 PID: 559 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.574109] Tainted: [W]=WARN
+[    4.574138] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.574221] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.574264] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.574396] RSP: 0018:ffffd375c304f978 EFLAGS: 00010246
+[    4.574430] RAX: 00000000ffffffa6 RBX: ffff8b88c34baa00 RCX: 0000000000000000
+[    4.574481] RDX: ffff8b88c6c1ae00 RSI: 0000000000000000 RDI: ffff8b88c34baa00
+[    4.574532] RBP: 0000000000000010 R08: ffff8b88c6fae3d0 R09: ffff8b88c6fe8834
+[    4.574583] R10: ffff8b88c44fe120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.574635] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44fe000
+[    4.574688] FS:  00007f4119489640(0000) GS:ffff8b8946cdb000(0000) knlGS:0000000000000000
+[    4.574746] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.574796] CR2: 00007f411949ec6c CR3: 0000000009915000 CR4: 0000000000750ef0
+[    4.574848] PKRU: 55555554
+[    4.574865] Call Trace:
+[    4.574882]  <TASK>
+[    4.574900]  rtmsg_ifinfo+0x38/0x90
+[    4.574929]  __dev_notify_flags+0xb0/0xf0
+[    4.574954]  rtnl_configure_link+0x6f/0xa0
+[    4.574988]  rtnl_newlink+0x5c4/0xc80
+[    4.575014]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.575056]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.575081]  ? __alloc_frozen_pages_noprof+0x198/0x1330
+[    4.575120]  ? proc_ns_get_link+0xd0/0xf0
+[    4.575150]  ? dput.part.0+0x93/0x100
+[    4.575176]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.575210]  netlink_rcv_skb+0x57/0x100
+[    4.575236]  netlink_unicast+0x23a/0x380
+[    4.575269]  netlink_sendmsg+0x1e2/0x430
+[    4.575295]  __sys_sendto+0x146/0x1d0
+[    4.575321]  __x64_sys_sendto+0x24/0x30
+[    4.575354]  do_syscall_64+0x10e/0xfc0
+[    4.575380]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.575414] RIP: 0033:0x7f41195b60d7
+[    4.575440] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.575560] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.575611] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.575662] RDX: 0000000000000070 RSI: 00007f411667dbc0 RDI: 0000000000000013
+[    4.575713] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.575764] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.575815] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.575866]  </TASK>
+[    4.575887] ---[ end trace 0000000000000000 ]---
+[    4.575968] ------------[ cut here ]------------
+[    4.576007] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#19: python3/558
+[    4.576073] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.576463] CPU: 19 UID: 0 PID: 558 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.576533] Tainted: [W]=WARN
+[    4.576558] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.576632] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.576666] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.576781] RSP: 0018:ffffd375c3047978 EFLAGS: 00010246
+[    4.576814] RAX: 00000000ffffffa6 RBX: ffff8b88c9851300 RCX: 0000000000000000
+[    4.576864] RDX: ffff8b88c5eb5c00 RSI: 0000000000000000 RDI: ffff8b88c9851300
+[    4.576914] RBP: 0000000000000010 R08: ffff8b88c2d0b950 R09: ffff8b88c7472838
+[    4.576963] R10: ffff8b88c44fa120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.577013] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44fa000
+[    4.577064] FS:  00007f4119489640(0000) GS:ffff8b8946c9b000(0000) knlGS:0000000000000000
+[    4.577125] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.577170] CR2: 00007f411668f030 CR3: 0000000009944000 CR4: 0000000000750ef0
+[    4.577221] PKRU: 55555554
+[    4.577236] Call Trace:
+[    4.577253]  <TASK>
+[    4.577270]  rtmsg_ifinfo+0x38/0x90
+[    4.577294]  __dev_notify_flags+0xb0/0xf0
+[    4.577319]  rtnl_configure_link+0x6f/0xa0
+[    4.577344]  rtnl_newlink+0x5c4/0xc80
+[    4.577369]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.577402]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.577426]  ? netfs_read_subreq_terminated+0x2f0/0x380
+[    4.577467]  ? netfs_read_subreq_terminated+0x380/0x380
+[    4.577501]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.577533]  netlink_rcv_skb+0x57/0x100
+[    4.577559]  netlink_unicast+0x23a/0x380
+[    4.577583]  netlink_sendmsg+0x1e2/0x430
+[    4.577608]  __sys_sendto+0x146/0x1d0
+[    4.577633]  __x64_sys_sendto+0x24/0x30
+[    4.577657]  do_syscall_64+0x10e/0xfc0
+[    4.577682]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.577715] RIP: 0033:0x7f41195b60d7
+[    4.577740] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.577855] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.577904] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.577954] RDX: 0000000000000044 RSI: 00007f4116692c90 RDI: 0000000000000011
+[    4.578004] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.578053] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.578103] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.578156]  </TASK>
+[    4.578177] ---[ end trace 0000000000000000 ]---
+[    4.578253] ------------[ cut here ]------------
+[    4.578298] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#20: python3/559
+[    4.578367] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.578794] CPU: 20 UID: 0 PID: 559 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.578883] Tainted: [W]=WARN
+[    4.578914] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.578996] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.579040] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.579181] RSP: 0018:ffffd375c304f978 EFLAGS: 00010246
+[    4.579221] RAX: 00000000ffffffa6 RBX: ffff8b88c34bab00 RCX: 0000000000000000
+[    4.579277] RDX: ffff8b88c6c1ae00 RSI: 0000000000000000 RDI: ffff8b88c34bab00
+[    4.579333] RBP: 0000000000000010 R08: ffff8b88c6fae310 R09: ffff8b88c7401038
+[    4.579393] R10: ffff8b88c44fd120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.579442] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44fd000
+[    4.579497] FS:  00007f4119489640(0000) GS:ffff8b8946cdb000(0000) knlGS:0000000000000000
+[    4.579563] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.579614] CR2: 00007f41166c20b0 CR3: 0000000009915000 CR4: 0000000000750ef0
+[    4.579672] PKRU: 55555554
+[    4.579702] Call Trace:
+[    4.579720]  <TASK>
+[    4.579738]  rtmsg_ifinfo+0x38/0x90
+[    4.579771]  __dev_notify_flags+0xb0/0xf0
+[    4.579801]  rtnl_configure_link+0x6f/0xa0
+[    4.579841]  rtnl_newlink+0x5c4/0xc80
+[    4.579868]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.579912]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.579943]  ? netlink_unicast+0x2d9/0x380
+[    4.579975]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.580012]  netlink_rcv_skb+0x57/0x100
+[    4.580047]  netlink_unicast+0x23a/0x380
+[    4.580086]  netlink_sendmsg+0x1e2/0x430
+[    4.580112]  __sys_sendto+0x146/0x1d0
+[    4.580152]  __x64_sys_sendto+0x24/0x30
+[    4.580187]  do_syscall_64+0x10e/0xfc0
+[    4.580217]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.580256] RIP: 0033:0x7f41195b60d7
+[    4.580283] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.580413] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.580475] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.580531] RDX: 0000000000000044 RSI: 00007f41166b54d0 RDI: 0000000000000013
+[    4.580585] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.580641] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.580698] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.580754]  </TASK>
+[    4.580774] ---[ end trace 0000000000000000 ]---
+[    4.580861] ------------[ cut here ]------------
+[    4.580904] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#22: python3/560
+[    4.580987] Modules linked in: sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.581505] CPU: 22 UID: 0 PID: 560 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.581584] Tainted: [W]=WARN
+[    4.581611] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.581698] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.581734] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.581869] RSP: 0018:ffffd375c3057978 EFLAGS: 00010246
+[    4.581906] RAX: 00000000ffffffa6 RBX: ffff8b88c3634f00 RCX: 0000000000000000
+[    4.581966] RDX: ffff8b88c6c19700 RSI: 0000000000000000 RDI: ffff8b88c3634f00
+[    4.582033] RBP: 0000000000000010 R08: ffff8b88c84bbc90 R09: ffff8b88c97ca038
+[    4.582094] R10: ffff8b88c456f120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.582158] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c456f000
+[    4.582216] FS:  00007f4119489640(0000) GS:ffff8b8946d5b000(0000) knlGS:0000000000000000
+[    4.582292] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.582360] CR2: 00007f4116696010 CR3: 0000000007792000 CR4: 0000000000750ef0
+[    4.582419] PKRU: 55555554
+[    4.582438] Call Trace:
+[    4.582459]  <TASK>
+[    4.582481]  rtmsg_ifinfo+0x38/0x90
+[    4.582515]  __dev_notify_flags+0xb0/0xf0
+[    4.582552]  rtnl_configure_link+0x6f/0xa0
+[    4.582582]  rtnl_newlink+0x5c4/0xc80
+[    4.582617]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.582671]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.582710]  ? netlink_unicast+0x2d9/0x380
+[    4.582741]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.582789]  netlink_rcv_skb+0x57/0x100
+[    4.582822]  netlink_unicast+0x23a/0x380
+[    4.582856]  netlink_sendmsg+0x1e2/0x430
+[    4.582889]  __sys_sendto+0x146/0x1d0
+[    4.582922]  __x64_sys_sendto+0x24/0x30
+[    4.582950]  do_syscall_64+0x10e/0xfc0
+[    4.582984]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.583030] RIP: 0033:0x7f41195b60d7
+[    4.583061] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.583231] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.583305] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.583373] RDX: 0000000000000044 RSI: 00007f41166a2600 RDI: 0000000000000015
+[    4.583446] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.583507] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.583580] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.583652]  </TASK>
+[    4.583676] ---[ end trace 0000000000000000 ]---
+[    4.641680] ------------[ cut here ]------------
+[    4.641716] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#19: python3/558
+[    4.641779] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.642163] CPU: 19 UID: 0 PID: 558 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.642233] Tainted: [W]=WARN
+[    4.642259] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.642334] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.642370] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.642492] RSP: 0018:ffffd375c3047978 EFLAGS: 00010246
+[    4.642529] RAX: 00000000ffffffa6 RBX: ffff8b88c9851200 RCX: 0000000000000000
+[    4.642582] RDX: ffff8b88c5eb5c00 RSI: 0000000000000000 RDI: ffff8b88c9851200
+[    4.642638] RBP: 0000000000000010 R08: ffff8b88c251da10 R09: ffff8b88c914b038
+[    4.642683] R10: ffff8b88c44f8120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.642728] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44f8000
+[    4.642779] FS:  00007f4119489640(0000) GS:ffff8b8946c9b000(0000) knlGS:0000000000000000
+[    4.642833] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.642874] CR2: 00007f4116693000 CR3: 0000000009944000 CR4: 0000000000750ef0
+[    4.642919] PKRU: 55555554
+[    4.642942] Call Trace:
+[    4.642958]  <TASK>
+[    4.642973]  rtmsg_ifinfo+0x38/0x90
+[    4.643002]  __dev_notify_flags+0xb0/0xf0
+[    4.643032]  rtnl_configure_link+0x6f/0xa0
+[    4.643056]  rtnl_newlink+0x5c4/0xc80
+[    4.643077]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.643112]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.643140]  ? netlink_unicast+0x2d9/0x380
+[    4.643163]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.643190]  netlink_rcv_skb+0x57/0x100
+[    4.643216]  netlink_unicast+0x23a/0x380
+[    4.643244]  netlink_sendmsg+0x1e2/0x430
+[    4.643268]  __sys_sendto+0x146/0x1d0
+[    4.643294]  __x64_sys_sendto+0x24/0x30
+[    4.643318]  do_syscall_64+0x10e/0xfc0
+[    4.643344]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.643376] RIP: 0033:0x7f41195b60d7
+[    4.643397] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.643496] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.643536] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.643579] RDX: 0000000000000040 RSI: 00007f4116692f60 RDI: 0000000000000011
+[    4.643619] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.643660] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.643702] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.643745]  </TASK>
+[    4.643763] ---[ end trace 0000000000000000 ]---
+[    4.643831] ------------[ cut here ]------------
+[    4.643869] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#20: python3/559
+[    4.643922] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.644271] CPU: 20 UID: 0 PID: 559 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.644337] Tainted: [W]=WARN
+[    4.644368] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.644439] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.644480] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.644585] RSP: 0018:ffffd375c304f978 EFLAGS: 00010246
+[    4.644621] RAX: 00000000ffffffa6 RBX: ffff8b88c34baa00 RCX: 0000000000000000
+[    4.644662] RDX: ffff8b88c6c1ae00 RSI: 0000000000000000 RDI: ffff8b88c34baa00
+[    4.644710] RBP: 0000000000000010 R08: ffff8b88c6fae210 R09: ffff8b88c97cf838
+[    4.644753] R10: ffff8b88c44fc120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.644799] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44fc000
+[    4.644846] FS:  00007f4119489640(0000) GS:ffff8b8946cdb000(0000) knlGS:0000000000000000
+[    4.644896] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.644943] CR2: 00007f41166be030 CR3: 0000000009915000 CR4: 0000000000750ef0
+[    4.644987] PKRU: 55555554
+[    4.645010] Call Trace:
+[    4.645029]  <TASK>
+[    4.645044]  rtmsg_ifinfo+0x38/0x90
+[    4.645074]  __dev_notify_flags+0xb0/0xf0
+[    4.645105]  rtnl_configure_link+0x6f/0xa0
+[    4.645136]  rtnl_newlink+0x5c4/0xc80
+[    4.645162]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.645194]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.645221]  ? netlink_unicast+0x2d9/0x380
+[    4.645247]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.645286]  netlink_rcv_skb+0x57/0x100
+[    4.645315]  netlink_unicast+0x23a/0x380
+[    4.645339]  netlink_sendmsg+0x1e2/0x430
+[    4.645367]  __sys_sendto+0x146/0x1d0
+[    4.645394]  __x64_sys_sendto+0x24/0x30
+[    4.645420]  do_syscall_64+0x10e/0xfc0
+[    4.645452]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.645491] RIP: 0033:0x7f41195b60d7
+[    4.645522] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.645627] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.645677] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.645719] RDX: 0000000000000040 RSI: 00007f41166b57a0 RDI: 0000000000000013
+[    4.645763] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.645810] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.645857] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.645901]  </TASK>
+[    4.645923] ---[ end trace 0000000000000000 ]---
+[    4.646022] ------------[ cut here ]------------
+[    4.646051] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#22: python3/560
+[    4.646105] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.646435] CPU: 22 UID: 0 PID: 560 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.646500] Tainted: [W]=WARN
+[    4.646530] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.646591] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.646623] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.646726] RSP: 0018:ffffd375c3057978 EFLAGS: 00010246
+[    4.646762] RAX: 00000000ffffffa6 RBX: ffff8b88c3634e00 RCX: 0000000000000000
+[    4.646812] RDX: ffff8b88c6c19700 RSI: 0000000000000000 RDI: ffff8b88c3634e00
+[    4.646856] RBP: 0000000000000010 R08: ffff8b88c84bbb90 R09: ffff8b88c97c8838
+[    4.646894] R10: ffff8b88c456c120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.646931] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c456c000
+[    4.646972] FS:  00007f4119489640(0000) GS:ffff8b8946d5b000(0000) knlGS:0000000000000000
+[    4.647021] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.647059] CR2: 00007f41166b3030 CR3: 0000000007792000 CR4: 0000000000750ef0
+[    4.647098] PKRU: 55555554
+[    4.647122] Call Trace:
+[    4.647138]  <TASK>
+[    4.647151]  rtmsg_ifinfo+0x38/0x90
+[    4.647176]  __dev_notify_flags+0xb0/0xf0
+[    4.647201]  rtnl_configure_link+0x6f/0xa0
+[    4.647227]  rtnl_newlink+0x5c4/0xc80
+[    4.647253]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.647284]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.647310]  ? netlink_unicast+0x2d9/0x380
+[    4.647335]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.647367]  netlink_rcv_skb+0x57/0x100
+[    4.647393]  netlink_unicast+0x23a/0x380
+[    4.647418]  netlink_sendmsg+0x1e2/0x430
+[    4.647444]  __sys_sendto+0x146/0x1d0
+[    4.647470]  __x64_sys_sendto+0x24/0x30
+[    4.647494]  do_syscall_64+0x10e/0xfc0
+[    4.647520]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.647552] RIP: 0033:0x7f41195b60d7
+[    4.647577] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.647672] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.647717] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.647754] RDX: 0000000000000040 RSI: 00007f41166a28d0 RDI: 0000000000000015
+[    4.647792] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.647831] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.647869] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.647908]  </TASK>
+[    4.647926] ---[ end trace 0000000000000000 ]---
+[    4.657328] ------------[ cut here ]------------
+[    4.657361] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#3: ip/586
+[    4.657413] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.657703] CPU: 3 UID: 0 PID: 586 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.657760] Tainted: [W]=WARN
+[    4.657786] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.657850] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.657883] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.657979] RSP: 0018:ffffd375c0a27698 EFLAGS: 00010246
+[    4.658011] RAX: 00000000ffffffa6 RBX: ffff8b88c3572700 RCX: 0000000000000000
+[    4.658056] RDX: ffff8b88c3f25c00 RSI: 0000000000000000 RDI: ffff8b88c3572700
+[    4.658101] RBP: 0000000000000011 R08: ffff8b88c2fef810 R09: ffff8b88c5eb9838
+[    4.658158] R10: ffff8b88c3e9b120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.658210] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c3e9b000
+[    4.658267] FS:  00007fc5c8c17b80(0000) GS:ffff8b894689b000(0000) knlGS:0000000000000000
+[    4.658327] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.658373] CR2: 000055b8a49ad2a8 CR3: 0000000002625000 CR4: 0000000000750ef0
+[    4.658431] PKRU: 55555554
+[    4.658454] Call Trace:
+[    4.658476]  <TASK>
+[    4.658500]  unregister_netdevice_many_notify+0x573/0x9f0
+[    4.658538]  rtnl_dellink+0x185/0x3b0
+[    4.658565]  ? kmalloc_reserve+0x7d/0x100
+[    4.658588]  ? rtnl_dellinkprop+0x20/0x20
+[    4.658614]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.658640]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.658672]  netlink_rcv_skb+0x57/0x100
+[    4.658698]  netlink_unicast+0x23a/0x380
+[    4.658724]  netlink_sendmsg+0x1e2/0x430
+[    4.658749]  ____sys_sendmsg+0x161/0x250
+[    4.658775]  ___sys_sendmsg+0x99/0xe0
+[    4.658801]  __sys_sendmsg+0x88/0xe0
+[    4.658826]  do_syscall_64+0x10e/0xfc0
+[    4.658851]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.658884] RIP: 0033:0x7fc5c8e1d034
+[    4.658909] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.659006] RSP: 002b:00007ffe78938038 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.659050] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007fc5c8e1d034
+[    4.659096] RDX: 0000000000000000 RSI: 00007ffe789380a0 RDI: 0000000000000003
+[    4.659147] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.659189] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffe789380a0
+[    4.659234] R13: 000055b864f54020 R14: 00007ffe78938170 R15: 0000000000000000
+[    4.659279]  </TASK>
+[    4.659298] ---[ end trace 0000000000000000 ]---
+[    4.687537] ip (586) used greatest stack depth: 11496 bytes left
+[    4.696456] ------------[ cut here ]------------
+[    4.696488] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#31: ip/588
+[    4.696538] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.696822] CPU: 31 UID: 0 PID: 588 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.696879] Tainted: [W]=WARN
+[    4.696898] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.696955] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.696987] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.697083] RSP: 0018:ffffd375c097f838 EFLAGS: 00010246
+[    4.697114] RAX: 00000000ffffffa6 RBX: ffff8b88c3c2eb00 RCX: 0000000000000000
+[    4.697169] RDX: ffff8b88c455dc00 RSI: 0000000000000000 RDI: ffff8b88c3c2eb00
+[    4.697207] RBP: 0000000000000010 R08: ffff8b88c5c59c90 R09: ffff8b88c46a6838
+[    4.697245] R10: ffff8b88c46c1120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.697282] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c46c1000
+[    4.697321] FS:  00007fa068197b80(0000) GS:ffff8b8946f9b000(0000) knlGS:0000000000000000
+[    4.697363] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.697401] CR2: 000055d647f1a198 CR3: 0000000003bf3000 CR4: 0000000000750ef0
+[    4.697439] PKRU: 55555554
+[    4.697457] Call Trace:
+[    4.697470]  <TASK>
+[    4.697482]  rtmsg_ifinfo+0x38/0x90
+[    4.697507]  __dev_notify_flags+0xb0/0xf0
+[    4.697532]  ? register_netdevice+0x736/0x9a0
+[    4.697563]  rtnl_configure_link+0x6f/0xa0
+[    4.697588]  rtnl_newlink+0x5c4/0xc80
+[    4.697607]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.697638]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.697657]  ? get_page_from_freelist+0x15a1/0x1690
+[    4.697688]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.697713]  netlink_rcv_skb+0x57/0x100
+[    4.697738]  netlink_unicast+0x23a/0x380
+[    4.697763]  netlink_sendmsg+0x1e2/0x430
+[    4.697788]  ____sys_sendmsg+0x161/0x250
+[    4.697813]  ___sys_sendmsg+0x99/0xe0
+[    4.697839]  __sys_sendmsg+0x88/0xe0
+[    4.697863]  do_syscall_64+0x10e/0xfc0
+[    4.697888]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.697920] RIP: 0033:0x7fa06839d034
+[    4.697939] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.698027] RSP: 002b:00007ffd9528d5f8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.698066] RAX: ffffffffffffffda RBX: 00007ffd9528dd80 RCX: 00007fa06839d034
+[    4.698103] RDX: 0000000000000000 RSI: 00007ffd9528d660 RDI: 0000000000000003
+[    4.698147] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.698188] R10: 000055d647e67738 R11: 0000000000000202 R12: 00007ffd9528d660
+[    4.698226] R13: 000055d647f12020 R14: 00007ffd9528d730 R15: 0000000000000000
+[    4.698264]  </TASK>
+[    4.698276] ---[ end trace 0000000000000000 ]---
+[    4.707276] ------------[ cut here ]------------
+[    4.707308] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#29: ip/590
+[    4.707359] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.707642] CPU: 29 UID: 0 PID: 590 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.707697] Tainted: [W]=WARN
+[    4.707716] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.707771] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.707802] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.707895] RSP: 0018:ffffd375c0c2f838 EFLAGS: 00010246
+[    4.707919] RAX: 00000000ffffffa6 RBX: ffff8b88c3ac0200 RCX: 0000000000000000
+[    4.707956] RDX: ffff8b88c741ae00 RSI: 0000000000000000 RDI: ffff8b88c3ac0200
+[    4.707992] RBP: 0000000000000010 R08: ffff8b88c754e010 R09: ffff8b88c5d49030
+[    4.708029] R10: ffff8b88c4682120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.708066] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4682000
+[    4.708105] FS:  00007fb17a1c0b80(0000) GS:ffff8b8946f1b000(0000) knlGS:0000000000000000
+[    4.708166] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.708200] CR2: 00005582679cf198 CR3: 0000000003a87000 CR4: 0000000000750ef0
+[    4.708237] PKRU: 55555554
+[    4.708255] Call Trace:
+[    4.708268]  <TASK>
+[    4.708280]  rtmsg_ifinfo+0x38/0x90
+[    4.708305]  __dev_notify_flags+0xb0/0xf0
+[    4.708330]  ? register_netdevice+0x736/0x9a0
+[    4.708361]  rtnl_configure_link+0x6f/0xa0
+[    4.708386]  rtnl_newlink+0x5c4/0xc80
+[    4.708405]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.708435]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.708454]  ? refill_objects+0x215/0x2e0
+[    4.708472]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.708496]  netlink_rcv_skb+0x57/0x100
+[    4.708522]  netlink_unicast+0x23a/0x380
+[    4.708546]  netlink_sendmsg+0x1e2/0x430
+[    4.708571]  ____sys_sendmsg+0x161/0x250
+[    4.708596]  ___sys_sendmsg+0x99/0xe0
+[    4.708622]  __sys_sendmsg+0x88/0xe0
+[    4.708647]  do_syscall_64+0x10e/0xfc0
+[    4.708672]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.708703] RIP: 0033:0x7fb17a3c6034
+[    4.708721] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.708807] RSP: 002b:00007ffe010559c8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.708844] RAX: ffffffffffffffda RBX: 00007ffe01056150 RCX: 00007fb17a3c6034
+[    4.708881] RDX: 0000000000000000 RSI: 00007ffe01055a30 RDI: 0000000000000003
+[    4.708917] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.708954] R10: 000055826791c738 R11: 0000000000000202 R12: 00007ffe01055a30
+[    4.708990] R13: 00005582679c7020 R14: 00007ffe01055b00 R15: 0000000000000000
+[    4.709027]  </TASK>
+[    4.709039] ---[ end trace 0000000000000000 ]---
+[    4.755159] ------------[ cut here ]------------
+[    4.755191] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#0: ip/600
+[    4.755241] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.755524] CPU: 0 UID: 0 PID: 600 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.755581] Tainted: [W]=WARN
+[    4.755599] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.755655] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.755686] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.755780] RSP: 0018:ffffd375c09bf698 EFLAGS: 00010246
+[    4.755804] RAX: 00000000ffffffa6 RBX: ffff8b88c208db00 RCX: 0000000000000000
+[    4.755841] RDX: ffff8b88c46e4500 RSI: 0000000000000000 RDI: ffff8b88c208db00
+[    4.755878] RBP: 0000000000000011 R08: ffff8b88c5c59c90 R09: ffff8b88c46d0038
+[    4.755915] R10: ffff8b88c46c1120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.755952] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c46c1000
+[    4.755990] FS:  00007f7a10dc9b80(0000) GS:ffff8b89467db000(0000) knlGS:0000000000000000
+[    4.756033] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.756069] CR2: 00007f7a10fb9710 CR3: 0000000007542000 CR4: 0000000000750ef0
+[    4.756107] PKRU: 55555554
+[    4.756140] Call Trace:
+[    4.756157]  <TASK>
+[    4.756169]  unregister_netdevice_many_notify+0x573/0x9f0
+[    4.756200]  rtnl_dellink+0x185/0x3b0
+[    4.756230]  ? kmalloc_reserve+0x7d/0x100
+[    4.756254]  ? rtnl_dellinkprop+0x20/0x20
+[    4.756273]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.756291]  ? netlink_unicast+0x2d9/0x380
+[    4.756317]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.756341]  netlink_rcv_skb+0x57/0x100
+[    4.756367]  netlink_unicast+0x23a/0x380
+[    4.756392]  netlink_sendmsg+0x1e2/0x430
+[    4.756417]  ____sys_sendmsg+0x161/0x250
+[    4.756442]  ___sys_sendmsg+0x99/0xe0
+[    4.756468]  __sys_sendmsg+0x88/0xe0
+[    4.756493]  do_syscall_64+0x10e/0xfc0
+[    4.756518]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.756549] RIP: 0033:0x7f7a10fcf034
+[    4.756574] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.756660] RSP: 002b:00007fff4e7b52d8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.756696] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f7a10fcf034
+[    4.756733] RDX: 0000000000000000 RSI: 00007fff4e7b5340 RDI: 0000000000000003
+[    4.756770] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.756807] R10: 0000000000000001 R11: 0000000000000202 R12: 00007fff4e7b5340
+[    4.756844] R13: 000055a41348e020 R14: 00007fff4e7b5410 R15: 0000000000000000
+[    4.756881]  </TASK>
+[    4.756893] ---[ end trace 0000000000000000 ]---
+[    4.786232] ------------[ cut here ]------------
+[    4.786263] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#29: ip/602
+[    4.786325] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.786606] CPU: 29 UID: 0 PID: 602 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.786662] Tainted: [W]=WARN
+[    4.786680] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.786735] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.786766] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.786852] RSP: 0018:ffffd375c0a5f698 EFLAGS: 00010246
+[    4.786877] RAX: 00000000ffffffa6 RBX: ffff8b88c3ac0100 RCX: 0000000000000000
+[    4.786914] RDX: ffff8b88c4584500 RSI: 0000000000000000 RDI: ffff8b88c3ac0100
+[    4.786952] RBP: 0000000000000011 R08: ffff8b88c754e010 R09: ffff8b88c450b830
+[    4.786988] R10: ffff8b88c4682120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.787025] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4682000
+[    4.787063] FS:  00007fadccd17b80(0000) GS:ffff8b8946f1b000(0000) knlGS:0000000000000000
+[    4.787105] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.787149] CR2: 000055eef70da2a8 CR3: 000000000340f000 CR4: 0000000000750ef0
+[    4.787190] PKRU: 55555554
+[    4.787208] Call Trace:
+[    4.787220]  <TASK>
+[    4.787233]  unregister_netdevice_many_notify+0x573/0x9f0
+[    4.787264]  rtnl_dellink+0x185/0x3b0
+[    4.787290]  ? kmalloc_reserve+0x7d/0x100
+[    4.787314]  ? rtnl_dellinkprop+0x20/0x20
+[    4.787332]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.787350]  ? netlink_unicast+0x2d9/0x380
+[    4.787375]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.787400]  netlink_rcv_skb+0x57/0x100
+[    4.787425]  netlink_unicast+0x23a/0x380
+[    4.787450]  netlink_sendmsg+0x1e2/0x430
+[    4.787475]  ____sys_sendmsg+0x161/0x250
+[    4.787500]  ___sys_sendmsg+0x99/0xe0
+[    4.787525]  __sys_sendmsg+0x88/0xe0
+[    4.787550]  do_syscall_64+0x10e/0xfc0
+[    4.787575]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.787599] RIP: 0033:0x7fadccf1d034
+[    4.787624] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.787709] RSP: 002b:00007ffd268f8288 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.787745] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007fadccf1d034
+[    4.787782] RDX: 0000000000000000 RSI: 00007ffd268f82f0 RDI: 0000000000000003
+[    4.787818] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.787855] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffd268f82f0
+[    4.787891] R13: 000055eed94c4020 R14: 00007ffd268f83c0 R15: 0000000000000000
+[    4.787929]  </TASK>
+[    4.787940] ---[ end trace 0000000000000000 ]---
+[    4.823995] ------------[ cut here ]------------
+[    4.824030] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#27: ip/604
+[    4.824083] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.824398] CPU: 27 UID: 0 PID: 604 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.824454] Tainted: [W]=WARN
+[    4.824479] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.824536] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.824569] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.824665] RSP: 0018:ffffd375c31e3838 EFLAGS: 00010246
+[    4.824697] RAX: 00000000ffffffa6 RBX: ffff8b88c25e1e00 RCX: 0000000000000000
+[    4.824735] RDX: ffff8b88c7419700 RSI: 0000000000000000 RDI: ffff8b88c25e1e00
+[    4.824773] RBP: 0000000000000010 R08: ffff8b88c84b6110 R09: ffff8b88c8bf0038
+[    4.824811] R10: ffff8b88c92ba120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.824849] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c92ba000
+[    4.824889] FS:  00007f2dbbe22b80(0000) GS:ffff8b8946e9b000(0000) knlGS:0000000000000000
+[    4.824934] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.824973] CR2: 000055f0b4071198 CR3: 0000000004e31000 CR4: 0000000000750ef0
+[    4.825012] PKRU: 55555554
+[    4.825031] Call Trace:
+[    4.825044]  <TASK>
+[    4.825064]  rtmsg_ifinfo+0x38/0x90
+[    4.825090]  __dev_notify_flags+0xb0/0xf0
+[    4.825122]  ? register_netdevice+0x736/0x9a0
+[    4.825162]  rtnl_configure_link+0x6f/0xa0
+[    4.825188]  rtnl_newlink+0x5c4/0xc80
+[    4.825215]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.825247]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.825273]  ? get_page_from_freelist+0x15a1/0x1690
+[    4.825306]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.825339]  netlink_rcv_skb+0x57/0x100
+[    4.825365]  netlink_unicast+0x23a/0x380
+[    4.825391]  netlink_sendmsg+0x1e2/0x430
+[    4.825417]  ____sys_sendmsg+0x161/0x250
+[    4.825443]  ___sys_sendmsg+0x99/0xe0
+[    4.825470]  __sys_sendmsg+0x88/0xe0
+[    4.825496]  do_syscall_64+0x10e/0xfc0
+[    4.825521]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.825555] RIP: 0033:0x7f2dbc028034
+[    4.825581] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.825678] RSP: 002b:00007ffd962e7068 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.825724] RAX: ffffffffffffffda RBX: 00007ffd962e77f0 RCX: 00007f2dbc028034
+[    4.825763] RDX: 0000000000000000 RSI: 00007ffd962e70d0 RDI: 0000000000000003
+[    4.825802] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.825840] R10: 000055f0b3fbe738 R11: 0000000000000202 R12: 00007ffd962e70d0
+[    4.825879] R13: 000055f0b4069020 R14: 00007ffd962e71a0 R15: 0000000000000000
+[    4.825919]  </TASK>
+[    4.825938] ---[ end trace 0000000000000000 ]---
+[    4.862341] ------------[ cut here ]------------
+[    4.862377] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#2: ip/612
+[    4.862430] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.862731] CPU: 2 UID: 0 PID: 612 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.862789] Tainted: [W]=WARN
+[    4.862815] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.862873] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.862906] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.863004] RSP: 0018:ffffd375c3097698 EFLAGS: 00010246
+[    4.863036] RAX: 00000000ffffffa6 RBX: ffff8b88c3ac1f00 RCX: 0000000000000000
+[    4.863075] RDX: ffff8b88c74f5c00 RSI: 0000000000000000 RDI: ffff8b88c3ac1f00
+[    4.863114] RBP: 0000000000000011 R08: ffff8b88c84b6110 R09: ffff8b88c8bf1838
+[    4.863160] R10: ffff8b88c92ba120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.863204] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c92ba000
+[    4.863245] FS:  00007febe8070b80(0000) GS:ffff8b894685b000(0000) knlGS:0000000000000000
+[    4.863289] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.863329] CR2: 0000561bddc6c2a8 CR3: 0000000006e94000 CR4: 0000000000750ef0
+[    4.863368] PKRU: 55555554
+[    4.863387] Call Trace:
+[    4.863401]  <TASK>
+[    4.863415]  unregister_netdevice_many_notify+0x573/0x9f0
+[    4.863449]  rtnl_dellink+0x185/0x3b0
+[    4.863476]  ? kmalloc_reserve+0x7d/0x100
+[    4.863500]  ? rtnl_dellinkprop+0x20/0x20
+[    4.863527]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.863553]  ? netlink_unicast+0x2d9/0x380
+[    4.863579]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.863612]  netlink_rcv_skb+0x57/0x100
+[    4.863639]  netlink_unicast+0x23a/0x380
+[    4.863665]  netlink_sendmsg+0x1e2/0x430
+[    4.863691]  ____sys_sendmsg+0x161/0x250
+[    4.863717]  ___sys_sendmsg+0x99/0xe0
+[    4.863744]  __sys_sendmsg+0x88/0xe0
+[    4.863770]  do_syscall_64+0x10e/0xfc0
+[    4.863796]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.863829] RIP: 0033:0x7febe8276034
+[    4.863855] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.863953] RSP: 002b:00007ffe2ea65e28 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.863998] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007febe8276034
+[    4.864037] RDX: 0000000000000000 RSI: 00007ffe2ea65e90 RDI: 0000000000000003
+[    4.864077] RBP: 000000006a10c582 R08: 0000000000000010 R09: 0000000000000000
+[    4.864116] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffe2ea65e90
+[    4.864183] R13: 0000561bc68b3020 R14: 00007ffe2ea65f60 R15: 0000000000000000
+[    4.864227]  </TASK>
+[    4.864247] ---[ end trace 0000000000000000 ]---
+[    4.901629] ------------[ cut here ]------------
+[    4.901664] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#23: ip/614
+[    4.901716] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.902016] CPU: 23 UID: 0 PID: 614 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.902074] Tainted: [W]=WARN
+[    4.902101] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.902165] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.902195] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.902293] RSP: 0018:ffffd375c31f3838 EFLAGS: 00010246
+[    4.902331] RAX: 00000000ffffffa6 RBX: ffff8b88c4fe3200 RCX: 0000000000000000
+[    4.902371] RDX: ffff8b88c4584500 RSI: 0000000000000000 RDI: ffff8b88c4fe3200
+[    4.902410] RBP: 0000000000000010 R08: ffff8b88c2f37350 R09: ffff8b88c8bf6038
+[    4.902449] R10: ffff8b88c45ab120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.902489] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c45ab000
+[    4.902530] FS:  00007f0616fc3b80(0000) GS:ffff8b8946d9b000(0000) knlGS:0000000000000000
+[    4.902575] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.902614] CR2: 000055d6ac490198 CR3: 000000000894f000 CR4: 0000000000750ef0
+[    4.902654] PKRU: 55555554
+[    4.902673] Call Trace:
+[    4.902686]  <TASK>
+[    4.902699]  rtmsg_ifinfo+0x38/0x90
+[    4.902726]  __dev_notify_flags+0xb0/0xf0
+[    4.902752]  ? register_netdevice+0x736/0x9a0
+[    4.902784]  rtnl_configure_link+0x6f/0xa0
+[    4.902810]  rtnl_newlink+0x5c4/0xc80
+[    4.902837]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.902869]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.902895]  ? get_page_from_freelist+0x15a1/0x1690
+[    4.902929]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.902961]  netlink_rcv_skb+0x57/0x100
+[    4.902988]  netlink_unicast+0x23a/0x380
+[    4.903014]  netlink_sendmsg+0x1e2/0x430
+[    4.903040]  ____sys_sendmsg+0x161/0x250
+[    4.903066]  ___sys_sendmsg+0x99/0xe0
+[    4.903093]  __sys_sendmsg+0x88/0xe0
+[    4.903123]  do_syscall_64+0x10e/0xfc0
+[    4.903147]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.903180] RIP: 0033:0x7f06171c9034
+[    4.903206] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.903302] RSP: 002b:00007ffdb54f6af8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.903348] RAX: ffffffffffffffda RBX: 00007ffdb54f7280 RCX: 00007f06171c9034
+[    4.903386] RDX: 0000000000000000 RSI: 00007ffdb54f6b60 RDI: 0000000000000003
+[    4.903426] RBP: 000000006a10c583 R08: 0000000000000010 R09: 0000000000000000
+[    4.903465] R10: 000055d6ac3dd738 R11: 0000000000000202 R12: 00007ffdb54f6b60
+[    4.903503] R13: 000055d6ac488020 R14: 00007ffdb54f6c30 R15: 0000000000000000
+[    4.903543]  </TASK>
+[    4.903562] ---[ end trace 0000000000000000 ]---
+[    4.939866] ------------[ cut here ]------------
+[    4.939901] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#27: ip/622
+[    4.939955] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.940271] CPU: 27 UID: 0 PID: 622 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.940330] Tainted: [W]=WARN
+[    4.940356] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.940414] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.940448] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.940546] RSP: 0018:ffffd375c31fb698 EFLAGS: 00010246
+[    4.940578] RAX: 00000000ffffffa6 RBX: ffff8b88c25e1e00 RCX: 0000000000000000
+[    4.940617] RDX: ffff8b88c7419700 RSI: 0000000000000000 RDI: ffff8b88c25e1e00
+[    4.940656] RBP: 0000000000000011 R08: ffff8b88c2f37350 R09: ffff8b88c8bf7838
+[    4.940696] R10: ffff8b88c45ab120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.940736] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c45ab000
+[    4.940776] FS:  00007f88f65e9b80(0000) GS:ffff8b8946e9b000(0000) knlGS:0000000000000000
+[    4.940821] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.940860] CR2: 00007f88f67d9710 CR3: 0000000004e31000 CR4: 0000000000750ef0
+[    4.940899] PKRU: 55555554
+[    4.940918] Call Trace:
+[    4.940931]  <TASK>
+[    4.940944]  unregister_netdevice_many_notify+0x573/0x9f0
+[    4.940977]  rtnl_dellink+0x185/0x3b0
+[    4.941004]  ? kmalloc_reserve+0x7d/0x100
+[    4.941029]  ? rtnl_dellinkprop+0x20/0x20
+[    4.941055]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.941082]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.941122]  netlink_rcv_skb+0x57/0x100
+[    4.941157]  netlink_unicast+0x23a/0x380
+[    4.941183]  netlink_sendmsg+0x1e2/0x430
+[    4.941210]  ____sys_sendmsg+0x161/0x250
+[    4.941236]  ___sys_sendmsg+0x99/0xe0
+[    4.941262]  __sys_sendmsg+0x88/0xe0
+[    4.941288]  do_syscall_64+0x10e/0xfc0
+[    4.941314]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.941347] RIP: 0033:0x7f88f67ef034
+[    4.941372] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+[    4.941470] RSP: 002b:00007fffe3117188 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[    4.941516] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f88f67ef034
+[    4.941555] RDX: 0000000000000000 RSI: 00007fffe31171f0 RDI: 0000000000000003
+[    4.941594] RBP: 000000006a10c583 R08: 0000000000000010 R09: 0000000000000000
+[    4.941633] R10: 0000000000000001 R11: 0000000000000202 R12: 00007fffe31171f0
+[    4.941672] R13: 000055cbe3965020 R14: 00007fffe31172c0 R15: 0000000000000000
+[    4.941712]  </TASK>
+[    4.941731] ---[ end trace 0000000000000000 ]---
+[    4.976952] ------------[ cut here ]------------
+[    4.976986] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#20: python3/623
+[    4.977039] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.977355] CPU: 20 UID: 0 PID: 623 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.977412] Tainted: [W]=WARN
+[    4.977438] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.977497] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.977530] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.977629] RSP: 0018:ffffd375c324bcb8 EFLAGS: 00010246
+[    4.977662] RAX: 00000000ffffffa6 RBX: ffff8b88c34baa00 RCX: 0000000000000000
+[    4.977708] RDX: ffff8b88c4f28000 RSI: 0000000000000000 RDI: ffff8b88c34baa00
+[    4.977753] RBP: 0000000000000010 R08: ffff8b88c1d86990 R09: ffff8b88c881902c
+[    4.977793] R10: ffff8b88c8438120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.977833] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c8438000
+[    4.977874] FS:  00007f4119489640(0000) GS:ffff8b8946cdb000(0000) knlGS:0000000000000000
+[    4.977919] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.977958] CR2: 00007f41166c8010 CR3: 0000000005de1000 CR4: 0000000000750ef0
+[    4.977998] PKRU: 55555554
+[    4.978017] Call Trace:
+[    4.978030]  <TASK>
+[    4.978044]  rtmsg_ifinfo+0x38/0x90
+[    4.978070]  register_netdevice+0x888/0x9a0
+[    4.978096]  register_netdev+0x1e/0x30
+[    4.978127]  loopback_net_init+0x4f/0xa0
+[    4.978151]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    4.978184]  ops_init+0x68/0x110
+[    4.978210]  setup_net+0x7d/0x130
+[    4.978236]  copy_net_ns+0xe4/0x1d0
+[    4.978262]  create_new_namespaces+0x113/0x2e0
+[    4.978295]  unshare_nsproxy_namespaces+0x73/0xa0
+[    4.978331]  ksys_unshare+0x150/0x3d0
+[    4.978357]  __x64_sys_unshare+0x12/0x20
+[    4.978383]  do_syscall_64+0x10e/0xfc0
+[    4.978409]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.978442] RIP: 0033:0x7f41195b51db
+[    4.978468] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    4.978566] RSP: 002b:00007ffe9d7e66a8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    4.978612] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    4.978651] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    4.978690] RBP: 00007ffe9d7e66b0 R08: 00007f4116c70830 R09: 0000000000000000
+[    4.978730] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6858
+[    4.978769] R13: 00007ffe9d7e6920 R14: 00007ffe9d7e6770 R15: 00007ffe9d7e6848
+[    4.978809]  </TASK>
+[    4.978828] ---[ end trace 0000000000000000 ]---
+[    4.983523] ------------[ cut here ]------------
+[    4.983559] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#18: python3/557
+[    4.983611] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.983911] CPU: 18 UID: 0 PID: 557 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.983970] Tainted: [W]=WARN
+[    4.983996] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.984055] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.984087] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.984210] RSP: 0018:ffffd375c303f6e8 EFLAGS: 00010246
+[    4.984240] RAX: 00000000ffffffa6 RBX: ffff8b88c2f8ee00 RCX: 0000000000000000
+[    4.984285] RDX: ffff8b88c5eb4500 RSI: 0000000000000000 RDI: ffff8b88c2f8ee00
+[    4.984325] RBP: 0000000000000010 R08: ffff8b88c94865d0 R09: ffff8b88c881e034
+[    4.984365] R10: ffff8b88c44ce120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.984404] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44ce000
+[    4.984445] FS:  00007f4119489640(0000) GS:ffff8b8946c5b000(0000) knlGS:0000000000000000
+[    4.984491] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.984530] CR2: 00000000004cf4b5 CR3: 000000000996f000 CR4: 0000000000750ef0
+[    4.984571] PKRU: 55555554
+[    4.984590] Call Trace:
+[    4.984603]  <TASK>
+[    4.984617]  rtmsg_ifinfo+0x38/0x90
+[    4.984643]  __dev_notify_flags+0xb0/0xf0
+[    4.984669]  rtnl_configure_link+0x6f/0xa0
+[    4.984695]  veth_newlink+0x16e/0x450
+[    4.984723]  rtnl_newlink+0x58a/0xc80
+[    4.984748]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.984780]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.984806]  ? refill_objects+0x215/0x2e0
+[    4.984832]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.984865]  netlink_rcv_skb+0x57/0x100
+[    4.984891]  netlink_unicast+0x23a/0x380
+[    4.984918]  netlink_sendmsg+0x1e2/0x430
+[    4.984944]  __sys_sendto+0x146/0x1d0
+[    4.984971]  __x64_sys_sendto+0x24/0x30
+[    4.984996]  do_syscall_64+0x10e/0xfc0
+[    4.985022]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.985054] RIP: 0033:0x7f41195b60d7
+[    4.985080] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.985205] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.985249] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.985288] RDX: 0000000000000070 RSI: 00007f41166a8a50 RDI: 000000000000000f
+[    4.985326] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.985366] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.985405] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.985445]  </TASK>
+[    4.985464] ---[ end trace 0000000000000000 ]---
+[    4.985747] ------------[ cut here ]------------
+[    4.985780] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#18: python3/557
+[    4.985833] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.986139] CPU: 18 UID: 0 PID: 557 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.986198] Tainted: [W]=WARN
+[    4.986217] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.986276] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.986319] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.986417] RSP: 0018:ffffd375c303f978 EFLAGS: 00010246
+[    4.986450] RAX: 00000000ffffffa6 RBX: ffff8b88c2f8ee00 RCX: 0000000000000000
+[    4.986489] RDX: ffff8b88c5eb4500 RSI: 0000000000000000 RDI: ffff8b88c2f8ee00
+[    4.986535] RBP: 0000000000000010 R08: ffff8b88c9486590 R09: ffff8b88c881c834
+[    4.986574] R10: ffff8b88c44cf120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.986614] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44cf000
+[    4.986654] FS:  00007f4119489640(0000) GS:ffff8b8946c5b000(0000) knlGS:0000000000000000
+[    4.986699] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.986738] CR2: 00000000004cf4b5 CR3: 000000000996f000 CR4: 0000000000750ef0
+[    4.986778] PKRU: 55555554
+[    4.986798] Call Trace:
+[    4.986811]  <TASK>
+[    4.986824]  rtmsg_ifinfo+0x38/0x90
+[    4.986850]  __dev_notify_flags+0xb0/0xf0
+[    4.986876]  rtnl_configure_link+0x6f/0xa0
+[    4.986903]  rtnl_newlink+0x5c4/0xc80
+[    4.986930]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.986962]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.986988]  ? refill_objects+0x215/0x2e0
+[    4.987014]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.987046]  netlink_rcv_skb+0x57/0x100
+[    4.987073]  netlink_unicast+0x23a/0x380
+[    4.987098]  netlink_sendmsg+0x1e2/0x430
+[    4.987131]  __sys_sendto+0x146/0x1d0
+[    4.987158]  __x64_sys_sendto+0x24/0x30
+[    4.987183]  do_syscall_64+0x10e/0xfc0
+[    4.987209]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.987241] RIP: 0033:0x7f41195b60d7
+[    4.987267] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.987360] RSP: 002b:00007ffe9d7e6638 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.987407] RAX: ffffffffffffffda RBX: 00007ffe9d7e66f8 RCX: 00007f41195b60d7
+[    4.987446] RDX: 0000000000000070 RSI: 00007f41166a8a50 RDI: 000000000000000f
+[    4.987486] RBP: 00007ffe9d7e6650 R08: 00007ffe9d7e6770 R09: 000000000000000c
+[    4.987524] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.987563] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.987602]  </TASK>
+[    4.987622] ---[ end trace 0000000000000000 ]---
+[    4.987915] ------------[ cut here ]------------
+[    4.987949] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#18: python3/557
+[    4.988001] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.988330] CPU: 18 UID: 0 PID: 557 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.988385] Tainted: [W]=WARN
+[    4.988405] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.988463] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.988495] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.988592] RSP: 0018:ffffd375c303f978 EFLAGS: 00010246
+[    4.988625] RAX: 00000000ffffffa6 RBX: ffff8b88c2f8ef00 RCX: 0000000000000000
+[    4.988664] RDX: ffff8b88c5eb4500 RSI: 0000000000000000 RDI: ffff8b88c2f8ef00
+[    4.988707] RBP: 0000000000000010 R08: ffff8b88c9486650 R09: ffff8b88c881b038
+[    4.988747] R10: ffff8b88c44cd120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.988786] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44cd000
+[    4.988827] FS:  00007f4119489640(0000) GS:ffff8b8946c5b000(0000) knlGS:0000000000000000
+[    4.988872] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.988911] CR2: 00007f41166f0024 CR3: 000000000996f000 CR4: 0000000000750ef0
+[    4.988951] PKRU: 55555554
+[    4.988970] Call Trace:
+[    4.988983]  <TASK>
+[    4.988997]  rtmsg_ifinfo+0x38/0x90
+[    4.989023]  __dev_notify_flags+0xb0/0xf0
+[    4.989049]  rtnl_configure_link+0x6f/0xa0
+[    4.989075]  rtnl_newlink+0x5c4/0xc80
+[    4.989102]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.989154]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.989178]  ? netlink_unicast+0x2d9/0x380
+[    4.989204]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.989237]  netlink_rcv_skb+0x57/0x100
+[    4.989264]  netlink_unicast+0x23a/0x380
+[    4.989290]  netlink_sendmsg+0x1e2/0x430
+[    4.989316]  __sys_sendto+0x146/0x1d0
+[    4.989342]  __x64_sys_sendto+0x24/0x30
+[    4.989368]  do_syscall_64+0x10e/0xfc0
+[    4.989394]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.989426] RIP: 0033:0x7f41195b60d7
+[    4.989452] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.989551] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.989597] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.989637] RDX: 0000000000000044 RSI: 00007f41166dc4e0 RDI: 000000000000000f
+[    4.989677] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.989716] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.989755] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.989794]  </TASK>
+[    4.989813] ---[ end trace 0000000000000000 ]---
+[    4.990017] ------------[ cut here ]------------
+[    4.990050] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#18: python3/557
+[    4.990103] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    4.990413] CPU: 18 UID: 0 PID: 557 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    4.990469] Tainted: [W]=WARN
+[    4.990488] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    4.990547] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    4.990580] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    4.990678] RSP: 0018:ffffd375c303f978 EFLAGS: 00010246
+[    4.990710] RAX: 00000000ffffffa6 RBX: ffff8b88c2f8ee00 RCX: 0000000000000000
+[    4.990749] RDX: ffff8b88c5eb4500 RSI: 0000000000000000 RDI: ffff8b88c2f8ee00
+[    4.990789] RBP: 0000000000000010 R08: ffff8b88c347e4d0 R09: ffff8b88c8945838
+[    4.990829] R10: ffff8b88c44cc120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    4.990869] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c44cc000
+[    4.990909] FS:  00007f4119489640(0000) GS:ffff8b8946c5b000(0000) knlGS:0000000000000000
+[    4.990954] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    4.990992] CR2: 00007f41166e2030 CR3: 000000000996f000 CR4: 0000000000750ef0
+[    4.991032] PKRU: 55555554
+[    4.991052] Call Trace:
+[    4.991065]  <TASK>
+[    4.991079]  rtmsg_ifinfo+0x38/0x90
+[    4.991105]  __dev_notify_flags+0xb0/0xf0
+[    4.991142]  rtnl_configure_link+0x6f/0xa0
+[    4.991169]  rtnl_newlink+0x5c4/0xc80
+[    4.991196]  ? do_setlink.isra.0+0x1430/0x1430
+[    4.991228]  rtnetlink_rcv_msg+0x34a/0x3f0
+[    4.991254]  ? netlink_unicast+0x2d9/0x380
+[    4.991280]  ? rtnl_calcit.isra.0+0x110/0x110
+[    4.991313]  netlink_rcv_skb+0x57/0x100
+[    4.991340]  netlink_unicast+0x23a/0x380
+[    4.991366]  netlink_sendmsg+0x1e2/0x430
+[    4.991392]  __sys_sendto+0x146/0x1d0
+[    4.991418]  __x64_sys_sendto+0x24/0x30
+[    4.991444]  do_syscall_64+0x10e/0xfc0
+[    4.991470]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    4.991502] RIP: 0033:0x7f41195b60d7
+[    4.991528] Code: c7 c0 ff ff ff ff eb be 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 80 3d 75 ef 0d 00 00 41 89 ca 74 10 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 69 c3 55 48 89 e5 53 48 83 ec 38 44 89 4d d0
+[    4.991627] RSP: 002b:00007ffe9d7e6658 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
+[    4.991672] RAX: ffffffffffffffda RBX: 00007ffe9d7e6718 RCX: 00007f41195b60d7
+[    4.991711] RDX: 0000000000000040 RSI: 00007f41166dc7b0 RDI: 000000000000000f
+[    4.991750] RBP: 00007ffe9d7e6670 R08: 00007ffe9d7e6790 R09: 000000000000000c
+[    4.991790] R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000000
+[    4.991829] R13: 0000000000000000 R14: 0000000000000000 R15: 00000000004d0d48
+[    4.991868]  </TASK>
+[    4.991888] ---[ end trace 0000000000000000 ]---
+[    6.655568] ------------[ cut here ]------------
+[    6.655604] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#21: python3/626
+[    6.655656] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.655956] CPU: 21 UID: 0 PID: 626 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.656014] Tainted: [W]=WARN
+[    6.656033] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.656092] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.656140] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.656239] RSP: 0018:ffffd375c325bcb8 EFLAGS: 00010246
+[    6.656274] RAX: 00000000ffffffa6 RBX: ffff8b88c3576b00 RCX: 0000000000000000
+[    6.656327] RDX: ffff8b88c4f54500 RSI: 0000000000000000 RDI: ffff8b88c3576b00
+[    6.656366] RBP: 0000000000000010 R08: ffff8b88c84b6a10 R09: ffff8b88c760e02c
+[    6.656406] R10: ffff8b88c4568120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.656445] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4568000
+[    6.656486] FS:  00007f4119489640(0000) GS:ffff8b8946d1b000(0000) knlGS:0000000000000000
+[    6.656530] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.656568] CR2: 00007f41166b9440 CR3: 0000000005dc4000 CR4: 0000000000750ef0
+[    6.656608] PKRU: 55555554
+[    6.656627] Call Trace:
+[    6.656640]  <TASK>
+[    6.656661]  rtmsg_ifinfo+0x38/0x90
+[    6.656686]  register_netdevice+0x888/0x9a0
+[    6.656712]  register_netdev+0x1e/0x30
+[    6.656738]  loopback_net_init+0x4f/0xa0
+[    6.656765]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.656797]  ops_init+0x68/0x110
+[    6.656824]  setup_net+0x7d/0x130
+[    6.656850]  copy_net_ns+0xe4/0x1d0
+[    6.656876]  create_new_namespaces+0x113/0x2e0
+[    6.656909]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.656942]  ksys_unshare+0x150/0x3d0
+[    6.656969]  __x64_sys_unshare+0x12/0x20
+[    6.656992]  do_syscall_64+0x10e/0xfc0
+[    6.657018]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.657059] RIP: 0033:0x7f41195b51db
+[    6.657088] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.657197] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.657239] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.657279] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.657318] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.657357] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.657396] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.657436]  </TASK>
+[    6.657456] ---[ end trace 0000000000000000 ]---
+[    6.657530] ------------[ cut here ]------------
+[    6.657564] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#26: python3/627
+[    6.657613] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.657894] CPU: 26 UID: 0 PID: 627 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.657949] Tainted: [W]=WARN
+[    6.657967] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.658023] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.658054] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.658168] RSP: 0018:ffffd375c3253cb8 EFLAGS: 00010246
+[    6.658196] RAX: 00000000ffffffa6 RBX: ffff8b88c38d1500 RCX: 0000000000000000
+[    6.658232] RDX: ffff8b88c5d12e00 RSI: 0000000000000000 RDI: ffff8b88c38d1500
+[    6.658270] RBP: 0000000000000010 R08: ffff8b88c4b35950 R09: ffff8b88c743202c
+[    6.658307] R10: ffff8b88c45e4120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.658348] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c45e4000
+[    6.658386] FS:  00007f4119489640(0000) GS:ffff8b8946e5b000(0000) knlGS:0000000000000000
+[    6.658428] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.658464] CR2: 00007f41166936b0 CR3: 0000000002d82000 CR4: 0000000000750ef0
+[    6.658501] PKRU: 55555554
+[    6.658520] Call Trace:
+[    6.658532]  <TASK>
+[    6.658545]  rtmsg_ifinfo+0x38/0x90
+[    6.658569]  register_netdevice+0x888/0x9a0
+[    6.658594]  register_netdev+0x1e/0x30
+[    6.658619]  loopback_net_init+0x4f/0xa0
+[    6.658644]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.658675]  ops_init+0x68/0x110
+[    6.658700]  setup_net+0x7d/0x130
+[    6.658725]  copy_net_ns+0xe4/0x1d0
+[    6.658750]  create_new_namespaces+0x113/0x2e0
+[    6.658781]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.658812]  ksys_unshare+0x150/0x3d0
+[    6.658837]  __x64_sys_unshare+0x12/0x20
+[    6.658861]  do_syscall_64+0x10e/0xfc0
+[    6.658891]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.658922] RIP: 0033:0x7f41195b51db
+[    6.658947] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.659038] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.659077] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.659126] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.659168] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.659209] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.659251] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.659293]  </TASK>
+[    6.659306] ---[ end trace 0000000000000000 ]---
+[    6.659390] ------------[ cut here ]------------
+[    6.659428] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#27: python3/628
+[    6.659480] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.659802] CPU: 27 UID: 0 PID: 628 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.659864] Tainted: [W]=WARN
+[    6.659895] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.659961] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.659994] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.660106] RSP: 0018:ffffd375c324bcb8 EFLAGS: 00010246
+[    6.660158] RAX: 00000000ffffffa6 RBX: ffff8b88c25e1e00 RCX: 0000000000000000
+[    6.660203] RDX: ffff8b88c8719700 RSI: 0000000000000000 RDI: ffff8b88c25e1e00
+[    6.660252] RBP: 0000000000000010 R08: ffff8b88c2dc5090 R09: ffff8b88c743702c
+[    6.660309] R10: ffff8b88c92b8120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.660358] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c92b8000
+[    6.660406] FS:  00007f4119489640(0000) GS:ffff8b8946e9b000(0000) knlGS:0000000000000000
+[    6.660456] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.660501] CR2: 0000000000b94668 CR3: 0000000003719000 CR4: 0000000000750ef0
+[    6.660547] PKRU: 55555554
+[    6.660567] Call Trace:
+[    6.660583]  <TASK>
+[    6.660599]  rtmsg_ifinfo+0x38/0x90
+[    6.660629]  register_netdevice+0x888/0x9a0
+[    6.660656]  register_netdev+0x1e/0x30
+[    6.660682]  loopback_net_init+0x4f/0xa0
+[    6.660709]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.660741]  ops_init+0x68/0x110
+[    6.660768]  setup_net+0x7d/0x130
+[    6.660795]  copy_net_ns+0xe4/0x1d0
+[    6.660828]  create_new_namespaces+0x113/0x2e0
+[    6.660865]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.660903]  ksys_unshare+0x150/0x3d0
+[    6.660931]  __x64_sys_unshare+0x12/0x20
+[    6.660960]  do_syscall_64+0x10e/0xfc0
+[    6.660988]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.661022] RIP: 0033:0x7f41195b51db
+[    6.661049] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.661179] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.661234] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.661284] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.661341] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.661391] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.661441] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.661493]  </TASK>
+[    6.661521] ---[ end trace 0000000000000000 ]---
+[    6.663455] ------------[ cut here ]------------
+[    6.663494] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#21: python3/629
+[    6.663561] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.663928] CPU: 21 UID: 0 PID: 629 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.663996] Tainted: [W]=WARN
+[    6.664017] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.664085] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.664126] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.664237] RSP: 0018:ffffd375c3263cb8 EFLAGS: 00010246
+[    6.664272] RAX: 00000000ffffffa6 RBX: ffff8b88c3576b00 RCX: 0000000000000000
+[    6.664318] RDX: ffff8b88c4f55c00 RSI: 0000000000000000 RDI: ffff8b88c3576b00
+[    6.664368] RBP: 0000000000000010 R08: ffff8b88c4b08cd0 R09: ffff8b88c9a4502c
+[    6.664421] R10: ffff8b88c4d20120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.664469] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4d20000
+[    6.664520] FS:  00007f4119489640(0000) GS:ffff8b8946d1b000(0000) knlGS:0000000000000000
+[    6.664576] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.664616] CR2: 0000000000b94668 CR3: 00000000086f2000 CR4: 0000000000750ef0
+[    6.664662] PKRU: 55555554
+[    6.664685] Call Trace:
+[    6.664701]  <TASK>
+[    6.664717]  rtmsg_ifinfo+0x38/0x90
+[    6.664743]  register_netdevice+0x888/0x9a0
+[    6.664770]  register_netdev+0x1e/0x30
+[    6.664801]  loopback_net_init+0x4f/0xa0
+[    6.664844]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.664875]  ops_init+0x68/0x110
+[    6.664902]  setup_net+0x7d/0x130
+[    6.664930]  copy_net_ns+0xe4/0x1d0
+[    6.664955]  create_new_namespaces+0x113/0x2e0
+[    6.664998]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.665031]  ksys_unshare+0x150/0x3d0
+[    6.665057]  __x64_sys_unshare+0x12/0x20
+[    6.665087]  do_syscall_64+0x10e/0xfc0
+[    6.665112]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.665160] RIP: 0033:0x7f41195b51db
+[    6.665184] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.665287] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.665345] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.665396] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.665445] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.665496] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.665545] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.665591]  </TASK>
+[    6.665616] ---[ end trace 0000000000000000 ]---
+[    6.665684] ------------[ cut here ]------------
+[    6.665721] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#28: python3/630
+[    6.665777] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.666079] CPU: 28 UID: 0 PID: 630 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.666145] Tainted: [W]=WARN
+[    6.666168] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.666227] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.666260] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.666363] RSP: 0018:ffffd375c0c77cb8 EFLAGS: 00010246
+[    6.666396] RAX: 00000000ffffffa6 RBX: ffff8b88c2e1fb00 RCX: 0000000000000000
+[    6.666436] RDX: ffff8b88c5d11700 RSI: 0000000000000000 RDI: ffff8b88c2e1fb00
+[    6.666482] RBP: 0000000000000010 R08: ffff8b88c5c59910 R09: ffff8b88c341802c
+[    6.666526] R10: ffff8b88c92bc120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.666575] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c92bc000
+[    6.666629] FS:  00007f4119489640(0000) GS:ffff8b8946edb000(0000) knlGS:0000000000000000
+[    6.666684] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.666731] CR2: 00007f411668fd00 CR3: 0000000005f3b000 CR4: 0000000000750ef0
+[    6.666781] PKRU: 55555554
+[    6.666805] Call Trace:
+[    6.666821]  <TASK>
+[    6.666838]  rtmsg_ifinfo+0x38/0x90
+[    6.666870]  register_netdevice+0x888/0x9a0
+[    6.666895]  register_netdev+0x1e/0x30
+[    6.666920]  loopback_net_init+0x4f/0xa0
+[    6.666951]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.666989]  ops_init+0x68/0x110
+[    6.667019]  setup_net+0x7d/0x130
+[    6.667051]  copy_net_ns+0xe4/0x1d0
+[    6.667078]  create_new_namespaces+0x113/0x2e0
+[    6.667122]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.667170]  ksys_unshare+0x150/0x3d0
+[    6.667195]  __x64_sys_unshare+0x12/0x20
+[    6.667229]  do_syscall_64+0x10e/0xfc0
+[    6.667259]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.667300] RIP: 0033:0x7f41195b51db
+[    6.667326] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.667443] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.667495] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.667551] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.667605] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.667657] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.667709] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.667765]  </TASK>
+[    6.667782] ---[ end trace 0000000000000000 ]---
+[    6.667872] ------------[ cut here ]------------
+[    6.667923] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#29: python3/631
+[    6.667998] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.668401] CPU: 29 UID: 0 PID: 631 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.668475] Tainted: [W]=WARN
+[    6.668506] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.668581] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.668621] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.668739] RSP: 0018:ffffd375c326bcb8 EFLAGS: 00010246
+[    6.668772] RAX: 00000000ffffffa6 RBX: ffff8b88c3ac0100 RCX: 0000000000000000
+[    6.668821] RDX: ffff8b88c6c54500 RSI: 0000000000000000 RDI: ffff8b88c3ac0100
+[    6.668873] RBP: 0000000000000010 R08: ffff8b88c2876fd0 R09: ffff8b88c2a9182c
+[    6.668922] R10: ffff8b88c4681120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.668971] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c4681000
+[    6.669022] FS:  00007f4119489640(0000) GS:ffff8b8946f1b000(0000) knlGS:0000000000000000
+[    6.669074] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.669127] CR2: 00007f4116696830 CR3: 00000000028b0000 CR4: 0000000000750ef0
+[    6.669180] PKRU: 55555554
+[    6.669204] Call Trace:
+[    6.669220]  <TASK>
+[    6.669238]  rtmsg_ifinfo+0x38/0x90
+[    6.669268]  register_netdevice+0x888/0x9a0
+[    6.669299]  register_netdev+0x1e/0x30
+[    6.669328]  loopback_net_init+0x4f/0xa0
+[    6.669358]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.669397]  ops_init+0x68/0x110
+[    6.669428]  setup_net+0x7d/0x130
+[    6.669458]  copy_net_ns+0xe4/0x1d0
+[    6.669487]  create_new_namespaces+0x113/0x2e0
+[    6.669527]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.669571]  ksys_unshare+0x150/0x3d0
+[    6.669608]  __x64_sys_unshare+0x12/0x20
+[    6.669643]  do_syscall_64+0x10e/0xfc0
+[    6.669677]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.669718] RIP: 0033:0x7f41195b51db
+[    6.669752] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.669887] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.669953] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.670007] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.670062] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.670113] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.670178] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.670239]  </TASK>
+[    6.670257] ---[ end trace 0000000000000000 ]---
+[    6.670332] ------------[ cut here ]------------
+[    6.670386] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#30: python3/632
+[    6.670447] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.670804] CPU: 30 UID: 0 PID: 632 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.670877] Tainted: [W]=WARN
+[    6.670902] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.670976] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.671015] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.671134] RSP: 0018:ffffd375c3273cb8 EFLAGS: 00010246
+[    6.671176] RAX: 00000000ffffffa6 RBX: ffff8b88c3b7b700 RCX: 0000000000000000
+[    6.671227] RDX: ffff8b88c4ed0000 RSI: 0000000000000000 RDI: ffff8b88c3b7b700
+[    6.671270] RBP: 0000000000000010 R08: ffff8b88c754ec50 R09: ffff8b88c2a9302c
+[    6.671311] R10: ffff8b88c7758120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.671351] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c7758000
+[    6.671402] FS:  00007f4119489640(0000) GS:ffff8b8946f5b000(0000) knlGS:0000000000000000
+[    6.671461] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.671512] CR2: 00007f411668f230 CR3: 00000000093b3000 CR4: 0000000000750ef0
+[    6.671565] PKRU: 55555554
+[    6.671581] Call Trace:
+[    6.671601]  <TASK>
+[    6.671616]  rtmsg_ifinfo+0x38/0x90
+[    6.671648]  register_netdevice+0x888/0x9a0
+[    6.671675]  register_netdev+0x1e/0x30
+[    6.671701]  loopback_net_init+0x4f/0xa0
+[    6.671727]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.671771]  ops_init+0x68/0x110
+[    6.671798]  setup_net+0x7d/0x130
+[    6.671833]  copy_net_ns+0xe4/0x1d0
+[    6.671860]  create_new_namespaces+0x113/0x2e0
+[    6.671894]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.671927]  ksys_unshare+0x150/0x3d0
+[    6.671952]  __x64_sys_unshare+0x12/0x20
+[    6.671985]  do_syscall_64+0x10e/0xfc0
+[    6.672017]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.672052] RIP: 0033:0x7f41195b51db
+[    6.672080] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.672221] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.672277] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.672332] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.672385] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.672441] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.672495] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.672550]  </TASK>
+[    6.672567] ---[ end trace 0000000000000000 ]---
+[    6.672651] ------------[ cut here ]------------
+[    6.672699] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#29: python3/633
+[    6.672773] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.673155] CPU: 29 UID: 0 PID: 633 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.673220] Tainted: [W]=WARN
+[    6.673242] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.673322] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.673363] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.673477] RSP: 0018:ffffd375c327bcb8 EFLAGS: 00010246
+[    6.673510] RAX: 00000000ffffffa6 RBX: ffff8b88c3ac0100 RCX: 0000000000000000
+[    6.673558] RDX: ffff8b88c5d10000 RSI: 0000000000000000 RDI: ffff8b88c3ac0100
+[    6.673614] RBP: 0000000000000010 R08: ffff8b88c3b2c0d0 R09: ffff8b88c5dd082c
+[    6.673667] R10: ffff8b88c2fdc120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.673716] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c2fdc000
+[    6.673767] FS:  00007f4119489640(0000) GS:ffff8b8946f1b000(0000) knlGS:0000000000000000
+[    6.673822] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.673871] CR2: 00007f4116692eb0 CR3: 0000000005e11000 CR4: 0000000000750ef0
+[    6.673924] PKRU: 55555554
+[    6.673948] Call Trace:
+[    6.673965]  <TASK>
+[    6.673981]  rtmsg_ifinfo+0x38/0x90
+[    6.674023]  register_netdevice+0x888/0x9a0
+[    6.674055]  register_netdev+0x1e/0x30
+[    6.674087]  loopback_net_init+0x4f/0xa0
+[    6.674123]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.674160]  ops_init+0x68/0x110
+[    6.674191]  setup_net+0x7d/0x130
+[    6.674221]  copy_net_ns+0xe4/0x1d0
+[    6.674251]  create_new_namespaces+0x113/0x2e0
+[    6.674288]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.674334]  ksys_unshare+0x150/0x3d0
+[    6.674366]  __x64_sys_unshare+0x12/0x20
+[    6.674399]  do_syscall_64+0x10e/0xfc0
+[    6.674436]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.674475] RIP: 0033:0x7f41195b51db
+[    6.674506] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.674642] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.674697] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.674751] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.674804] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.674858] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.674912] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.674965]  </TASK>
+[    6.674991] ---[ end trace 0000000000000000 ]---
+[    6.675078] ------------[ cut here ]------------
+[    6.675125] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x109/0x110, CPU#31: python3/634
+[    6.675191] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+[    6.675515] CPU: 31 UID: 0 PID: 634 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy) 
+[    6.675579] Tainted: [W]=WARN
+[    6.675601] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[    6.675666] RIP: 0010:rtmsg_ifinfo_build_skb+0x109/0x110
+[    6.675694] Code: ff 8b 44 24 0c 48 8b 0c 24 ba 01 00 00 00 31 f6 31 db 48 8b b9 48 02 00 00 89 c1 e8 d1 81 05 00 eb af b8 97 ff ff ff eb dc 90 <0f> 0b 90 eb bf 66 90 f3 0f 1e fa 0f 1f 44 00 00 48 83 fe 1f 77 28
+[    6.675803] RSP: 0018:ffffd375c3283cb8 EFLAGS: 00010246
+[    6.675832] RAX: 00000000ffffffa6 RBX: ffff8b88c3c2eb00 RCX: 0000000000000000
+[    6.675876] RDX: ffff8b88c6c55c00 RSI: 0000000000000000 RDI: ffff8b88c3c2eb00
+[    6.675920] RBP: 0000000000000010 R08: ffff8b88c95f60d0 R09: ffff8b88c3aa682c
+[    6.675967] R10: ffff8b88c9513120 R11: fefefefefefefeff R12: 00000000ffffffff
+[    6.676009] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8b88c9513000
+[    6.676053] FS:  00007f4119489640(0000) GS:ffff8b8946f9b000(0000) knlGS:0000000000000000
+[    6.676101] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[    6.676161] CR2: 00007f411666d800 CR3: 000000000756a000 CR4: 0000000000750ef0
+[    6.676213] PKRU: 55555554
+[    6.676228] Call Trace:
+[    6.676244]  <TASK>
+[    6.676260]  rtmsg_ifinfo+0x38/0x90
+[    6.676299]  register_netdevice+0x888/0x9a0
+[    6.676322]  register_netdev+0x1e/0x30
+[    6.676342]  loopback_net_init+0x4f/0xa0
+[    6.676369]  ? ip_set_net_init+0x69/0x90 [ip_set]
+[    6.676400]  ops_init+0x68/0x110
+[    6.676426]  setup_net+0x7d/0x130
+[    6.676451]  copy_net_ns+0xe4/0x1d0
+[    6.676477]  create_new_namespaces+0x113/0x2e0
+[    6.676508]  unshare_nsproxy_namespaces+0x73/0xa0
+[    6.676540]  ksys_unshare+0x150/0x3d0
+[    6.676565]  __x64_sys_unshare+0x12/0x20
+[    6.676591]  do_syscall_64+0x10e/0xfc0
+[    6.676616]  entry_SYSCALL_64_after_hwframe+0x4b/0x53
+[    6.676648] RIP: 0033:0x7f41195b51db
+[    6.676667] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+[    6.676753] RSP: 002b:00007ffe9d7e66c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[    6.676790] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f41195b51db
+[    6.676827] RDX: 00007f41193e1258 RSI: 0000003000000018 RDI: 0000000040000000
+[    6.676865] RBP: 00007ffe9d7e66d0 R08: 00007f4116c70830 R09: 0000000000000000
+[    6.676903] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffe9d7e6878
+[    6.676944] R13: 00007ffe9d7e6940 R14: 00007ffe9d7e6790 R15: 00007ffe9d7e6868
+[    6.676982]  </TASK>
+[    6.676994] ---[ end trace 0000000000000000 ]---
