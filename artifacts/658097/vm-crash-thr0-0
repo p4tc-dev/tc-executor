@@ -1,0 +1,2805 @@
+======================================
+| [?2004hxx__-> [   13.962380] ------------[ cut here ]------------
+| [   13.962454] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#17: python3/798
+| [   13.962551] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   13.963168] CPU: 17 UID: 0 PID: 798 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   13.963279] Tainted: [W]=WARN
+[   13.963319] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.963439] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   13.963495] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   13.963684] RSP: 0018:ffff88800b10fb00 EFLAGS: 00010246
+[   13.963737] RAX: 00000000ffffffa6 RBX: ffff88800ae67d40 RCX: ffffed1001621f26
+[   13.963820] RDX: 1ffff110015ccfbf RSI: 0000000000000000 RDI: ffff88800ae67df8
+[   13.963903] RBP: 00000000ffffffa6 R08: ffff8880053b2e10 R09: ffff8880047c602c
+[   13.963985] R10: ffff8880047c6026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   13.964071] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888004b6a108
+[   13.964153] FS:  00007f0304f24640(0000) GS:ffff8880a7db8000(0000) knlGS:0000000000000000
+[   13.964236] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.964304] CR2: 00007f030220e130 CR3: 0000000004944000 CR4: 0000000000750ef0
+[   13.964383] PKRU: 55555554
+[   13.964413] Call Trace:
+[   13.964439]  <TASK>
+[   13.964466]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   13.964507]  register_netdevice (net/core/dev.c:11488)
+[   13.964562]  ? alloc_netdev_mqs (net/core/dev.c:12129 (discriminator 2))
+[   13.964620]  ? unregister_netdev (net/core/dev.c:12517)
+[   13.964677]  register_netdev (net/core/dev.c:11552)
+[   13.964716]  loopback_net_init (drivers/net/loopback.c:218)
+[   13.964762]  ops_init (net/core/net_namespace.c:137)
+[   13.964800]  setup_net (net/core/net_namespace.c:446)
+[   13.964850]  ? ops_init (net/core/net_namespace.c:144)
+[   13.964895]  copy_net_ns (net/core/net_namespace.c:579)
+[   13.964936]  create_new_namespaces (kernel/nsproxy.c:132)
+[   13.964995]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   13.965050]  ksys_unshare (kernel/fork.c:3243)
+[   13.965092]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   13.965148]  ? handle_mm_fault (mm/memory.c:6734)
+[   13.965193]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   13.965232]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   13.965275]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   13.965330] RIP: 0033:0x7f03050501db
+[   13.965370] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   13.965564] RSP: 002b:00007ffd6f88a6c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   13.965645] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   13.965723] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   13.965801] RBP: 00007ffd6f88a6d0 R08: 00007f0302541b20 R09: 0000000000000000
+[   13.965889] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a878
+[   13.965969] R13: 00007ffd6f88a940 R14: 00007ffd6f88a790 R15: 00007ffd6f88a868
+| [   13.966341] ------------[ cut here ]------------
+| [   13.966399] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#21: python3/796
+| [   13.966495] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   13.967105] CPU: 21 UID: 0 PID: 796 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   13.967213] Tainted: [W]=WARN
+[   13.967252] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.967370] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   13.967425] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   13.967609] RSP: 0018:ffff8880090afb00 EFLAGS: 00010246
+[   13.967661] RAX: 00000000ffffffa6 RBX: ffff88800887d400 RCX: ffffed1001215f26
+[   13.967740] RDX: 1ffff1100110fa97 RSI: 0000000000000000 RDI: ffff88800887d4b8
+[   13.967827] RBP: 00000000ffffffa6 R08: ffff8880052a3290 R09: ffff8880093aa02c
+[   13.967906] R10: ffff8880093aa026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   13.967985] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800894e108
+[   13.968069] FS:  00007f0304f24640(0000) GS:ffff8880a7eb8000(0000) knlGS:0000000000000000
+[   13.968148] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.968213] CR2: 0000000000b94668 CR3: 0000000007359000 CR4: 0000000000750ef0
+[   13.968296] PKRU: 55555554
+[   13.968321] Call Trace:
+[   13.968347]  <TASK>
+[   13.968374]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   13.968413]  register_netdevice (net/core/dev.c:11488)
+[   13.968466]  ? unregister_netdev (net/core/dev.c:12517)
+[   13.968518]  register_netdev (net/core/dev.c:11552)
+[   13.968562]  loopback_net_init (drivers/net/loopback.c:218)
+[   13.968601]  ops_init (net/core/net_namespace.c:137)
+[   13.968640]  setup_net (net/core/net_namespace.c:446)
+[   13.968679]  ? ops_init (net/core/net_namespace.c:144)
+[   13.968718]  copy_net_ns (net/core/net_namespace.c:579)
+[   13.968757]  create_new_namespaces (kernel/nsproxy.c:132)
+[   13.968810]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   13.968874]  ksys_unshare (kernel/fork.c:3243)
+[   13.968915]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   13.968967]  ? handle_mm_fault (mm/memory.c:6734)
+[   13.969007]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   13.969046]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   13.969085]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   13.969137] RIP: 0033:0x7f03050501db
+[   13.969176] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   13.969363] RSP: 002b:00007ffd6f88a6c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   13.969446] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   13.969533] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   13.969613] RBP: 00007ffd6f88a6d0 R08: 00007f0302541b20 R09: 0000000000000000
+[   13.969687] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a878
+[   13.969768] R13: 00007ffd6f88a940 R14: 00007ffd6f88a790 R15: 00007ffd6f88a868
+| [   13.970233] ------------[ cut here ]------------
+| [   13.970294] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#8: python3/797
+| [   13.970398] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   13.971038] CPU: 8 UID: 0 PID: 797 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   13.971150] Tainted: [W]=WARN
+[   13.971191] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.971311] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   13.971374] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   13.971569] RSP: 0018:ffff88800ab2fb00 EFLAGS: 00010246
+[   13.971621] RAX: 00000000ffffffa6 RBX: ffff888008847ac0 RCX: ffffed1001565f26
+[   13.971698] RDX: 1ffff11001108f6f RSI: 0000000000000000 RDI: ffff888008847b78
+[   13.971780] RBP: 00000000ffffffa6 R08: ffff8880026b0490 R09: ffff888006c7602c
+[   13.971872] R10: ffff888006c76026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   13.971956] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888005044108
+[   13.972042] FS:  00007f0304f24640(0000) GS:ffff8880a7b78000(0000) knlGS:0000000000000000
+[   13.972124] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.972198] CR2: 0000000000b94668 CR3: 00000000049b5000 CR4: 0000000000750ef0
+[   13.972290] PKRU: 55555554
+[   13.972319] Call Trace:
+[   13.972344]  <TASK>
+[   13.972372]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   13.972411]  register_netdevice (net/core/dev.c:11488)
+[   13.972464]  ? unregister_netdev (net/core/dev.c:12517)
+[   13.972521]  register_netdev (net/core/dev.c:11552)
+[   13.972569]  loopback_net_init (drivers/net/loopback.c:218)
+[   13.972616]  ops_init (net/core/net_namespace.c:137)
+[   13.972666]  setup_net (net/core/net_namespace.c:446)
+[   13.972704]  ? ops_init (net/core/net_namespace.c:144)
+[   13.972754]  copy_net_ns (net/core/net_namespace.c:579)
+[   13.972805]  create_new_namespaces (kernel/nsproxy.c:132)
+[   13.972883]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   13.972936]  ksys_unshare (kernel/fork.c:3243)
+[   13.972979]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   13.973036]  ? __flush_smp_call_function_queue (kernel/smp.c:136 kernel/smp.c:607)
+[   13.973096]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   13.973134]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   13.973174]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   13.973244] RIP: 0033:0x7f03050501db
+[   13.973294] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   13.973481] RSP: 002b:00007ffd6f88a6c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   13.973564] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   13.973646] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   13.973727] RBP: 00007ffd6f88a6d0 R08: 00007f0302541b20 R09: 0000000000000000
+[   13.973810] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a878
+[   13.973892] R13: 00007ffd6f88a940 R14: 00007ffd6f88a790 R15: 00007ffd6f88a868
+| [   13.974329] ------------[ cut here ]------------
+| [   13.974397] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#22: ip/795
+| [   13.974496] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   13.975181] CPU: 22 UID: 0 PID: 795 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   13.975312] Tainted: [W]=WARN
+[   13.975360] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.975505] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   13.975569] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   13.975795] RSP: 0018:ffff888006e47268 EFLAGS: 00010246
+[   13.975862] RAX: 00000000ffffffa6 RBX: ffff8880037a1b80 RCX: ffffed1000dc8e13
+[   13.975960] RDX: 1ffff110006f4387 RSI: 0000000000000000 RDI: ffff8880037a1c38
+[   13.976056] RBP: 00000000ffffffa6 R08: ffff888008682d10 R09: ffff888007352038
+[   13.976154] R10: ffff888007352030 R11: 0000000068d77b71 R12: 00000000ffffffff
+[   13.976242] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888002f2e108
+[   13.976330] FS:  00007f78a60adb80(0000) GS:ffff8880a7ef8000(0000) knlGS:0000000000000000
+[   13.976414] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.976484] CR2: 00007fdebd540000 CR3: 0000000004a69000 CR4: 0000000000750ef0
+[   13.976569] PKRU: 55555554
+[   13.976596] Call Trace:
+[   13.976623]  <TASK>
+[   13.976653]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   13.976698]  __dev_notify_flags (net/core/dev.c:9787)
+[   13.976743]  ? netif_change_name (net/core/dev.c:1497 (discriminator 2))
+[   13.976803]  ? register_netdevice (./include/linux/netdevice.h:2835 ./include/net/netdev_lock.h:48 net/core/dev.c:11475)
+[   13.976879]  ? mutex_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:4457 kernel/locking/mutex.c:161 kernel/locking/mutex.c:318)
+[   13.976931]  rtnl_configure_link (net/core/rtnetlink.c:3670)
+[   13.976997]  rtnl_newlink (net/core/rtnetlink.c:3914 net/core/rtnetlink.c:4035 net/core/rtnetlink.c:4150)
+[   13.977051]  ? __kernel_text_address (kernel/extable.c:79)
+[   13.977110]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   13.977179]  ? write_profile (profile.c:?)
+[   13.977223]  ? is_bpf_text_address (./include/linux/rcupdate.h:871 kernel/bpf/core.c:749)
+[   13.977275]  ? __kernel_text_address (kernel/extable.c:79)
+[   13.977337]  ? unwind_get_return_address (arch/x86/kernel/unwind_orc.c:385)
+[   13.977400]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   13.977440]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   13.977486]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   13.977531]  ? kasan_save_track (mm/kasan/common.c:78)
+[   13.977569]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   13.977604]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   13.977659]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   13.977702]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   13.977759]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   13.977808]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   13.977881]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   13.977926]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   13.977965]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   13.978012]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   13.978056]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   13.978110]  ? warn_alloc (./include/linux/oom.h:76)
+[   13.978154]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   13.978191]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   13.978230]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   13.978274]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   13.978319]  ? sock_read_iter (net/socket.c:1142)
+[   13.978361]  ? __copy_msghdr (net/socket.c:2603)
+[   13.978405]  ? pte_offset_map_rw_nolock (mm/pgtable-generic.c:332 (discriminator 1))
+[   13.978457]  ___sys_sendmsg (net/socket.c:2752)
+[   13.978497]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   13.978550]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   13.978597]  ? __pmd_alloc (./include/linux/mm.h:1682)
+[   13.978646]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   13.978688]  __sys_sendmsg (net/socket.c:2784)
+[   13.978732]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   13.978774]  ? handle_mm_fault (mm/memory.c:6734)
+[   13.978831]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   13.978875]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   13.978928] RIP: 0033:0x7f78a62b3034
+[   13.978967] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   13.979157] RSP: 002b:00007ffe58724468 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   13.979248] RAX: ffffffffffffffda RBX: 00007ffe58724bf0 RCX: 00007f78a62b3034
+[   13.979330] RDX: 0000000000000000 RSI: 00007ffe587244d0 RDI: 0000000000000003
+[   13.979410] RBP: 000000006a10cd29 R08: 0000000000000010 R09: 0000000000000000
+[   13.979489] R10: 00005596fe4f7738 R11: 0000000000000202 R12: 00007ffe587244d0
+[   13.979578] R13: 00005596fe5a2020 R14: 00007ffe587245a0 R15: 0000000000000000
+| [   13.990301] ------------[ cut here ]------------
+| [   13.990382] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#16: python3/807
+| [   13.990515] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   13.991291] CPU: 16 UID: 0 PID: 807 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   13.991435] Tainted: [W]=WARN
+[   13.991492] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.991646] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   13.991712] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   13.991955] RSP: 0018:ffff8880031c7b00 EFLAGS: 00010246
+[   13.992021] RAX: 00000000ffffffa6 RBX: ffff8880037a2940 RCX: ffffed1000638f26
+[   13.992133] RDX: 1ffff110006f453f RSI: 0000000000000000 RDI: ffff8880037a29f8
+[   13.992238] RBP: 00000000ffffffa6 R08: ffff888005366d90 R09: ffff888008aa102c
+[   13.992348] R10: ffff888008aa1026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   13.992449] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888008ada108
+[   13.992544] FS:  00007f0304f24640(0000) GS:ffff8880a7d78000(0000) knlGS:0000000000000000
+[   13.992649] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.992740] CR2: 00007f030216ef40 CR3: 0000000004a43000 CR4: 0000000000750ef0
+[   13.992857] PKRU: 55555554
+[   13.992887] Call Trace:
+[   13.992922]  <TASK>
+[   13.992960]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   13.993012]  register_netdevice (net/core/dev.c:11488)
+[   13.993086]  ? alloc_netdev_mqs (net/core/dev.c:12129 (discriminator 2))
+[   13.993161]  ? unregister_netdev (net/core/dev.c:12517)
+[   13.993237]  register_netdev (net/core/dev.c:11552)
+[   13.993291]  loopback_net_init (drivers/net/loopback.c:218)
+[   13.993343]  ops_init (net/core/net_namespace.c:137)
+[   13.993393]  setup_net (net/core/net_namespace.c:446)
+[   13.993447]  ? ops_init (net/core/net_namespace.c:144)
+[   13.993499]  copy_net_ns (net/core/net_namespace.c:579)
+[   13.993547]  create_new_namespaces (kernel/nsproxy.c:132)
+[   13.993619]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   13.993693]  ksys_unshare (kernel/fork.c:3243)
+[   13.993750]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   13.993828]  ? handle_mm_fault (mm/memory.c:6734)
+[   13.993881]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   13.993935]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   13.993987]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   13.994057] RIP: 0033:0x7f03050501db
+[   13.994113] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   13.994343] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   13.994451] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   13.994548] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   13.994651] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   13.994757] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   13.994865] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   13.995305] ------------[ cut here ]------------
+| [   13.995386] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#22: python3/808
+| [   13.995516] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   13.996311] CPU: 22 UID: 0 PID: 808 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   13.996450] Tainted: [W]=WARN
+[   13.996500] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.996653] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   13.996720] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   13.996964] RSP: 0018:ffff88800b447b00 EFLAGS: 00010246
+[   13.997032] RAX: 00000000ffffffa6 RBX: ffff888008b6fd40 RCX: ffffed1001688f26
+[   13.997133] RDX: 1ffff1100116dfbf RSI: 0000000000000000 RDI: ffff888008b6fdf8
+[   13.997234] RBP: 00000000ffffffa6 R08: ffff8880050dc610 R09: ffff8880084e102c
+[   13.997335] R10: ffff8880084e1026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   13.997435] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888006268108
+[   13.997537] FS:  00007f0304f24640(0000) GS:ffff8880a7ef8000(0000) knlGS:0000000000000000
+[   13.997638] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.997722] CR2: 00007f0302167d00 CR3: 000000000a627000 CR4: 0000000000750ef0
+[   13.997828] PKRU: 55555554
+[   13.997863] Call Trace:
+[   13.997897]  <TASK>
+[   13.997931]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   13.997982]  register_netdevice (net/core/dev.c:11488)
+[   13.998053]  ? unregister_netdev (net/core/dev.c:12517)
+[   13.998117]  register_netdev (net/core/dev.c:11552)
+[   13.998168]  loopback_net_init (drivers/net/loopback.c:218)
+[   13.998218]  ops_init (net/core/net_namespace.c:137)
+[   13.998268]  setup_net (net/core/net_namespace.c:446)
+[   13.998319]  ? ops_init (net/core/net_namespace.c:144)
+[   13.998370]  copy_net_ns (net/core/net_namespace.c:579)
+[   13.998420]  create_new_namespaces (kernel/nsproxy.c:132)
+[   13.998488]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   13.998555]  ksys_unshare (kernel/fork.c:3243)
+[   13.998606]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   13.998673]  ? handle_mm_fault (mm/memory.c:6734)
+[   13.998724]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   13.998775]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   13.998829]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   13.998898] RIP: 0033:0x7f03050501db
+[   13.998952] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   13.999189] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   13.999290] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   13.999367] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   13.999441] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   13.999525] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   13.999610] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.000095] ------------[ cut here ]------------
+| [   14.000170] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#24: python3/809
+| [   14.000296] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.001055] CPU: 24 UID: 0 PID: 809 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.001193] Tainted: [W]=WARN
+[   14.001242] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.001391] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.001458] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.001690] RSP: 0018:ffff88800aa4fb00 EFLAGS: 00010246
+[   14.001756] RAX: 00000000ffffffa6 RBX: ffff88800a747ac0 RCX: ffffed1001549f26
+[   14.001862] RDX: 1ffff110014e8f6f RSI: 0000000000000000 RDI: ffff88800a747b78
+[   14.001963] RBP: 00000000ffffffa6 R08: ffff888006f70490 R09: ffff8880084e602c
+[   14.002063] R10: ffff8880084e6026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.002163] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8880036f4108
+[   14.002265] FS:  00007f0304f24640(0000) GS:ffff8880a7f78000(0000) knlGS:0000000000000000
+[   14.002366] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.002450] CR2: 00007f030220de30 CR3: 0000000004c73000 CR4: 0000000000750ef0
+[   14.002551] PKRU: 55555554
+[   14.002584] Call Trace:
+[   14.002618]  <TASK>
+[   14.002651]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.002702]  register_netdevice (net/core/dev.c:11488)
+[   14.002770]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.002840]  register_netdev (net/core/dev.c:11552)
+[   14.002896]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.002946]  ops_init (net/core/net_namespace.c:137)
+[   14.002997]  setup_net (net/core/net_namespace.c:446)
+[   14.003047]  ? ops_init (net/core/net_namespace.c:144)
+[   14.003100]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.003150]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.003217]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.003284]  ksys_unshare (kernel/fork.c:3243)
+[   14.003334]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.003401]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.003455]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.003505]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.003555]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.003622] RIP: 0033:0x7f03050501db
+[   14.003672] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.003910] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.004017] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.004117] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.004223] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.004321] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.004419] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.004867] ------------[ cut here ]------------
+| [   14.004939] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#17: python3/810
+| [   14.005060] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.005783] CPU: 17 UID: 0 PID: 810 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.005924] Tainted: [W]=WARN
+[   14.005972] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.006118] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.006183] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.006409] RSP: 0018:ffff8880033b7b00 EFLAGS: 00010246
+[   14.006474] RAX: 00000000ffffffa6 RBX: ffff88800ae67200 RCX: ffffed1000676f26
+[   14.006571] RDX: 1ffff110015cce57 RSI: 0000000000000000 RDI: ffff88800ae672b8
+[   14.006667] RBP: 00000000ffffffa6 R08: ffff888005013b10 R09: ffff88800aa5d02c
+[   14.006764] R10: ffff88800aa5d026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.006869] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8880036f6108
+[   14.006974] FS:  00007f0304f24640(0000) GS:ffff8880a7db8000(0000) knlGS:0000000000000000
+[   14.007068] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.007153] CR2: 0000000000b94668 CR3: 000000000490e000 CR4: 0000000000750ef0
+[   14.007247] PKRU: 55555554
+[   14.007278] Call Trace:
+[   14.007311]  <TASK>
+[   14.007343]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.007392]  register_netdevice (net/core/dev.c:11488)
+[   14.007456]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.007521]  register_netdev (net/core/dev.c:11552)
+[   14.007569]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.007610]  ops_init (net/core/net_namespace.c:137)
+[   14.007650]  setup_net (net/core/net_namespace.c:446)
+[   14.007689]  ? ops_init (net/core/net_namespace.c:144)
+[   14.007730]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.007768]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.007833]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.007889]  ksys_unshare (kernel/fork.c:3243)
+[   14.007931]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.007987]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.008028]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.008071]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.008116]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.008164] RIP: 0033:0x7f03050501db
+[   14.008212] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.008394] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.008483] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.008562] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.008646] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.008733] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.008812] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.009189] ------------[ cut here ]------------
+| [   14.009263] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#20: python3/811
+| [   14.009384] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.010141] CPU: 20 UID: 0 PID: 811 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.010278] Tainted: [W]=WARN
+[   14.010328] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.010477] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.010544] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.010778] RSP: 0018:ffff88800b12fb00 EFLAGS: 00010246
+[   14.010855] RAX: 00000000ffffffa6 RBX: ffff888008b40c80 RCX: ffffed1001625f26
+[   14.010958] RDX: 1ffff110011681a7 RSI: 0000000000000000 RDI: ffff888008b40d38
+[   14.011059] RBP: 00000000ffffffa6 R08: ffff88800475a790 R09: ffff888005f1502c
+[   14.011163] R10: ffff888005f15026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.011263] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8880052e8108
+[   14.011365] FS:  00007f0304f24640(0000) GS:ffff8880a7e78000(0000) knlGS:0000000000000000
+[   14.011466] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.011549] CR2: 00007f0304c58018 CR3: 000000000ab06000 CR4: 0000000000750ef0
+[   14.011650] PKRU: 55555554
+[   14.011683] Call Trace:
+[   14.011716]  <TASK>
+[   14.011750]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.011801]  register_netdevice (net/core/dev.c:11488)
+[   14.011873]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.011943]  register_netdev (net/core/dev.c:11552)
+[   14.011993]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.012043]  ops_init (net/core/net_namespace.c:137)
+[   14.012096]  setup_net (net/core/net_namespace.c:446)
+[   14.012148]  ? ops_init (net/core/net_namespace.c:144)
+[   14.012198]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.012253]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.012320]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.012387]  ksys_unshare (kernel/fork.c:3243)
+[   14.012437]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.012509]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.012560]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.012606]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.012653]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.012720] RIP: 0033:0x7f03050501db
+[   14.012774] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.013020] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.013128] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.013229] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.013330] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.013430] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.013531] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.014202] ------------[ cut here ]------------
+| [   14.014279] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#24: python3/812
+| [   14.014406] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.015215] CPU: 24 UID: 0 PID: 812 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.015344] Tainted: [W]=WARN
+[   14.015393] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.015521] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.015585] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.015784] RSP: 0018:ffff88800ab2fb00 EFLAGS: 00010246
+[   14.015848] RAX: 00000000ffffffa6 RBX: ffff88800a7470c0 RCX: ffffed1001565f26
+[   14.015938] RDX: 1ffff110014e8e2f RSI: 0000000000000000 RDI: ffff88800a747178
+[   14.016027] RBP: 00000000ffffffa6 R08: ffff888008655590 R09: ffff88800b55102c
+[   14.016110] R10: ffff88800b551026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.016200] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888002814108
+[   14.016293] FS:  00007f0304f24640(0000) GS:ffff8880a7f78000(0000) knlGS:0000000000000000
+[   14.016380] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.016454] CR2: 00007f0304c58018 CR3: 0000000005f67000 CR4: 0000000000750ef0
+[   14.016537] PKRU: 55555554
+[   14.016563] Call Trace:
+[   14.016590]  <TASK>
+[   14.016618]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.016663]  register_netdevice (net/core/dev.c:11488)
+[   14.016725]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.016783]  register_netdev (net/core/dev.c:11552)
+[   14.016830]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.016871]  ops_init (net/core/net_namespace.c:137)
+[   14.016920]  setup_net (net/core/net_namespace.c:446)
+[   14.016968]  ? ops_init (net/core/net_namespace.c:144)
+[   14.017016]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.017061]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.017119]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.017173]  ksys_unshare (kernel/fork.c:3243)
+[   14.017210]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.017263]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.017308]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.017348]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.017395]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.017454] RIP: 0033:0x7f03050501db
+[   14.017495] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.017694] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.017779] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.017870] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.017954] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.018040] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.018117] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.018509] ------------[ cut here ]------------
+| [   14.018573] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#26: python3/814
+| [   14.018674] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.019296] CPU: 26 UID: 0 PID: 814 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.019416] Tainted: [W]=WARN
+[   14.019454] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.019581] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.019640] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.019846] RSP: 0018:ffff88800b16fb00 EFLAGS: 00010246
+[   14.019906] RAX: 00000000ffffffa6 RBX: ffff888008b6ed00 RCX: ffffed100162df26
+[   14.019998] RDX: 1ffff1100116ddb7 RSI: 0000000000000000 RDI: ffff888008b6edb8
+[   14.020101] RBP: 00000000ffffffa6 R08: ffff88800bb28a90 R09: ffff88800637902c
+[   14.020190] R10: ffff888006379026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.020284] R13: 0000000000000000 R14: 0000000000000000 R15: ffff8880093c6108
+[   14.020382] FS:  00007f0304f24640(0000) GS:ffff8880a7ff8000(0000) knlGS:0000000000000000
+[   14.020480] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.020571] CR2: 00007f030201a9a8 CR3: 0000000002cb4000 CR4: 0000000000750ef0
+[   14.020670] PKRU: 55555554
+[   14.020708] Call Trace:
+[   14.020739]  <TASK>
+[   14.020779]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.020839]  register_netdevice (net/core/dev.c:11488)
+[   14.020911]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.020980]  register_netdev (net/core/dev.c:11552)
+[   14.021037]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.021079]  ops_init (net/core/net_namespace.c:137)
+[   14.021132]  setup_net (net/core/net_namespace.c:446)
+[   14.021175]  ? ops_init (net/core/net_namespace.c:144)
+[   14.021224]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.021272]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.021335]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.021397]  ksys_unshare (kernel/fork.c:3243)
+[   14.021448]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.021510]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.021556]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.021606]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.021652]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.021710] RIP: 0033:0x7f03050501db
+[   14.021760] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.022014] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.022118] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.022218] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.022315] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.022425] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.022526] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.023346] ------------[ cut here ]------------
+| [   14.023404] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#28: python3/816
+| [   14.023511] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.024142] CPU: 28 UID: 0 PID: 816 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.024265] Tainted: [W]=WARN
+[   14.024309] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.024437] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.024502] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.024684] RSP: 0018:ffff888004defb00 EFLAGS: 00010246
+[   14.024742] RAX: 00000000ffffffa6 RBX: ffff88800a745900 RCX: ffffed10009bdf26
+[   14.024836] RDX: 1ffff110014e8b37 RSI: 0000000000000000 RDI: ffff88800a7459b8
+[   14.024917] RBP: 00000000ffffffa6 R08: ffff88800309f690 R09: ffff8880084ab02c
+[   14.025001] R10: ffff8880084ab026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.025083] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800619a108
+[   14.025164] FS:  00007f0304f24640(0000) GS:ffff8880a8078000(0000) knlGS:0000000000000000
+[   14.025254] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.025330] CR2: 00007f0304c58018 CR3: 000000000b1da000 CR4: 0000000000750ef0
+[   14.025416] PKRU: 55555554
+[   14.025446] Call Trace:
+[   14.025479]  <TASK>
+[   14.025510]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.025557]  register_netdevice (net/core/dev.c:11488)
+[   14.025619]  ? alloc_netdev_mqs (net/core/dev.c:12129 (discriminator 2))
+[   14.025683]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.025743]  register_netdev (net/core/dev.c:11552)
+[   14.025787]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.025844]  ops_init (net/core/net_namespace.c:137)
+[   14.025884]  setup_net (net/core/net_namespace.c:446)
+[   14.025926]  ? ops_init (net/core/net_namespace.c:144)
+[   14.025973]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.026014]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.026072]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.026130]  ksys_unshare (kernel/fork.c:3243)
+[   14.026176]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.026236]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.026284]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.026333]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.026378]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.026434] RIP: 0033:0x7f03050501db
+[   14.026476] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.026669] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.026751] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.026855] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.026939] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.027033] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.027112] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.027528] ------------[ cut here ]------------
+| [   14.027580] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#30: python3/817
+| [   14.027680] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.028314] CPU: 30 UID: 0 PID: 817 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.028427] Tainted: [W]=WARN
+[   14.028466] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.028591] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.028649] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.028849] RSP: 0018:ffff888006c67b00 EFLAGS: 00010246
+[   14.028901] RAX: 00000000ffffffa6 RBX: ffff88800611cdc0 RCX: ffffed1000d8cf26
+[   14.028986] RDX: 1ffff11000c239cf RSI: 0000000000000000 RDI: ffff88800611ce78
+[   14.029063] RBP: 00000000ffffffa6 R08: ffff888002dbf290 R09: ffff888008a9b02c
+[   14.029146] R10: ffff888008a9b026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.029224] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888009274108
+[   14.029304] FS:  00007f0304f24640(0000) GS:ffff8880a80f8000(0000) knlGS:0000000000000000
+[   14.029386] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.029452] CR2: 00007f0304c58018 CR3: 0000000003054000 CR4: 0000000000750ef0
+[   14.029531] PKRU: 55555554
+[   14.029557] Call Trace:
+[   14.029583]  <TASK>
+[   14.029609]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.029652]  register_netdevice (net/core/dev.c:11488)
+[   14.029704]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.029757]  register_netdev (net/core/dev.c:11552)
+[   14.029796]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.029843]  ops_init (net/core/net_namespace.c:137)
+[   14.029885]  setup_net (net/core/net_namespace.c:446)
+[   14.029924]  ? ops_init (net/core/net_namespace.c:144)
+[   14.029964]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.030003]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.030056]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.030108]  ksys_unshare (kernel/fork.c:3243)
+[   14.030148]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.030200]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.030240]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.030282]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.030322]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.030374] RIP: 0033:0x7f03050501db
+[   14.030414] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.030598] RSP: 002b:00007ffd6f88a6e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.030677] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.030756] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.030841] RBP: 00007ffd6f88a6f0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.030921] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a898
+[   14.031000] R13: 00007ffd6f88a960 R14: 00007ffd6f88a7b0 R15: 00007ffd6f88a888
+| [   14.059862] ------------[ cut here ]------------
+| [   14.059922] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#30: ip/821
+| [   14.060020] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.060629] CPU: 30 UID: 0 PID: 821 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.060739] Tainted: [W]=WARN
+[   14.060781] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.061213] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.061270] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.061459] RSP: 0018:ffff888009a87130 EFLAGS: 00010246
+[   14.061516] RAX: 00000000ffffffa6 RBX: ffff88800611c640 RCX: ffffed1001350dec
+[   14.061598] RDX: 1ffff11000c238df RSI: 0000000000000000 RDI: ffff88800611c6f8
+[   14.061680] RBP: 00000000ffffffa6 R08: ffff888008682d10 R09: ffff888008969038
+[   14.061762] R10: ffff888008969030 R11: 0000000039c05210 R12: 00000000ffffffff
+[   14.061886] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888002f2e108
+[   14.061968] FS:  00007f10ed19cb80(0000) GS:ffff8880a80f8000(0000) knlGS:0000000000000000
+[   14.062050] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.062120] CR2: 00007f10ed38c710 CR3: 0000000003054000 CR4: 0000000000750ef0
+[   14.062203] PKRU: 55555554
+[   14.062232] Call Trace:
+[   14.062261]  <TASK>
+[   14.062290]  unregister_netdevice_many_notify (net/core/dev.c:12439)
+[   14.062347]  ? unregister_netdevice_queued (./include/linux/list.h:404 (discriminator 2))
+[   14.062403]  ? mutex_is_locked (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 kernel/locking/mutex.h:48 kernel/locking/mutex.c:65)
+[   14.062447]  ? rtnl_is_locked (net/core/rtnetlink.c:169)
+[   14.062491]  ? unregister_netdevice_queue (net/core/dev.c:12301)
+[   14.062547]  ? unregister_netdevice_many (net/core/dev.c:12497)
+[   14.062603]  rtnl_dellink (net/core/rtnetlink.c:3592 net/core/rtnetlink.c:3634)
+[   14.062692]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.062749]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.062795]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.062888]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.062947]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.062990]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.063034]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.063078]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.063121]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.063164]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.063207]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.063266]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.063309]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.063366]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.063410]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.063466]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.063509]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.063553]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.063598]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.063641]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.063697]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.063754]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.063798]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.063891]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.063935]  ? arch_stack_walk (arch/x86/kernel/stacktrace.c:26)
+[   14.063980]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.064024]  ? sock_read_iter (net/socket.c:1142)
+[   14.064067]  ? __copy_msghdr (net/socket.c:2603)
+[   14.064110]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.064167]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.064224]  ___sys_sendmsg (net/socket.c:2752)
+[   14.064271]  ? fput_close_sync (fs/file_table.c:615)
+[   14.064316]  ? __x64_sys_close (fs/open.c:1507 fs/open.c:1492 fs/open.c:1492)
+[   14.064360]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.064417]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.064462]  __sys_sendmsg (net/socket.c:2784)
+[   14.064505]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.064547]  ? kmem_cache_free (mm/slub.c:2650 mm/slub.c:6250 mm/slub.c:6377)
+[   14.064593]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.064636]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.064692] RIP: 0033:0x7f10ed3a2034
+[   14.064736] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.064979] RSP: 002b:00007ffec0236898 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.065062] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f10ed3a2034
+[   14.065144] RDX: 0000000000000000 RSI: 00007ffec0236900 RDI: 0000000000000003
+[   14.065229] RBP: 000000006a10cd29 R08: 0000000000000010 R09: 0000000000000000
+[   14.065312] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffec0236900
+[   14.065394] R13: 0000559dbcd10020 R14: 00007ffec02369d0 R15: 0000000000000000
+| [   14.104117] ------------[ cut here ]------------
+| [   14.104176] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#18: ip/823
+| [   14.104275] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.104878] CPU: 18 UID: 0 PID: 823 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.104985] Tainted: [W]=WARN
+[   14.105023] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.105140] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.105195] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.105384] RSP: 0018:ffff8880031c7268 EFLAGS: 00010246
+[   14.105436] RAX: 00000000ffffffa6 RBX: ffff88800467c780 RCX: ffffed1000638e13
+[   14.105514] RDX: 1ffff110008cf907 RSI: 0000000000000000 RDI: ffff88800467c838
+[   14.105592] RBP: 00000000ffffffa6 R08: ffff88800a8fc490 R09: ffff88800896d038
+[   14.105671] R10: ffff88800896d030 R11: 0000000068d77b71 R12: 00000000ffffffff
+[   14.105749] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800710c108
+[   14.105835] FS:  00007f98d1734b80(0000) GS:ffff8880a7df8000(0000) knlGS:0000000000000000
+[   14.105916] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.105981] CR2: 0000564d69cfa198 CR3: 0000000004f2b000 CR4: 0000000000750ef0
+[   14.106059] PKRU: 55555554
+[   14.106084] Call Trace:
+[   14.106111]  <TASK>
+[   14.106137]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.106177]  __dev_notify_flags (net/core/dev.c:9787)
+[   14.106216]  ? netif_change_name (net/core/dev.c:1497 (discriminator 2))
+[   14.106268]  ? register_netdevice (./include/linux/netdevice.h:2835 ./include/net/netdev_lock.h:48 net/core/dev.c:11475)
+[   14.106320]  ? mutex_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:4457 kernel/locking/mutex.c:161 kernel/locking/mutex.c:318)
+[   14.106359]  rtnl_configure_link (net/core/rtnetlink.c:3670)
+[   14.106412]  rtnl_newlink (net/core/rtnetlink.c:3914 net/core/rtnetlink.c:4035 net/core/rtnetlink.c:4150)
+[   14.106451]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.106503]  ? write_profile (profile.c:?)
+[   14.106542]  ? is_bpf_text_address (./include/linux/rcupdate.h:871 kernel/bpf/core.c:749)
+[   14.106595]  ? __kernel_text_address (kernel/extable.c:79)
+[   14.106649]  ? unwind_get_return_address (arch/x86/kernel/unwind_orc.c:385)
+[   14.106708]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.106749]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.106788]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.106833]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.106874]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.106913]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.106965]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.107004]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.107057]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.107098]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.107150]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.107189]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.107229]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.107270]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.107312]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.107364]  ? warn_alloc (./include/linux/oom.h:76)
+[   14.107403]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.107442]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.107481]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.107520]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.107559]  ? sock_read_iter (net/socket.c:1142)
+[   14.107598]  ? __copy_msghdr (net/socket.c:2603)
+[   14.107638]  ? mod_node_page_state (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:3260 ./include/linux/vmstat.h:173 mm/vmstat.c:665 mm/vmstat.c:671)
+[   14.107692]  ___sys_sendmsg (net/socket.c:2752)
+[   14.107731]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.107784]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   14.107831]  ? __pmd_alloc (./include/linux/mm.h:1682)
+[   14.107872]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.107911]  __sys_sendmsg (net/socket.c:2784)
+[   14.107950]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.107990]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.108029]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.108068]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.108120] RIP: 0033:0x7f98d193a034
+[   14.108159] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.108339] RSP: 002b:00007ffebb5b6668 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.108417] RAX: ffffffffffffffda RBX: 00007ffebb5b6df0 RCX: 00007f98d193a034
+[   14.108496] RDX: 0000000000000000 RSI: 00007ffebb5b66d0 RDI: 0000000000000003
+[   14.108574] RBP: 000000006a10cd29 R08: 0000000000000010 R09: 0000000000000000
+[   14.108652] R10: 0000564d69c47738 R11: 0000000000000202 R12: 00007ffebb5b66d0
+[   14.108730] R13: 0000564d69cf2020 R14: 00007ffebb5b67a0 R15: 0000000000000000
+| [   14.122267] ------------[ cut here ]------------
+| [   14.122333] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#15: ip/825
+| [   14.122433] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.123053] CPU: 15 UID: 0 PID: 825 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.123164] Tainted: [W]=WARN
+[   14.123204] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.123324] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.123381] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.123572] RSP: 0018:ffff88800aa07268 EFLAGS: 00010246
+[   14.123628] RAX: 00000000ffffffa6 RBX: ffff88800ae65b80 RCX: ffffed1001540e13
+[   14.123709] RDX: 1ffff110015ccb87 RSI: 0000000000000000 RDI: ffff88800ae65c38
+[   14.123789] RBP: 00000000ffffffa6 R08: ffff888003827190 R09: ffff888008a9b030
+[   14.123876] R10: ffff888008a9b028 R11: 0000000068d77b71 R12: 00000000ffffffff
+[   14.123959] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800710a108
+[   14.124041] FS:  00007f1f9283ab80(0000) GS:ffff8880a7d38000(0000) knlGS:0000000000000000
+[   14.124128] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.124197] CR2: 000055cb00a84198 CR3: 0000000004a69000 CR4: 0000000000750ef0
+[   14.124287] PKRU: 55555554
+[   14.124316] Call Trace:
+[   14.124343]  <TASK>
+[   14.124370]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.124413]  __dev_notify_flags (net/core/dev.c:9787)
+[   14.124455]  ? netif_change_name (net/core/dev.c:1497 (discriminator 2))
+[   14.124512]  ? register_netdevice (./include/linux/netdevice.h:2835 ./include/net/netdev_lock.h:48 net/core/dev.c:11475)
+[   14.124568]  ? mutex_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:4457 kernel/locking/mutex.c:161 kernel/locking/mutex.c:318)
+[   14.124611]  rtnl_configure_link (net/core/rtnetlink.c:3670)
+[   14.124665]  rtnl_newlink (net/core/rtnetlink.c:3914 net/core/rtnetlink.c:4035 net/core/rtnetlink.c:4150)
+[   14.124709]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.124765]  ? write_profile (profile.c:?)
+[   14.124809]  ? is_bpf_text_address (./include/linux/rcupdate.h:871 kernel/bpf/core.c:749)
+[   14.124889]  ? __kernel_text_address (kernel/extable.c:79)
+[   14.124947]  ? unwind_get_return_address (arch/x86/kernel/unwind_orc.c:385)
+[   14.125004]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.125047]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.125091]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.125131]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.125171]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.125212]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.125265]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.125305]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.125363]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.125407]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.125461]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.125505]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.125548]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.125593]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.125634]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.125690]  ? warn_alloc (./include/linux/oom.h:76)
+[   14.125734]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.125777]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.125845]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.125890]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.125933]  ? sock_read_iter (net/socket.c:1142)
+[   14.125977]  ? __copy_msghdr (net/socket.c:2603)
+[   14.126018]  ? pte_offset_map_rw_nolock (mm/pgtable-generic.c:332 (discriminator 1))
+[   14.126075]  ___sys_sendmsg (net/socket.c:2752)
+[   14.126118]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.126172]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   14.126216]  ? __pmd_alloc (./include/linux/mm.h:1682)
+[   14.126258]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.126302]  __sys_sendmsg (net/socket.c:2784)
+[   14.126342]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.126382]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.126425]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.126468]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.126521] RIP: 0033:0x7f1f92a40034
+[   14.126565] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.126755] RSP: 002b:00007fffa61d8408 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.126843] RAX: ffffffffffffffda RBX: 00007fffa61d8b90 RCX: 00007f1f92a40034
+[   14.126926] RDX: 0000000000000000 RSI: 00007fffa61d8470 RDI: 0000000000000003
+[   14.127011] RBP: 000000006a10cd29 R08: 0000000000000010 R09: 0000000000000000
+[   14.127091] R10: 000055cb009d1738 R11: 0000000000000202 R12: 00007fffa61d8470
+[   14.127171] R13: 000055cb00a7c020 R14: 00007fffa61d8540 R15: 0000000000000000
+| [   14.195469] ------------[ cut here ]------------
+| [   14.195532] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#24: ip/835
+| [   14.195632] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.196257] CPU: 24 UID: 0 PID: 835 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.196370] Tainted: [W]=WARN
+[   14.196410] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.196531] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.196589] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.196780] RSP: 0018:ffff8880073cf130 EFLAGS: 00010246
+[   14.196849] RAX: 00000000ffffffa6 RBX: ffff88800a746940 RCX: ffffed1000e79dec
+[   14.196932] RDX: 1ffff110014e8d3f RSI: 0000000000000000 RDI: ffff88800a7469f8
+[   14.197013] RBP: 00000000ffffffa6 R08: ffff88800a8fc490 R09: ffff888006e16038
+[   14.197093] R10: ffff888006e16030 R11: 0000000039c05210 R12: 00000000ffffffff
+[   14.197174] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800710c108
+[   14.197256] FS:  00007fad613b5b80(0000) GS:ffff8880a7f78000(0000) knlGS:0000000000000000
+[   14.197340] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.197410] CR2: 0000561d3a8772a8 CR3: 0000000005f67000 CR4: 0000000000750ef0
+[   14.197492] PKRU: 55555554
+[   14.197519] Call Trace:
+[   14.197546]  <TASK>
+[   14.197573]  unregister_netdevice_many_notify (net/core/dev.c:12439)
+[   14.197631]  ? unregister_netdevice_queued (./include/linux/list.h:404 (discriminator 2))
+[   14.197687]  ? mutex_is_locked (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 kernel/locking/mutex.h:48 kernel/locking/mutex.c:65)
+[   14.197731]  ? rtnl_is_locked (net/core/rtnetlink.c:169)
+[   14.197771]  ? unregister_netdevice_queue (net/core/dev.c:12301)
+[   14.197844]  ? unregister_netdevice_many (net/core/dev.c:12497)
+[   14.197902]  rtnl_dellink (net/core/rtnetlink.c:3592 net/core/rtnetlink.c:3634)
+[   14.197945]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.198000]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.198044]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.198085]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.198142]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.198182]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.198223]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.198265]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.198306]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.198346]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.198387]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.198441]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.198485]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.198539]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.198583]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.198637]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.198677]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.198718]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.198762]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.198803]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.198864]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.198921]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.198964]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.199009]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.199049]  ? arch_stack_walk (arch/x86/kernel/stacktrace.c:26)
+[   14.199093]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.199134]  ? sock_read_iter (net/socket.c:1142)
+[   14.199174]  ? __copy_msghdr (net/socket.c:2603)
+[   14.199215]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.199272]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.199329]  ___sys_sendmsg (net/socket.c:2752)
+[   14.199370]  ? fput_close_sync (fs/file_table.c:615)
+[   14.199414]  ? __x64_sys_close (fs/open.c:1507 fs/open.c:1492 fs/open.c:1492)
+[   14.199457]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.199512]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.199556]  __sys_sendmsg (net/socket.c:2784)
+[   14.199597]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.199638]  ? kmem_cache_free (mm/slub.c:2650 mm/slub.c:6250 mm/slub.c:6377)
+[   14.199682]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.199725]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.199779] RIP: 0033:0x7fad615bb034
+[   14.199827] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.200019] RSP: 002b:00007ffdc5bfe848 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.200103] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007fad615bb034
+[   14.200184] RDX: 0000000000000000 RSI: 00007ffdc5bfe8b0 RDI: 0000000000000003
+[   14.200270] RBP: 000000006a10cd29 R08: 0000000000000010 R09: 0000000000000000
+[   14.200351] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffdc5bfe8b0
+[   14.200432] R13: 0000561d0254d020 R14: 00007ffdc5bfe980 R15: 0000000000000000
+| [   14.240565] ------------[ cut here ]------------
+| [   14.240624] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#18: ip/837
+| [   14.240720] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.241324] CPU: 18 UID: 0 PID: 837 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.241431] Tainted: [W]=WARN
+[   14.241469] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.241586] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.241641] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.241841] RSP: 0018:ffff88800325f130 EFLAGS: 00010246
+[   14.241895] RAX: 00000000ffffffa6 RBX: ffff88800467c140 RCX: ffffed100064bdec
+[   14.241973] RDX: 1ffff110008cf83f RSI: 0000000000000000 RDI: ffff88800467c1f8
+[   14.242051] RBP: 00000000ffffffa6 R08: ffff888003827190 R09: ffff888005e10030
+[   14.242129] R10: ffff888005e10028 R11: 0000000039c05210 R12: 00000000ffffffff
+[   14.242207] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800710a108
+[   14.242286] FS:  00007f796ff29b80(0000) GS:ffff8880a7df8000(0000) knlGS:0000000000000000
+[   14.242366] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.242431] CR2: 00007f7970119710 CR3: 0000000004f2b000 CR4: 0000000000750ef0
+[   14.242509] PKRU: 55555554
+[   14.242538] Call Trace:
+[   14.242565]  <TASK>
+[   14.242591]  unregister_netdevice_many_notify (net/core/dev.c:12439)
+[   14.242646]  ? unregister_netdevice_queued (./include/linux/list.h:404 (discriminator 2))
+[   14.242697]  ? mutex_is_locked (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 kernel/locking/mutex.h:48 kernel/locking/mutex.c:65)
+[   14.242741]  ? rtnl_is_locked (net/core/rtnetlink.c:169)
+[   14.242780]  ? unregister_netdevice_queue (net/core/dev.c:12301)
+[   14.242862]  ? unregister_netdevice_many (net/core/dev.c:12497)
+[   14.242916]  rtnl_dellink (net/core/rtnetlink.c:3592 net/core/rtnetlink.c:3634)
+[   14.242955]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.243010]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.243051]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.243090]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.243145]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.243184]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.243223]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.243262]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.243301]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.243340]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.243380]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.243432]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.243471]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.243524]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.243563]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.243615]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.243654]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.243693]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.243732]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.243771]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.243831]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.243885]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.243924]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.243963]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.244002]  ? arch_stack_walk (arch/x86/kernel/stacktrace.c:26)
+[   14.244041]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.244080]  ? sock_read_iter (net/socket.c:1142)
+[   14.244119]  ? __copy_msghdr (net/socket.c:2603)
+[   14.244158]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.244210]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.244261]  ___sys_sendmsg (net/socket.c:2752)
+[   14.244300]  ? fput_close_sync (fs/file_table.c:615)
+[   14.244339]  ? __x64_sys_close (fs/open.c:1507 fs/open.c:1492 fs/open.c:1492)
+[   14.244378]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.244431]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.244472]  __sys_sendmsg (net/socket.c:2784)
+[   14.244511]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.244554]  ? kmem_cache_free (mm/slub.c:2650 mm/slub.c:6250 mm/slub.c:6377)
+[   14.244595]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.244636]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.244688] RIP: 0033:0x7f797012f034
+[   14.244728] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.244946] RSP: 002b:00007ffc86770148 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.245027] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f797012f034
+[   14.245105] RDX: 0000000000000000 RSI: 00007ffc867701b0 RDI: 0000000000000003
+[   14.245184] RBP: 000000006a10cd2a R08: 0000000000000010 R09: 0000000000000000
+[   14.245263] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffc867701b0
+[   14.245341] R13: 000055d99dc9d020 R14: 00007ffc86770280 R15: 0000000000000000
+| [   14.283116] ------------[ cut here ]------------
+| [   14.283173] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#17: ip/839
+| [   14.283268] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.283860] CPU: 17 UID: 0 PID: 839 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.283966] Tainted: [W]=WARN
+[   14.284005] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.284121] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.284175] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.284363] RSP: 0018:ffff88800aa07268 EFLAGS: 00010246
+[   14.284414] RAX: 00000000ffffffa6 RBX: ffff888002878c80 RCX: ffffed1001540e13
+[   14.284491] RDX: 1ffff1100050f1a7 RSI: 0000000000000000 RDI: ffff888002878d38
+[   14.284568] RBP: 00000000ffffffa6 R08: ffff888005f73b10 R09: ffff8880048ed038
+[   14.284650] R10: ffff8880048ed030 R11: 0000000068d77b71 R12: 00000000ffffffff
+[   14.284728] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888004af6108
+[   14.284806] FS:  00007ff24b94cb80(0000) GS:ffff8880a7db8000(0000) knlGS:0000000000000000
+[   14.284896] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.284963] CR2: 0000561bf6eb9198 CR3: 000000000490e000 CR4: 0000000000750ef0
+[   14.285040] PKRU: 55555554
+[   14.285065] Call Trace:
+[   14.285091]  <TASK>
+[   14.285117]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.285159]  __dev_notify_flags (net/core/dev.c:9787)
+[   14.285198]  ? netif_change_name (net/core/dev.c:1497 (discriminator 2))
+[   14.285249]  ? register_netdevice (./include/linux/netdevice.h:2835 ./include/net/netdev_lock.h:48 net/core/dev.c:11475)
+[   14.285301]  ? mutex_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:4457 kernel/locking/mutex.c:161 kernel/locking/mutex.c:318)
+[   14.285340]  rtnl_configure_link (net/core/rtnetlink.c:3670)
+[   14.285392]  rtnl_newlink (net/core/rtnetlink.c:3914 net/core/rtnetlink.c:4035 net/core/rtnetlink.c:4150)
+[   14.285431]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.285482]  ? write_profile (profile.c:?)
+[   14.285521]  ? is_bpf_text_address (./include/linux/rcupdate.h:871 kernel/bpf/core.c:749)
+[   14.285573]  ? __kernel_text_address (kernel/extable.c:79)
+[   14.285628]  ? unwind_get_return_address (arch/x86/kernel/unwind_orc.c:385)
+[   14.285684]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.285725]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.285763]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.285802]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.285879]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.285920]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.285972]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.286011]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.286063]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.286101]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.286156]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.286195]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.286234]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.286273]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.286312]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.286364]  ? warn_alloc (./include/linux/oom.h:76)
+[   14.286403]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.286442]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.286480]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.286520]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.286558]  ? sock_read_iter (net/socket.c:1142)
+[   14.286597]  ? __copy_msghdr (net/socket.c:2603)
+[   14.286641]  ? pte_offset_map_rw_nolock (mm/pgtable-generic.c:332 (discriminator 1))
+[   14.286694]  ___sys_sendmsg (net/socket.c:2752)
+[   14.286733]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.286785]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   14.286832]  ? __pmd_alloc (./include/linux/mm.h:1682)
+[   14.286876]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.286920]  __sys_sendmsg (net/socket.c:2784)
+[   14.286964]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.287011]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.287055]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.287099]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.287156] RIP: 0033:0x7ff24bb52034
+[   14.287200] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.287387] RSP: 002b:00007ffee4cef4f8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.287470] RAX: ffffffffffffffda RBX: 00007ffee4cefc80 RCX: 00007ff24bb52034
+[   14.287552] RDX: 0000000000000000 RSI: 00007ffee4cef560 RDI: 0000000000000003
+[   14.287633] RBP: 000000006a10cd2a R08: 0000000000000010 R09: 0000000000000000
+[   14.287711] R10: 0000561bf6e06738 R11: 0000000000000202 R12: 00007ffee4cef560
+[   14.287789] R13: 0000561bf6eb1020 R14: 00007ffee4cef630 R15: 0000000000000000
+| [   14.342158] ------------[ cut here ]------------
+| [   14.342219] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#22: ip/847
+| [   14.342320] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.342944] CPU: 22 UID: 0 PID: 847 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.343057] Tainted: [W]=WARN
+[   14.343097] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.343218] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.343275] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.343467] RSP: 0018:ffff88800a98f130 EFLAGS: 00010246
+[   14.343521] RAX: 00000000ffffffa6 RBX: ffff888008847d40 RCX: ffffed1001531dec
+[   14.343602] RDX: 1ffff11001108fbf RSI: 0000000000000000 RDI: ffff888008847df8
+[   14.343682] RBP: 00000000ffffffa6 R08: ffff888005f73b10 R09: ffff888005e10038
+[   14.343767] R10: ffff888005e10030 R11: 0000000039c05210 R12: 00000000ffffffff
+[   14.343854] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888004af6108
+[   14.343938] FS:  00007efeb7816b80(0000) GS:ffff8880a7ef8000(0000) knlGS:0000000000000000
+[   14.344021] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.344091] CR2: 000055c3415942a8 CR3: 000000000a627000 CR4: 0000000000750ef0
+[   14.344174] PKRU: 55555554
+[   14.344200] Call Trace:
+[   14.344227]  <TASK>
+[   14.344257]  unregister_netdevice_many_notify (net/core/dev.c:12439)
+[   14.344314]  ? unregister_netdevice_queued (./include/linux/list.h:404 (discriminator 2))
+[   14.344371]  ? mutex_is_locked (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 kernel/locking/mutex.h:48 kernel/locking/mutex.c:65)
+[   14.344414]  ? rtnl_is_locked (net/core/rtnetlink.c:169)
+[   14.344454]  ? unregister_netdevice_queue (net/core/dev.c:12301)
+[   14.344507]  ? unregister_netdevice_many (net/core/dev.c:12497)
+[   14.344561]  rtnl_dellink (net/core/rtnetlink.c:3592 net/core/rtnetlink.c:3634)
+[   14.344605]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.344661]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.344704]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.344748]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.344805]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.344852]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.344896]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.344936]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.344976]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.345017]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.345057]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.345111]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.345152]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.345206]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.345249]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.345303]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.345344]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.345385]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.345428]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.345471]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.345524]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.345579]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.345622]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.345666]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.345709]  ? arch_stack_walk (arch/x86/kernel/stacktrace.c:26)
+[   14.345750]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.345790]  ? sock_read_iter (net/socket.c:1142)
+[   14.345844]  ? __copy_msghdr (net/socket.c:2603)
+[   14.345887]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.345944]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.345998]  ___sys_sendmsg (net/socket.c:2752)
+[   14.346038]  ? fput_close_sync (fs/file_table.c:615)
+[   14.346078]  ? __x64_sys_close (fs/open.c:1507 fs/open.c:1492 fs/open.c:1492)
+[   14.346123]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.346177]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.346220]  __sys_sendmsg (net/socket.c:2784)
+[   14.346261]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.346301]  ? kmem_cache_free (mm/slub.c:2650 mm/slub.c:6250 mm/slub.c:6377)
+[   14.346342]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.346385]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.346439] RIP: 0033:0x7efeb7a1c034
+[   14.346479] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.346668] RSP: 002b:00007ffd4c2eacc8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.346754] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007efeb7a1c034
+[   14.346841] RDX: 0000000000000000 RSI: 00007ffd4c2ead30 RDI: 0000000000000003
+[   14.346924] RBP: 000000006a10cd2a R08: 0000000000000010 R09: 0000000000000000
+[   14.347004] R10: 0000000000000001 R11: 0000000000000202 R12: 00007ffd4c2ead30
+[   14.347085] R13: 000055c30c274020 R14: 00007ffd4c2eae00 R15: 0000000000000000
+| [   14.377067] ------------[ cut here ]------------
+| [   14.377128] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#10: ip/849
+| [   14.377229] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.377856] CPU: 10 UID: 0 PID: 849 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.377967] Tainted: [W]=WARN
+[   14.378007] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.378127] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.378184] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.378374] RSP: 0018:ffff888009b97268 EFLAGS: 00010246
+[   14.378430] RAX: 00000000ffffffa6 RBX: ffff8880088461c0 RCX: ffffed1001372e13
+[   14.378511] RDX: 1ffff11001108c4f RSI: 0000000000000000 RDI: ffff888008846278
+[   14.378591] RBP: 00000000ffffffa6 R08: ffff888004e13310 R09: ffff888008a9b038
+[   14.378672] R10: ffff888008a9b030 R11: 0000000068d77b71 R12: 00000000ffffffff
+[   14.378752] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888006d9c108
+[   14.378840] FS:  00007f5d13ab4b80(0000) GS:ffff8880a7bf8000(0000) knlGS:0000000000000000
+[   14.378925] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.378995] CR2: 000055e66b118198 CR3: 0000000003c1f000 CR4: 0000000000750ef0
+[   14.379077] PKRU: 55555554
+[   14.379103] Call Trace:
+[   14.379130]  <TASK>
+[   14.379156]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.379199]  __dev_notify_flags (net/core/dev.c:9787)
+[   14.379242]  ? netif_change_name (net/core/dev.c:1497 (discriminator 2))
+[   14.379295]  ? register_netdevice (./include/linux/netdevice.h:2835 ./include/net/netdev_lock.h:48 net/core/dev.c:11475)
+[   14.379351]  ? mutex_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:4457 kernel/locking/mutex.c:161 kernel/locking/mutex.c:318)
+[   14.379394]  rtnl_configure_link (net/core/rtnetlink.c:3670)
+[   14.379450]  rtnl_newlink (net/core/rtnetlink.c:3914 net/core/rtnetlink.c:4035 net/core/rtnetlink.c:4150)
+[   14.379490]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.379546]  ? write_profile (profile.c:?)
+[   14.379589]  ? is_bpf_text_address (./include/linux/rcupdate.h:871 kernel/bpf/core.c:749)
+[   14.379645]  ? __kernel_text_address (kernel/extable.c:79)
+[   14.379703]  ? unwind_get_return_address (arch/x86/kernel/unwind_orc.c:385)
+[   14.379759]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.379806]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.379879]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.379923]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.379963]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.380004]  ? do_setlink.isra.0 (net/core/rtnetlink.c:3053 (discriminator 1))
+[   14.380057]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.380098]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.380155]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.380197]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.380249]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.380289]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.380330]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.380373]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.380416]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.380472]  ? warn_alloc (./include/linux/oom.h:76)
+[   14.380517]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.380560]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.380603]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.380645]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.380686]  ? sock_read_iter (net/socket.c:1142)
+[   14.380726]  ? __copy_msghdr (net/socket.c:2603)
+[   14.380766]  ? pte_offset_map_rw_nolock (mm/pgtable-generic.c:332 (discriminator 1))
+[   14.380863]  ___sys_sendmsg (net/socket.c:2752)
+[   14.380906]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.380964]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   14.381008]  ? __pmd_alloc (./include/linux/mm.h:1682)
+[   14.381051]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.381094]  __sys_sendmsg (net/socket.c:2784)
+[   14.381134]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.381175]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.381217]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.381260]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.381314] RIP: 0033:0x7f5d13cba034
+[   14.381354] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.381545] RSP: 002b:00007fff411b08e8 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.381628] RAX: ffffffffffffffda RBX: 00007fff411b1070 RCX: 00007f5d13cba034
+[   14.381708] RDX: 0000000000000000 RSI: 00007fff411b0950 RDI: 0000000000000003
+[   14.381788] RBP: 000000006a10cd2a R08: 0000000000000010 R09: 0000000000000000
+[   14.381916] R10: 000055e66b065738 R11: 0000000000000202 R12: 00007fff411b0950
+[   14.381999] R13: 000055e66b110020 R14: 00007fff411b0a20 R15: 0000000000000000
+| [   14.435804] ------------[ cut here ]------------
+| [   14.436074] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#17: ip/857
+| [   14.436170] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.436767] CPU: 17 UID: 0 PID: 857 Comm: ip Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.436881] Tainted: [W]=WARN
+[   14.436921] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.437038] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.437090] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.437271] RSP: 0018:ffff888009107130 EFLAGS: 00010246
+[   14.437323] RAX: 00000000ffffffa6 RBX: ffff88800887d900 RCX: ffffed1001220dec
+[   14.437400] RDX: 1ffff1100110fb37 RSI: 0000000000000000 RDI: ffff88800887d9b8
+[   14.437478] RBP: 00000000ffffffa6 R08: ffff888004e13310 R09: ffff888004c4e038
+[   14.437556] R10: ffff888004c4e030 R11: 0000000039c05210 R12: 00000000ffffffff
+[   14.437633] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888006d9c108
+[   14.437712] FS:  00007fe3f82d7b80(0000) GS:ffff8880a7db8000(0000) knlGS:0000000000000000
+[   14.437790] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.437866] CR2: 000055a44c2d32a8 CR3: 000000000490e000 CR4: 0000000000750ef0
+[   14.437950] PKRU: 55555554
+[   14.437975] Call Trace:
+[   14.438001]  <TASK>
+[   14.438027]  unregister_netdevice_many_notify (net/core/dev.c:12439)
+[   14.438082]  ? unregister_netdevice_queued (./include/linux/list.h:404 (discriminator 2))
+[   14.438134]  ? mutex_is_locked (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 kernel/locking/mutex.h:48 kernel/locking/mutex.c:65)
+[   14.438176]  ? rtnl_is_locked (net/core/rtnetlink.c:169)
+[   14.438215]  ? unregister_netdevice_queue (net/core/dev.c:12301)
+[   14.438267]  ? unregister_netdevice_many (net/core/dev.c:12497)
+[   14.438319]  rtnl_dellink (net/core/rtnetlink.c:3592 net/core/rtnetlink.c:3634)
+[   14.438358]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.438412]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.438452]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.438491]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.438545]  ? stack_trace_save (kernel/stacktrace.c:122 (discriminator 1))
+[   14.438584]  ? filter_irq_stacks (kernel/stacktrace.c:397)
+[   14.438623]  ? kasan_save_stack (mm/kasan/common.c:58)
+[   14.438662]  ? kasan_save_stack (mm/kasan/common.c:57)
+[   14.438701]  ? kasan_save_track (mm/kasan/common.c:78)
+[   14.438740]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   14.438779]  ? rtnl_bridge_getlink (net/core/rtnetlink.c:5487)
+[   14.438836]  rtnetlink_rcv_msg (net/core/rtnetlink.c:7061)
+[   14.438877]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.438930]  netlink_rcv_skb (net/netlink/af_netlink.c:2551)
+[   14.438968]  ? rtnl_calcit.isra.0 (./include/net/netlink.h:1307 (discriminator 1))
+[   14.439020]  ? netlink_ack (./include/linux/skbuff.h:2718)
+[   14.439059]  ? __asan_memset (mm/kasan/shadow.c:84 (discriminator 1))
+[   14.439099]  ? _copy_from_iter (./include/linux/instrumented.h:146 lib/iov_iter.c:66 ./include/linux/iov_iter.h:30 ./include/linux/iov_iter.h:302 ./include/linux/iov_iter.h:330 lib/iov_iter.c:261 lib/iov_iter.c:272)
+[   14.439137]  netlink_unicast (net/netlink/af_netlink.c:1319 net/netlink/af_netlink.c:1345)
+[   14.439176]  ? netlink_attachskb (./arch/x86/include/asm/bitops.h:202)
+[   14.439228]  ? entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.439280]  netlink_sendmsg (net/netlink/af_netlink.c:1895)
+[   14.439319]  ? netlink_unicast (./include/net/net_namespace.h:419 ./include/net/sock.h:713 net/netlink/af_netlink.c:348 net/netlink/af_netlink.c:1318 net/netlink/af_netlink.c:1345)
+[   14.439358]  ? __import_iovec (lib/iov_iter.c:1358 lib/iov_iter.c:1373)
+[   14.439397]  ? arch_stack_walk (arch/x86/kernel/stacktrace.c:26)
+[   14.439436]  ____sys_sendmsg (net/socket.c:787 (discriminator 1) net/socket.c:802 (discriminator 1) net/socket.c:2698 (discriminator 1))
+[   14.439475]  ? sock_read_iter (net/socket.c:1142)
+[   14.439514]  ? __copy_msghdr (net/socket.c:2603)
+[   14.439553]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.439605]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   14.439657]  ___sys_sendmsg (net/socket.c:2752)
+[   14.439696]  ? fput_close_sync (fs/file_table.c:615)
+[   14.439735]  ? __x64_sys_close (fs/open.c:1507 fs/open.c:1492 fs/open.c:1492)
+[   14.439774]  ? copy_msghdr_from_user (net/socket.c:2639)
+[   14.439832]  ? fdget (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:49 fs/file.c:1196 fs/file.c:1210)
+[   14.439873]  __sys_sendmsg (net/socket.c:2784)
+[   14.439916]  ? __sys_sendmsg_sock (net/socket.c:2765)
+[   14.439956]  ? kmem_cache_free (mm/slub.c:2650 mm/slub.c:6250 mm/slub.c:6377)
+[   14.439998]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.440037]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.440089] RIP: 0033:0x7fe3f84dd034
+[   14.440128] Code: 15 e9 6d 0d 00 f7 d8 64 89 02 b8 ff ff ff ff eb bf 0f 1f 44 00 00 f3 0f 1e fa 80 3d 15 f0 0d 00 00 74 13 b8 2e 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 4c c3 0f 1f 00 55 48 89 e5 48 83 ec 20 89 55
+All code
+========
+   0:	15 e9 6d 0d 00       	adc    $0xd6de9,%eax
+   5:	f7 d8                	neg    %eax
+   7:	64 89 02             	mov    %eax,%fs:(%rdx)
+   a:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+   f:	eb bf                	jmp    0xffffffffffffffd0
+  11:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  16:	f3 0f 1e fa          	endbr64
+  1a:	80 3d 15 f0 0d 00 00 	cmpb   $0x0,0xdf015(%rip)        # 0xdf036
+  21:	74 13                	je     0x36
+  23:	b8 2e 00 00 00       	mov    $0x2e,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax		<-- trapping instruction
+  30:	77 4c                	ja     0x7e
+  32:	c3                   	ret
+  33:	0f 1f 00             	nopl   (%rax)
+  36:	55                   	push   %rbp
+  37:	48 89 e5             	mov    %rsp,%rbp
+  3a:	48 83 ec 20          	sub    $0x20,%rsp
+  3e:	89                   	.byte 0x89
+  3f:	55                   	push   %rbp
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 00 f0 ff ff    	cmp    $0xfffffffffffff000,%rax
+   6:	77 4c                	ja     0x54
+   8:	c3                   	ret
+   9:	0f 1f 00             	nopl   (%rax)
+   c:	55                   	push   %rbp
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	48 83 ec 20          	sub    $0x20,%rsp
+  14:	89                   	.byte 0x89
+  15:	55                   	push   %rbp
+[   14.440314] RSP: 002b:00007fff7327af38 EFLAGS: 00000202 ORIG_RAX: 000000000000002e
+[   14.440392] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007fe3f84dd034
+[   14.440470] RDX: 0000000000000000 RSI: 00007fff7327afa0 RDI: 0000000000000003
+[   14.440549] RBP: 000000006a10cd2a R08: 0000000000000010 R09: 0000000000000000
+[   14.440628] R10: 0000000000000001 R11: 0000000000000202 R12: 00007fff7327afa0
+[   14.440706] R13: 000055a4446f1020 R14: 00007fff7327b070 R15: 0000000000000000
+| [   14.459670] ------------[ cut here ]------------
+| [   14.459732] WARNING: net/core/rtnetlink.c:4523 at rtmsg_ifinfo_build_skb+0x1df/0x210, CPU#8: python3/858
+| [   14.459838] Modules linked in: ifb sch_dualpi2 sch_teql sch_htb sch_hhf sch_hfsc sch_gred sch_fq_pie sch_pie sch_fq_codel sch_fq sch_ets sch_etf sch_drr sch_codel sch_choke sch_cbs sch_cake em_u32 em_text em_nbyte em_meta em_ipt em_ipset ip_set em_cmp em_canid cls_u32 cls_route cls_matchall cls_fw cls_flower cls_flow cls_cgroup cls_bpf cls_basic act_meta_skbprio act_meta_skbtcindex act_meta_mark act_ife ife act_vlan act_tunnel_key act_skbmod act_skbedit act_simple act_sample act_police act_pedit act_nat act_mpls act_mirred act_gate act_gact act_ctinfo act_ct nf_flow_table nf_tables nf_nat act_csum act_connmark nf_conntrack nf_defrag_ipv4 act_bpf netdevsim ptp_mock psample
+| [   14.460448] CPU: 8 UID: 0 PID: 858 Comm: python3 Tainted: G        W           7.1.0-rc4-virtme #1 PREEMPT(lazy)
+| [   14.460559] Tainted: [W]=WARN
+[   14.460602] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   14.460722] RIP: 0010:rtmsg_ifinfo_build_skb (net/core/rtnetlink.c:4523 (discriminator 1))
+[   14.460779] Code: 48 8b b8 48 02 00 00 e8 9f 80 14 00 e9 60 ff ff ff bd 97 ff ff ff eb b7 e8 ee 8f ee fe e9 e5 fe ff ff e8 04 90 ee fe eb 84 90 <0f> 0b 90 eb 91 4c 89 ff e8 14 90 ee fe e9 5b fe ff ff 4c 89 ff 44
+All code
+========
+   0:	48 8b b8 48 02 00 00 	mov    0x248(%rax),%rdi
+   7:	e8 9f 80 14 00       	call   0x1480ab
+   c:	e9 60 ff ff ff       	jmp    0xffffffffffffff71
+  11:	bd 97 ff ff ff       	mov    $0xffffff97,%ebp
+  16:	eb b7                	jmp    0xffffffffffffffcf
+  18:	e8 ee 8f ee fe       	call   0xfffffffffeee900b
+  1d:	e9 e5 fe ff ff       	jmp    0xffffffffffffff07
+  22:	e8 04 90 ee fe       	call   0xfffffffffeee902b
+  27:	eb 84                	jmp    0xffffffffffffffad
+  29:	90                   	nop
+  2a:*	0f 0b                	ud2		<-- trapping instruction
+  2c:	90                   	nop
+  2d:	eb 91                	jmp    0xffffffffffffffc0
+  2f:	4c 89 ff             	mov    %r15,%rdi
+  32:	e8 14 90 ee fe       	call   0xfffffffffeee904b
+  37:	e9 5b fe ff ff       	jmp    0xfffffffffffffe97
+  3c:	4c 89 ff             	mov    %r15,%rdi
+  3f:	44                   	rex.R
+
+Code starting with the faulting instruction
+===========================================
+   0:	0f 0b                	ud2
+   2:	90                   	nop
+   3:	eb 91                	jmp    0xffffffffffffff96
+   5:	4c 89 ff             	mov    %r15,%rdi
+   8:	e8 14 90 ee fe       	call   0xfffffffffeee9021
+   d:	e9 5b fe ff ff       	jmp    0xfffffffffffffe6d
+  12:	4c 89 ff             	mov    %r15,%rdi
+  15:	44                   	rex.R
+[   14.460977] RSP: 0018:ffff88800712fb00 EFLAGS: 00010246
+[   14.461035] RAX: 00000000ffffffa6 RBX: ffff888008b42a80 RCX: ffffed1000e25f26
+[   14.461117] RDX: 1ffff11001168567 RSI: 0000000000000000 RDI: ffff888008b42b38
+[   14.461199] RBP: 00000000ffffffa6 R08: ffff888004cf4790 R09: ffff8880048e802c
+[   14.461281] R10: ffff8880048e8026 R11: 000000005d8804c2 R12: 00000000ffffffff
+[   14.461363] R13: 0000000000000000 R14: 0000000000000000 R15: ffff88800b954108
+[   14.461446] FS:  00007f0304f24640(0000) GS:ffff8880a7b78000(0000) knlGS:0000000000000000
+[   14.461528] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   14.461598] CR2: 0000000002d44b18 CR3: 000000000b695000 CR4: 0000000000750ef0
+[   14.461681] PKRU: 55555554
+[   14.461710] Call Trace:
+[   14.461739]  <TASK>
+[   14.461768]  rtmsg_ifinfo (net/core/rtnetlink.c:4551 net/core/rtnetlink.c:4541 net/core/rtnetlink.c:4560)
+[   14.461812]  register_netdevice (net/core/dev.c:11488)
+[   14.461876]  ? alloc_netdev_mqs (net/core/dev.c:12129 (discriminator 2))
+[   14.461933]  ? unregister_netdev (net/core/dev.c:12517)
+[   14.461995]  register_netdev (net/core/dev.c:11552)
+[   14.462038]  loopback_net_init (drivers/net/loopback.c:218)
+[   14.462083]  ops_init (net/core/net_namespace.c:137)
+[   14.462128]  setup_net (net/core/net_namespace.c:446)
+[   14.462172]  ? ops_init (net/core/net_namespace.c:144)
+[   14.462216]  copy_net_ns (net/core/net_namespace.c:579)
+[   14.462261]  create_new_namespaces (kernel/nsproxy.c:132)
+[   14.462317]  unshare_nsproxy_namespaces (kernel/nsproxy.c:234 (discriminator 1))
+[   14.462374]  ksys_unshare (kernel/fork.c:3243)
+[   14.462418]  ? walk_process_tree (kernel/fork.c:3036 (discriminator 6))
+[   14.462474]  ? handle_mm_fault (mm/memory.c:6734)
+[   14.462518]  __x64_sys_unshare (kernel/fork.c:3317 kernel/fork.c:3315 kernel/fork.c:3315)
+[   14.462561]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   14.462605]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   14.462662] RIP: 0033:0x7f03050501db
+[   14.462707] Code: 73 01 c3 48 8b 0d 3d 7c 0d 00 f7 d8 64 89 01 48 83 c8 ff c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa b8 10 01 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 0d 7c 0d 00 f7 d8 64 89 01 48
+All code
+========
+   0:	73 01                	jae    0x3
+   2:	c3                   	ret
+   3:	48 8b 0d 3d 7c 0d 00 	mov    0xd7c3d(%rip),%rcx        # 0xd7c47
+   a:	f7 d8                	neg    %eax
+   c:	64 89 01             	mov    %eax,%fs:(%rcx)
+   f:	48 83 c8 ff          	or     $0xffffffffffffffff,%rax
+  13:	c3                   	ret
+  14:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+  1b:	00 00 00 
+  1e:	90                   	nop
+  1f:	f3 0f 1e fa          	endbr64
+  23:	b8 10 01 00 00       	mov    $0x110,%eax
+  28:	0f 05                	syscall
+  2a:*	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax		<-- trapping instruction
+  30:	73 01                	jae    0x33
+  32:	c3                   	ret
+  33:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c47
+  3a:	f7 d8                	neg    %eax
+  3c:	64 89 01             	mov    %eax,%fs:(%rcx)
+  3f:	48                   	rex.W
+
+Code starting with the faulting instruction
+===========================================
+   0:	48 3d 01 f0 ff ff    	cmp    $0xfffffffffffff001,%rax
+   6:	73 01                	jae    0x9
+   8:	c3                   	ret
+   9:	48 8b 0d 0d 7c 0d 00 	mov    0xd7c0d(%rip),%rcx        # 0xd7c1d
+  10:	f7 d8                	neg    %eax
+  12:	64 89 01             	mov    %eax,%fs:(%rcx)
+  15:	48                   	rex.W
+[   14.462905] RSP: 002b:00007ffd6f88a6c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000110
+[   14.462993] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f03050501db
+[   14.463077] RDX: 00007f0304e79258 RSI: 0000003000000018 RDI: 0000000040000000
+[   14.463160] RBP: 00007ffd6f88a6d0 R08: 00007f0302541b20 R09: 0000000000000000
+[   14.463242] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffd6f88a878
+
+
+Finger prints:
+rtmsg_ifinfo_build_skb:rtmsg_ifinfo:__dev_notify_flags:rtnl_configure_link:rtnl_newlink
+rtmsg_ifinfo_build_skb:rtmsg_ifinfo:register_netdevice:register_netdev:loopback_net_init
+rtmsg_ifinfo_build_skb:unregister_netdevice_many_notify:rtnl_dellink:rtnetlink_rcv_msg:netlink_rcv_skb
