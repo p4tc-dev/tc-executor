@@ -1,0 +1,121 @@
+======================================
+| [   13.870370] #PF: supervisor read access in kernel mode
+| [   13.870420] #PF: error_code(0x0000) - not-present page
+| [   13.870467] PGD 0 P4D 0
+| [   13.870501] Oops: Oops: 0000 [#1] SMP
+| [   13.870535] CPU: 19 UID: 0 PID: 0 Comm: swapper/19 Not tainted 7.1.0-rc5-virtme #1 PREEMPT(lazy)
+[   13.870627] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   13.870733] RIP: 0010:netlink_broadcast_filtered (net/netlink/af_netlink.c:1513)
+[   13.870786] Code: 00 00 00 00 00 f3 0f 1e fa 0f 1f 44 00 00 41 57 41 56 49 89 fe 48 89 f7 44 89 c6 41 55 41 54 41 89 d4 55 53 89 cb 48 83 ec 30 <4d> 8b 6e 30 44 89 44 24 28 4c 89 4c 24 18 e8 58 cc ff ff 48 c7 c7
+All code
+========
+   0:	00 00                	add    %al,(%rax)
+   2:	00 00                	add    %al,(%rax)
+   4:	00 f3                	add    %dh,%bl
+   6:	0f 1e fa             	nop    %edx
+   9:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   e:	41 57                	push   %r15
+  10:	41 56                	push   %r14
+  12:	49 89 fe             	mov    %rdi,%r14
+  15:	48 89 f7             	mov    %rsi,%rdi
+  18:	44 89 c6             	mov    %r8d,%esi
+  1b:	41 55                	push   %r13
+  1d:	41 54                	push   %r12
+  1f:	41 89 d4             	mov    %edx,%r12d
+  22:	55                   	push   %rbp
+  23:	53                   	push   %rbx
+  24:	89 cb                	mov    %ecx,%ebx
+  26:	48 83 ec 30          	sub    $0x30,%rsp
+  2a:*	4d 8b 6e 30          	mov    0x30(%r14),%r13		<-- trapping instruction
+  2e:	44 89 44 24 28       	mov    %r8d,0x28(%rsp)
+  33:	4c 89 4c 24 18       	mov    %r9,0x18(%rsp)
+  38:	e8 58 cc ff ff       	call   0xffffffffffffcc95
+  3d:	48                   	rex.W
+  3e:	c7                   	.byte 0xc7
+  3f:	c7                   	.byte 0xc7
+
+Code starting with the faulting instruction
+===========================================
+   0:	4d 8b 6e 30          	mov    0x30(%r14),%r13
+   4:	44 89 44 24 28       	mov    %r8d,0x28(%rsp)
+   9:	4c 89 4c 24 18       	mov    %r9,0x18(%rsp)
+   e:	e8 58 cc ff ff       	call   0xffffffffffffcc6b
+  13:	48                   	rex.W
+  14:	c7                   	.byte 0xc7
+  15:	c7                   	.byte 0xc7
+[   13.870940] RSP: 0018:ffffd287404f0e58 EFLAGS: 00010282
+[   13.870982] RAX: ffff8e5d044f8000 RBX: 0000000000000009 RCX: 0000000000000009
+[   13.871046] RDX: 0000000000000000 RSI: 0000000000000820 RDI: ffff8e5d0352f100
+[   13.871116] RBP: ffff8e5d095e5980 R08: 0000000000000820 R09: 0000000000000000
+[   13.871186] R10: 000000000000001b R11: 0000000000000001 R12: 0000000000000000
+[   13.871256] R13: 0000000000000002 R14: 0000000000000000 R15: 0000000000000000
+[   13.871333] FS:  0000000000000000(0000) GS:ffff8e5d93e9b000(0000) knlGS:0000000000000000
+[   13.871405] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   13.871464] CR2: 0000000000000030 CR3: 0000000014c42000 CR4: 0000000000750ef0
+[   13.871532] PKRU: 55555554
+[   13.871552] Call Trace:
+[   13.871575]  <IRQ>
+[   13.871595]  ? nla_put (lib/nlattr.c:1041 (discriminator 1) lib/nlattr.c:1099 (discriminator 1))
+[   13.871638] psample_group_notify (./include/net/netlink.h:1165 ./include/net/genetlink.h:497 ./include/net/genetlink.h:514 net/psample/psample.c:135) psample
+[   13.871694] psample_group_put (net/psample/psample.c:160 net/psample/psample.c:209) psample
+[   13.871734]  tcf_action_rcu_free (net/sched/act_api.c:367 net/sched/act_api.c:378)
+[   13.871778]  rcu_core (kernel/rcu/tree.c:2617 kernel/rcu/tree.c:2869)
+[   13.871820]  ? __hrtimer_run_queues (kernel/time/hrtimer.c:1946 kernel/time/hrtimer.c:1994)
+[   13.871866]  handle_softirqs (kernel/softirq.c:622)
+[   13.871905]  irq_exit_rcu (kernel/softirq.c:656 kernel/softirq.c:496 kernel/softirq.c:735 kernel/softirq.c:752)
+[   13.871938]  sysvec_apic_timer_interrupt (arch/x86/kernel/apic/apic.c:1061 (discriminator 35) arch/x86/kernel/apic/apic.c:1061 (discriminator 35))
+[   13.871985]  </IRQ>
+[   13.872003]  <TASK>
+[   13.872023]  asm_sysvec_apic_timer_interrupt (./arch/x86/include/asm/idtentry.h:697)
+[   13.872062] RIP: 0010:pv_native_safe_halt (./arch/x86/include/asm/irqflags.h:48 arch/x86/kernel/paravirt.c:62)
+[   13.872104] Code: 48 8b 3d 14 e7 f5 00 e8 1f 00 00 00 48 2b 05 98 86 55 00 c3 0f 1f 80 00 00 00 00 f3 0f 1e fa eb 07 0f 00 2d a5 3c 14 00 fb f4 <c3> 0f 1f 40 d6 8b 17 48 89 fe 89 d7 83 e7 fe 0f 01 f9 66 90 48 c1
+All code
+========
+   0:	48 8b 3d 14 e7 f5 00 	mov    0xf5e714(%rip),%rdi        # 0xf5e71b
+   7:	e8 1f 00 00 00       	call   0x2b
+   c:	48 2b 05 98 86 55 00 	sub    0x558698(%rip),%rax        # 0x5586ab
+  13:	c3                   	ret
+  14:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  1b:	f3 0f 1e fa          	endbr64
+  1f:	eb 07                	jmp    0x28
+  21:	0f 00 2d a5 3c 14 00 	verw   0x143ca5(%rip)        # 0x143ccd
+  28:	fb                   	sti
+  29:	f4                   	hlt
+  2a:*	c3                   	ret		<-- trapping instruction
+  2b:	0f 1f 40 d6          	nopl   -0x2a(%rax)
+  2f:	8b 17                	mov    (%rdi),%edx
+  31:	48 89 fe             	mov    %rdi,%rsi
+  34:	89 d7                	mov    %edx,%edi
+  36:	83 e7 fe             	and    $0xfffffffe,%edi
+  39:	0f 01 f9             	rdtscp
+  3c:	66 90                	xchg   %ax,%ax
+  3e:	48                   	rex.W
+  3f:	c1                   	.byte 0xc1
+
+Code starting with the faulting instruction
+===========================================
+   0:	c3                   	ret
+   1:	0f 1f 40 d6          	nopl   -0x2a(%rax)
+   5:	8b 17                	mov    (%rdi),%edx
+   7:	48 89 fe             	mov    %rdi,%rsi
+   a:	89 d7                	mov    %edx,%edi
+   c:	83 e7 fe             	and    $0xfffffffe,%edi
+   f:	0f 01 f9             	rdtscp
+  12:	66 90                	xchg   %ax,%ax
+  14:	48                   	rex.W
+  15:	c1                   	.byte 0xc1
+[   13.872222] RSP: 0018:ffffd2874013bed0 EFLAGS: 00000206
+[   13.872256] RAX: ffff8e5d93e9b000 RBX: ffff8e5d018b4500 RCX: 0000000000000000
+[   13.872319] RDX: 0000000000000013 RSI: ffffffffaa1edd7e RDI: 00000000000e3264
+[   13.872369] RBP: 0000000000000013 R08: 00000000000e3264 R09: 0000000000000000
+[   13.872419] R10: ffff8e5d3eae9b88 R11: ffff8e5d3eae9e60 R12: 0000000000000000
+[   13.872466] R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+[   13.872516]  default_idle (./arch/x86/include/asm/paravirt.h:62 arch/x86/kernel/process.c:767)
+[   13.872548]  default_idle_call (kernel/sched/idle.c:122)
+[   13.872576]  do_idle (kernel/sched/idle.c:199 kernel/sched/idle.c:352)
+[   13.872606]  cpu_startup_entry (kernel/sched/idle.c:451 (discriminator 1))
+[   13.872634]  start_secondary (arch/x86/kernel/smpboot.c:312)
+
+
+Finger prints:
+netlink_broadcast_filtered:psample_group_notify:psample_group_put:tcf_action_rcu_free:rcu_core
