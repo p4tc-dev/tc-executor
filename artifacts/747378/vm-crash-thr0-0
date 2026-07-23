@@ -1,0 +1,552 @@
+======================================
+| [   41.001373] tc (6826) used greatest stack depth: 23952 bytes left
+| [   41.037705] tbf_change: 3 callbacks suppressed
+| [   41.037708] sch_tbf: burst 100 is lower than device dummy1id34c0 mtu (1514) !
+| [   43.056983] ip invoked oom-killer: gfp_mask=0x440dc0(GFP_KERNEL_ACCOUNT|__GFP_ZERO|__GFP_COMP), order=0, oom_score_adj=0
+| [   43.057161] CPU: 1 UID: 0 PID: 7013 Comm: ip Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   43.057165] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   43.057166] Call Trace:
+[   43.057172]  <TASK>
+[   43.057173]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   43.057191]  dump_header (mm/oom_kill.c:464)
+[   43.057200]  ? idr_get_free (??:?)
+[   43.057203]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   43.057218]  oom_kill_process (mm/oom_kill.c:1031)
+[   43.057220]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   43.057223]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   43.057225]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   43.057226]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 ./include/linux/mmzone.h:1197 ./include/linux/mmzone.h:1692 mm/vmscan.c:7486)
+[   43.057229]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   43.057232]  ? warn_alloc (mm/page_alloc.c:4025)
+[   43.057234]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   43.057237]  ? mas_store_prealloc (lib/maple_tree.c:4936)
+[   43.057239]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   43.057242]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   43.057243]  ? up_write (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:3390 kernel/locking/rwsem.c:1417 kernel/locking/rwsem.c:1688)
+[   43.057248]  alloc_pages_noprof (mm/mempolicy.c:2581)
+[   43.057250]  __pmd_alloc (./include/linux/mm.h:3685 ./include/asm-generic/pgalloc.h:143 mm/memory.c:6772)
+[   43.057252]  move_page_tables (./include/linux/mm.h:3601 mm/mremap.c:134 mm/mremap.c:850)
+[   43.057255]  ? alloc_new_pud (./arch/x86/include/asm/pgtable.h:1118 (discriminator 1))
+[   43.057256]  ? vma_expand (mm/vma.c:1219)
+[   43.057258]  ? mas_prev (lib/maple_tree.c:5212)
+[   43.057259]  relocate_vma_down (mm/vma_exec.c:67)
+[   43.057261]  ? vma_mmu_pagesize+0x80/0x80
+[   43.057262]  ? write_profile (profile.c:?)
+[   43.057264]  ? is_bpf_text_address (./include/linux/rcupdate.h:873 kernel/bpf/core.c:750)
+[   43.057268]  ? kernel_text_address (kernel/extable.c:125 kernel/extable.c:94)
+[   43.057271]  ? chacha_block_generic (./include/linux/string.h:363 ./include/crypto/chacha.h:99 lib/crypto/chacha-block-generic.c:91)
+[   43.057275]  ? down_write_killable (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:144 kernel/locking/rwsem.c:269 kernel/locking/rwsem.c:1346 kernel/locking/rwsem.c:1361 kernel/locking/rwsem.c:1645)
+[   43.057276]  ? down_write (kernel/locking/rwsem.c:1633)
+[   43.057278]  ? tlb_finish_mmu (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:592 ./include/linux/mm_inline.h:521 mm/mmu_gather.c:554)
+[   43.057279]  setup_arg_pages (fs/exec.c:694)
+[   43.057283]  ? open_exec (fs/exec.c:822)
+[   43.057284]  ? perf_lock_task_context (./include/linux/rcupdate.h:873 kernel/events/core.c:1614)
+[   43.057287]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   43.057288]  ? __get_random_u32_below (drivers/char/random.c:572 (discriminator 1))
+[   43.057292]  ? mmput (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:1383 kernel/fork.c:1209)
+[   43.057295]  load_elf_binary (fs/binfmt_elf.c:1028 (discriminator 1))
+[   43.057298]  ? __kernel_read (fs/read_write.c:532)
+[   43.057299]  ? _raw_spin_lock_irqsave (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:133 kernel/locking/spinlock.c:166)
+[   43.057301]  ? __ia32_sys_llseek (fs/read_write.c:391)
+[   43.057302]  ? sched_exec (./include/linux/spinlock.h:571 kernel/sched/core.c:5629)
+[   43.057304]  ? _raw_spin_lock_irq (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:143 kernel/locking/spinlock.c:174)
+[   43.057306]  ? elf_load (./include/linux/pid.h:236)
+[   43.057307]  ? _raw_read_unlock (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:326 ./include/asm-generic/qrwlock.h:113 ./include/linux/rwlock_api_smp.h:255 kernel/locking/spinlock.c:264)
+[   43.057309]  ? load_misc_binary (fs/binfmt_misc.c:150 fs/binfmt_misc.c:214)
+[   43.057310]  ? __mutex_unlock_slowpath.isra.0 (./include/trace/events/lock.h:140 (discriminator 15))
+[   43.057312]  bprm_execve (fs/exec.c:1694 fs/exec.c:1726 fs/exec.c:1778 fs/exec.c:1754)
+[   43.057314]  ? set_binfmt (fs/exec.c:1930)
+[   43.057316]  do_execveat_common.isra.0 (fs/exec.c:1876)
+[   43.057318]  __x64_sys_execve (fs/exec.c:1949 (discriminator 2) fs/exec.c:1943 (discriminator 2) fs/exec.c:1943 (discriminator 2))
+[   43.057320]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   43.057322]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   43.057324] RIP: 0033:0x7fa8d3e27f3b
+[   43.057329] Code: Unable to access opcode bytes at 0x7fa8d3e27f11.
+
+Code starting with the faulting instruction
+===========================================
+[   43.057334] RSP: 002b:00007ffe405be0c8 EFLAGS: 00000246 ORIG_RAX: 000000000000003b
+[   43.057336] RAX: ffffffffffffffda RBX: 0000562769ad64f0 RCX: 00007fa8d3e27f3b
+[   43.057337] RDX: 0000562769ad66d8 RSI: 0000562769ad6670 RDI: 0000562769ad64f0
+[   43.057338] RBP: 00007ffe405be1a0 R08: 00007fa8d3f3cb20 R09: 00000000000000b0
+[   43.057338] R10: 0000000000000008 R11: 0000000000000246 R12: 0000562769ad6670
+[   43.057339] R13: 000056276730d004 R14: 0000562769ad66d8 R15: 0000562769ad64f0
+| [   43.080252] python3 (554) used greatest stack depth: 23272 bytes left
+| [   43.574057] qfq_dequeue: plug qdisc 2: is non-work-conserving?
+| [   46.694009] qfq_dequeue: plug qdisc 2: is non-work-conserving?
+| [   47.908674] bash invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   47.908853] CPU: 31 UID: 0 PID: 7549 Comm: bash Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   47.908856] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   47.908857] Call Trace:
+[   47.908858]  <TASK>
+[   47.908859]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   47.908865]  dump_header (mm/oom_kill.c:464)
+[   47.908869]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   47.908872]  ? idr_get_free (??:?)
+[   47.908873]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   47.908875]  oom_kill_process (mm/oom_kill.c:1031)
+[   47.908876]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   47.908878]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   47.908880]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   47.908881]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:32 mm/vmscan.c:7548 mm/vmscan.c:7505)
+[   47.908884]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   47.908887]  ? ttwu_do_activate (kernel/sched/core.c:3825)
+[   47.908890]  ? warn_alloc (mm/page_alloc.c:4025)
+[   47.908898]  ? try_to_wake_up (./include/linux/spinlock.h:571 kernel/sched/core.c:4292)
+[   47.908900]  ? select_fallback_rq (kernel/sched/sched.h:1399)
+[   47.908903]  ? kick_pool (kernel/workqueue.c:1313)
+[   47.908905]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   47.908908]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   47.908910]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   47.908911]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   47.908913]  folio_alloc_noprof (mm/mempolicy.c:2581 mm/mempolicy.c:2591)
+[   47.908914]  filemap_alloc_folio_noprof.part.0 (mm/filemap.c:1013)
+[   47.908916]  ? __folio_lock_or_retry (./arch/x86/include/asm/bitops.h:202)
+[   47.908918]  ? filemap_invalidate_inode (mm/filemap.c:4570)
+[   47.908919]  ? down_read (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:177 kernel/locking/rwsem.c:182 kernel/locking/rwsem.c:257 kernel/locking/rwsem.c:249 kernel/locking/rwsem.c:1290 kernel/locking/rwsem.c:1304 kernel/locking/rwsem.c:1576)
+[   47.908921]  __filemap_get_folio_mpol (mm/filemap.c:2029 mm/filemap.c:2012)
+[   47.908922]  filemap_fault (./include/linux/pagemap.h:761 mm/filemap.c:3592)
+[   47.908923]  ? read_cache_page_gfp (./include/linux/mm.h:1726)
+[   47.908925]  ? __dequeue_entity (./include/linux/rbtree_augmented.h:339 kernel/sched/fair.c:1051)
+[   47.908926]  __do_fault (mm/memory.c:5425)
+[   47.908928]  __handle_mm_fault (mm/memory.c:5860 mm/memory.c:5994 mm/memory.c:4566 mm/memory.c:6379 mm/memory.c:6517)
+[   47.908930]  ? set_next_task_fair (kernel/sched/fair.c:15068)
+[   47.908931]  ? __pmd_alloc (./include/linux/mm.h:1726)
+[   47.908932]  ? lock_vma_under_rcu (./include/linux/rcupdate.h:873 mm/mmap_lock.c:329)
+[   47.908934]  handle_mm_fault (mm/memory.c:6686)
+[   47.908936]  do_user_addr_fault (arch/x86/mm/fault.c:1343)
+[   47.908939]  exc_page_fault (arch/x86/mm/fault.c:1483 arch/x86/mm/fault.c:1536)
+[   47.908941]  asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:595)
+[   47.908943] RIP: 0033:0x55c1a8c45a80
+[   47.908947] Code: Unable to access opcode bytes at 0x55c1a8c45a56.
+
+Code starting with the faulting instruction
+===========================================
+[   47.908950] RSP: 002b:00007fff06f28648 EFLAGS: 00010246
+[   47.908952] RAX: 0000000000001d7a RBX: 0000000000000039 RCX: 000000000000000c
+[   47.908953] RDX: 00007fff06f2865c RSI: 000000000000000a RDI: 0000000000001d7a
+[   47.908954] RBP: 00007fff06f28680 R08: 0000000000000000 R09: 0000000000000020
+[   47.908954] R10: 0000000000000001 R11: 0000000000000246 R12: 000055c1a8c8cf6a
+[   47.908955] R13: 000055c1a8cce3b0 R14: 000055c1ae871580 R15: 0000000000000000
+| [   47.925839] [   7551]     0  7551     1041       21       20        1         0    36864        0             0 ip
+| [   47.925971] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,task=python3,pid=556,uid=0
+| [   47.926127] Out of memory: Killed process 556 (python3) total-vm:75172kB, anon-rss:53944kB, file-rss:536kB, shmem-rss:8kB, UID:0 pgtables:180kB oom_score_adj:0
+| [   48.944087] ip invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   48.944264] CPU: 17 UID: 0 PID: 7726 Comm: ip Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   48.944267] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   48.944268] Call Trace:
+[   48.944269]  <TASK>
+[   48.944270]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   48.944277]  dump_header (mm/oom_kill.c:464)
+[   48.944280]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   48.944283]  ? idr_get_free (??:?)
+[   48.944285]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   48.944287]  oom_kill_process (mm/oom_kill.c:1031)
+[   48.944288]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   48.944290]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   48.944292]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   48.944293]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:32 mm/vmscan.c:7548 mm/vmscan.c:7505)
+[   48.944296]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   48.944300]  ? warn_alloc (mm/page_alloc.c:4025)
+[   48.944301]  ? write_profile (profile.c:?)
+[   48.944304]  ? is_bpf_text_address (./include/linux/rcupdate.h:873 kernel/bpf/core.c:750)
+[   48.944306]  ? kernel_text_address (kernel/extable.c:125 kernel/extable.c:94)
+[   48.944309]  ? __kernel_text_address (kernel/extable.c:79)
+[   48.944315]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   48.944317]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   48.944320]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   48.944322]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   48.944323]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   48.944325]  folio_alloc_noprof (mm/mempolicy.c:2581 mm/mempolicy.c:2591)
+[   48.944326]  filemap_alloc_folio_noprof.part.0 (mm/filemap.c:1013)
+[   48.944329]  ? __folio_lock_or_retry (./arch/x86/include/asm/bitops.h:202)
+[   48.944330]  ? filemap_invalidate_inode (mm/filemap.c:4570)
+[   48.944332]  ? down_read (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:177 kernel/locking/rwsem.c:182 kernel/locking/rwsem.c:257 kernel/locking/rwsem.c:249 kernel/locking/rwsem.c:1290 kernel/locking/rwsem.c:1304 kernel/locking/rwsem.c:1576)
+[   48.944333]  __filemap_get_folio_mpol (mm/filemap.c:2029 mm/filemap.c:2012)
+[   48.944335]  filemap_fault (./include/linux/pagemap.h:761 mm/filemap.c:3592)
+[   48.944336]  ? read_cache_page_gfp (./include/linux/mm.h:1726)
+[   48.944338]  __do_fault (mm/memory.c:5425)
+[   48.944340]  __handle_mm_fault (mm/memory.c:5860 mm/memory.c:5994 mm/memory.c:4566 mm/memory.c:6379 mm/memory.c:6517)
+[   48.944342]  ? __pmd_alloc (./include/linux/mm.h:1726)
+[   48.944343]  ? lock_vma_under_rcu (./include/linux/rcupdate.h:873 mm/mmap_lock.c:329)
+[   48.944345]  handle_mm_fault (mm/memory.c:6686)
+[   48.944347]  do_user_addr_fault (arch/x86/mm/fault.c:1343)
+[   48.944350]  exc_page_fault (arch/x86/mm/fault.c:1483 arch/x86/mm/fault.c:1536)
+[   48.944352]  asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:595)
+[   48.944354] RIP: 0033:0x55f154fc6e20
+[   48.944359] Code: Unable to access opcode bytes at 0x55f154fc6df6.
+
+Code starting with the faulting instruction
+===========================================
+[   48.944360] RSP: 002b:00007ffe848dfdd8 EFLAGS: 00010206
+[   48.944362] RAX: 0000000000000002 RBX: 000055f155005320 RCX: 0000000000000001
+[   48.944363] RDX: 00007ffe848dff90 RSI: 000055f154fe2c04 RDI: 00007ffe848e1f50
+[   48.944364] RBP: 00007ffe848e1f50 R08: 0000000000000004 R09: 00007ff837865380
+[   48.944365] R10: 00007ffe848dfdf4 R11: 0000000000000246 R12: 000000000000000a
+[   48.944366] R13: 00007ffe848dff90 R14: 0000000000000001 R15: 00007ff837898000
+| [   48.962953] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,task=python3,pid=7017,uid=0
+| [   48.963093] Out of memory: Killed process 7017 (python3) total-vm:293788kB, anon-rss:52160kB, file-rss:1548kB, shmem-rss:4kB, UID:0 pgtables:196kB oom_score_adj:0
+| [   48.966544] python3 (7017) used greatest stack depth: 22568 bytes left
+| [   49.671626] python3 invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   49.671818] CPU: 0 UID: 0 PID: 7730 Comm: python3 Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   49.671821] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   49.671823] Call Trace:
+[   49.671824]  <TASK>
+[   49.671825]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   49.671831]  dump_header (mm/oom_kill.c:464)
+[   49.671836]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   49.671839]  ? idr_get_free (??:?)
+[   49.671841]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   49.671844]  oom_kill_process (mm/oom_kill.c:1031)
+[   49.671846]  ? oom_badness (./include/linux/rcupdate.h:873 ./include/linux/rcupdate.h:1183 mm/oom_kill.c:138 mm/oom_kill.c:207)
+[   49.671848]  ? oom_cpuset_eligible.isra.0 (./include/linux/rcupdate.h:873 mm/oom_kill.c:117)
+[   49.671850]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   49.671853]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   49.671855]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:3188 ./include/linux/mmzone.h:1197 ./include/linux/mmzone.h:1692 mm/vmscan.c:7486)
+[   49.671858]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   49.671863]  ? ttwu_do_activate (kernel/sched/core.c:3825)
+[   49.671867]  ? warn_alloc (mm/page_alloc.c:4025)
+[   49.671869]  ? try_to_wake_up (./include/linux/spinlock.h:571 kernel/sched/core.c:4292)
+[   49.671872]  ? select_fallback_rq (kernel/sched/sched.h:1399)
+[   49.671875]  ? irqentry_exit (./include/linux/irq-entry-common.h:468 ./include/linux/irq-entry-common.h:539 kernel/entry/common.c:167)
+[   49.671878]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   49.671882]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   49.671884]  ? folio_add_file_rmap_ptes (./include/linux/instrumented.h:41 ./include/asm-generic/bitops/instrumented-non-atomic.h:28 ./include/linux/mm.h:1099 ./include/linux/mm.h:1108 mm/internal.h:1197 mm/rmap.c:1715 mm/rmap.c:1732)
+[   49.671888]  folio_alloc_noprof (mm/mempolicy.c:2581 mm/mempolicy.c:2591)
+[   49.671890]  filemap_alloc_folio_noprof.part.0 (mm/filemap.c:1013)
+[   49.671893]  ? __folio_lock_or_retry (./arch/x86/include/asm/bitops.h:202)
+[   49.671895]  ? filemap_invalidate_inode (mm/filemap.c:4570)
+[   49.671898]  ? down_read (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:177 kernel/locking/rwsem.c:182 kernel/locking/rwsem.c:257 kernel/locking/rwsem.c:249 kernel/locking/rwsem.c:1290 kernel/locking/rwsem.c:1304 kernel/locking/rwsem.c:1576)
+[   49.671900]  __filemap_get_folio_mpol (mm/filemap.c:2029 mm/filemap.c:2012)
+[   49.671902]  filemap_fault (./include/linux/pagemap.h:761 mm/filemap.c:3592)
+[   49.671904]  ? read_cache_page_gfp (./include/linux/mm.h:1726)
+[   49.671907]  ? __dequeue_entity (./include/linux/rbtree_augmented.h:339 kernel/sched/fair.c:1051)
+[   49.671909]  __do_fault (mm/memory.c:5425)
+[   49.671912]  __handle_mm_fault (mm/memory.c:5860 mm/memory.c:5994 mm/memory.c:4566 mm/memory.c:6379 mm/memory.c:6517)
+[   49.671914]  ? set_next_task_fair (kernel/sched/fair.c:15068)
+[   49.671916]  ? __pmd_alloc (./include/linux/mm.h:1726)
+[   49.671919]  ? lock_vma_under_rcu (./include/linux/rcupdate.h:873 mm/mmap_lock.c:329)
+[   49.671922]  handle_mm_fault (mm/memory.c:6686)
+[   49.671924]  do_user_addr_fault (arch/x86/mm/fault.c:1343)
+[   49.671929]  exc_page_fault (arch/x86/mm/fault.c:1483 arch/x86/mm/fault.c:1536)
+[   49.671931]  asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:595)
+[   49.671934] RIP: 0033:0x55621c
+[   49.671937] Code: e9 29 a7 fe ff 66 0f 1f 84 00 00 00 00 00 be c0 96 a3 00 f2 0f 11 4d b8 e8 51 33 04 00 f2 0f 10 4d b8 85 c0 75 a4 49 8b 45 08 <f2> 0f 10 15 6c f3 1e 00 66 0f 28 c1 66 0f 54 05 c0 62 1e 00 48 8b
+All code
+========
+   0:	e9 29 a7 fe ff       	jmp    0xfffffffffffea72e
+   5:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+   c:	00 00 
+   e:	be c0 96 a3 00       	mov    $0xa396c0,%esi
+  13:	f2 0f 11 4d b8       	movsd  %xmm1,-0x48(%rbp)
+  18:	e8 51 33 04 00       	call   0x4336e
+  1d:	f2 0f 10 4d b8       	movsd  -0x48(%rbp),%xmm1
+  22:	85 c0                	test   %eax,%eax
+  24:	75 a4                	jne    0xffffffffffffffca
+  26:	49 8b 45 08          	mov    0x8(%r13),%rax
+  2a:*	f2 0f 10 15 6c f3 1e 	movsd  0x1ef36c(%rip),%xmm2        # 0x1ef39e		<-- trapping instruction
+  31:	00 
+  32:	66 0f 28 c1          	movapd %xmm1,%xmm0
+  36:	66 0f 54 05 c0 62 1e 	andpd  0x1e62c0(%rip),%xmm0        # 0x1e62fe
+  3d:	00 
+  3e:	48                   	rex.W
+  3f:	8b                   	.byte 0x8b
+
+Code starting with the faulting instruction
+===========================================
+   0:	f2 0f 10 15 6c f3 1e 	movsd  0x1ef36c(%rip),%xmm2        # 0x1ef374
+   7:	00 
+   8:	66 0f 28 c1          	movapd %xmm1,%xmm0
+   c:	66 0f 54 05 c0 62 1e 	andpd  0x1e62c0(%rip),%xmm0        # 0x1e62d4
+  13:	00 
+  14:	48                   	rex.W
+  15:	8b                   	.byte 0x8b
+[   49.671939] RSP: 002b:00007f585c4913e0 EFLAGS: 00010246
+[   49.671941] RAX: 0000000000a3bf20 RBX: 0000000000000000 RCX: 0000000000000000
+[   49.671943] RDX: 0000000000000002 RSI: 0000000000a396c0 RDI: 0000000000a3bf20
+[   49.671947] RBP: 00007f585c491430 R08: 0013cb5a5d000000 R09: 00007f585c64b5b0
+[   49.671948] R10: 00007f585bc8ef98 R11: 0000000000000002 R12: 00007f585c64b5b0
+[   49.671950] R13: 0000000000b37088 R14: 000000002ff52e10 R15: 0000000000000000
+| [   49.688759] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,task=python3,pid=553,uid=0
+| [   49.688885] Out of memory: Killed process 553 (python3) total-vm:72820kB, anon-rss:52244kB, file-rss:1084kB, shmem-rss:8kB, UID:0 pgtables:176kB oom_score_adj:0
+| [   49.695234] python3 (553) used greatest stack depth: 21672 bytes left
+| [   52.599341] ip invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   52.599557] CPU: 6 UID: 0 PID: 8291 Comm: ip Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   52.599561] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   52.599563] Call Trace:
+[   52.599564]  <TASK>
+[   52.599565]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   52.599572]  dump_header (mm/oom_kill.c:464)
+[   52.599575]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   52.599578]  ? idr_get_free (??:?)
+[   52.599580]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   52.599581]  oom_kill_process (mm/oom_kill.c:1031)
+[   52.599583]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   52.599584]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   52.599586]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   52.599587]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:32 mm/vmscan.c:7548 mm/vmscan.c:7505)
+[   52.599590]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   52.599593]  ? arch_stack_walk (./arch/x86/include/asm/unwind.h:64 arch/x86/kernel/stacktrace.c:24)
+[   52.599596]  ? get_reg (arch/x86/kernel/unwind_orc.c:472 (discriminator 2))
+[   52.599598]  ? warn_alloc (mm/page_alloc.c:4025)
+[   52.599600]  ? unwind_next_frame (./include/linux/rcupdate.h:873 ./include/linux/rcupdate.h:1183 arch/x86/kernel/unwind_orc.c:495)
+[   52.599601]  ? arch_stack_walk (./arch/x86/include/asm/unwind.h:64 arch/x86/kernel/stacktrace.c:24)
+[   52.599602]  ? get_reg (arch/x86/kernel/unwind_orc.c:472 (discriminator 2))
+[   52.599604]  ? write_profile (profile.c:?)
+[   52.599607]  ? is_bpf_text_address (./include/linux/rcupdate.h:873 kernel/bpf/core.c:750)
+[   52.599609]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   52.599612]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   52.599613]  ? folio_add_file_rmap_ptes (./include/linux/instrumented.h:41 ./include/asm-generic/bitops/instrumented-non-atomic.h:28 ./include/linux/mm.h:1099 ./include/linux/mm.h:1108 mm/internal.h:1197 mm/rmap.c:1715 mm/rmap.c:1732)
+[   52.599616]  folio_alloc_noprof (mm/mempolicy.c:2581 mm/mempolicy.c:2591)
+[   52.599617]  filemap_alloc_folio_noprof.part.0 (mm/filemap.c:1013)
+[   52.599619]  ? __folio_lock_or_retry (./arch/x86/include/asm/bitops.h:202)
+[   52.599621]  ? filemap_invalidate_inode (mm/filemap.c:4570)
+[   52.599622]  ? stack_depot_save_flags (lib/stackdepot.c:667)
+[   52.599625]  ? task_work_run (kernel/task_work.c:233)
+[   52.599626]  ? down_read (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:177 kernel/locking/rwsem.c:182 kernel/locking/rwsem.c:257 kernel/locking/rwsem.c:249 kernel/locking/rwsem.c:1290 kernel/locking/rwsem.c:1304 kernel/locking/rwsem.c:1576)
+[   52.599628]  __filemap_get_folio_mpol (mm/filemap.c:2029 mm/filemap.c:2012)
+[   52.599629]  filemap_fault (./include/linux/pagemap.h:761 mm/filemap.c:3592)
+[   52.599630]  ? read_cache_page_gfp (./include/linux/mm.h:1726)
+[   52.599632]  __do_fault (mm/memory.c:5425)
+[   52.599634]  __handle_mm_fault (mm/memory.c:5860 mm/memory.c:5994 mm/memory.c:4566 mm/memory.c:6379 mm/memory.c:6517)
+[   52.599636]  ? __pmd_alloc (./include/linux/mm.h:1726)
+[   52.599637]  ? lock_vma_under_rcu (./include/linux/rcupdate.h:873 mm/mmap_lock.c:329)
+[   52.599639]  handle_mm_fault (mm/memory.c:6686)
+[   52.599648]  do_user_addr_fault (arch/x86/mm/fault.c:1343)
+[   52.599650]  exc_page_fault (arch/x86/mm/fault.c:1483 arch/x86/mm/fault.c:1536)
+[   52.599652]  asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:595)
+[   52.599654] RIP: 0033:0x7fdd4605a8c0
+[   52.599660] Code: Unable to access opcode bytes at 0x7fdd4605a896.
+
+Code starting with the faulting instruction
+===========================================
+[   52.599661] RSP: 002b:00007ffef9d98828 EFLAGS: 00010202
+[   52.599663] RAX: 00007fdd460c7d58 RBX: 00007ffef9d988e8 RCX: 00007fdd460bf960
+[   52.599664] RDX: 00007ffef9d98988 RSI: 000000000000002f RDI: 00007ffef9d99f01
+[   52.599665] RBP: 00007ffef9d98840 R08: 0000000000000000 R09: 00007fdd461a5440
+[   52.599666] R10: 00007ffef9d984e0 R11: 0000000000000203 R12: 00007ffef9d99f01
+[   52.599666] R13: 00007ffef9d988e8 R14: 00007ffef9d98988 R15: 00007fdd460bcc80
+| [   54.309957] v0p0id3992: left promiscuous mode
+| [   55.328698] v0p0id9c2a: entered promiscuous mode
+| [   55.370137] v0p0id9c2a: left promiscuous mode
+| [   56.824374] ip invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+| [   56.824537] CPU: 29 UID: 0 PID: 8820 Comm: ip Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   56.824540] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   56.824541] Call Trace:
+[   56.824542]  <TASK>
+[   56.824543]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   56.824549]  dump_header (mm/oom_kill.c:464)
+[   56.824553]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   56.824556]  ? idr_get_free (??:?)
+[   56.824557]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   56.824559]  oom_kill_process (mm/oom_kill.c:1031)
+[   56.824561]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   56.824562]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   56.824564]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   56.824565]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:32 mm/vmscan.c:7548 mm/vmscan.c:7505)
+[   56.824568]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   56.824571]  ? ttwu_do_activate (kernel/sched/core.c:3825)
+[   56.824574]  ? warn_alloc (mm/page_alloc.c:4025)
+[   56.824576]  ? try_to_wake_up (./include/linux/spinlock.h:571 kernel/sched/core.c:4292)
+[   56.824578]  ? select_fallback_rq (kernel/sched/sched.h:1399)
+[   56.824580]  ? kick_pool (kernel/workqueue.c:1313)
+[   56.824583]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   56.824585]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   56.824587]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   56.824588]  ? _raw_read_lock_irq (./include/asm-generic/qrwlock.h:87)
+[   56.824592]  folio_alloc_noprof (mm/mempolicy.c:2581 mm/mempolicy.c:2591)
+[   56.824594]  filemap_alloc_folio_noprof.part.0 (mm/filemap.c:1013)
+[   56.824597]  ? __folio_lock_or_retry (./arch/x86/include/asm/bitops.h:202)
+[   56.824598]  ? filemap_invalidate_inode (mm/filemap.c:4570)
+[   56.824600]  ? down_read (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:177 kernel/locking/rwsem.c:182 kernel/locking/rwsem.c:257 kernel/locking/rwsem.c:249 kernel/locking/rwsem.c:1290 kernel/locking/rwsem.c:1304 kernel/locking/rwsem.c:1576)
+[   56.824601]  __filemap_get_folio_mpol (mm/filemap.c:2029 mm/filemap.c:2012)
+[   56.824602]  filemap_fault (./include/linux/pagemap.h:761 mm/filemap.c:3592)
+[   56.824604]  ? read_cache_page_gfp (./include/linux/mm.h:1726)
+[   56.824605]  ? __dequeue_entity (./include/linux/rbtree_augmented.h:339 kernel/sched/fair.c:1051)
+[   56.824607]  __do_fault (mm/memory.c:5425)
+[   56.824609]  __handle_mm_fault (mm/memory.c:5860 mm/memory.c:5994 mm/memory.c:4566 mm/memory.c:6379 mm/memory.c:6517)
+[   56.824611]  ? set_next_task_fair (kernel/sched/fair.c:15068)
+[   56.824612]  ? __pmd_alloc (./include/linux/mm.h:1726)
+[   56.824613]  ? lock_vma_under_rcu (./include/linux/rcupdate.h:873 mm/mmap_lock.c:329)
+[   56.824615]  handle_mm_fault (mm/memory.c:6686)
+[   56.824617]  do_user_addr_fault (arch/x86/mm/fault.c:1343)
+[   56.824620]  exc_page_fault (arch/x86/mm/fault.c:1483 arch/x86/mm/fault.c:1536)
+[   56.824623]  asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:595)
+[   56.824625] RIP: 0033:0x7fa64d957637
+[   56.824629] Code: Unable to access opcode bytes at 0x7fa64d95760d.
+
+Code starting with the faulting instruction
+===========================================
+[   56.824630] RSP: 002b:00007fffd38bc388 EFLAGS: 00010206
+[   56.824632] RAX: 0000000000002f07 RBX: 00007fa64d934000 RCX: 0000000000000a18
+[   56.824634] RDX: 000000000000006c RSI: 00007fa64d93552d RDI: 000055e46db583c7
+[   56.824634] RBP: 00007fffd38bc480 R08: 0000000000000001 R09: 00007fa64d977440
+[   56.824635] R10: 0000000000000002 R11: 00000000000000c3 R12: 0000000000000061
+[   56.824636] R13: 0000000000000918 R14: 0000000000000000 R15: 00007fa64d934030
+| [   56.840778] [   8820]     0  8820      364       29       10       19         0    36864        0             0 ip
+| [   56.840940] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,task=python3,pid=7843,uid=0
+| [   56.841097] Out of memory: Killed process 7843 (python3) total-vm:294812kB, anon-rss:54016kB, file-rss:252kB, shmem-rss:4kB, UID:0 pgtables:196kB oom_score_adj:0
+| [   58.230100] tc invoked oom-killer: gfp_mask=0x440dc0(GFP_KERNEL_ACCOUNT|__GFP_ZERO|__GFP_COMP), order=0, oom_score_adj=0
+| [   58.230277] CPU: 14 UID: 0 PID: 8926 Comm: tc Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   58.230279] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   58.230281] Call Trace:
+[   58.230282]  <TASK>
+[   58.230283]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   58.230289]  dump_header (mm/oom_kill.c:464)
+[   58.230293]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   58.230295]  ? idr_get_free (??:?)
+[   58.230297]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   58.230299]  oom_kill_process (mm/oom_kill.c:1031)
+[   58.230301]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   58.230302]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   58.230304]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   58.230305]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:32 mm/vmscan.c:7548 mm/vmscan.c:7505)
+[   58.230308]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   58.230311]  ? warn_alloc (mm/page_alloc.c:4025)
+[   58.230313]  ? __kasan_slab_alloc (mm/kasan/common.c:340 mm/kasan/common.c:366)
+[   58.230320]  ? mas_store_prealloc (lib/maple_tree.c:4936)
+[   58.230323]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   58.230325]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   58.230327]  ? up_write (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:3390 kernel/locking/rwsem.c:1417 kernel/locking/rwsem.c:1688)
+[   58.230330]  alloc_pages_noprof (mm/mempolicy.c:2581)
+[   58.230331]  __pmd_alloc (./include/linux/mm.h:3685 ./include/asm-generic/pgalloc.h:143 mm/memory.c:6772)
+[   58.230334]  move_page_tables (./include/linux/mm.h:3601 mm/mremap.c:134 mm/mremap.c:850)
+[   58.230336]  ? alloc_new_pud (./arch/x86/include/asm/pgtable.h:1118 (discriminator 1))
+[   58.230337]  ? vma_expand (mm/vma.c:1219)
+[   58.230338]  ? mas_prev (lib/maple_tree.c:5212)
+[   58.230340]  relocate_vma_down (mm/vma_exec.c:67)
+[   58.230342]  ? vma_mmu_pagesize+0x80/0x80
+[   58.230343]  ? kernel_text_address (kernel/extable.c:125 kernel/extable.c:94)
+[   58.230346]  ? down_write_killable (./include/linux/instrumented.h:97 ./include/linux/atomic/atomic-instrumented.h:3223 kernel/locking/rwsem.c:144 kernel/locking/rwsem.c:269 kernel/locking/rwsem.c:1346 kernel/locking/rwsem.c:1361 kernel/locking/rwsem.c:1645)
+[   58.230348]  ? down_write (kernel/locking/rwsem.c:1633)
+[   58.230349]  ? tlb_finish_mmu (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:592 ./include/linux/mm_inline.h:521 mm/mmu_gather.c:554)
+[   58.230350]  setup_arg_pages (fs/exec.c:694)
+[   58.230353]  ? open_exec (fs/exec.c:822)
+[   58.230357]  load_elf_binary (fs/binfmt_elf.c:1028 (discriminator 1))
+[   58.230360]  ? __kernel_read (fs/read_write.c:532)
+[   58.230361]  ? _raw_spin_lock_irqsave (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:133 kernel/locking/spinlock.c:166)
+[   58.230363]  ? __ia32_sys_llseek (fs/read_write.c:391)
+[   58.230364]  ? sched_exec (./include/linux/spinlock.h:571 kernel/sched/core.c:5629)
+[   58.230366]  ? disable_delayed_work (kernel/workqueue.c:4644)
+[   58.230368]  ? elf_load (./include/linux/pid.h:236)
+[   58.230370]  ? _raw_read_unlock (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:326 ./include/asm-generic/qrwlock.h:113 ./include/linux/rwlock_api_smp.h:255 kernel/locking/spinlock.c:264)
+[   58.230371]  ? load_misc_binary (fs/binfmt_misc.c:150 fs/binfmt_misc.c:214)
+[   58.230373]  bprm_execve (fs/exec.c:1694 fs/exec.c:1726 fs/exec.c:1778 fs/exec.c:1754)
+[   58.230375]  ? set_binfmt (fs/exec.c:1930)
+[   58.230377]  do_execveat_common.isra.0 (fs/exec.c:1876)
+[   58.230379]  __x64_sys_execve (fs/exec.c:1949 (discriminator 2) fs/exec.c:1943 (discriminator 2) fs/exec.c:1943 (discriminator 2))
+[   58.230381]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   58.230383]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   58.230385] RIP: 0033:0x7f4b60935f3b
+[   58.230390] Code: Unable to access opcode bytes at 0x7f4b60935f11.
+
+Code starting with the faulting instruction
+===========================================
+[   58.230390] RSP: 002b:00007ffc9ba62ec8 EFLAGS: 00000206 ORIG_RAX: 000000000000003b
+[   58.230393] RAX: ffffffffffffffda RBX: 00007ffc9ba63f55 RCX: 00007f4b60935f3b
+[   58.230394] RDX: 00007ffc9ba63350 RSI: 00007ffc9ba632e8 RDI: 00007ffc9ba63f55
+[   58.230394] RBP: 00007ffc9ba62f60 R08: 0000000000000073 R09: 0000000000000000
+[   58.230395] R10: 0000000000000000 R11: 0000000000000206 R12: 00007ffc9ba63350
+[   58.230396] R13: 00007ffc9ba63f55 R14: 00007ffc9ba632e8 R15: 00007ffc9ba632e8
+| [   58.247644] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,task=python3,pid=8927,uid=0
+| [   58.247802] Out of memory: Killed process 8927 (python3) total-vm:293788kB, anon-rss:52308kB, file-rss:372kB, shmem-rss:0kB, UID:0 pgtables:196kB oom_score_adj:0
+| [   58.286990] tc (8926) used greatest stack depth: 21208 bytes left
+| [   58.338880] tc invoked oom-killer: gfp_mask=0x440dc0(GFP_KERNEL_ACCOUNT|__GFP_ZERO|__GFP_COMP), order=0, oom_score_adj=0
+| [   58.339022] CPU: 7 UID: 0 PID: 8929 Comm: tc Not tainted 7.2.0-rc4-virtme #1 PREEMPT(lazy)
+[   58.339025] Hardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
+[   58.339027] Call Trace:
+[   58.339028]  <TASK>
+[   58.339036]  dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)
+[   58.339043]  dump_header (mm/oom_kill.c:464)
+[   58.339046]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   58.339049]  ? idr_get_free (??:?)
+[   58.339050]  ? _raw_spin_lock (./include/linux/instrumented.h:55 ./include/linux/atomic/atomic-instrumented.h:1301 ./include/asm-generic/qspinlock.h:111 ./include/linux/spinlock.h:187 ./include/linux/spinlock_api_smp.h:159 kernel/locking/spinlock.c:158)
+[   58.339052]  oom_kill_process (mm/oom_kill.c:1031)
+[   58.339053]  ? oom_badness (./include/linux/spinlock.h:390 ./include/linux/sched/task.h:225 mm/oom_kill.c:230)
+[   58.339055]  out_of_memory (mm/oom_kill.c:1169 (discriminator 4))
+[   58.339056]  ? oom_killer_disable (mm/oom_kill.c:835)
+[   58.339058]  ? wakeup_kswapd (./include/linux/instrumented.h:82 ./include/linux/atomic/atomic-instrumented.h:32 mm/vmscan.c:7548 mm/vmscan.c:7505)
+[   58.339061]  __alloc_frozen_pages_noprof (mm/page_alloc.c:4116 mm/page_alloc.c:4967 mm/page_alloc.c:5317)
+[   58.339064]  ? warn_alloc (mm/page_alloc.c:4025)
+[   58.339065]  ? __call_rcu_common.constprop.0 (./include/linux/instrumented.h:82 ./include/asm-generic/bitops/instrumented-non-atomic.h:141 ./include/linux/cpumask.h:651 ./include/linux/cpumask.h:1233 kernel/rcu/tree.c:3049 kernel/rcu/tree.c:3183)
+[   58.339069]  alloc_pages_mpol (mm/mempolicy.c:2490)
+[   58.339071]  ? policy_nodemask (mm/mempolicy.c:2281)
+[   58.339073]  ? do_vmi_align_munmap (mm/vma.c:1604)
+[   58.339075]  alloc_pages_noprof (mm/mempolicy.c:2581)
+[   58.339076]  __pud_alloc (./include/linux/mm.h:3685 ./include/asm-generic/pgalloc.h:181 ./include/asm-generic/pgalloc.h:206 mm/memory.c:6748)
+[   58.339079]  __handle_mm_fault (./include/linux/mm.h:3595 mm/memory.c:6439)
+[   58.339080]  ? __pmd_alloc (./include/linux/mm.h:1726)
+[   58.339082]  ? init_reserve_notifier (mm/mmap.c:1684)
+[   58.339084]  handle_mm_fault (mm/memory.c:6686)
+[   58.339086]  do_user_addr_fault (arch/x86/mm/fault.c:1394)
+[   58.339089]  exc_page_fault (arch/x86/mm/fault.c:1483 arch/x86/mm/fault.c:1536)
+[   58.339091]  asm_exc_page_fault (./arch/x86/include/asm/idtentry.h:595)
+[   58.339093] RIP: 0010:elf_load (./arch/x86/include/asm/uaccess_64.h:190 ./arch/x86/include/asm/uaccess_64.h:207 fs/binfmt_elf.c:134 fs/binfmt_elf.c:436)
+[   58.339096] Code: e9 48 c7 c7 20 62 99 b7 4c 89 14 24 e8 ea a0 77 ff 4c 8b 14 24 e9 78 fd ff ff 0f 01 cb b9 00 10 00 00 48 89 f7 48 29 c1 31 c0 <f3> aa 0f 1f 00 0f 01 ca 48 85 c9 75 49 48 b8 00 00 00 00 00 fc ff
+All code
+========
+   0:	e9 48 c7 c7 20       	jmp    0x20c7c74d
+   5:	62 99 b7 4c 89       	(bad)
+   a:	14 24                	adc    $0x24,%al
+   c:	e8 ea a0 77 ff       	call   0xffffffffff77a0fb
+  11:	4c 8b 14 24          	mov    (%rsp),%r10
+  15:	e9 78 fd ff ff       	jmp    0xfffffffffffffd92
+  1a:	0f 01 cb             	stac
+  1d:	b9 00 10 00 00       	mov    $0x1000,%ecx
+  22:	48 89 f7             	mov    %rsi,%rdi
+  25:	48 29 c1             	sub    %rax,%rcx
+  28:	31 c0                	xor    %eax,%eax
+  2a:*	f3 aa                	rep stos %al,%es:(%rdi)		<-- trapping instruction
+  2c:	0f 1f 00             	nopl   (%rax)
+  2f:	0f 01 ca             	clac
+  32:	48 85 c9             	test   %rcx,%rcx
+  35:	75 49                	jne    0x80
+  37:	48                   	rex.W
+  38:	b8 00 00 00 00       	mov    $0x0,%eax
+  3d:	00 fc                	add    %bh,%ah
+  3f:	ff                   	.byte 0xff
+
+Code starting with the faulting instruction
+===========================================
+   0:	f3 aa                	rep stos %al,%es:(%rdi)
+   2:	0f 1f 00             	nopl   (%rax)
+   5:	0f 01 ca             	clac
+   8:	48 85 c9             	test   %rcx,%rcx
+   b:	75 49                	jne    0x56
+   d:	48                   	rex.W
+   e:	b8 00 00 00 00       	mov    $0x0,%eax
+  13:	00 fc                	add    %bh,%ah
+  15:	ff                   	.byte 0xff
+[   58.339098] RSP: 0018:ffff88800d38fbc8 EFLAGS: 00050246
+[   58.339100] RAX: 0000000000000000 RBX: ffff88800fa12918 RCX: 0000000000000b48
+[   58.339101] RDX: ffff88800fa12940 RSI: 000055d9e09dc4b8 RDI: 000055d9e09dc4b8
+[   58.339102] RBP: 000055d9e09d4000 R08: 0000000000000000 R09: ffffed1003502610
+[   58.339103] R10: ffff88800fa12928 R11: 0000000000000028 R12: 000055d9e09e4c80
+[   58.339103] R13: 0000000000000003 R14: 0000000000008008 R15: ffff88800fa12938
+[   58.339105]  ? elf_load (./include/linux/instrumented.h:82 ./include/asm-generic/bitops/instrumented-non-atomic.h:141 ./include/linux/thread_info.h:133 fs/binfmt_elf.c:424)
+[   58.339107]  load_elf_binary (fs/binfmt_elf.c:1188)
+[   58.339109]  ? sched_exec (./include/linux/spinlock.h:571 kernel/sched/core.c:5629)
+[   58.339111]  ? disable_delayed_work (kernel/workqueue.c:4644)
+[   58.339113]  ? elf_load (./include/linux/pid.h:236)
+[   58.339115]  ? _raw_read_unlock (./include/linux/instrumented.h:112 ./include/linux/atomic/atomic-instrumented.h:326 ./include/asm-generic/qrwlock.h:113 ./include/linux/rwlock_api_smp.h:255 kernel/locking/spinlock.c:264)
+[   58.339116]  ? load_misc_binary (fs/binfmt_misc.c:150 fs/binfmt_misc.c:214)
+[   58.339118]  bprm_execve (fs/exec.c:1694 fs/exec.c:1726 fs/exec.c:1778 fs/exec.c:1754)
+[   58.339121]  ? set_binfmt (fs/exec.c:1930)
+[   58.339123]  do_execveat_common.isra.0 (fs/exec.c:1876)
+[   58.339125]  __x64_sys_execve (fs/exec.c:1949 (discriminator 2) fs/exec.c:1943 (discriminator 2) fs/exec.c:1943 (discriminator 2))
+[   58.339127]  do_syscall_64 (arch/x86/entry/syscall_64.c:63 arch/x86/entry/syscall_64.c:94)
+[   58.339128]  entry_SYSCALL_64_after_hwframe (arch/x86/entry/entry_64.S:121)
+[   58.339130] RIP: 0033:0x7fc912bbff3b
+[   58.339136] Code: Unable to access opcode bytes at 0x7fc912bbff11.
+
+Code starting with the faulting instruction
+===========================================
+[   58.339136] RSP: 002b:00007ffd2ff64318 EFLAGS: 00000206 ORIG_RAX: 000000000000003b
+[   58.339138] RAX: ffffffffffffffda RBX: 00007ffd2ff65f6c RCX: 00007fc912bbff3b
+[   58.339139] RDX: 00007ffd2ff64778 RSI: 00007ffd2ff64738 RDI: 00007ffd2ff65f6c
+[   58.339139] RBP: 00007ffd2ff643b0 R08: 0000000000000073 R09: 0000000000000000
+[   58.339140] R10: 0000000000000000 R11: 0000000000000206 R12: 00007ffd2ff64778
+
+
+Finger prints:
+dump_stack_lvl:dump_header:oom_kill_process:out_of_memory:__alloc_frozen_pages_noprof
